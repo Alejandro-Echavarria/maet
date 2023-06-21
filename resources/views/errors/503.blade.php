@@ -30,7 +30,7 @@
     <meta name="author" content="Manuel Echavarria">
     <title inertia>{{ config('app.name', 'Laravel') }}</title>
     <meta name="description"
-        content="maet.dev: Desarrollo web profesional y creativo. Explora mi portafolio de diseño y desarrollo web. Convierte tus ideas en realidad con mi habilidad en Laravel, Vue y más. Impulsa tu presencia en línea con diseños responsivos y optimizados. Potencia tu marca con maet.dev y destaca en la web." />
+        content="maet.dev - Explora mi portafolio de desarrollo web. Convierte tus ideas en realida e impulsa tu presencia en línea con diseños responsivos y optimizados." />
 
     <link rel="shortcut icon" href="{{ asset('img/icon/11.ico') }}">
 
@@ -74,7 +74,10 @@
                             <path fill="currentColor"
                                 d="M331.8 224.1c28.29 0 54.88 10.99 74.86 30.97l19.59 19.59c40.01-17.74 71.25-53.3 81.62-96.65c5.725-23.92 5.34-47.08 .2148-68.4c-2.613-10.88-16.43-14.51-24.34-6.604l-68.9 68.9h-75.6V97.2l68.9-68.9c7.912-7.912 4.275-21.73-6.604-24.34c-21.32-5.125-44.48-5.51-68.4 .2148c-55.3 13.23-98.39 60.22-107.2 116.4C224.5 128.9 224.2 137 224.3 145l82.78 82.86C315.2 225.1 323.5 224.1 331.8 224.1zM384 278.6c-23.16-23.16-57.57-27.57-85.39-13.9L191.1 158L191.1 95.99l-127.1-95.99L0 63.1l96 127.1l62.04 .0077l106.7 106.6c-13.67 27.82-9.251 62.23 13.91 85.39l117 117.1c14.62 14.5 38.21 14.5 52.71-.0016l52.75-52.75c14.5-14.5 14.5-38.08-.0016-52.71L384 278.6zM227.9 307L168.7 247.9l-148.9 148.9c-26.37 26.37-26.37 69.08 0 95.45C32.96 505.4 50.21 512 67.5 512s34.54-6.592 47.72-19.78l119.1-119.1C225.5 352.3 222.6 329.4 227.9 307zM64 472c-13.25 0-24-10.75-24-24c0-13.26 10.75-24 24-24S88 434.7 88 448C88 461.3 77.25 472 64 472z" />
                         </svg>
-                        <h1 class="mt-4 text-3xl font-bold text-gray-700 sm:text-5xl">Working in progress</h1>
+                        <h1 class="mt-4 text-3xl font-bold text-gray-700 sm:text-5xl">MAET DEV - PORTAFOLIO</h1>
+                        <div>
+                            <span class="text-xl font-bold text-gray-700">Working in process</span>
+                        </div>
                         <a href="mailto:mechavarria@maet.dev">
                             <button
                                 class="bg-blue-700 hover:bg-blue-500 text-white font-bold py-2 px-4 mt-8 rounded-xl">
@@ -86,12 +89,12 @@
                     {{-- Projects --}}
                     <section>
                         <div class="py-10">
-                            <h2 class="text-xl font-semibold text-center text-gray-700 lg:text-2xl">
-                                Take a look at some of my projects
-                            </h2>
+                            <h3 class="text-xl font-semibold text-center text-gray-700 lg:text-2xl">
+                                Estos son algunos de mi de proyectos
+                            </h3>
                             <div class="grid grid-cols-1 gap-8 mt-8 xl:mt-10 xl:gap-16 lg:grid-cols-2 sm:place-items-center">
                                 @foreach ($projects as $project)
-                                    <div class="mt-8 lg:-mx-6 lg:flex lg:items-center sm:w-[20rem] md:w-[32rem] lg:w-[30rem] xl:w-auto">
+                                    <div class="mt-8 lg:-mx-6 lg:flex lg:items-center sm:w-[20rem] md:w-[32rem] lg:w-[24rem] xl:w-[30rem]">
                                         <img class="bg-auto bg-no-repeat bg-center w-full"
                                             src="{{ asset($project['image']) }}"alt="">
                                         <div class="mt-6 lg:mt-0 lg:ml-2">
