@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('services', function (Blueprint $table) {
 
             $table->id();
+            $table->foreignId('user_id')->constrained();
             $table->string('title', 45);
             $table->string('icon', 25);
             $table->string('description', 255);

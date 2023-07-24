@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
@@ -58,4 +59,39 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    // Relación uno a muchos
+    public function educations()
+    {
+        return $this->hasMany(Education::class);
+    }
+
+    // Relación uno a muchos
+    public function expiriences()
+    {
+        return $this->hasMany(Experience::class);
+    }
+
+    // Relación uno a muchos
+    public function services()
+    {
+        return $this->hasMany(Service::class);
+    }
+
+    // Relación uno a muchos
+    public function workingSkills()
+    {
+        return $this->hasMany(WorkingSkill::class);
+    }
+
+    // Relación uno a muchos
+    public function knowledges()
+    {
+        return $this->hasMany(Knowledge::class);
+    }
+
+    public function userSocialMedia()
+    {
+        return $this->hasMany(UserSocialMedia::class);
+    }
 }

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('working_skills', function (Blueprint $table) {
 
             $table->id();
+            $table->foreignId('user_id')->constrained();
             $table->string('title');
             $table->integer('percentage');
             $table->timestamps();
