@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('social_media_id')->constrained('social_medias')->onDelete('cascade');
+            $table->string('url');
             $table->timestamps();
         });
     }

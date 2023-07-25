@@ -14,7 +14,9 @@ class Controller extends BaseController
 
     public function __construct()
     {
-        $user = User::find(1);
+        $user = User::with([
+            'userSocialMedia.socialMedia'
+        ])->find(1);
 
         return Inertia::share([
             'user' => $user
