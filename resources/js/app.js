@@ -13,12 +13,12 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 
 // Free icos styles
-// import { fas } from '@fortawesome/free-solid-svg-icons';
-import { fab } from '@fortawesome/free-brands-svg-icons';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+// import { fab } from '@fortawesome/free-brands-svg-icons';
 // import { far } from '@fortawesome/free-regular-svg-icons';
 
 // Add the free icons styles to SVG core
-library.add(fab);
+library.add(fas);
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
 
