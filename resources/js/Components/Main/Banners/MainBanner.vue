@@ -1,20 +1,30 @@
 <script setup>
 import Container from '@/Components/Main/Containers/Container.vue';
+
+const { user } = defineProps({
+    user: {
+        type: Object,
+    }
+});
 </script>
 
 <template>
     <div class="w-full h-[60vh] relative overflow-hidden">
         <div class="backdrop-blur-2xl bg-gradient-to-b from-zinc-200/80 to-blue-50/10 h-full">
             <Container class="w-full h-full flex items-center">
-                <span
-                    class="text-4xl font-bold bg-gradient-to-r from-zinc-700 via-indigo-700 to-blue-700 bg-clip-text text-transparent">
-                    Hi,
+                <span class="text-3xl font-bold bg-gradient-to-r from-zinc-700 via-indigo-700 to-blue-700 bg-clip-text text-transparent">
+                    Hey,
                 </span>
-                <h1
-                    class="text-4xl font-bold bg-gradient-to-r from-zinc-700 via-indigo-700 to-blue-700 bg-clip-text text-transparent">
-                    I'm Manuel Echavarria
-                </h1>
-                <h3 class="text-2xl font-bold text-gray-700 dark:text-white">Software Ingenier</h3>
+                <div class="flex items-end">
+                    <span class="text-3xl font-bold bg-gradient-to-r from-zinc-700 via-indigo-700 to-blue-700 bg-clip-text text-transparent">
+                        I'm
+                    </span>
+                    &nbsp;
+                    <h1 class="text-4xl font-bold uppercase bg-gradient-to-r from-zinc-700 via-indigo-700 to-blue-700 bg-clip-text text-transparent">
+                        {{ user.name }}
+                    </h1>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-700 dark:text-white">{{ user.position }}</h3>
             </Container>
         </div>
         <div class="tk-blob w-64 absolute top-10 right-20 z-[-1]" style="fill: #6b56cb">

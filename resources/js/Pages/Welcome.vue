@@ -2,7 +2,29 @@
 import { Head, Link } from '@inertiajs/vue3';
 import { ref, computed } from 'vue';
 import Container from '@/Components/Main/Containers/Container.vue';
-import MainBanner from '@/Components/Main/Banner/MainBanner.vue';
+import MainBanner from '@/Components/Main/Banners/MainBanner.vue';
+import SliderProjects from '@/Components/Main/Sliders/SliderProjects.vue';
+
+const projects = [
+    {
+        'name': 'CI',
+        'description': 'Academic grade calculator',
+        'image': 'img/projects/ci.jpg',
+        'link': 'https://ci.maet.dev/',
+    },
+    {
+        'name': 'BLOG',
+        'description': 'My personal blog',
+        'image': 'img/projects/payments.jpg',
+        'link': 'https://blog.maet.dev/',
+    },
+    {
+        'name': 'PAYMENTS',
+        'description': 'Payment gateway with stripe (Cashier)',
+        'image': 'img/projects/payments.jpg',
+        'link': 'https://payments.maet.dev/',
+    },
+];
 
 const { user } = defineProps(['user']);
 
@@ -47,7 +69,39 @@ const contactInfo = computed(() => {
 <template>
     <Head title="Welcome" />
 
-    <MainBanner />
+    <MainBanner :user=user />
+
+    <Container>
+        <h3 class="text-3xl font-bold text-gray-700 dark:text-gray-200 mb-8">Some of my projects</h3>
+        <!-- <SliderProjects /> -->
+
+        <section>
+            <div class="py-10">
+                <div class="grid grid-cols-1 gap-8 mt-8 xl:mt-10 xl:gap-16">
+                    <template v-for="project in projects">
+                        <div class="mt-8 lg:flex w-full">
+                            <div class="mt-6 lg:mt-0 lg:ml-2">
+                                <a :href="project.link" target="_blank" rel="noreferrer noopener nofollow"
+                                    class="block mt-4 text-2xl font-semibold text-gray-800 hover:underline dark:text-white">
+                                    {{ project.name }}
+                                </a>
+
+                                <p class="mt-3 text-sm text-gray-500 dark:text-gray-300 md:text-sm">
+                                    {{ project.description }}
+                                </p>
+
+                                <a href="{{ project.link }}" target="_blank" rel="noreferrer noopener nofollow"
+                                    class="inline-block mt-2 text-blue-500 underline hover:text-blue-400">
+                                    Visit project
+                                </a>
+                            </div>
+                            <img class="bg-auto sm:w-[20rem] md:w-[32rem] lg:w-[24rem] xl:w-[30rem] bg-no-repeat bg-center w-full" :src="project.image" alt="">
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </section>
+    </Container>
 
     <Container>
         <div class="min-h-screen">
@@ -113,7 +167,8 @@ const contactInfo = computed(() => {
             <div class="container grid grid-cols-12 md:gap-10 justify-between lg:mt-[220px]">
                 <!-- sidber personal info -->
                 <div class="col-span-12 lg:col-span-4 hidden lg:block h-screen sticky top-44">
-                    <div class="w-full mb-6 lg:mb-0 mx-auto relative bg-white text-center dark:bg-[#111111] rounded-[20px] mt-[180px] md:mt-[220px] lg:mt-0">
+                    <div
+                        class="w-full mb-6 lg:mb-0 mx-auto relative bg-white text-center dark:bg-[#111111] rounded-[20px] mt-[180px] md:mt-[220px] lg:mt-0">
                         <!-- profile image -->
                         <!-- <img src="/img/others/retrato.jpg2"
                             class="w-[240px] absolute left-[50%] transform -translate-x-[50%] h-[240px] drop-shadow-xl mx-auto rounded-[20px] -mt-[140px]"
