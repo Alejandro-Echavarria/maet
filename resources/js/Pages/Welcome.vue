@@ -186,7 +186,7 @@ const contactInfo = computed(() => {
                                 <a v-for="socialMedia in user.user_social_media" :href="socialMedia.url" target="_blank"
                                     rel="noopener noreferrer">
                                     <span class="socialbtn text-gray-700 dark:text-gray-200">
-                                        <font-awesome-icon :icon="['fab', `${socialMedia.social_media.icon}`]" />
+                                        <font-awesome-icon :icon="['fas', `${socialMedia.social_media.icon}`]" />
                                     </span>
                                 </a>
                             </div>
