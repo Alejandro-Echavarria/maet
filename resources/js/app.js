@@ -6,11 +6,11 @@ import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 
+/* import the fontawesome core */
+import { library } from '@fortawesome/fontawesome-svg-core'
+
 /* import font awesome icon component */
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-
-/* import the fontawesome core */
-import { library, config } from '@fortawesome/fontawesome-svg-core'
 
 // Free icos styles
 import { fas } from '@fortawesome/free-solid-svg-icons'
