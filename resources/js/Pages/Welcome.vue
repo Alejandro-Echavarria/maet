@@ -7,7 +7,7 @@ import SliderProjects from '@/Components/Main/Sliders/SliderProjects.vue';
 
 const projects = [
     {
-        'name': 'CI',
+        'name': 'Academic grade calculator - CI',
         'description': 'Academic grade calculator',
         'image': 'img/projects/ci.jpg',
         'link': 'https://ci.maet.dev/',
@@ -72,21 +72,26 @@ const contactInfo = computed(() => {
     <MainBanner :user=user />
 
     <Container>
-        <h3 class="text-3xl font-bold text-gray-700 dark:text-gray-200 mb-8">Some of my projects</h3>
+        <h3 class="text-3xl font-bold text-gray-700 dark:text-gray-200 mb-8 text-center">Some of my projects</h3>
         <!-- <SliderProjects /> -->
 
         <section>
             <div class="py-10">
                 <div class="grid grid-cols-1 gap-8 mt-8 xl:mt-10 xl:gap-16">
                     <template v-for="project in projects">
-                        <div class="mt-8 lg:flex w-full">
+                        <div class="mt-8 lg:flex w-full justify-between">
                             <div class="mt-6 lg:mt-0 lg:ml-2">
-                                <a :href="project.link" target="_blank" rel="noreferrer noopener nofollow"
-                                    class="block mt-4 text-2xl font-semibold text-gray-800 hover:underline dark:text-white">
-                                    {{ project.name }}
+                                <span class="text-indigo-700 font-semibold">
+                                    Personal project
+                                </span>
+                                <a :href="project.link" target="_blank" rel="noreferrer noopener nofollow" class="">
+                                    <h3
+                                        class="block mb-8 text-2xl font-bold text-gray-700 dark:text-gray-200 hover:text-indigo-700 transition duration-150">
+                                        {{ project.name }}
+                                    </h3>
                                 </a>
 
-                                <p class="mt-3 text-sm text-gray-500 dark:text-gray-300 md:text-sm">
+                                <p class="mb-8 text-sm text-gray-500 dark:text-gray-300 md:text-lg">
                                     {{ project.description }}
                                 </p>
 
@@ -95,7 +100,8 @@ const contactInfo = computed(() => {
                                     Visit project
                                 </a>
                             </div>
-                            <img class="bg-auto sm:w-[20rem] md:w-[32rem] lg:w-[24rem] xl:w-[30rem] bg-no-repeat bg-center w-full" :src="project.image" alt="">
+                            <img class="bg-auto sm:w-[20rem] md:w-[32rem] lg:w-[24rem] xl:w-[30rem] bg-no-repeat bg-center w-full border-2 rounded-lg"
+                                :src="project.image" alt="">
                         </div>
                     </template>
                 </div>
@@ -186,7 +192,7 @@ const contactInfo = computed(() => {
                                 <a v-for="socialMedia in user.user_social_media" :href="socialMedia.url" target="_blank"
                                     rel="noopener noreferrer">
                                     <span class="socialbtn text-gray-700 dark:text-gray-200">
-                                        <font-awesome-icon :icon="['fas', `${socialMedia.social_media.icon}`]" />
+                                        <font-awesome-icon :icon="['fab', `${socialMedia.social_media.icon}`]" />
                                     </span>
                                 </a>
                             </div>
