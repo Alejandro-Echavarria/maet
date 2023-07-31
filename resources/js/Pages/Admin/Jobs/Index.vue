@@ -12,7 +12,9 @@ defineOptions({
             Resize to change the mode
         </h3>
         <div>
-            <img class="inline-block w-[80%] rounded" src="https://tecdn.b-cdn.net/img/Photos/Others/img%20(53).webp" />
+            <pre>
+                5
+            </pre>
         </div>
     </div>
 </template>

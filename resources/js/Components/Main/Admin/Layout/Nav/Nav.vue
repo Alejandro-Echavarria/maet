@@ -1,5 +1,6 @@
 <script setup>
 import { onMounted } from "vue";
+import { Link } from "@inertiajs/vue3";
 import { Sidenav, Dropdown, Ripple, initTE } from "tw-elements";
 
 onMounted(() => {
@@ -35,6 +36,7 @@ onMounted(() => {
     // Event listeners
     window.addEventListener("resize", setMode2);
 });
+
 </script>
 
 <template>
@@ -55,31 +57,37 @@ onMounted(() => {
                 </a>
 
                 <ul class="relative m-0 list-none px-[0.2rem]" data-te-sidenav-menu-ref>
-                    <li class="relative pt-4">
-                        <span
-                            class="px-6 py-4 text-[0.6rem] font-bold uppercase text-gray-600 dark:text-gray-400">Create</span>
-                        <a class="flex cursor-pointer items-center truncate rounded-[5px] px-6 py-[0.45rem] text-[0.85rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
-                            data-te-sidenav-link-ref>
+                    <span
+                        class="px-6 py-4 text-[0.6rem] font-bold uppercase text-gray-600 dark:text-gray-400">
+                        Create
+                    </span>
+                    <li class="relative pt-4 px-1 flex flex-col space-y-1">
+                        <Link
+                            class="flex cursor-pointer font-bold items-center truncate rounded-[5px] px-6 py-[0.45rem] text-[0.85rem] text-gray-700 outline-none transition duration-300 ease-linear hover:bg-indigo-200 hover:text-inherit hover:outline-none active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10"
+                            :class="route().current('admin.dashboard') ? 'bg-indigo-100 text-indigo-700' : ''"
+                            data-te-sidenav-link-ref
+                            :href="route('admin.dashboard')"
+                            >
                             <span class="mr-4 [&>svg]:h-5 [&>svg]:w-5 [&>svg]:text-gray-400 dark:[&>svg]:text-gray-300">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                     stroke="currentColor" class="h-5 w-5">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                                 </svg>
                             </span>
-                            <span>Project</span>
-                        </a>
-                    </li>
-                    <li class="relative">
-                        <a class="flex cursor-pointer items-center truncate rounded-[5px] px-6 py-[0.45rem] text-[0.85rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
-                            data-te-sidenav-link-ref>
+                            <span>Dashboard</span>
+                        </Link>
+
+                        <Link
+                            class="flex cursor-pointer font-bold items-center truncate rounded-[5px] px-6 py-[0.45rem] text-[0.85rem] text-gray-700 outline-none transition duration-300 ease-linear hover:bg-indigo-200 hover:text-inherit hover:outline-none active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10"
+                            :class="route().current('admin.jobs.index') ? 'bg-indigo-100 text-indigo-700' : ''"
+                            data-te-sidenav-link-ref
+                            :href="route('admin.jobs.index')"
+                            >
                             <span class="mr-4 [&>svg]:h-5 [&>svg]:w-5 [&>svg]:text-gray-400 dark:[&>svg]:text-gray-300">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                    stroke="currentColor" class="h-5 w-5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                                </svg>
+                                <font-awesome-icon :icon="['fas', 'file-arrow-down']" />
                             </span>
-                            <span>Database</span>
-                        </a>
+                            <span>Jobs</span>
+                        </Link>
                     </li>
                 </ul>
             </nav>
