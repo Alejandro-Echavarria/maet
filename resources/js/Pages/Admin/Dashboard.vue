@@ -1,4 +1,5 @@
 <script setup>
+import { Head } from '@inertiajs/vue3';
 import MainLayout from '@/Components/Main/Admin/Layout/MainLayout.vue';
 
 defineOptions({
@@ -7,6 +8,8 @@ defineOptions({
 </script>
 
 <template>
+    <Head title="Dashboard" />
+
     <div class="pt-12">
         <h3 class="my-12 text-[1.75rem] font-bold leading-[1.2]">
             Resize to change the mode

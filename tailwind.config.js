@@ -11,7 +11,8 @@ export default {
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
         './resources/js/**/*.vue',
-        './node_modules/tw-elements/dist/js/**/*.js'
+        'node_modules/flowbite-vue/**/*.{js,jsx,ts,tsx}',
+        'node_modules/flowbite/**/*.{js,jsx,ts,tsx}'
     ],
 
     theme: {
@@ -22,5 +23,5 @@ export default {
         },
     },
 
-    plugins: [forms, typography, require("tw-elements/dist/plugin.cjs")],
+    plugins: [forms, typography, require('flowbite/plugin')],
 };

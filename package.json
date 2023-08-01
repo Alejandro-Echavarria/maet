@@ -25,7 +25,8 @@
         "@fortawesome/free-regular-svg-icons": "^6.4.0",
         "@fortawesome/free-solid-svg-icons": "^6.4.0",
         "@fortawesome/vue-fontawesome": "^3.0.3",
-        "swiper": "^10.0.4",
-        "tw-elements": "^1.0.0-beta2"
+        "flowbite": "^1.8.1",
+        "flowbite-vue": "^0.0.17-next.0",
+        "swiper": "^10.0.4"
     }
 }
