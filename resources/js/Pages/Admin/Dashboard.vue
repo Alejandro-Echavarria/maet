@@ -11,9 +11,9 @@ defineOptions({
     <Head title="Dashboard" />
 
     <div class="pt-12">
-        <h3 class="my-12 text-[1.75rem] font-bold leading-[1.2]">
+        <h1 class="my-12 text-3xl font-bold leading-[1.2]">
             Resize to change the mode
-        </h3>
+        </h1>
         <div>
             <img class="inline-block w-[80%] rounded" src="https://tecdn.b-cdn.net/img/Photos/Others/img%20(53).webp" />
         </div>
