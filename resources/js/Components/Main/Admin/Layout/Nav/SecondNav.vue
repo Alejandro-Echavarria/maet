@@ -142,8 +142,7 @@ const logout = () => {
                                     class="flex items-center active p-2 font-bold text-gray-700 rounded-lg dark:text-gray-200 hover:bg-indigo-200 dark:hover:bg-indigo-700 group transition duration-300 ease-linear"
                                     role="menuitem"
                                     :class="route().current('admin.aboutme.index') ? 'bg-indigo-100 text-indigo-700' : ''">
-                                <font-awesome-icon class="w-5 h-5" :icon="['far', 'circle-dot']" />
-                                <span class="ml-3">About</span>
+                                <span class="ml-8">About</span>
                                 </Link>
                             </li>
                             
@@ -152,8 +151,42 @@ const logout = () => {
                                     class="flex items-center active p-2 font-bold text-gray-700 rounded-lg dark:text-gray-200 hover:bg-indigo-200 dark:hover:bg-indigo-700 group transition duration-300 ease-linear"
                                     role="menuitem"
                                     :class="route().current('admin.jobs.index') ? 'bg-indigo-100 text-indigo-700' : ''">
-                                <font-awesome-icon class="w-5 h-5" :icon="['far', 'circle-dot']" />
-                                <span class="ml-3">Jobs</span>
+                                <span class="ml-8">Jobs</span>
+                                </Link>
+                            </li>
+                        </ul>
+
+                        <!-- Config section -->
+                        <button type="button"
+                            class="flex items-center w-full p-2 text-base text-gray-700 rounded-lg group dark:text-gray-200 hover:bg-indigo-200 dark:hover:bg-indigo-700 transition duration-300 ease-linear"
+                            aria-controls="dropdown-config" data-collapse-toggle="dropdown-config">
+                            <font-awesome-icon class="w-5 h-5" :icon="['far', 'file']" />
+                            <span class="flex-1 ml-3 text-left whitespace-nowrap font-bold"
+                                sidebar-toggle-item>Config</span>
+                            <svg sidebar-toggle-item class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                        <ul id="dropdown-config" class="space-y-2 py-2"
+                            :class="route().current('admin.socialmedias.index') ? '' : 'hidden'">
+                            <li>
+                                <Link :href="route('admin.socialmedias.index')"
+                                    class="flex items-center active p-2 font-bold text-gray-700 rounded-lg dark:text-gray-200 hover:bg-indigo-200 dark:hover:bg-indigo-700 group transition duration-300 ease-linear"
+                                    role="menuitem"
+                                    :class="route().current('admin.socialmedias.index') ? 'bg-indigo-100 text-indigo-700' : ''">
+                                <span class="ml-8">Social Medias</span>
+                                </Link>
+                            </li>
+
+                            <li>
+                                <Link :href="route('admin.aboutme.index')"
+                                    class="flex items-center active p-2 font-bold text-gray-700 rounded-lg dark:text-gray-200 hover:bg-indigo-200 dark:hover:bg-indigo-700 group transition duration-300 ease-linear"
+                                    role="menuitem"
+                                    :class="route().current('admin.aboutme.index') ? 'bg-indigo-100 text-indigo-700' : ''">
+                                <span class="ml-8">Categories</span>
                                 </Link>
                             </li>
                         </ul>

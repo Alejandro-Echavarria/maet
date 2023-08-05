@@ -1,18 +1,14 @@
 <script setup>
-import { reactive } from 'vue';
-import { Head } from '@inertiajs/vue3';
+import { ref } from 'vue';
+import { Head, useForm } from '@inertiajs/vue3';
 import MainLayout from '@/Components/Main/Admin/Layout/MainLayout.vue';
 import MainTitle from '@/Components/Main/Admin/Components/Titles/MainTitle.vue';
 import MainTable from '@/Components/Main/Tables/MainTable.vue';
-
-const { thead, tbody } = reactive({
-    thead: [
-        'icon',
-        'name',
-        'url'
-    ],
-    tbody: props.user.user_social_media
-});
+import DialogModal from '@/Components/DialogModal.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
+import SecondaryButton from '@/Components/SecondaryButton.vue';
+import InputLabel from '@/Components/InputLabel.vue';
+import TextInput from '@/Components/TextInput.vue';
 
 defineOptions({
     layout: MainLayout
@@ -21,12 +17,39 @@ defineOptions({
 const props = defineProps({
     user: Object
 });
+
+const createForm = useForm({
+    icon: '',
+    name: '',
+    url: '',
+});
+
+const thead = ref(['icon','name', 'url']);
+const tbody = ref(props.user.user_social_media);
+const creatingSocialMedia = ref(false);
+
+const store = () => {
+    createForm.post(route('admin.aboutme.store'), {
+        errorBag: 'createSocialMedia',
+        preserveScroll: true
+    });
+};
+
+const createModal = () => {
+    creatingSocialMedia.value = true;
+
+    // setTimeout(() => passwordInput.value.focus(), 250);
+};
+
+const closeModal = () => {
+    creatingSocialMedia.value = false;
+};
 </script>
 
 <template>
-    <div>
-        <Head title="About me" />
+    <Head title="About me" />
 
+    <div>
         <MainTitle>
             About me
         </MainTitle>
@@ -39,7 +62,9 @@ const props = defineProps({
             </template>
 
             <template #tbody>
-                <tr v-for="(tb, key) in tbody" class="border-b dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition ease-linear duration-300" :key="key">
+                <tr v-for="(tb, key) in tbody"
+                    class="border-b dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition ease-linear duration-300"
+                    :key="key">
                     <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         {{ tb.social_media.icon }}
                     </th>
@@ -102,6 +127,42 @@ const props = defineProps({
                     </td>
                 </tr>
             </template>
+
+            <template #createButton>
+                <PrimaryButton @click="createModal" id="createProductModalButton">
+                    <font-awesome-icon class="mr-2" :icon="['fas', 'plus']" />
+                    Add social media
+                </PrimaryButton>
+            </template>
         </MainTable>
+
+        <DialogModal :show="creatingSocialMedia" :maxWidth="'2xl'" @close="closeModal">
+            <template #title>
+                Create a new social media
+            </template>
+
+            <template #content>
+                <div class="mt-4">
+                    <InputLabel for="name" value="Name" />
+                    <TextInput v-model="createForm.name" id="name" type="text" />
+                </div>
+
+                <div class="mt-4">
+                    <InputLabel for="icon" value="Icon" />
+                    <TextInput v-model="createForm.icon" id="icon" type="text" placeholder="fas-user" />
+                </div>
+            </template>
+
+            <template #footer>
+                <SecondaryButton @click="closeModal" class="mr-3">
+                    Cancel
+                </SecondaryButton>
+
+                <PrimaryButton @click="store" :class="{ 'opacity-25': createForm.processing }"
+                    :disabled="createForm.processing">
+                    Save
+                </PrimaryButton>
+            </template>
+        </DialogModal>
     </div>
 </template>
