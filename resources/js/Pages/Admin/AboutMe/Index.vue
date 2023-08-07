@@ -9,6 +9,7 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
+import InputError from '@/Components/InputError.vue';
 
 defineOptions({
     layout: MainLayout
@@ -24,7 +25,7 @@ const createForm = useForm({
     url: '',
 });
 
-const thead = ref(['icon','name', 'url']);
+const thead = ref(['icon', 'name', 'url']);
 const tbody = ref(props.user.user_social_media);
 const creatingSocialMedia = ref(false);
 
@@ -145,11 +146,15 @@ const closeModal = () => {
                 <div class="mt-4">
                     <InputLabel for="name" value="Name" />
                     <TextInput v-model="createForm.name" id="name" type="text" />
+
+                    <InputError :message="createForm.errors.name" class="mt-2" />
                 </div>
 
                 <div class="mt-4">
                     <InputLabel for="icon" value="Icon" />
                     <TextInput v-model="createForm.icon" id="icon" type="text" placeholder="fas-user" />
+
+                    <InputError :message="createForm.errors.icon" class="mt-2" />
                 </div>
             </template>
 
