@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import { Head, useForm } from '@inertiajs/vue3';
 import MainLayout from '@/Components/Main/Admin/Layout/MainLayout.vue';
 import MainTitle from '@/Components/Main/Admin/Components/Titles/MainTitle.vue';
-import MainTable from '@/Components/Main/Tables/MainTable.vue';
+import MainTable from '@/Components/Main/Admin/Components/Tables/MainTable.vue';
 import DialogModal from '@/Components/DialogModal.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';

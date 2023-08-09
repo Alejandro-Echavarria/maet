@@ -18,15 +18,32 @@ class SocialMediaController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|max:255|string',
-            'icon' => 'required|max:25|string',
-        ]);
+        SocialMedia::create(
+            $request->validate([
+                'name' => "required|max:255|string|unique:social_medias,name,$request->id",
+                'icon' => 'required|max:25|string',
+            ])
+        );
 
-        $data = $request->all();
+        return to_route('admin.socialmedias.index');;
+    }
 
-        $socialMedia = SocialMedia::create($data);
+    public function update(Request $request, SocialMedia $socialmedia)
+    {
+        $socialmedia->update(
+            $request->validate([
+                'name' => "required|max:255|string|unique:social_medias,name,$socialmedia->id",
+                'icon' => 'required|max:25|string',
+            ])
+        );
 
-        return redirect()->route('admin.socialmedias.index');
+        return to_route('admin.socialmedias.index');
+    }
+
+    public function destroy(SocialMedia $socialmedia)
+    {
+        $socialmedia->delete();
+
+        return to_route('admin.socialmedias.index');
     }
 }
