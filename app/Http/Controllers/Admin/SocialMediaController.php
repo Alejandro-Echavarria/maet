@@ -9,9 +9,10 @@ use Inertia\Inertia;
 
 class SocialMediaController extends Controller
 {
+
     public function index()
     {
-        $socialMedias = SocialMedia::orderBy('created_at', 'desc')->get();
+        $socialMedias = SocialMedia::orderBy('created_at', 'desc')->paginate(10);
 
         return Inertia::render('Admin/SocialMedias/Index', compact('socialMedias'));
     }
@@ -25,7 +26,13 @@ class SocialMediaController extends Controller
             ])
         );
 
-        return to_route('admin.socialmedias.index');;
+        if ($request->page) {
+            $page = $request->page;
+        }
+
+        return to_route('admin.socialmedias.index', [
+            'page' => $page
+        ]);
     }
 
     public function update(Request $request, SocialMedia $socialmedia)
@@ -37,13 +44,25 @@ class SocialMediaController extends Controller
             ])
         );
 
-        return to_route('admin.socialmedias.index');
+        if ($request->page) {
+            $page = $request->page;
+        }
+
+        return to_route('admin.socialmedias.index', [
+            'page' => $page
+        ]);
     }
 
-    public function destroy(SocialMedia $socialmedia)
+    public function destroy(Request $request, SocialMedia $socialmedia)
     {
         $socialmedia->delete();
 
-        return to_route('admin.socialmedias.index');
+        if ($request->page) {
+            $page = $request->page;
+        }
+
+        return to_route('admin.socialmedias.index', [
+            'page' => $page
+        ]);
     }
 }

@@ -23,13 +23,14 @@ const props = defineProps({
 
 const form = useForm({
     icon: '',
-    name: ''
+    name: '',
+    page: props.socialMedias.current_page
 });
 
 const iconInput = ref(null);
 const nameInput = ref(null);
 const thead = ref(['icon', 'name', 'created', 'updated']);
-const tbody = ref(props.socialMedias);
+const tbody = ref(props.socialMedias.data);
 
 const socialMedia = ref('');
 const title = ref('');
@@ -63,7 +64,7 @@ const save = () => {
         form.post(route('admin.socialmedias.store'), {
             preserveScroll: true,
             onSuccess: () => {
-                tbody.value = props.socialMedias;
+                tbody.value = props.socialMedias.data;
                 ok('Social media created successfully');
             },
             onError: () => {
@@ -80,7 +81,7 @@ const save = () => {
         form.put(route('admin.socialmedias.update', socialMedia.value), {
             preserveScroll: true,
             onSuccess: () => {
-                tbody.value = props.socialMedias;
+                tbody.value = props.socialMedias.data;
                 ok('Social media updated successfully');
             },
             onError: () => {
@@ -113,6 +114,7 @@ const destroy = (id) => {
     }).then((result) => {
         if (result.isConfirmed) {
             form.delete(route('admin.socialmedias.destroy', id), {
+                preserveScroll: true,
                 onSuccess: () => {
                     ok('Social media deleted successfully');
                 },
@@ -120,7 +122,7 @@ const destroy = (id) => {
                     console.log('error');
                 },
                 onFinish: () => {
-                    tbody.value = props.socialMedias;
+                    tbody.value = props.socialMedias.data;
                 }
             });
         }
@@ -155,7 +157,7 @@ const ok = (msj, type = 'success', timer = 10000) => {
             Social medias
         </MainTitle>
 
-        <MainTable>
+        <MainTable :pagination="props.socialMedias">
             <template #createButton>
                 <PrimaryButton @click="openModal(1)">
                     <font-awesome-icon class="mr-2" :icon="['fas', 'plus']" />
@@ -224,16 +226,3 @@ const ok = (msj, type = 'success', timer = 10000) => {
         </DialogModal>
     </div>
 </template>
-
-<style scoped>
-.list-enter-active,
-.list-leave-active {
-    transition: all 0.5s ease;
-}
-
-.list-enter-from,
-.list-leave-to {
-    opacity: 0;
-    transform: translateX(30px);
-}
-</style>
