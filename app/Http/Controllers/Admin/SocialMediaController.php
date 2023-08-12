@@ -10,11 +10,15 @@ use Inertia\Inertia;
 class SocialMediaController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $socialMedias = SocialMedia::orderBy('created_at', 'desc')->paginate(10);
+        $filter = $request->all('search');
 
-        return Inertia::render('Admin/SocialMedias/Index', compact('socialMedias'));
+        $socialMedias = SocialMedia::orderBy('created_at', 'desc')
+            ->filter($filter)
+            ->paginate(10);
+
+        return Inertia::render('Admin/SocialMedias/Index', compact('socialMedias', 'filter'));
     }
 
     public function store(Request $request)
@@ -26,11 +30,11 @@ class SocialMediaController extends Controller
             ])
         );
 
-        if ($request->page) {
-            $page = $request->page;
-        }
+        $page = $request->page;
+        $search = $request->search;
 
         return to_route('admin.socialmedias.index', [
+            'search' => $search,
             'page' => $page
         ]);
     }
@@ -44,11 +48,11 @@ class SocialMediaController extends Controller
             ])
         );
 
-        if ($request->page) {
-            $page = $request->page;
-        }
+        $page = $request->page;
+        $search = $request->search;
 
         return to_route('admin.socialmedias.index', [
+            'search' => $search,
             'page' => $page
         ]);
     }
@@ -57,11 +61,11 @@ class SocialMediaController extends Controller
     {
         $socialmedia->delete();
 
-        if ($request->page) {
-            $page = $request->page;
-        }
+        $page = $request->page;
+        $search = $request->search;
 
         return to_route('admin.socialmedias.index', [
+            'search' => $search,
             'page' => $page
         ]);
     }

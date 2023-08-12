@@ -27,6 +27,7 @@
         "@fortawesome/vue-fontawesome": "^3.0.3",
         "flowbite": "^1.8.1",
         "flowbite-vue": "^0.0.17-next.0",
+        "lodash": "^4.17.21",
         "sweetalert2": "^11.7.20",
         "swiper": "^10.0.4"
     }

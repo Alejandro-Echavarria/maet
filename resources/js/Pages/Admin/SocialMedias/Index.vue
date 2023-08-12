@@ -13,20 +13,6 @@ import TextInput from '@/Components/TextInput.vue';
 import InputError from '@/Components/InputError.vue';
 import Swal from 'sweetalert2';
 
-defineOptions({
-    layout: MainLayout
-});
-
-const props = defineProps({
-    socialMedias: Object
-});
-
-const form = useForm({
-    icon: '',
-    name: '',
-    page: props.socialMedias.current_page
-});
-
 const iconInput = ref(null);
 const nameInput = ref(null);
 const thead = ref(['icon', 'name', 'created', 'updated']);
@@ -36,6 +22,15 @@ const socialMedia = ref('');
 const title = ref('');
 const modal = ref(false);
 const opration = ref(1);
+
+const url = 'admin.socialmedias.index';
+
+const form = useForm({
+    icon: '',
+    name: '',
+    search: props.filter.search,
+    page: props.socialMedias.current_page
+});
 
 const openModal = (op, id, icon, name) => {
     modal.value = true;
@@ -147,6 +142,15 @@ const ok = (msj, type = 'success', timer = 10000) => {
         }
     });
 }
+
+defineOptions({
+    layout: MainLayout
+});
+
+const props = defineProps({
+    socialMedias: Object,
+    filter: Object
+});
 </script>
 
 <template>
@@ -157,7 +161,7 @@ const ok = (msj, type = 'success', timer = 10000) => {
             Social medias
         </MainTitle>
 
-        <MainTable :pagination="props.socialMedias">
+        <MainTable :pagination="props.socialMedias" :filter="props.filter" :url="url">
             <template #createButton>
                 <PrimaryButton @click="openModal(1)">
                     <font-awesome-icon class="mr-2" :icon="['fas', 'plus']" />
@@ -172,7 +176,7 @@ const ok = (msj, type = 'success', timer = 10000) => {
             </template>
 
             <template #tbody>
-                <tr v-for="tb in tbody"
+                <tr v-for="tb in socialMedias.data"
                     class="dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition ease-linear duration-300"
                     :key="tb.id + 'tb'">
                     <td class="px-4 py-3">{{ tb.icon }}</td>
