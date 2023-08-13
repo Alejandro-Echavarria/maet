@@ -19,7 +19,9 @@ const props = defineProps({
     <div class="bg-white dark:bg-gray-800 relative border rounded-xl overflow-hidden">
         <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
             <div class="w-full md:w-1/2">
-                <Search :filter="filter" :url="url" />
+                <template v-if="filter && url">
+                    <Search :filter="filter" :url="url" />
+                </template>
             </div>
             <div
                 class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end space-x-7 flex-shrink-0">

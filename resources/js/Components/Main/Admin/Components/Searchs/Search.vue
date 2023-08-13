@@ -1,53 +1,17 @@
-<!-- <script setup>
-import { ref, onMounted, computed, defineProps } from 'vue';
-import { router, usePage } from '@inertiajs/vue3';
-import pickBy from 'lodash/pickBy';
-
-const search = ref(props.filter);
-const page = ref(usePage().props.current_page);
-
-const debounce = (func, wait) => {
-    let timeout;
-    return function () {
-        const context = this,
-            args = arguments;
-        clearTimeout(timeout);
-        timeout = setTimeout(function () {
-            timeout = null;
-            func.apply(context, args);
-        }, wait);
-    };
-}
-
-const contactsFilter = () => {
-    router.get(route('admin.socialmedias.index'), pickBy({ search: search.value, page: page.value }), { preserveState: true });
-}
-
-const debounceData = computed(() => debounce(contactsFilter, 500));
-
-onMounted(() => {
-    debounceData.value(); // Llamamos a la función debounceData al montar el componente
-});
-
-const props = defineProps({
-    filter: {
-        type: Object,
-    }
-});
-</script> -->
-
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue';
 import { router } from '@inertiajs/vue3';
 import pickBy from 'lodash/pickBy';
 
-const search = ref(props.filter.search);
+const search = ref(props.filter?.search);
 const page = ref('');
+const searchInput = ref(null);
 
 const debounceData = computed(() => debounce(getData, 500));
 
 onMounted(() => {
     debounceData.value = debounce(getData, 500);
+    searchInput.value?.focus();
 });
 
 watch(search, () => {
@@ -55,7 +19,10 @@ watch(search, () => {
 });
 
 const getData = () => {
-    router.get(route(props.url), pickBy({ search: search.value, page: page.value }), { preserveState: false });
+    router.get(route(props.url), pickBy({ search: search.value, page: page.value }), {
+        preserveScroll: true,
+        preserveState: false,
+    });
 };
 
 const debounce = (func, wait) => {
@@ -84,7 +51,7 @@ const props = defineProps({
 
 <template>
     <div class="relative w-full">
-        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+        <div class="absolute inset-y-0 left-0 flex items-center pointer-events-none">
             <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewbox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd"
@@ -92,8 +59,8 @@ const props = defineProps({
                     clip-rule="evenodd" />
             </svg>
         </div>
-        <input v-model="search" type="text" id="simple-search"
-            class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Search" required="">
+        <input ref="searchInput" v-model="search" type="text" id="simple-search"
+            class="flex-1 w-full lock p-2 pl-7 py-2.5 px-0 text-sm text-gray-700 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:ring-indigo-700 focus:border-indigo-700 peer transition"
+            placeholder="Search">
     </div>
 </template>
