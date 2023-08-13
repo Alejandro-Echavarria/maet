@@ -1,8 +1,6 @@
 <script setup>
-import { router, usePage } from '@inertiajs/vue3';
+import { router } from '@inertiajs/vue3';
 import { onBeforeMount, watch } from 'vue';
-
-const urlComplete = usePage();
 
 onBeforeMount(() => {
     if (props.pagination.last_page < props.pagination.current_page) {
@@ -27,8 +25,8 @@ watch(() => props.pagination?.data?.length, (newLength, oldLength) => {
 const changePage = (url) => {
     const page = url.split("?page=")[1];
     router.visit(router.page.url, {
-        replace: true,
         preserveScroll: true,
+        replace: true,
         data: {
             page: page
         }

@@ -1,12 +1,12 @@
 <script setup>
-import Pagination from '@/Components/Main/Admin/Components/Paginations/Pagination.vue';
 import Search from '@/Components/Main/Admin/Components/Searchs/Search.vue';
+import Pagination from '@/Components/Main/Admin/Components/Paginations/Pagination.vue';
 
 const props = defineProps({
-    pagination: {
+    filter: {
         type: Object,
     },
-    filter: {
+    pagination: {
         type: Object,
     },
     url: {
