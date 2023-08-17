@@ -26,7 +26,7 @@ const changePage = (url) => {
     const page = url.split("?page=")[1];
     router.visit(router.page.url, {
         preserveScroll: true,
-        replace: true,
+        preserveState: false,
         data: {
             page: page
         }

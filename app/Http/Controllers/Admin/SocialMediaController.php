@@ -13,12 +13,13 @@ class SocialMediaController extends Controller
     public function index(Request $request)
     {
         $filter = $request->all('search');
+        $page = $request->all('page');
 
         $socialMedias = SocialMedia::orderBy('created_at', 'desc')
             ->filter($filter)
             ->paginate(10);
 
-        return Inertia::render('Admin/SocialMedias/Index', compact('socialMedias', 'filter'));
+        return Inertia::render('Admin/SocialMedias/Index', compact('socialMedias', 'filter', 'page'));
     }
 
     public function store(Request $request)
@@ -30,8 +31,8 @@ class SocialMediaController extends Controller
             ])
         );
 
-        $page = $request->page;
-        $search = $request->search;
+        $page = $request?->page;
+        $search = $request?->search;
 
         return to_route('admin.socialmedias.index', [
             'search' => $search,
@@ -48,21 +49,21 @@ class SocialMediaController extends Controller
             ])
         );
 
-        $page = $request->page;
-        $search = $request->search;
+        $page = $request?->page;
+        $search = $request?->search;
 
         return to_route('admin.socialmedias.index', [
             'search' => $search,
             'page' => $page
-        ]);
+        ])->with('success', 'Social Media Updated');
     }
 
     public function destroy(Request $request, SocialMedia $socialmedia)
     {
         $socialmedia->delete();
 
-        $page = $request->page;
-        $search = $request->search;
+        $page = $request?->page;
+        $search = $request?->search;
 
         return to_route('admin.socialmedias.index', [
             'search' => $search,

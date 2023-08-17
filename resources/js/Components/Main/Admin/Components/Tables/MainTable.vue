@@ -1,16 +1,9 @@
 <script setup>
-import Search from '@/Components/Main/Admin/Components/Searchs/Search.vue';
 import Pagination from '@/Components/Main/Admin/Components/Paginations/Pagination.vue';
 
 const props = defineProps({
-    filter: {
-        type: Object,
-    },
     pagination: {
         type: Object,
-    },
-    url: {
-        type: String,
     }
 });
 </script>
@@ -19,9 +12,7 @@ const props = defineProps({
     <div class="bg-white dark:bg-gray-800 relative border rounded-xl overflow-hidden">
         <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
             <div class="w-full md:w-1/2">
-                <template v-if="filter && url">
-                    <Search :filter="filter" :url="url" />
-                </template>
+                <slot name="search" />
             </div>
             <div
                 class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end space-x-7 flex-shrink-0">
@@ -39,14 +30,7 @@ const props = defineProps({
                     </tr>
                 </thead>
                 <tbody>
-                    <TransitionGroup enter-active-class="ease-in-out duration-500"
-                        enter-from-class="opacity-0 translate-x-4 sm:translate-x-0 sm:scale-95"
-                        enter-to-class="opacity-100 translate-x-0 sm:scale-100" leave-active-class="ease-in duration-500"
-                        leave-from-class="opacity-100 translate-x-0 sm:scale-100"
-                        leave-to-class="opacity-0 translate-x-4 sm:translate-x-0 sm:scale-95"
-                    >
-                        <slot name="tbody" />
-                    </TransitionGroup>
+                    <slot name="tbody" />
                 </tbody>
             </table>
         </div>

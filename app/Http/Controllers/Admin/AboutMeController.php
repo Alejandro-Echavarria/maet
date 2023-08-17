@@ -4,14 +4,16 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\SocialMedia;
-use Illuminate\Support\Facades\Redirect;
+use App\Models\UserSocialMedia;
 use Inertia\Inertia;
 
 class AboutMeController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Admin/AboutMe/Index');
+        $userSocialMedias = UserSocialMedia::orderBy('created_at', 'desc')
+            ->paginate(10);
+
+        return Inertia::render('Admin/AboutMe/Index', compact('userSocialMedias'));
     }
 }

@@ -29,6 +29,8 @@
         "flowbite-vue": "^0.0.17-next.0",
         "lodash": "^4.17.21",
         "sweetalert2": "^11.7.20",
-        "swiper": "^10.0.4"
+        "swiper": "^10.0.4",
+        "vue-multiselect": "^3.0.0-beta.2",
+        "vue-select": "^4.0.0-beta.6"
     }
 }

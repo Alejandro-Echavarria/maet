@@ -10,24 +10,25 @@ import SecondaryButton from '@/Components/SecondaryButton.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
 import InputError from '@/Components/InputError.vue';
+import VueMultiselect from 'vue-multiselect';
+import vSelect from 'vue-select';
+import 'vue-select/dist/vue-select.css';
 
-defineOptions({
-    layout: MainLayout
-});
 
-const props = defineProps({
-    user: Object
-});
+const title = ref('');
+const modal = ref(false);
+const opration = ref(1);
 
-const createForm = useForm({
+const value = ref('');
+const selected = ref(null);
+const source = ref(['Select option', 'options', 'selected', 'multiple', 'label', 'searchable', 'clearOnSelect', 'hideSelected', 'maxHeight', 'allowEmpty', 'showLabels', 'onChange', 'touched']);
+
+const form = useForm({
     icon: '',
-    name: '',
-    url: '',
+    url: ''
 });
 
-const thead = ref(['icon', 'name', 'url']);
-const tbody = ref(props.user.user_social_media);
-const creatingSocialMedia = ref(false);
+const thead = ref(['social media', 'url', 'created', 'updated']);
 
 const store = () => {
     createForm.post(route('admin.aboutme.store'), {
@@ -36,125 +37,110 @@ const store = () => {
     });
 };
 
-const createModal = () => {
-    creatingSocialMedia.value = true;
+const openModal = (op, id, icon, name) => {
+    modal.value = true;
+    opration.value = op;
 
-    // setTimeout(() => passwordInput.value.focus(), 250);
+    if (op == 1) {
+        title.value = 'Create a new social media';
+    } else {
+        title.value = 'Edit social media';
+        socialMedia.value = id;
+        form.icon = icon;
+        form.name = name;
+    }
 };
 
 const closeModal = () => {
-    creatingSocialMedia.value = false;
+    modal.value = false;
+    form.clearErrors();
+    form.reset();
 };
+
+defineOptions({
+    layout: MainLayout
+});
+
+const props = defineProps({
+    userSocialMedias: Object,
+});
 </script>
 
 <template>
-    <Head title="About me" />
+    <Head title="User social medias" />
 
     <div>
         <MainTitle>
-            About me
+            User social medias
         </MainTitle>
 
         <MainTable>
+            <template #createButton>
+                <PrimaryButton @click="openModal(1)">
+                    <font-awesome-icon class="mr-2" :icon="['fas', 'plus']" />
+                    Add social media
+                </PrimaryButton>
+            </template>
+
             <template #thead>
-                <th v-for="(th, key) in thead" scope="col" class="px-4 py-3" :key="key">
+                <th v-for="(th, key) in thead" scope="col" class="px-4 py-3" :key="key + 'th'">
                     {{ th }}
                 </th>
             </template>
 
             <template #tbody>
-                <tr v-for="(tb, key) in tbody"
-                    class="border-b dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition ease-linear duration-300"
-                    :key="key">
-                    <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        {{ tb.social_media.icon }}
-                    </th>
-                    <td class="px-4 py-3">{{ tb.social_media.name }}</td>
+                <tr v-for="tb in userSocialMedias.data"
+                    class="dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition ease-linear duration-300"
+                    :key="tb.id + 'tb'">
+                    <td class="px-4 py-3">{{ tb.social_media_id }}</td>
                     <td class="px-4 py-3">{{ tb.url }}</td>
+                    <td class="px-4 py-3">{{ tb.created_at }}</td>
+                    <td class="px-4 py-3">{{ tb.updated_at }}</td>
                     <td class="px-4 py-3 flex items-center justify-end">
-                        <!-- <button id="apple-imac-27-dropdown-button" data-dropdown-toggle="apple-imac-27-dropdown"
-                            class="inline-flex items-center text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-700 p-1.5 dark:hover-bg-gray-800 text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100"
-                            type="button">
-                            <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
-                            </svg>
-                        </button> -->
-                        <!-- <div id="apple-imac-27-dropdown"
-                            class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
-                            <ul class="py-1 text-sm" aria-labelledby="apple-imac-27-dropdown-button">
-                                <li>
-                                    <button type="button" data-modal-target="updateProductModal"
-                                        data-modal-toggle="updateProductModal"
-                                        class="flex w-full items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-gray-700 dark:text-gray-200">
-                                        <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg"
-                                            viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                            <path
-                                                d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
-                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" />
-                                        </svg>
-                                        Edit
-                                    </button>
-                                </li>
-                                <li>
-                                    <button type="button" data-modal-target="readProductModal"
-                                        data-modal-toggle="readProductModal"
-                                        class="flex w-full items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-gray-700 dark:text-gray-200">
-                                        <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg"
-                                            viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                            <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" />
-                                        </svg>
-                                        Preview
-                                    </button>
-                                </li>
-                                <li>
-                                    <button type="button" data-modal-target="deleteModal"
-                                        data-modal-toggle="deleteModal"
-                                        class="flex w-full items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 text-red-500 dark:hover:text-red-400">
-                                        <svg class="w-4 h-4 mr-2" viewbox="0 0 14 15" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                            <path fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"
-                                                d="M6.09922 0.300781C5.93212 0.30087 5.76835 0.347476 5.62625 0.435378C5.48414 0.523281 5.36931 0.649009 5.29462 0.798481L4.64302 2.10078H1.59922C1.36052 2.10078 1.13161 2.1956 0.962823 2.36439C0.79404 2.53317 0.699219 2.76209 0.699219 3.00078C0.699219 3.23948 0.79404 3.46839 0.962823 3.63718C1.13161 3.80596 1.36052 3.90078 1.59922 3.90078V12.9008C1.59922 13.3782 1.78886 13.836 2.12643 14.1736C2.46399 14.5111 2.92183 14.7008 3.39922 14.7008H10.5992C11.0766 14.7008 11.5344 14.5111 11.872 14.1736C12.2096 13.836 12.3992 13.3782 12.3992 12.9008V3.90078C12.6379 3.90078 12.8668 3.80596 13.0356 3.63718C13.2044 3.46839 13.2992 3.23948 13.2992 3.00078C13.2992 2.76209 13.2044 2.53317 13.0356 2.36439C12.8668 2.1956 12.6379 2.10078 12.3992 2.10078H9.35542L8.70382 0.798481C8.62913 0.649009 8.5143 0.523281 8.37219 0.435378C8.23009 0.347476 8.06631 0.30087 7.89922 0.300781H6.09922ZM4.29922 5.70078C4.29922 5.46209 4.39404 5.23317 4.56282 5.06439C4.73161 4.8956 4.96052 4.80078 5.19922 4.80078C5.43791 4.80078 5.66683 4.8956 5.83561 5.06439C6.0044 5.23317 6.09922 5.46209 6.09922 5.70078V11.1008C6.09922 11.3395 6.0044 11.5684 5.83561 11.7372C5.66683 11.906 5.43791 12.0008 5.19922 12.0008C4.96052 12.0008 4.73161 11.906 4.56282 11.7372C4.39404 11.5684 4.29922 11.3395 4.29922 11.1008V5.70078ZM8.79922 4.80078C8.56052 4.80078 8.33161 4.8956 8.16282 5.06439C7.99404 5.23317 7.89922 5.46209 7.89922 5.70078V11.1008C7.89922 11.3395 7.99404 11.5684 8.16282 11.7372C8.33161 11.906 8.56052 12.0008 8.79922 12.0008C9.03791 12.0008 9.26683 11.906 9.43561 11.7372C9.6044 11.5684 9.69922 11.3395 9.69922 11.1008V5.70078C9.69922 5.46209 9.6044 5.23317 9.43561 5.06439C9.26683 4.8956 9.03791 4.80078 8.79922 4.80078Z" />
-                                        </svg>
-                                        Delete
-                                    </button>
-                                </li>
-                            </ul>
-                        </div> -->
+                        <!-- <TableButton>
+                            <font-awesome-icon @click="openModal(2, tb.id, tb.icon, tb.name)"
+                                class="w-4 h-4 text-indigo-500" :icon="['far', 'pen-to-square']" />
+                        </TableButton>
+                        <TableButton>
+                            <font-awesome-icon @click="destroy(tb.id)" class="w-4 h-4 text-red-500"
+                                :icon="['far', 'trash-can']" />
+                        </TableButton> -->
                     </td>
                 </tr>
             </template>
-
-            <template #createButton>
-                <PrimaryButton @click="createModal" id="createProductModalButton">
-                    <font-awesome-icon class="mr-2" :icon="['fas', 'plus']" />
-                    Add social media
-                </PrimaryButton>
-            </template>
         </MainTable>
 
-        <DialogModal :show="creatingSocialMedia" :maxWidth="'2xl'" @close="closeModal">
+        <DialogModal :show="modal" :maxWidth="'2xl'" @close="closeModal">
             <template #title>
-                Create a new social media
+                {{ title }}
             </template>
 
             <template #content>
                 <div class="mt-4">
-                    <InputLabel for="name" value="Name" />
-                    <TextInput v-model="createForm.name" id="name" type="text" />
+                    <InputLabel for="icon" value="Social media" />
+                    <!-- <TextInput v-model="form.icon" id="icon" ref="iconInput" type="text" placeholder="fas-user" /> -->
+                    <VueMultiselect v-model="value" :options="source" class="bg-blue-7000">
+                        <template #singleLabel>
+                            <span class="option__title bg-slate-500" slot-scope="props">hola4</span>
+                        </template>
+                        <template slot="option" slot-scope="props">
+                            <div class="option__desc bg-slate-500"><span class="option__title">hola2</span><span
+                                    class="option__small">hola2</span></div>
+                        </template>
+                    </VueMultiselect>
 
-                    <InputError :message="createForm.errors.name" class="mt-2" />
+                    <v-select :options="['Canada', 'United States', 'United States', 'United States', 'United States']">
+                    </v-select>
+
+                    {{ value }}
+                    <!-- <InputError :message="form.errors.icon" class="mt-2" /> -->
                 </div>
 
                 <div class="mt-4">
-                    <InputLabel for="icon" value="Icon" />
-                    <TextInput v-model="createForm.icon" id="icon" type="text" placeholder="fas-user" />
+                    <InputLabel for="name" value="URL" />
+                    <TextInput v-model="form.url" id="name" ref="urlInput" type="url" />
 
-                    <InputError :message="createForm.errors.icon" class="mt-2" />
+                    <!-- <InputError :message="form.errors.name" class="mt-2" /> -->
                 </div>
             </template>
 
@@ -163,11 +149,11 @@ const closeModal = () => {
                     Cancel
                 </SecondaryButton>
 
-                <PrimaryButton @click="store" :class="{ 'opacity-25': createForm.processing }"
-                    :disabled="createForm.processing">
+                <PrimaryButton @click="save" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Save
                 </PrimaryButton>
             </template>
         </DialogModal>
     </div>
 </template>
+<style src="vue-multiselect/dist/vue-multiselect.css"></style>

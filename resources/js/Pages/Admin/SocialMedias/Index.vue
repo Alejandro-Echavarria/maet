@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import { Head, useForm } from '@inertiajs/vue3';
+import { Head, router, useForm } from '@inertiajs/vue3';
 import MainLayout from '@/Components/Main/Admin/Layout/MainLayout.vue';
 import MainTitle from '@/Components/Main/Admin/Components/Titles/MainTitle.vue';
 import MainTable from '@/Components/Main/Admin/Components/Tables/MainTable.vue';
@@ -12,54 +12,34 @@ import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
 import InputError from '@/Components/InputError.vue';
 import Swal from 'sweetalert2';
+import Search from '@/Components/Main/Admin/Components/Searchs/Search.vue';
 
 const iconInput = ref(null);
 const nameInput = ref(null);
 const thead = ref(['icon', 'name', 'created', 'updated']);
 const tbody = ref(props.socialMedias.data);
-
 const socialMedia = ref('');
 const title = ref('');
 const modal = ref(false);
 const opration = ref(1);
-
 const url = 'admin.socialmedias.index';
+
+const search = ref(props.filter?.search);
+const page = ref(props.socialMedias?.current_page);
 
 const form = useForm({
     icon: '',
     name: '',
-    search: props.filter.search,
-    page: props.socialMedias.current_page
+    search: search.value,
+    page: page.value
 });
-
-const openModal = (op, id, icon, name) => {
-    modal.value = true;
-    opration.value = op;
-
-    if (op == 1) {
-        title.value = 'Create a new social media';
-    } else {
-        title.value = 'Edit social media';
-        socialMedia.value = id;
-        form.icon = icon;
-        form.name = name;
-    }
-
-    setTimeout(() => iconInput.value.focus(), 250);
-};
-
-const closeModal = () => {
-    modal.value = false;
-    form.clearErrors();
-    form.reset();
-};
 
 const save = () => {
     if (opration.value === 1) {
         form.post(route('admin.socialmedias.store'), {
             preserveScroll: true,
             onSuccess: () => {
-                tbody.value = props.socialMedias.data;
+                // tbody.value = props.socialMedias.data;
                 ok('Social media created successfully');
             },
             onError: () => {
@@ -72,12 +52,17 @@ const save = () => {
                 }
             }
         });
+        console.log(form);
     } else {
         form.put(route('admin.socialmedias.update', socialMedia.value), {
             preserveScroll: true,
             onSuccess: () => {
-                tbody.value = props.socialMedias.data;
+                // tbody.value = props.socialMedias.data;
                 ok('Social media updated successfully');
+                // router.visit(route('admin.socialmedias.index', {
+                //     search: search.value,
+                //     page: page?.value
+                // }));
             },
             onError: () => {
                 if (form.errors.name) {
@@ -116,12 +101,32 @@ const destroy = (id) => {
                 onError: () => {
                     console.log('error');
                 },
-                onFinish: () => {
-                    tbody.value = props.socialMedias.data;
-                }
             });
         }
     });
+};
+
+const openModal = (op, id, icon, name) => {
+    modal.value = true;
+    opration.value = op;
+
+    if (op == 1) {
+        title.value = 'Create a new social media';
+    } else {
+        title.value = 'Edit social media';
+        socialMedia.value = id;
+        form.icon = icon;
+        form.name = name;
+    }
+
+    setTimeout(() => iconInput.value.focus(), 250);
+};
+
+const closeModal = () => {
+    modal.value = false;
+    form.clearErrors();
+    form.reset();
+    form.search = search.value;
 };
 
 const ok = (msj, type = 'success', timer = 10000) => {
@@ -134,6 +139,8 @@ const ok = (msj, type = 'success', timer = 10000) => {
         toast: true,
         position: 'top-end',
         showConfirmButton: false,
+        padding: '0.4em',
+        showCloseButton: true,
         timer: timer,
         timerProgressBar: true,
         didOpen: (toast) => {
@@ -161,7 +168,15 @@ const props = defineProps({
             Social medias
         </MainTitle>
 
-        <MainTable :pagination="props.socialMedias" :filter="props.filter" :url="url">
+        <pre>
+            {{ filter }}
+            {{ form.search }}
+            {{ form.page }}
+        </pre>
+        <MainTable :pagination="socialMedias">
+            <template #search>
+                <Search :filter="filter" :url="url" />
+            </template>
             <template #createButton>
                 <PrimaryButton @click="openModal(1)">
                     <font-awesome-icon class="mr-2" :icon="['fas', 'plus']" />
