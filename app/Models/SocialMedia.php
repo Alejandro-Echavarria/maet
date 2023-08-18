@@ -36,7 +36,7 @@ class SocialMedia extends Model
 
     public function scopeFilter($query, $filter)
     {
-        $query->when($filter['search'] ?? null, function ($query, $search) {
+        $query->when($filter ?? null, function ($query, $search) {
             $query->where('name', 'like', '%' . $search . '%')
                 ->orWhere('icon', 'like', '%' . $search . '%')
                 ->orWhere('created_at', 'like', '%' . $search . '%');

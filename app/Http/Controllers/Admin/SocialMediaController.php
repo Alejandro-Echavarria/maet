@@ -12,8 +12,8 @@ class SocialMediaController extends Controller
 
     public function index(Request $request)
     {
-        $filter = $request->all('search');
-        $page = $request->all('page');
+        $page = $request?->page;
+        $filter = $request?->search;
 
         $socialMedias = SocialMedia::orderBy('created_at', 'desc')
             ->filter($filter)

@@ -17,14 +17,13 @@ import Search from '@/Components/Main/Admin/Components/Searchs/Search.vue';
 const iconInput = ref(null);
 const nameInput = ref(null);
 const thead = ref(['icon', 'name', 'created', 'updated']);
-const tbody = ref(props.socialMedias.data);
 const socialMedia = ref('');
 const title = ref('');
 const modal = ref(false);
 const opration = ref(1);
 const url = 'admin.socialmedias.index';
 
-const search = ref(props.filter?.search);
+const search = ref(props?.filter);
 const page = ref(props.socialMedias?.current_page);
 
 const form = useForm({
@@ -39,7 +38,6 @@ const save = () => {
         form.post(route('admin.socialmedias.store'), {
             preserveScroll: true,
             onSuccess: () => {
-                // tbody.value = props.socialMedias.data;
                 ok('Social media created successfully');
             },
             onError: () => {
@@ -52,17 +50,11 @@ const save = () => {
                 }
             }
         });
-        console.log(form);
     } else {
         form.put(route('admin.socialmedias.update', socialMedia.value), {
             preserveScroll: true,
             onSuccess: () => {
-                // tbody.value = props.socialMedias.data;
                 ok('Social media updated successfully');
-                // router.visit(route('admin.socialmedias.index', {
-                //     search: search.value,
-                //     page: page?.value
-                // }));
             },
             onError: () => {
                 if (form.errors.name) {
@@ -125,12 +117,10 @@ const openModal = (op, id, icon, name) => {
 const closeModal = () => {
     modal.value = false;
     form.clearErrors();
-    form.reset();
-    form.search = search.value;
+    form.reset('icon', 'name');
 };
 
 const ok = (msj, type = 'success', timer = 10000) => {
-    form.reset();
     closeModal();
 
     Swal.fire({
@@ -168,14 +158,9 @@ const props = defineProps({
             Social medias
         </MainTitle>
 
-        <pre>
-            {{ filter }}
-            {{ form.search }}
-            {{ form.page }}
-        </pre>
         <MainTable :pagination="socialMedias">
             <template #search>
-                <Search :filter="filter" :url="url" />
+                <Search :filter="filter" :url="url" @updateSearch="(newValue) => form.search = newValue" :key="'search'+1" />
             </template>
             <template #createButton>
                 <PrimaryButton @click="openModal(1)">
