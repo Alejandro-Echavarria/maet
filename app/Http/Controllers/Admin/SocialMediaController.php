@@ -9,7 +9,6 @@ use Inertia\Inertia;
 
 class SocialMediaController extends Controller
 {
-
     public function index(Request $request)
     {
         $page = $request?->page;
@@ -55,7 +54,7 @@ class SocialMediaController extends Controller
         return to_route('admin.socialmedias.index', [
             'search' => $search,
             'page' => $page
-        ])->with('success', 'Social Media Updated');
+        ])->with('flash', 'Social Media Updated');
     }
 
     public function destroy(Request $request, SocialMedia $socialmedia)

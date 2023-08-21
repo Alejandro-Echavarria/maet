@@ -19,9 +19,9 @@ const iconInput = ref(null);
 const nameInput = ref(null);
 const thead = ref(['icon', 'name', 'created', 'updated']);
 const socialMedia = ref('');
+const opration = ref(1);
 const title = ref('');
 const modal = ref(false);
-const opration = ref(1);
 const url = 'admin.socialmedias.index';
 
 const search = ref(props?.filter);
@@ -132,7 +132,7 @@ const props = defineProps({
 
         <MainTable :pagination="socialMedias">
             <template #search>
-                <Search :filter="filter" :url="url" @updateSearch="(newValue) => form.search = newValue" :key="'search'+1" />
+                <Search :filter="filter" :url="url" @updateSearch="(newValue) => form.search = newValue" :key="'socialMedia-search'+1" />
             </template>
             <template #createButton>
                 <PrimaryButton @click="openModal(1)">

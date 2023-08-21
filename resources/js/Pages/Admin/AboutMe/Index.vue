@@ -4,38 +4,39 @@ import { Head, useForm } from '@inertiajs/vue3';
 import MainLayout from '@/Components/Main/Admin/Layout/MainLayout.vue';
 import MainTitle from '@/Components/Main/Admin/Components/Titles/MainTitle.vue';
 import MainTable from '@/Components/Main/Admin/Components/Tables/MainTable.vue';
-import DialogModal from '@/Components/DialogModal.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
+import InputError from '@/Components/InputError.vue';
+import DialogModal from '@/Components/DialogModal.vue';
+
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
-import InputError from '@/Components/InputError.vue';
-import VueMultiselect from 'vue-multiselect';
+
 import vSelect from 'vue-select';
 import 'vue-select/dist/vue-select.css';
 
+defineOptions({
+    layout: MainLayout
+});
 
-const title = ref('');
-const modal = ref(false);
-const opration = ref(1);
+const props = defineProps({
+    userSocialMedias: Object,
+});
+
+const thead = ref(['social media', 'url', 'created', 'updated']);
 
 const value = ref('');
 const selected = ref(null);
 const source = ref(['Select option', 'options', 'selected', 'multiple', 'label', 'searchable', 'clearOnSelect', 'hideSelected', 'maxHeight', 'allowEmpty', 'showLabels', 'onChange', 'touched']);
 
+const title = ref('');
+const modal = ref(false);
+const opration = ref(1);
+
 const form = useForm({
     icon: '',
-    url: ''
+    name: '',
 });
-
-const thead = ref(['social media', 'url', 'created', 'updated']);
-
-const store = () => {
-    createForm.post(route('admin.aboutme.store'), {
-        errorBag: 'createSocialMedia',
-        preserveScroll: true
-    });
-};
 
 const openModal = (op, id, icon, name) => {
     modal.value = true;
@@ -56,14 +57,6 @@ const closeModal = () => {
     form.clearErrors();
     form.reset();
 };
-
-defineOptions({
-    layout: MainLayout
-});
-
-const props = defineProps({
-    userSocialMedias: Object,
-});
 </script>
 
 <template>
@@ -119,20 +112,9 @@ const props = defineProps({
                 <div class="mt-4">
                     <InputLabel for="icon" value="Social media" />
                     <!-- <TextInput v-model="form.icon" id="icon" ref="iconInput" type="text" placeholder="fas-user" /> -->
-                    <VueMultiselect v-model="value" :options="source" class="bg-blue-7000">
-                        <template #singleLabel>
-                            <span class="option__title bg-slate-500" slot-scope="props">hola4</span>
-                        </template>
-                        <template slot="option" slot-scope="props">
-                            <div class="option__desc bg-slate-500"><span class="option__title">hola2</span><span
-                                    class="option__small">hola2</span></div>
-                        </template>
-                    </VueMultiselect>
 
-                    <v-select :options="['Canada', 'United States', 'United States', 'United States', 'United States']">
+                    <v-select class="mt-2" :options="['Canada', 'United States', 'United States', 'United States', 'United States']">
                     </v-select>
-
-                    {{ value }}
                     <!-- <InputError :message="form.errors.icon" class="mt-2" /> -->
                 </div>
 
@@ -156,4 +138,3 @@ const props = defineProps({
         </DialogModal>
     </div>
 </template>
-<style src="vue-multiselect/dist/vue-multiselect.css"></style>
