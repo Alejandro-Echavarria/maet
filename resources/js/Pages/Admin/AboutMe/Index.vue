@@ -4,16 +4,7 @@ import { Head, useForm } from '@inertiajs/vue3';
 import MainLayout from '@/Components/Main/Admin/Layout/MainLayout.vue';
 import MainTitle from '@/Components/Main/Admin/Components/Titles/MainTitle.vue';
 import MainTable from '@/Components/Main/Admin/Components/Tables/MainTable.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import SecondaryButton from '@/Components/SecondaryButton.vue';
-import InputError from '@/Components/InputError.vue';
-import DialogModal from '@/Components/DialogModal.vue';
-
-import InputLabel from '@/Components/InputLabel.vue';
-import TextInput from '@/Components/TextInput.vue';
-
-import vSelect from 'vue-select';
-import 'vue-select/dist/vue-select.css';
+import SaveUserSocialMedia from '@/Pages/Admin/AboutMe/Partials/SaveUserSocialMedia.vue';
 
 defineOptions({
     layout: MainLayout
@@ -24,39 +15,6 @@ const props = defineProps({
 });
 
 const thead = ref(['social media', 'url', 'created', 'updated']);
-
-const value = ref('');
-const selected = ref(null);
-const source = ref(['Select option', 'options', 'selected', 'multiple', 'label', 'searchable', 'clearOnSelect', 'hideSelected', 'maxHeight', 'allowEmpty', 'showLabels', 'onChange', 'touched']);
-
-const title = ref('');
-const modal = ref(false);
-const opration = ref(1);
-
-const form = useForm({
-    icon: '',
-    name: '',
-});
-
-const openModal = (op, id, icon, name) => {
-    modal.value = true;
-    opration.value = op;
-
-    if (op == 1) {
-        title.value = 'Create a new social media';
-    } else {
-        title.value = 'Edit social media';
-        socialMedia.value = id;
-        form.icon = icon;
-        form.name = name;
-    }
-};
-
-const closeModal = () => {
-    modal.value = false;
-    form.clearErrors();
-    form.reset();
-};
 </script>
 
 <template>
@@ -69,10 +27,7 @@ const closeModal = () => {
 
         <MainTable>
             <template #createButton>
-                <PrimaryButton @click="openModal(1)">
-                    <font-awesome-icon class="mr-2" :icon="['fas', 'plus']" />
-                    Add social media
-                </PrimaryButton>
+                <SaveUserSocialMedia />
             </template>
 
             <template #thead>
@@ -102,39 +57,5 @@ const closeModal = () => {
                 </tr>
             </template>
         </MainTable>
-
-        <DialogModal :show="modal" :maxWidth="'2xl'" @close="closeModal">
-            <template #title>
-                {{ title }}
-            </template>
-
-            <template #content>
-                <div class="mt-4">
-                    <InputLabel for="icon" value="Social media" />
-                    <!-- <TextInput v-model="form.icon" id="icon" ref="iconInput" type="text" placeholder="fas-user" /> -->
-
-                    <v-select class="mt-2" :options="['Canada', 'United States', 'United States', 'United States', 'United States']">
-                    </v-select>
-                    <!-- <InputError :message="form.errors.icon" class="mt-2" /> -->
-                </div>
-
-                <div class="mt-4">
-                    <InputLabel for="name" value="URL" />
-                    <TextInput v-model="form.url" id="name" ref="urlInput" type="url" />
-
-                    <!-- <InputError :message="form.errors.name" class="mt-2" /> -->
-                </div>
-            </template>
-
-            <template #footer>
-                <SecondaryButton @click="closeModal" class="mr-3">
-                    Cancel
-                </SecondaryButton>
-
-                <PrimaryButton @click="save" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Save
-                </PrimaryButton>
-            </template>
-        </DialogModal>
     </div>
 </template>
