@@ -1,9 +1,8 @@
 <script setup>
-import { Head, Link } from '@inertiajs/vue3';
+import { Head } from '@inertiajs/vue3';
 import { ref, computed } from 'vue';
 import Container from '@/Components/Main/Containers/Container.vue';
 import MainBanner from '@/Components/Main/Banners/MainBanner.vue';
-import SliderProjects from '@/Components/Main/Sliders/SliderProjects.vue';
 
 const projects = [
     {
@@ -137,7 +136,7 @@ const contactInfo = computed(() => {
                     <li>
                         <a class="mobile-menu-items-active" href="./aboutOne.html">
                             <span class="mr-2 text-xl">
-                                <i class="fa-regular fa-user"></i>
+                                <!-- <i class="fa-regular fa-user"></i> -->
                             </span>
                             Sobre mi
                         </a>
@@ -145,25 +144,25 @@ const contactInfo = computed(() => {
                     <li>
                         <a class="mobile-menu-items" href="./resumeOne.html">
                             <span class="mr-2 text-xl">
-                                <i class="fa-regular fa-file-lines"></i>
+                                <!-- <i class="fa-regular fa-file-lines"></i> -->
                             </span>Resumen </a>
                     </li>
                     <li>
                         <a class="mobile-menu-items" href="./portfiloOne.html">
                             <span class="mr-2 text-xl">
-                                <i class="fas fa-briefcase"></i>
+                                <!-- <i class="fas fa-briefcase"></i> -->
                             </span>Trabajos </a>
                     </li>
                     <li>
                         <a class="mobile-menu-items" href="./blogOne.html">
                             <span class="mr-2 text-xl">
-                                <i class="fa-brands fa-blogger"></i>
+                                <!-- <i class="fa-brands fa-blogger"></i> -->
                             </span>Blogs </a>
                     </li>
                     <li>
                         <a class="mobile-menu-items" href="./contactOne.html">
                             <span class="mr-2 text-xl">
-                                <i class="fa-solid fa-address-book"></i>
+                                <!-- <i class="fa-solid fa-address-book"></i> -->
                             </span> Contacto </a>
                     </li>
                 </ul>
@@ -192,7 +191,7 @@ const contactInfo = computed(() => {
                                 <a v-for="socialMedia in user.user_social_media" :href="socialMedia.url" target="_blank"
                                     rel="noopener noreferrer">
                                     <span class="socialbtn text-gray-700 dark:text-gray-200">
-                                        <font-awesome-icon :icon="['fab', `${socialMedia.social_media.icon}`]" />
+                                        <!-- <font-awesome-icon :icon="['fab', `${socialMedia.social_media.icon}`]" /> -->
                                     </span>
                                 </a>
                             </div>
@@ -202,7 +201,7 @@ const contactInfo = computed(() => {
                                 <template v-for="contact in contactInfo.data" :key="contact.id">
                                     <div class="flex items-center  border-[#E3E3E3] dark:border-[#3D3A3A] pb-2.5">
                                         <span :class='contact.color' class=" bg-white dark:bg-black mr-2 w-2">
-                                            <font-awesome-icon :icon="['fas', `${contact.icon}`]" />
+                                            <!-- <font-awesome-icon :icon="['fas', `${contact.icon}`]" /> -->
                                         </span>
                                         <div class="text-left ml-2.5">
                                             <p class="text-xs text-[#44566C] dark:text-[#A6A6A6]"> {{ contact.title }} </p>
@@ -215,7 +214,7 @@ const contactInfo = computed(() => {
 
                             <!-- dowanload button -->
                             <button class="bg-blue-700 text-white px-4 py-2 rounded-lg">
-                                <font-awesome-icon :icon="['fas', 'file-arrow-down']" />
+                                <!-- <font-awesome-icon :icon="['fab', 'twitter']" /> -->
                                 Descargar CV
                             </button>
                         </div>

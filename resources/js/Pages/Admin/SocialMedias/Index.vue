@@ -15,6 +15,15 @@ import Swal from 'sweetalert2';
 import Search from '@/Components/Main/Admin/Components/Searchs/Search.vue';
 import DeleteSocialMedia from '@/Pages/Admin/SocialMedias/Partials/DeleteSocialMedia.vue';
 
+defineOptions({
+    layout: MainLayout
+});
+
+const props = defineProps({
+    socialMedias: Object,
+    filter: Object
+});
+
 const iconInput = ref(null);
 const nameInput = ref(null);
 const thead = ref(['icon', 'name', 'created', 'updated']);
@@ -110,16 +119,7 @@ const ok = (msj, type = 'success', timer = 10000) => {
             toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
     });
-}
-
-defineOptions({
-    layout: MainLayout
-});
-
-const props = defineProps({
-    socialMedias: Object,
-    filter: Object
-});
+};
 </script>
 
 <template>
