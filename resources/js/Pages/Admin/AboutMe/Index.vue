@@ -12,6 +12,7 @@ defineOptions({
 
 const props = defineProps({
     userSocialMedias: Object,
+    socialMedias: Object
 });
 
 const thead = ref(['social media', 'url', 'created', 'updated']);
@@ -27,7 +28,7 @@ const thead = ref(['social media', 'url', 'created', 'updated']);
 
         <MainTable>
             <template #createButton>
-                <SaveUserSocialMedia />
+                <SaveUserSocialMedia :socialMedias="socialMedias" />
             </template>
 
             <template #thead>
