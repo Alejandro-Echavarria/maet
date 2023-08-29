@@ -1,10 +1,10 @@
 <script setup>
 import { ref } from 'vue';
-import { Head, useForm } from '@inertiajs/vue3';
+import { Head } from '@inertiajs/vue3';
 import MainLayout from '@/Components/Main/Admin/Layout/MainLayout.vue';
 import MainTitle from '@/Components/Main/Admin/Components/Titles/MainTitle.vue';
 import MainTable from '@/Components/Main/Admin/Components/Tables/MainTable.vue';
-import SaveUserSocialMedia from '@/Pages/Admin/AboutMe/Partials/SaveUserSocialMedia.vue';
+import SaveUserSocialMedia from '@/Pages/Admin/UserSocialMedias/Partials/SaveUserSocialMedia.vue';
 
 defineOptions({
     layout: MainLayout

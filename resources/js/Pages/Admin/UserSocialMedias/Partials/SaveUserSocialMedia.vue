@@ -4,9 +4,10 @@ import { useForm } from '@inertiajs/vue3';
 import DialogModal from '@/Components/DialogModal.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
+import TextInput from '@/Components/TextInput.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
-import TextInput from '@/Components/TextInput.vue';
+import Swal from 'sweetalert2';
 import vSelect from 'vue-select';
 import 'vue-select/dist/vue-select.css';
 
@@ -22,19 +23,16 @@ const options = ref(
 );
 
 const form = useForm({
-    socialMedia: '',
+    social_media_id: '',
     url: '',
 });
 
 const save = () => {
     if (opration.value === 1) {
-
-        alert(form.socialMedia);
-        return false;
-        form.post(route('admin.socialmedias.store'), {
+        form.post(route('admin.usersocialmedias.store'), {
             preserveScroll: true,
             onSuccess: () => {
-                ok('Social media created successfully');
+                ok('User social media created successfully');
             },
             onError: () => {
                 if (form.errors.name) {
@@ -47,10 +45,10 @@ const save = () => {
             }
         });
     } else {
-        form.put(route('admin.socialmedias.update', socialMedia.value), {
+        form.put(route('admin.usersocialmedias.update', social_media_id.value), {
             preserveScroll: true,
             onSuccess: () => {
-                ok('Social media updated successfully');
+                ok('User social media updated successfully');
             },
             onError: () => {
                 if (form.errors.name) {
@@ -73,7 +71,7 @@ const openModal = (op, id, icon, name) => {
         title.value = 'Create a new social media';
     } else {
         title.value = 'Edit social media';
-        socialMedia.value = id;
+        social_media_id.value = id;
         form.icon = icon;
         form.name = name;
     }
@@ -84,14 +82,31 @@ const closeModal = () => {
     form.clearErrors();
     form.reset();
 };
+
+const ok = (msj, type = 'success', timer = 10000) => {
+    closeModal();
+
+    Swal.fire({
+        icon: type,
+        title: msj,
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        padding: '0.4em',
+        showCloseButton: true,
+        timer: timer,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    });
+};
 </script>
 
 <template>
     <div>
-        <!-- <pre>
-            {{ options }}
-        </pre> -->
-        <PrimaryButton @click="openModal(1)">
+        <PrimaryButton class="w-full" @click="openModal(1)">
             <font-awesome-icon class="mr-2" :icon="['fas', 'plus']" />
             Add social media
         </PrimaryButton>
@@ -102,26 +117,19 @@ const closeModal = () => {
 
             <template #content>
                 <div class="mt-4">
-                    <InputLabel for="icon" value="Social media" />
-                    <!-- <TextInput v-model="form.icon" id="icon" ref="iconInput" type="text" placeholder="fas-user" /> -->
-                    <v-select
-                        label="name"
-                        v-model="form.socialMedia"
-                        :options="options"
-                        :reduce="options => options.id"
-                        :select-on-tab="true"
-                        class="mt-3 style-chooser"
-                        placeholder="Selecciona una opción"
-                    >
+                    <InputLabel for="social-media" value="Social media" />
+                    <v-select id="social_media_id" label="name" v-model="form.social_media_id" :options="options"
+                        :reduce="options => options.id" :select-on-tab="true" class="mt-3 style-chooser"
+                        placeholder="Selecciona una opción">
                     </v-select>
-                    <!-- <InputError :message="form.errors.icon" class="mt-2" /> -->
+                    <InputError :message="form.errors.social_media_id" class="mt-2" />
                 </div>
 
                 <div class="mt-4">
-                    <InputLabel for="name" value="URL" />
-                    <TextInput v-model="form.url" id="name" ref="urlInput" type="url" placeholder="https://example.com" />
+                    <InputLabel for="url" value="URL" />
+                    <TextInput v-model="form.url" id="url" ref="urlInput" type="url" placeholder="https://example.com" />
 
-                    <!-- <InputError :message="form.errors.name" class="mt-2" /> -->
+                    <InputError :message="form.errors.url" class="mt-2" />
                 </div>
             </template>
 

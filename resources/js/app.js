@@ -19,6 +19,7 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { faChartLine } from "@fortawesome/free-solid-svg-icons";
 import { faFileArrowDown } from "@fortawesome/free-solid-svg-icons";
+import { faGear } from "@fortawesome/free-solid-svg-icons";
 
 // Regular icons
 import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
@@ -32,7 +33,8 @@ library.add(
     faFileArrowDown,
     faChartLine,
     faTrashCan,
-    faFile
+    faFile,
+    faGear
 );
 
 const appName =
