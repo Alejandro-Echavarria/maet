@@ -1,5 +1,4 @@
 <script setup>
-import { ref } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 import TableButton from '@/Components/Main/Admin/Components/Buttons/TableButton.vue';
 import Swal from 'sweetalert2';
@@ -10,11 +9,9 @@ const props = defineProps({
     page: Number,
 });
 
-const search = ref(props?.search);
-
 const form = useForm({
     id: props.id,
-    search: search.value,
+    search: props.search,
     page: props.page
 });
 
@@ -53,10 +50,10 @@ const destroy = (id) => {
         reverseButtons: true
     }).then((result) => {
         if (result.isConfirmed) {
-            form.delete(route('admin.socialmedias.destroy', id), {
+            form.delete(route('admin.usersocialmedias.destroy', id), {
                 preserveScroll: true,
                 onSuccess: () => {
-                    ok('Social media deleted successfully');
+                    ok('User social media deleted successfully');
                 },
                 onError: () => {
                     console.log('error');

@@ -8,7 +8,6 @@ import { initFlowbite } from 'flowbite';
 // initialize components based on data attribute selectors
 onMounted(() => {
     initFlowbite();
-
 });
 
 const logout = () => {
@@ -120,14 +119,12 @@ const logout = () => {
                         <span class="ml-3">Jobs</span>
                         </Link>
                     </li>
-
                     <li>
                         <button type="button"
                             class="flex items-center w-full p-2 text-base text-gray-700 rounded-lg group dark:text-gray-200 hover:bg-indigo-200 dark:hover:bg-indigo-700 transition duration-300 ease-linear"
                             aria-controls="dropdown-playground" data-collapse-toggle="dropdown-playground">
                             <font-awesome-icon class="w-5 h-5" :icon="['far', 'file']" />
-                            <span class="flex-1 ml-3 text-left whitespace-nowrap font-bold"
-                                sidebar-toggle-item>About</span>
+                            <span class="flex-1 ml-3 text-left whitespace-nowrap font-bold" sidebar-toggle-item>About</span>
                             <svg sidebar-toggle-item class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
@@ -135,6 +132,7 @@ const logout = () => {
                                     clip-rule="evenodd"></path>
                             </svg>
                         </button>
+
                         <ul id="dropdown-playground" class="space-y-2 py-2"
                             :class="route().current('admin.usersocialmedias.index') ? '' : 'hidden'">
                             <li>
@@ -145,7 +143,7 @@ const logout = () => {
                                 <span class="ml-8">User social medias</span>
                                 </Link>
                             </li>
-                            
+
                             <li>
                                 <Link :href="route('admin.jobs.index')" data-drawer-hide="logo-sidebar"
                                     class="flex items-center active p-2 font-bold text-gray-700 rounded-lg dark:text-gray-200 hover:bg-indigo-200 dark:hover:bg-indigo-700 group transition duration-300 ease-linear"

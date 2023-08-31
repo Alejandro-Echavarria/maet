@@ -17,6 +17,7 @@ const props = defineProps({
 
 const title = ref('');
 const modal = ref(false);
+const userSocialMedia = ref(null);
 const opration = ref(1);
 const options = ref(
     props.socialMedias
@@ -45,7 +46,7 @@ const save = () => {
             }
         });
     } else {
-        form.put(route('admin.usersocialmedias.update', social_media_id.value), {
+        form.put(route('admin.usersocialmedias.update', userSocialMedia.value), {
             preserveScroll: true,
             onSuccess: () => {
                 ok('User social media updated successfully');
@@ -63,7 +64,7 @@ const save = () => {
     }
 };
 
-const openModal = (op, id, icon, name) => {
+const openModal = (op, id, social_media_id, url) => {
     modal.value = true;
     opration.value = op;
 
@@ -71,9 +72,9 @@ const openModal = (op, id, icon, name) => {
         title.value = 'Create a new social media';
     } else {
         title.value = 'Edit social media';
-        social_media_id.value = id;
-        form.icon = icon;
-        form.name = name;
+        userSocialMedia.value = id;
+        form.social_media_id = social_media_id;
+        form.url = url;
     }
 };
 
@@ -102,6 +103,8 @@ const ok = (msj, type = 'success', timer = 10000) => {
         }
     });
 };
+
+defineExpose({ openModal });
 </script>
 
 <template>

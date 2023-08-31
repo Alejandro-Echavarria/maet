@@ -12,7 +12,8 @@ class UserSocialMediaController extends Controller
 {
     public function index(Request $request)
     {
-        $userSocialMedias = UserSocialMedia::orderBy('created_at', 'desc')
+        $userSocialMedias = UserSocialMedia::with('socialMedia:id,name')
+            ->orderBy('created_at', 'desc')
             ->paginate(10);
 
         $socialMedias = SocialMedia::get(['id', 'name']);
@@ -32,5 +33,36 @@ class UserSocialMediaController extends Controller
         UserSocialMedia::create($data);
 
         return to_route('admin.usersocialmedias.index');
+    }
+
+    public function update(Request $request, UserSocialMedia $userSocialMedia)
+    {
+        $userSocialMedia->update(
+            $request->validate([
+                'social_media_id' => "required|exists:social_medias,id|unique:social_media_user,social_media_id,$userSocialMedia->id",
+                'url' => 'required|max:255|string|url',
+            ])
+        );
+
+        $page = $request?->page;
+        $search = $request?->search;
+
+        return to_route('admin.usersocialmedias.index', [
+            'search' => $search,
+            'page' => $page
+        ])->with('flash', 'User social Media Updated');
+    }
+
+    public function destroy(Request $request, UserSocialMedia $userSocialMedia)
+    {
+        $userSocialMedia->delete();
+
+        $page = $request?->page;
+        $search = $request?->search;
+
+        return to_route('admin.usersocialmedias.index', [
+            'search' => $search,
+            'page' => $page
+        ]);
     }
 }

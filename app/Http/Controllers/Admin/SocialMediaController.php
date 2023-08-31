@@ -39,11 +39,11 @@ class SocialMediaController extends Controller
         ]);
     }
 
-    public function update(Request $request, SocialMedia $socialmedia)
+    public function update(Request $request, SocialMedia $socialMedia)
     {
-        $socialmedia->update(
+        $socialMedia->update(
             $request->validate([
-                'name' => "required|max:255|string|unique:social_medias,name,$socialmedia->id",
+                'name' => "required|max:255|string|unique:social_medias,name,$socialMedia->id",
                 'icon' => 'required|max:25|string',
             ])
         );
@@ -57,9 +57,9 @@ class SocialMediaController extends Controller
         ])->with('flash', 'Social Media Updated');
     }
 
-    public function destroy(Request $request, SocialMedia $socialmedia)
+    public function destroy(Request $request, SocialMedia $socialMedia)
     {
-        $socialmedia->delete();
+        $socialMedia->delete();
 
         $page = $request?->page;
         $search = $request?->search;

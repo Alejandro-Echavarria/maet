@@ -21,7 +21,7 @@ defineOptions({
 
 const props = defineProps({
     socialMedias: Object,
-    filter: Object
+    filter: String
 });
 
 const iconInput = ref(null);
@@ -160,7 +160,7 @@ const ok = (msj, type = 'success', timer = 10000) => {
                             <font-awesome-icon @click="openModal(2, tb.id, tb.icon, tb.name)"
                                 class="w-4 h-4 text-indigo-500" :icon="['far', 'pen-to-square']" />
                         </TableButton>
-                        <DeleteSocialMedia :id="tb.id" :page="form.page" :search="form.search" />
+                        <DeleteSocialMedia :id="tb.id + 'deleteBtn'" :search="form.search" :page="form.page" :key="tb.id + 'deleteBtn'"/>
                     </td>
                 </tr>
             </template>

@@ -9,6 +9,6 @@ use App\Http\Controllers\Admin\UserSocialMediaController;
 Route::get('', [DashboardController::class, 'index'])->name('admin.dashboard');
 Route::get('jobs', [JobController::class, 'index'])->name('admin.jobs.index');
 
-Route::resource('usersocialmedias', UserSocialMediaController::class)->names('admin.usersocialmedias');
+Route::resource('user-social-medias', UserSocialMediaController::class)->names('admin.usersocialmedias');
 
-Route::resource('socialmedias', SocialMediaController::class)->names('admin.socialmedias');
+Route::resource('social-medias', SocialMediaController::class)->names('admin.socialmedias');
