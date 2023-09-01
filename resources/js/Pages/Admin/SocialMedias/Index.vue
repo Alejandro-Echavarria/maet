@@ -132,7 +132,7 @@ const ok = (msj, type = 'success', timer = 10000) => {
 
         <MainTable :pagination="socialMedias">
             <template #search>
-                <Search :filter="filter" :url="url" @updateSearch="(newValue) => form.search = newValue" :key="'socialMedia-search'+1" />
+                <Search :filter="filter" :url="url" @updateSearch="(newValue) => form.search = newValue" />
             </template>
             <template #createButton>
                 <PrimaryButton @click="openModal(1)">
@@ -160,7 +160,7 @@ const ok = (msj, type = 'success', timer = 10000) => {
                             <font-awesome-icon @click="openModal(2, tb.id, tb.icon, tb.name)"
                                 class="w-4 h-4 text-indigo-500" :icon="['far', 'pen-to-square']" />
                         </TableButton>
-                        <DeleteSocialMedia :id="tb.id + 'deleteBtn'" :search="form.search" :page="form.page" :key="tb.id + 'deleteBtn'"/>
+                        <DeleteSocialMedia :id="tb.id" :search="form.search" :page="form.page" :key="tb.id + 'deleteBtn'"/>
                     </td>
                 </tr>
             </template>
