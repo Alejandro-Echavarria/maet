@@ -12,13 +12,17 @@ class UserSocialMediaController extends Controller
 {
     public function index(Request $request)
     {
+        $page = $request?->page;
+        $filter = $request?->search;
+
         $userSocialMedias = UserSocialMedia::with('socialMedia:id,name')
+            ->filter($filter)
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
         $socialMedias = SocialMedia::get(['id', 'name']);
 
-        return Inertia::render('Admin/UserSocialMedias/Index', compact('userSocialMedias', 'socialMedias'));
+        return Inertia::render('Admin/UserSocialMedias/Index', compact('userSocialMedias', 'socialMedias', 'filter', 'page'));
     }
 
     public function store(Request $request)
@@ -32,7 +36,13 @@ class UserSocialMediaController extends Controller
 
         UserSocialMedia::create($data);
 
-        return to_route('admin.usersocialmedias.index');
+        $page = $request?->page;
+        $search = $request?->search;
+
+        return to_route('admin.usersocialmedias.index', [
+            'search' => $search,
+            'page' => $page
+        ])->with('flash', 'User social Media Updated');
     }
 
     public function update(Request $request, UserSocialMedia $userSocialMedia)

@@ -13,15 +13,16 @@ import 'vue-select/dist/vue-select.css';
 
 const props = defineProps({
     socialMedias: Object,
+    filter: String,
+    page: Number
 });
 
+const urlInput = ref(null);
 const title = ref('');
 const modal = ref(false);
 const userSocialMedia = ref(null);
 const opration = ref(1);
-const options = ref(
-    props.socialMedias
-);
+const options = ref(props.socialMedias);
 
 const form = useForm({
     social_media_id: '',
@@ -30,34 +31,34 @@ const form = useForm({
 
 const save = () => {
     if (opration.value === 1) {
-        form.post(route('admin.usersocialmedias.store'), {
+        form.transform((data) => ({
+            ...data,
+            search: props.filter,
+            page: props.page
+        })).post(route('admin.usersocialmedias.store'), {
             preserveScroll: true,
             onSuccess: () => {
                 ok('User social media created successfully');
             },
             onError: () => {
-                if (form.errors.name) {
-                    nameInput.value.focus();
-                }
-
-                if (form.errors.icon) {
-                    iconInput.value.focus();
+                if (form.errors.url) {
+                    urlInput.value.focus();
                 }
             }
         });
     } else {
-        form.put(route('admin.usersocialmedias.update', userSocialMedia.value), {
+        form.transform((data) => ({
+            ...data,
+            search: props.filter,
+            page: props.page
+        })).put(route('admin.usersocialmedias.update', userSocialMedia.value), {
             preserveScroll: true,
             onSuccess: () => {
                 ok('User social media updated successfully');
             },
             onError: () => {
-                if (form.errors.name) {
-                    nameInput.value.focus();
-                }
-
-                if (form.errors.icon) {
-                    iconInput.value.focus();
+                if (form.errors.url) {
+                    urlInput.value.focus();
                 }
             }
         });
@@ -130,7 +131,7 @@ defineExpose({ openModal });
 
                 <div class="mt-4">
                     <InputLabel for="url" value="URL" />
-                    <TextInput v-model="form.url" id="url" ref="urlInput" type="url" placeholder="https://example.com" />
+                    <TextInput id="url" ref="urlInput" v-model="form.url" type="url" placeholder="https://example.com" />
 
                     <InputError :message="form.errors.url" class="mt-2" />
                 </div>

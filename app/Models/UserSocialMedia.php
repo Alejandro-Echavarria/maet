@@ -39,4 +39,13 @@ class UserSocialMedia extends Model
         $carbon = Carbon::parse($value)->timezone(config('app.timezone'));
         return $carbon->format('Y-m-d h:i:s A');
     }
+
+    public function scopeFilter($query, $filter)
+    {
+        $query->when($filter ?? null, function ($query, $search) {
+            $query->where('social_media_id', 'like', '%' . $search . '%')
+                ->orWhere('url', 'like', '%' . $search . '%')
+                ->orWhere('created_at', 'like', '%' . $search . '%');
+        });
+    }
 }

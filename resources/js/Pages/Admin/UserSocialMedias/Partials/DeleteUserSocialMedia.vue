@@ -5,14 +5,12 @@ import Swal from 'sweetalert2';
 
 const props = defineProps({
     id: Number,
-    search: String,
+    filter: String,
     page: Number,
 });
 
 const form = useForm({
-    id: props.id,
-    search: props.search,
-    page: props.page
+    id: props.id
 });
 
 const ok = (msj, type = 'success', timer = 10000) => {
@@ -34,7 +32,6 @@ const ok = (msj, type = 'success', timer = 10000) => {
 }
 
 const destroy = (id) => {
-    console.log(form.search);
     Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -50,7 +47,11 @@ const destroy = (id) => {
         reverseButtons: true
     }).then((result) => {
         if (result.isConfirmed) {
-            form.delete(route('admin.usersocialmedias.destroy', id), {
+            form.transform((data) => ({
+                ...data,
+                search: props.filter,
+                page: props.page
+            })).delete(route('admin.usersocialmedias.destroy', id), {
                 preserveScroll: true,
                 onSuccess: () => {
                     ok('User social media deleted successfully');
@@ -66,12 +67,7 @@ const destroy = (id) => {
 
 <template>
     <TableButton>
-        <font-awesome-icon
-            @click="destroy(id)"
-            :icon="['far', 'trash-can']"
-            :class="{ 'opacity-25': form.processing }"
-            :disabled="form.processing"
-            class="w-4 h-4 text-red-500"
-        />
+        <font-awesome-icon @click="destroy(id)" :icon="['far', 'trash-can']" :class="{ 'opacity-25': form.processing }"
+            :disabled="form.processing" class="w-4 h-4 text-red-500" />
     </TableButton>
 </template>

@@ -3,6 +3,19 @@ import { ref, computed, onMounted, watch } from 'vue';
 import { router } from '@inertiajs/vue3';
 import pickBy from 'lodash/pickBy';
 
+const props = defineProps({
+    filter: {
+        type: String,
+    },
+    page: {
+        type: Number,
+    },
+    url: {
+        type: String,
+        required: true
+    }
+});
+
 const search = ref(props?.filter);
 const page = ref('');
 
@@ -36,16 +49,6 @@ const debounce = (func, wait) => {
         }, wait);
     };
 };
-
-const props = defineProps({
-    filter: {
-        type: Object,
-    },
-    url: {
-        type: String,
-        required: true
-    }
-});
 </script>
 
 <template>
