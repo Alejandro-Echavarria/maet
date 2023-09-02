@@ -2,6 +2,13 @@
 import { router } from '@inertiajs/vue3';
 import { onBeforeMount, watch } from 'vue';
 
+const props = defineProps({
+    pagination: {
+        type: Object,
+        required: true
+    }
+});
+
 onBeforeMount(() => {
     if (props.pagination.last_page < props.pagination.current_page) {
         const url = props.pagination.last_page_url;
@@ -25,31 +32,43 @@ watch(() => props.pagination?.data?.length, (newLength, oldLength) => {
 const changePage = (url) => {
     const page = url.split("?page=")[1];
     router.visit(router.page.url, {
-        preserveScroll: true,
-        preserveState: false,
+        preserveScroll: false,
+        preserveState: true,
         data: {
             page: page
         }
     });
-}
-
-const props = defineProps({
-    pagination: {
-        type: Object,
-        required: true
-    }
-});
+};
 </script>
 
 <template>
     <div class="flex flex-col md:flex-row items-start md:items-center justify-between space-y-3 md:space-y-0 p-4 border-t">
-        <div class="flex flex-1 justify-between sm:hidden">
-            <a href="#"
-                class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
-                Previous
-            </a>
-            <a href="#"
-                class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Next</a>
+        <div class="w-full sm:hidden">
+            <div class="flex justify-between mb-4">
+                <a @click="changePage(pagination.prev_page_url)" :key="'mobile-link'"
+                    :class="pagination.prev_page_url == null
+                        ? 'relative inline-flex items-center py-2 text-sm font-semibold text-gray-400 focus:z-20 cursor-not-allowed'
+                        : 'relative inline-flex items-center py-2 text-sm font-semibold text-gray-900 focus:z-20 cursor-pointer'">
+                    Previous
+                </a>
+                <a @click="changePage(pagination.next_page_url)" :key="'mobile-link'"
+                    :class="pagination.next_page_url == null
+                        ? 'relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-400 focus:z-20 cursor-not-allowed'
+                        : 'relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 focus:z-20 cursor-pointer'">
+                    Next
+                </a>
+            </div>
+            <div class="flex justify-center">
+                <p class="text-sm text-gray-600">
+                    Showing
+                    <span class="font-small">{{ pagination.from }}</span>
+                    to
+                    <span class="font-small">{{ pagination.to }}</span>
+                    of
+                    <span class="font-small">{{ pagination.total }}</span>
+                    results
+                </p>
+            </div>
         </div>
         <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
             <div>
