@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 const props = defineProps({
     id: Number,
     filter: String,
-    page: Number,
+    page: String,
 });
 
 const form = useForm({

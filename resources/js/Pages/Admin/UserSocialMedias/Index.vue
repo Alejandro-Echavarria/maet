@@ -17,7 +17,7 @@ const props = defineProps({
     userSocialMedias: Object,
     socialMedias: Object,
     filter: String,
-    page: Number
+    page: String
 });
 
 const thead = ['social media', 'url', 'created', 'updated'];
@@ -27,7 +27,7 @@ const callOpenModal = ref(null);
 
 const openModal = (op, id, socialMediaId, url) => {
     callOpenModal.value.openModal(op, id, socialMediaId, url);
-}
+};
 </script>
 
 <template>

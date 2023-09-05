@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, onMounted, watch } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import { router } from '@inertiajs/vue3';
 import pickBy from 'lodash/pickBy';
 
@@ -19,7 +19,7 @@ const props = defineProps({
 const search = ref(props?.filter);
 const page = ref('');
 
-const debounceData = computed(() => debounce(getData, 600));
+const debounceData = () => debounce(getData, 600);
 
 onMounted(() => {
     debounceData.value = debounce(getData, 600);
@@ -61,7 +61,7 @@ const debounce = (func, wait) => {
                     clip-rule="evenodd" />
             </svg>
         </div>
-        <input v-model="search" @input="$emit('updateSearch', search)" type="text" id="simple-search"
+        <input v-model="search" type="text" id="simple-search"
             class="flex-1 w-full lock p-2 pl-7 py-2.5 px-0 text-sm text-gray-700 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:ring-indigo-700 focus:border-indigo-700 peer transition"
             placeholder="Search">
     </div>

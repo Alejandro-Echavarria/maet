@@ -8,7 +8,6 @@ import TextInput from '@/Components/TextInput.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import Swal from 'sweetalert2';
-import VueSelect from '@/Components/Main/Admin/Components/Selects/VueSelect.vue';
 
 const props = defineProps({
     socialMedias: Object,
@@ -16,16 +15,16 @@ const props = defineProps({
     page: String
 });
 
-const urlInput = ref(null);
+const iconInput = ref(null);
+const nameInput = ref(null);
 const title = ref('');
 const modal = ref(false);
-const userSocialMedia = ref(null);
+const socialMedia = ref(null);
 const opration = ref(1);
-const options = ref(props.socialMedias);
 
 const form = useForm({
-    social_media_id: '',
-    url: '',
+    icon: '',
+    name: ''
 });
 
 const save = () => {
@@ -34,14 +33,18 @@ const save = () => {
             ...data,
             search: props.filter,
             page: props.page
-        })).post(route('admin.usersocialmedias.store'), {
+        })).post(route('admin.socialmedias.store'), {
             preserveScroll: true,
             onSuccess: () => {
-                ok('User social media created successfully');
+                ok('Social media created successfully');
             },
             onError: () => {
-                if (form.errors.url) {
-                    urlInput.value.focus();
+                if (form.errors.name) {
+                    nameInput.value.focus();
+                }
+
+                if (form.errors.icon) {
+                    iconInput.value.focus();
                 }
             }
         });
@@ -50,32 +53,38 @@ const save = () => {
             ...data,
             search: props.filter,
             page: props.page
-        })).put(route('admin.usersocialmedias.update', userSocialMedia.value), {
+        })).put(route('admin.socialmedias.update', socialMedia.value), {
             preserveScroll: true,
             onSuccess: () => {
-                ok('User social media updated successfully');
+                ok('Social media updated successfull');
             },
             onError: () => {
-                if (form.errors.url) {
-                    urlInput.value.focus();
+                if (form.errors.name) {
+                    nameInput.value.focus();
+                }
+
+                if (form.errors.icon) {
+                    iconInput.value.focus();
                 }
             }
         });
     }
 };
 
-const openModal = (op, id, social_media_id, url) => {
+const openModal = (op, id, icon, name) => {
     modal.value = true;
     opration.value = op;
 
-    if (op === 1) {
+    if (op == 1) {
         title.value = 'Create a new social media';
     } else {
         title.value = 'Edit social media';
-        userSocialMedia.value = id;
-        form.social_media_id = social_media_id;
-        form.url = url;
+        socialMedia.value = id;
+        form.icon = icon;
+        form.name = name;
     }
+
+    setTimeout(() => iconInput.value.focus(), 250);
 };
 
 const closeModal = () => {
@@ -120,22 +129,17 @@ defineExpose({ openModal });
 
             <template #content>
                 <div class="mt-4">
-                    <InputLabel for="social-media" value="Social media" />
-                    <VueSelect
-                        id="social_media_id"
-                        label="name"
-                        v-model="form.social_media_id"
-                        :options="options"
-                        :reduce="options => options.id"
-                        :select-on-tab="true" />
-                    <InputError :message="form.errors.social_media_id" class="mt-2" />
+                    <InputLabel for="icon" value="Icon" />
+                    <TextInput v-model="form.icon" id="icon" ref="iconInput" type="text" placeholder="fas-user" />
+
+                    <InputError :message="form.errors.icon" class="mt-2" />
                 </div>
 
                 <div class="mt-4">
-                    <InputLabel for="url" value="URL" />
-                    <TextInput id="url" ref="urlInput" v-model="form.url" type="url" placeholder="https://example.com" />
+                    <InputLabel for="name" value="Name" />
+                    <TextInput v-model="form.name" id="name" ref="nameInput" type="text" />
 
-                    <InputError :message="form.errors.url" class="mt-2" />
+                    <InputError :message="form.errors.name" class="mt-2" />
                 </div>
             </template>
 

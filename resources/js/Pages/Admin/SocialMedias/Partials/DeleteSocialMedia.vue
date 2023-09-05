@@ -1,21 +1,16 @@
 <script setup>
-import { ref } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 import TableButton from '@/Components/Main/Admin/Components/Buttons/TableButton.vue';
 import Swal from 'sweetalert2';
 
 const props = defineProps({
     id: Number,
-    search: String,
-    page: Number,
+    filter: String,
+    page: String,
 });
 
-const search = ref(props?.search);
-
 const form = useForm({
-    id: props.id,
-    search: search.value,
-    page: props.page
+    id: props.id
 });
 
 const ok = (msj, type = 'success', timer = 10000) => {
@@ -37,7 +32,6 @@ const ok = (msj, type = 'success', timer = 10000) => {
 }
 
 const destroy = (id) => {
-    console.log(form.search);
     Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -53,7 +47,11 @@ const destroy = (id) => {
         reverseButtons: true
     }).then((result) => {
         if (result.isConfirmed) {
-            form.delete(route('admin.socialmedias.destroy', id), {
+            form.transform((data) => ({
+                ...data,
+                search: props.filter,
+                page: props.page
+            })).delete(route('admin.socialmedias.destroy', id), {
                 preserveScroll: true,
                 onSuccess: () => {
                     ok('Social media deleted successfully');
@@ -69,12 +67,7 @@ const destroy = (id) => {
 
 <template>
     <TableButton>
-        <font-awesome-icon
-            @click="destroy(id)"
-            :icon="['far', 'trash-can']"
-            :class="{ 'opacity-25': form.processing }"
-            :disabled="form.processing"
-            class="w-4 h-4 text-red-500"
-        />
+        <font-awesome-icon @click="destroy(id)" :icon="['far', 'trash-can']" :class="{ 'opacity-25': form.processing }"
+            :disabled="form.processing" class="w-4 h-4 text-red-500" />
     </TableButton>
 </template>
