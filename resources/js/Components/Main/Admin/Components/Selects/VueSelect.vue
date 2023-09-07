@@ -29,12 +29,10 @@ import 'vue-select/dist/vue-select.css';
     border: 0px;
     padding: 0px;
     margin: 4px;
-    /* outline: 1px blue solid; */
-    /* border: 1px solid #e5e7eb; */
 }
 
 .style-chooser input.vs__search:focus {
-    border: 0px transparent;
+    border: 1px solid #a21cbd;
 }
 
 .style-chooser .vs__search::placeholder,
