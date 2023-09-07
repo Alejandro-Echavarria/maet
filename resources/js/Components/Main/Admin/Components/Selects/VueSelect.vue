@@ -25,6 +25,10 @@ import 'vue-select/dist/vue-select.css';
     border: 0px solid #e5e7eb;
 }
 
+.style-chooser .vs__search {
+    border: 0px;
+}
+
 .style-chooser .vs__search::placeholder,
 .style-chooser .vs__dropdown-toggle {
     border-radius: 8px;
