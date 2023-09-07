@@ -9,7 +9,6 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import Swal from 'sweetalert2';
 import VueSelect from '@/Components/Main/Admin/Components/Selects/VueSelect.vue';
-import 'vue-select/dist/vue-select.css';
 
 const props = defineProps({
     socialMedias: Object,
@@ -123,6 +122,7 @@ defineExpose({ openModal });
                 <div class="mt-4">
                     <InputLabel for="social-media" value="Social media" />
                     <VueSelect
+                    v-inertia-ignore
                         id="social_media_id"
                         label="name"
                         v-model="form.social_media_id"
