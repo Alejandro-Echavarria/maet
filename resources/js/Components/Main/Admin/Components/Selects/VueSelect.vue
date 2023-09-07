@@ -32,6 +32,7 @@ import 'vue-select/dist/vue-select.css';
 }
 
 .style-chooser input.vs__search:focus {
+    outline: 1px solid #a21cbd;
     border: 1px solid #a21cbd;
 }
 
