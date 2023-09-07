@@ -9,7 +9,7 @@ import 'vue-select/dist/vue-select.css';
 </template>
 
 <style>
-.style-chooser .vs__search::placeholder,
+/* .style-chooser .vs__search::placeholder,
 .style-chooser .vs__dropdown-toggle,
 .style-chooser .vs__dropdown-menu {
     color: #747474;
@@ -19,7 +19,7 @@ import 'vue-select/dist/vue-select.css';
     border-radius: 0px 0px 8px 8px;
     margin-top: -4px;
     box-shadow: none;
-}
+} */
 
 /* .style-chooser .vs__search::placeholder {
     border: 0px solid #e5e7eb;
