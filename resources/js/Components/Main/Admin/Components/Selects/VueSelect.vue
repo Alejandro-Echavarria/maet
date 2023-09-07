@@ -25,9 +25,10 @@ import 'vue-select/dist/vue-select.css';
     border: 0px solid #e5e7eb;
 }
 
-.style-chooser .vs__search input {
+.style-chooser input.vs__search {
     border: 0px;
     padding: 0px;
+    margin: 4px;
 }
 
 .style-chooser .vs__search::placeholder,
