@@ -21,8 +21,8 @@ import 'vue-select/dist/vue-select.css';
     box-shadow: none;
 }
 
-.style-chooser .vs__search::placeholder + input {
-    border: 0px;
+.style-chooser .vs__search::placeholder {
+    border: 0px solid #e5e7eb;
 }
 
 .style-chooser .vs__search::placeholder,
