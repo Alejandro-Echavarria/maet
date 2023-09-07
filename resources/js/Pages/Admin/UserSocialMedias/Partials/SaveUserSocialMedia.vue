@@ -9,6 +9,7 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import Swal from 'sweetalert2';
 import VueSelect from '@/Components/Main/Admin/Components/Selects/VueSelect.vue';
+import 'vue-select/dist/vue-select.css';
 
 const props = defineProps({
     socialMedias: Object,
