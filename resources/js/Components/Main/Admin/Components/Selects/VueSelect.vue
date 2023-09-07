@@ -22,7 +22,7 @@ import 'vue-select/dist/vue-select.css';
 }
 
 .style-chooser .vs__search::placeholder + input {
-    border: none;
+    border: 0px;
 }
 
 .style-chooser .vs__search::placeholder,
