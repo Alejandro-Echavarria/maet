@@ -25,7 +25,7 @@ import 'vue-select/dist/vue-select.css';
     border: 0px solid #e5e7eb;
 } */
 
-.style-chooser .vs__search::placeholder,
+/* .style-chooser .vs__search::placeholder,
 .style-chooser .vs__dropdown-toggle {
     border-radius: 8px;
 }
@@ -43,5 +43,5 @@ import 'vue-select/dist/vue-select.css';
 .style-chooser .vs__clear,
 .style-chooser .vs__open-indicator {
     fill: #5145cd;
-}
+} */
 </style>
