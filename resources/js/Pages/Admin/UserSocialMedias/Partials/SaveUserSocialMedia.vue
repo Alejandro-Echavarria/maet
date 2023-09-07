@@ -122,7 +122,6 @@ defineExpose({ openModal });
                 <div class="mt-4">
                     <InputLabel for="social-media" value="Social media" />
                     <VueSelect
-                    v-inertia-ignore
                         id="social_media_id"
                         label="name"
                         v-model="form.social_media_id"
