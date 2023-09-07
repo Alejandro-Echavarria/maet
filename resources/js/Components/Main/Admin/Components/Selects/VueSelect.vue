@@ -30,6 +30,7 @@ import 'vue-select/dist/vue-select.css';
     padding: 0px;
     margin: 4px;
     outline: none;
+    -moz-appearance:none;
 }
 
 .style-chooser .vs__search::placeholder,
