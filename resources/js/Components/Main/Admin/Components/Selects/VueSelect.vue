@@ -5,7 +5,7 @@ import 'vue-select/dist/vue-select.css';
 
 <template>
     <vSelect class="mt-3 style-chooser"
-        placeholder="Selecciona una opción">
+        placeholder="Selecciona una opci&oacute;n">
     </vSelect>
 </template>
 
