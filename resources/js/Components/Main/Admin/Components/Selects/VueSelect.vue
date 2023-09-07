@@ -25,7 +25,7 @@ import 'vue-select/dist/vue-select.css';
     border: 0px solid #e5e7eb;
 }
 
-.style-chooser input.vs__search::focus {
+.style-chooser input.vs__search, .input.vs__search:focus {
     border: 0px;
     padding: 0px;
     margin: 4px;
