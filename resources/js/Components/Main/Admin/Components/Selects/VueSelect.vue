@@ -9,7 +9,7 @@ import 'vue-select/dist/vue-select.css';
 </template>
 
 <style>
-/* .style-chooser .vs__search::placeholder,
+.style-chooser .vs__search::placeholder,
 .style-chooser .vs__dropdown-toggle,
 .style-chooser .vs__dropdown-menu {
     color: #747474;
@@ -19,13 +19,13 @@ import 'vue-select/dist/vue-select.css';
     border-radius: 0px 0px 8px 8px;
     margin-top: -4px;
     box-shadow: none;
-} */
+}
 
-/* .style-chooser .vs__search::placeholder {
-    border: 0px solid #e5e7eb;
-} */
+.style-chooser .vs__search::placeholder + input {
+    border: none;
+}
 
-/* .style-chooser .vs__search::placeholder,
+.style-chooser .vs__search::placeholder,
 .style-chooser .vs__dropdown-toggle {
     border-radius: 8px;
 }
@@ -43,5 +43,5 @@ import 'vue-select/dist/vue-select.css';
 .style-chooser .vs__clear,
 .style-chooser .vs__open-indicator {
     fill: #5145cd;
-} */
+}
 </style>
