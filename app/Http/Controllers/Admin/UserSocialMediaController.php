@@ -17,7 +17,7 @@ class UserSocialMediaController extends Controller
 
         $userSocialMedias = UserSocialMedia::with('socialMedia:id,name')
             ->filter($filter)
-            ->orderBy('created_at', 'desc')
+            ->orderBy('social_media_user.created_at', 'desc')
             ->paginate(10);
 
         $socialMedias = SocialMedia::get(['id', 'name']);
