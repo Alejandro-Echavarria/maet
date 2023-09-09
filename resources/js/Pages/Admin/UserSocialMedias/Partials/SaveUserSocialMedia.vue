@@ -125,6 +125,7 @@ defineExpose({ openModal });
                         id="social_media_id"
                         label="name"
                         v-model="form.social_media_id"
+                        :append="true"
                         :options="options"
                         :reduce="options => options.id"
                         :select-on-tab="true" />
