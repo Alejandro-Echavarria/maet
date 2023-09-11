@@ -1,19 +1,25 @@
 <script setup>
 import vSelect from 'vue-select';
 import 'vue-select/dist/vue-select.css';
+
+defineProps({
+    append: {
+        type: Boolean,
+        default: false
+    }
+});
 </script>
 
 <template>
-    <vSelect class="mt-3 style-chooser" :appendToBody="true">
+    <vSelect class="mt-3 style-chooser" :appendToBody="append">
     </vSelect>
 </template>
 
 <style>
-
 .v-select.drop-up.vs--open .vs__dropdown-toggle {
-  border-radius: 0 0 4px 4px;
-  border-top-color: transparent;
-  border-bottom-color: rgba(182, 0, 0, 0.26);
+    border-radius: 0 0 4px 4px;
+    border-top-color: transparent;
+    border-bottom-color: rgba(182, 0, 0, 0.26);
 }
 
 .style-chooser .vs__search::placeholder,
@@ -23,8 +29,8 @@ import 'vue-select/dist/vue-select.css';
     text-transform: lowercase;
     font-variant: small-caps;
     border: 2px solid #e5e7eb;
-    border-radius: 0px 0px 8px 8px;
-    margin-top: -4px;
+    border-radius: 8px 8px 8px 8px;
+    margin-top: 1.5px;
     box-shadow: none;
 }
 
