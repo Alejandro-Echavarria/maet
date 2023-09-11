@@ -7,8 +7,8 @@ import SecondaryButton from '@/Components/SecondaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
-import Swal from 'sweetalert2';
 import VueSelect from '@/Components/Main/Admin/Components/Selects/VueSelect.vue';
+import SaveAlert from '@/Helpers/Alerts/SaveAlert';
 
 const props = defineProps({
     socialMedias: Object,
@@ -84,24 +84,9 @@ const closeModal = () => {
     form.reset();
 };
 
-const ok = (msj, type = 'success', timer = 10000) => {
+const ok = (msj, type, timer) => {
     closeModal();
-
-    Swal.fire({
-        icon: type,
-        title: msj,
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        padding: '0.4em',
-        showCloseButton: true,
-        timer: timer,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-    });
+    SaveAlert(msj, type, timer);
 };
 
 defineExpose({ openModal });
@@ -113,6 +98,7 @@ defineExpose({ openModal });
             <font-awesome-icon class="mr-2" :icon="['fas', 'plus']" />
             Add social media
         </PrimaryButton>
+
         <DialogModal :show="modal" :maxWidth="'2xl'" @close="closeModal">
             <template #title>
                 {{ title }}
@@ -121,14 +107,8 @@ defineExpose({ openModal });
             <template #content>
                 <div class="mt-4">
                     <InputLabel for="social-media" value="Social media" />
-                    <VueSelect
-                        id="social_media_id"
-                        label="name"
-                        v-model="form.social_media_id"
-                        :append="true"
-                        :options="options"
-                        :reduce="options => options.id"
-                        :select-on-tab="true" />
+                    <VueSelect id="social_media_id" label="name" v-model="form.social_media_id" :append="true"
+                        :options="options" :reduce="options => options.id" :select-on-tab="true" />
                     <InputError :message="form.errors.social_media_id" class="mt-2" />
                 </div>
 

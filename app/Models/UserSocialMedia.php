@@ -44,8 +44,9 @@ class UserSocialMedia extends Model
     {
         $query->when($filter ?? null, function ($query, $search) {
             $query
-                ->join('social_medias', 'social_media_user.social_media_id', '=', 'social_medias.id')
-                ->where('social_medias.name', 'like', '%' . $search . '%')
+            ->selectRaw('social_media_user.*, social_medias.name as social_media_name')
+                ->join('social_medias', 'social_medias.id', '=', 'social_media_user.social_media_id')
+                ->orWhere('social_medias.name', 'like', '%' . "$search" . '%')
                 ->orWhere('social_media_user.url', 'like', '%' . $search . '%')
                 ->orWhere('social_media_user.created_at', 'like', '%' . $search . '%');
         });
