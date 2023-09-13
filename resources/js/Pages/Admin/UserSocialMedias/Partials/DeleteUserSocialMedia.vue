@@ -16,7 +16,7 @@ const form = useForm({
 
 const ok = (msj, type, timer) => {
     SaveAlert(msj, type, timer);
-}
+};
 
 const destroy = (id) => {
     DeleteAlert().then((result) => {

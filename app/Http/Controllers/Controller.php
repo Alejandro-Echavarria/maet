@@ -11,15 +11,4 @@ use Inertia\Inertia;
 class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
-
-    public function __construct()
-    {
-        $user = User::with([
-            'userSocialMedia.socialMedia'
-        ])->find(1);
-
-        return Inertia::share([
-            'user' => $user
-        ]);
-    }
 }

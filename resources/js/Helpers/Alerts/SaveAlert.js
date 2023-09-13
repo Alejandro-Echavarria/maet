@@ -1,4 +1,5 @@
 import Swal from 'sweetalert2';
+import '../../../css/swal2.css';
 
 const SaveAlert = (msj = 'Ok', type = 'success', timer = 10000) => {
     return Swal.fire({

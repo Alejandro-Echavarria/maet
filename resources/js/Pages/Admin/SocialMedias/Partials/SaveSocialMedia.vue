@@ -7,7 +7,7 @@ import SecondaryButton from '@/Components/SecondaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
-import Swal from 'sweetalert2';
+import SaveAlert from '@/Helpers/Alerts/SaveAlert';
 
 const props = defineProps({
     socialMedias: Object,
@@ -93,24 +93,9 @@ const closeModal = () => {
     form.reset();
 };
 
-const ok = (msj, type = 'success', timer = 10000) => {
+const ok = (msj, type, timer) => {
     closeModal();
-
-    Swal.fire({
-        icon: type,
-        title: msj,
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        padding: '0.4em',
-        showCloseButton: true,
-        timer: timer,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-    });
+    SaveAlert(msj, type, timer);
 };
 
 defineExpose({ openModal });
