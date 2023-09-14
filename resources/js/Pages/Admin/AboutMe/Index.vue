@@ -7,11 +7,11 @@ import SimpleForm from '@/Components/Main/Admin/Components/Forms/SimpleForm.vue'
 import TextInput from '@/Components/TextInput.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
-import SimpleTextArea from '@/Components/Main/Admin/Components/Forms/Inputs/TextArea/SimpleTextArea.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SaveAlert from '@/Helpers/Alerts/SaveAlert';
 import Datepicker from 'flowbite-datepicker/Datepicker';
 import { initFlowbite } from 'flowbite';
+import Ckeditor from '@/Components/Main/Admin/Components/Forms/Inputs/ckeditor/Ckeditor.vue';
 
 defineOptions({
     layout: MainLayout
@@ -78,10 +78,10 @@ const ok = (msj, type, timer) => {
 
         <div class="flex w-auto mb-4">
             <Link :href="route('profile.show')">
-                <p class="text-indigo-700 text-md hover:text-indigo-400 transition duration-300">
-                    Click to change your <span class="font-bold">email</span> and <span class="font-bold">name </span>
-                    <font-awesome-icon class="w-4 h-4 ml-1" :icon="['fas', 'user-pen']" />
-                </p>
+            <p class="text-indigo-700 text-md hover:text-indigo-400 transition duration-300">
+                Click to change your <span class="font-bold">email</span> and <span class="font-bold">name </span>
+                <font-awesome-icon class="w-4 h-4 ml-1" :icon="['fas', 'user-pen']" />
+            </p>
             </Link>
         </div>
 
@@ -95,6 +95,7 @@ const ok = (msj, type, timer) => {
 
                         <InputError :message="form.errors.position" class="mt-2" />
                     </div>
+
                     <div>
                         <InputLabel for="address" value="Address" />
                         <TextInput v-model="form.address" id="address" ref="addressInput" type="text"
@@ -102,18 +103,14 @@ const ok = (msj, type, timer) => {
 
                         <InputError :message="form.errors.address" class="mt-2" />
                     </div>
-                    <div class="grid-cols-1 sm:col-span-2">
-                        <InputLabel for="bio" value="Bio" />
-                        <SimpleTextArea v-model="form.bio" placeholder="Your bio" value="" />
 
-                        <InputError :message="form.errors.bio" class="mt-2" />
-                    </div>
                     <div>
                         <InputLabel for="phone" value="Phone" />
                         <TextInput v-model="form.phone" id="phone" ref="phoneInput" type="phone" placeholder="Your phone" />
 
                         <InputError :message="form.errors.phone" class="mt-2" />
                     </div>
+
                     <div>
                         <InputLabel for="birthday" value="Birthday" />
                         <div class="relative">
@@ -130,11 +127,19 @@ const ok = (msj, type, timer) => {
                         </div>
                         <InputError :message="form.errors.birthday" class="mt-2" />
                     </div>
+
+                    <div class="grid-cols-1 sm:col-span-2">
+                        <InputLabel for="bio" value="Bio" class="mb-3" />
+                        <Ckeditor v-model="form.bio" :value="form.bio" id="bio" ref="bioInput" />
+
+                        <InputError :message="form.errors.bio" class="mt-2" />
+                    </div>
                 </div>
             </template>
 
             <template #actions>
-                <PrimaryButton class="w-full md:w-auto" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <PrimaryButton class="w-full md:w-auto" :class="{ 'opacity-25': form.processing }"
+                    :disabled="form.processing">
                     Save
                 </PrimaryButton>
             </template>

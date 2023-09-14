@@ -119,6 +119,16 @@ const logout = () => {
                         <span class="ml-3">Jobs</span>
                         </Link>
                     </li>
+
+                    <li>
+                        <Link :href="route('admin.services.index')" data-drawer-hide="logo-sidebar"
+                            class="flex items-center p-2 font-bold text-gray-700 rounded-lg dark:text-gray-200 hover:bg-indigo-200 dark:hover:bg-indigo-700 group transition duration-300 ease-linear"
+                            role="menuitem"
+                            :class="route().current('admin.services.index') ? 'bg-indigo-100 text-indigo-700' : ''">
+                        <font-awesome-icon class="w-5 h-5" :icon="['fas', 'store']" />
+                        <span class="ml-3">Services</span>
+                        </Link>
+                    </li>
                     <li>
                         <button type="button"
                             class="flex items-center w-full mt-2 p-2 text-base text-gray-700 rounded-lg group dark:text-gray-200 hover:bg-indigo-200 dark:hover:bg-indigo-700 transition duration-300 ease-linear"
@@ -155,15 +165,6 @@ const logout = () => {
                                     role="menuitem"
                                     :class="route().current('admin.usersocialmedias.index') ? 'bg-indigo-100 text-indigo-700' : ''">
                                 <span class="ml-8">User social medias</span>
-                                </Link>
-                            </li>
-
-                            <li>
-                                <Link :href="route('admin.jobs.index')" data-drawer-hide="logo-sidebar"
-                                    class="flex items-center active p-2 font-bold text-gray-700 rounded-lg dark:text-gray-200 hover:bg-indigo-200 dark:hover:bg-indigo-700 group transition duration-300 ease-linear"
-                                    role="menuitem"
-                                    :class="route().current('admin.jobs.index') ? 'bg-indigo-100 text-indigo-700' : ''">
-                                <span class="ml-8">Jobs</span>
                                 </Link>
                             </li>
                         </ul>
