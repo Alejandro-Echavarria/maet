@@ -121,7 +121,7 @@ const logout = () => {
                     </li>
                     <li>
                         <button type="button"
-                            class="flex items-center w-full my-2 p-2 text-base text-gray-700 rounded-lg group dark:text-gray-200 hover:bg-indigo-200 dark:hover:bg-indigo-700 transition duration-300 ease-linear"
+                            class="flex items-center w-full mt-2 p-2 text-base text-gray-700 rounded-lg group dark:text-gray-200 hover:bg-indigo-200 dark:hover:bg-indigo-700 transition duration-300 ease-linear"
                             aria-controls="dropdown-playground" data-collapse-toggle="dropdown-playground">
                             <font-awesome-icon class="w-5 h-5" :icon="['far', 'file']" />
                             <span class="flex-1 ml-3 text-left whitespace-nowrap font-bold" sidebar-toggle-item>Personal info</span>
@@ -170,7 +170,7 @@ const logout = () => {
 
                         <!-- Config section -->
                         <button type="button"
-                            class="flex items-center w-full p-2 text-base text-gray-700 rounded-lg group dark:text-gray-200 hover:bg-indigo-200 dark:hover:bg-indigo-700 transition duration-300 ease-linear"
+                            class="flex items-center w-full mt-2 p-2 text-base text-gray-700 rounded-lg group dark:text-gray-200 hover:bg-indigo-200 dark:hover:bg-indigo-700 transition duration-300 ease-linear"
                             aria-controls="dropdown-config" data-collapse-toggle="dropdown-config">
                             <font-awesome-icon class="w-5 h-5" :icon="['fas', 'gear']" />
                             <span class="flex-1 ml-3 text-left whitespace-nowrap font-bold"

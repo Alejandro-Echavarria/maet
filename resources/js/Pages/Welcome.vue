@@ -1,6 +1,6 @@
 <script setup>
 import { Head } from '@inertiajs/vue3';
-import { ref, computed } from 'vue';
+import { computed } from 'vue';
 import Container from '@/Components/Main/Containers/Container.vue';
 import MainBanner from '@/Components/Main/Banners/MainBanner.vue';
 
@@ -25,38 +25,40 @@ const projects = [
     },
 ];
 
-const { user } = defineProps(['user']);
+const props = defineProps({
+    auth: Object
+});
+
+const user = props.auth.user;
 
 const contactInfo = computed(() => {
-    const userRef = ref(user);
-
     return {
         data: [
             {
                 id: 1,
                 title: 'Teléfono',
-                value: userRef.value.phone,
+                value: user.phone,
                 icon: 'mobile',
                 color: 'text-gray-700',
             },
             {
                 id: 2,
                 title: 'Email',
-                value: userRef.value.email,
+                value: user.email,
                 icon: 'envelope-circle-check',
                 color: 'text-gray-700',
             },
             {
                 id: 3,
                 title: 'Dirección',
-                value: userRef.value.address,
+                value: user.address,
                 icon: 'street-view',
                 color: 'text-gray-700'
             },
             {
                 id: 4,
                 title: 'Año de nacimiento',
-                value: userRef.value.birthday,
+                value: user.birthday,
                 icon: 'calendar',
                 color: 'text-gray-700',
             }
@@ -180,20 +182,20 @@ const contactInfo = computed(() => {
                             alt="about" /> -->
                         <div class="pt-[100px] pb-8">
                             <h2 class="mt-6 mb-1 text-[26px] font-semibold dark:text-white">
-                                {{ user.name }}
+                                <!-- {{ user.name }} -->
                             </h2>
                             <h3
                                 class="mb-4 text-[#7B7B7B] inline-block dark:bg-[#1D1D1D] px-5 py-1.5 rounded-lg dark:text-[#A6A6A6]">
-                                {{ user.position }}
+                                <!-- {{ user.position }} -->
                             </h3>
                             <div class="flex justify-center space-x-3">
                                 <!-- facebook icon and link -->
-                                <a v-for="socialMedia in user.user_social_media" :href="socialMedia.url" target="_blank"
+                                <!-- <a v-for="socialMedia in user.user_social_media" :href="socialMedia.url" target="_blank"
                                     rel="noopener noreferrer">
-                                    <span class="socialbtn text-gray-700 dark:text-gray-200">
+                                    <span class="socialbtn text-gray-700 dark:text-gray-200"> -->
                                         <!-- <font-awesome-icon :icon="['fab', `${socialMedia.social_media.icon}`]" /> -->
-                                    </span>
-                                </a>
+                                    <!-- </span>
+                                </a> -->
                             </div>
 
                             <!-- personal infomation start -->
