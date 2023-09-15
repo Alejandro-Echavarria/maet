@@ -128,9 +128,8 @@ defineExpose({ openModal });
                                 <InputError :message="form.errors.color" class="mt-2" />
                             </div>
 
-                            <div class="col-span-3">
+                            <div class="sm:col-span-3">
                                 <InputLabel for="description" value="Description" class="mb-3" />
-                                <!-- <TextInput id="description" ref="descriptionInput" v-model="form.description" type="text" /> -->
                                 <Ckeditor v-model="form.description" :value="form.description" id="description" ref="descriptionInput" />
 
                                 <InputError :message="form.errors.description" class="mt-2" />
