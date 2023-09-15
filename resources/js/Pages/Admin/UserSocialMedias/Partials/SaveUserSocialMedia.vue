@@ -9,6 +9,7 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import VueSelect from '@/Components/Main/Admin/Components/Selects/VueSelect.vue';
 import SaveAlert from '@/Helpers/Alerts/SaveAlert';
+import SimpleForm from '@/Components/Main/Admin/Components/Forms/SimpleForm.vue';
 
 const props = defineProps({
     socialMedias: Object,
@@ -105,19 +106,25 @@ defineExpose({ openModal });
             </template>
 
             <template #content>
-                <div class="mt-4">
-                    <InputLabel for="social-media" value="Social media" />
-                    <VueSelect id="social_media_id" label="name" v-model="form.social_media_id" :append="true"
-                        :options="options" :reduce="options => options.id" :select-on-tab="true" />
-                    <InputError :message="form.errors.social_media_id" class="mt-2" />
-                </div>
-
-                <div class="mt-4">
-                    <InputLabel for="url" value="URL" />
-                    <TextInput id="url" ref="urlInput" v-model="form.url" type="url" placeholder="https://example.com" />
-
-                    <InputError :message="form.errors.url" class="mt-2" />
-                </div>
+                <SimpleForm :actions="true" @submitted="save">
+                    <template #form>
+                        <div class="grid grid-cols-1 gap-6">
+                            <div>
+                                <InputLabel for="social-media" value="Social media" />
+                                <VueSelect id="social_media_id" label="name" v-model="form.social_media_id" :append="true"
+                                    :options="options" :reduce="options => options.id" :select-on-tab="true" />
+                                <InputError :message="form.errors.social_media_id" class="mt-2" />
+                            </div>
+            
+                            <div>
+                                <InputLabel for="url" value="URL" />
+                                <TextInput id="url" ref="urlInput" v-model="form.url" type="url" placeholder="https://example.com" />
+            
+                                <InputError :message="form.errors.url" class="mt-2" />
+                            </div>
+                        </div>
+                    </template>
+                </SimpleForm>
             </template>
 
             <template #footer>
@@ -125,7 +132,7 @@ defineExpose({ openModal });
                     Cancel
                 </SecondaryButton>
 
-                <PrimaryButton @click="save" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <PrimaryButton form="simpleForm" @click="save" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Save
                 </PrimaryButton>
             </template>

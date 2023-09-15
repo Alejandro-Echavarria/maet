@@ -8,6 +8,8 @@ import TextInput from '@/Components/TextInput.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import SaveAlert from '@/Helpers/Alerts/SaveAlert';
+import SimpleForm from '@/Components/Main/Admin/Components/Forms/SimpleForm.vue';
+import Ckeditor from '@/Components/Main/Admin/Components/Forms/Inputs/ckeditor/Ckeditor.vue';
 
 const props = defineProps({
     data: Object,
@@ -18,6 +20,7 @@ const props = defineProps({
 const title = ref('');
 const modal = ref(false);
 const opration = ref(1);
+const service = ref(null);
 
 const form = useForm({
     title: '',
@@ -29,35 +32,34 @@ const form = useForm({
 const save = () => {
     if (opration.value === 1) {
         form.transform((data) => ({
-            ...data
+            ...data,
+            search: props.filter,
+            page: props.page
         })).post(route('admin.services.store'), {
             preserveScroll: true,
             onSuccess: () => {
                 ok('Service created successfully');
             },
             onError: () => {
-                if (form.errors.url) {
-                    urlInput.value.focus();
-                }
+
             }
         });
     } else {
         form.transform((data) => ({
-            ...data
-        })).put(route('admin.usersocialmedias.update', userSocialMedia.value), {
+            ...data,
+            search: props.filter,
+            page: props.page
+        })).put(route('admin.services.update', service.value), {
             preserveScroll: true,
             onSuccess: () => {
-                ok('User social media updated successfully');
+                ok('Service updated successfully');
             },
             onError: () => {
-                if (form.errors.url) {
-                    urlInput.value.focus();
-                }
+
             }
         });
     }
 };
-
 
 const openModal = (op, id, titleData, icon, description, color) => {
     modal.value = true;
@@ -67,7 +69,7 @@ const openModal = (op, id, titleData, icon, description, color) => {
         title.value = 'Create a new service';
     } else {
         title.value = 'Edit service';
-        form.id = id;
+        service.value = id;
         form.title = titleData;
         form.icon = icon;
         form.description = description;
@@ -96,40 +98,46 @@ defineExpose({ openModal });
             Add social media
         </PrimaryButton>
 
-        
-        <DialogModal :show="modal" :maxWidth="'2xl'" @close="closeModal">
+        <DialogModal :show="modal" :maxWidth="'6xl'" @close="closeModal">
             <template #title>
                 {{ title }}
             </template>
 
             <template #content>
-                <div class="mt-4">
-                    <InputLabel for="title" value="Title" />
-                    <TextInput id="title" ref="titleInput" v-model="form.title" type="text" />
+                <SimpleForm :actions="true" @submitted="save">
+                    <template #form>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                            <div>
+                                <InputLabel for="title" value="Title" />
+                                <TextInput id="title" ref="titleInput" v-model="form.title" type="text" />
 
-                    <InputError :message="form.errors.title" class="mt-2" />
-                </div>
+                                <InputError :message="form.errors.title" class="mt-2" />
+                            </div>
 
-                <div class="mt-4">
-                    <InputLabel for="icon" value="icon" />
-                    <TextInput id="icon" ref="iconInput" v-model="form.icon" type="text" />
+                            <div>
+                                <InputLabel for="icon" value="Icon" />
+                                <TextInput id="icon" ref="iconInput" v-model="form.icon" type="text" />
 
-                    <InputError :message="form.errors.icon" class="mt-2" />
-                </div>
+                                <InputError :message="form.errors.icon" class="mt-2" />
+                            </div>
 
-                <div class="mt-4">
-                    <InputLabel for="description" value="description" />
-                    <TextInput id="description" ref="descriptionInput" v-model="form.description" type="text" />
+                            <div>
+                                <InputLabel for="color" value="Color" />
+                                <TextInput id="color" ref="colorInput" v-model="form.color" type="text" />
 
-                    <InputError :message="form.errors.icon" class="mt-2" />
-                </div>
+                                <InputError :message="form.errors.color" class="mt-2" />
+                            </div>
 
-                <div class="mt-4">
-                    <InputLabel for="color" value="color" />
-                    <TextInput id="color" ref="colorInput" v-model="form.color" type="text" />
+                            <div class="col-span-3">
+                                <InputLabel for="description" value="Description" class="mb-3" />
+                                <!-- <TextInput id="description" ref="descriptionInput" v-model="form.description" type="text" /> -->
+                                <Ckeditor v-model="form.description" :value="form.description" id="description" ref="descriptionInput" />
 
-                    <InputError :message="form.errors.color" class="mt-2" />
-                </div>
+                                <InputError :message="form.errors.description" class="mt-2" />
+                            </div>
+                        </div>
+                    </template>
+                </SimpleForm>
             </template>
 
             <template #footer>
@@ -137,7 +145,8 @@ defineExpose({ openModal });
                     Cancel
                 </SecondaryButton>
 
-                <PrimaryButton @click="save" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <PrimaryButton form="simpleForm" type="submit" @click="save" :class="{ 'opacity-25': form.processing }"
+                    :disabled="form.processing">
                     Save
                 </PrimaryButton>
             </template>

@@ -44,7 +44,7 @@ const openModal = (op, id, socialMediaId, url) => {
             </template>
 
             <template #createButton>
-                <SaveUserSocialMedia ref="callOpenModal" :socialMedias="socialMedias" :filter="filter" :page="page"/>
+                <SaveUserSocialMedia ref="callOpenModal" :socialMedias="socialMedias" :filter="filter" :page="page" />
             </template>
 
             <template #thead>

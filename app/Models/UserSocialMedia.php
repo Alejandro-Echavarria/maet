@@ -31,13 +31,13 @@ class UserSocialMedia extends Model
     public function getCreatedAtAttribute($value)
     {
         $carbon = Carbon::parse($value)->timezone(config('app.timezone'));
-        return $carbon->format('d-m-Y h:i:s A');
+        return $carbon->format('d/m/Y h:i:s A');
     }
 
     public function getUpdatedAtAttribute($value)
     {
         $carbon = Carbon::parse($value)->timezone(config('app.timezone'));
-        return $carbon->format('d-m-Y h:i:s A');
+        return $carbon->format('d/m/Y h:i:s A');
     }
 
     public function scopeFilter($query, $filter)

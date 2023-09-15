@@ -27,12 +27,23 @@ class Service extends Model
     public function getCreatedAtAttribute($value)
     {
         $carbon = Carbon::parse($value)->timezone(config('app.timezone'));
-        return $carbon->format('d-m-Y h:i:s A');
+        return $carbon->format('d/m/Y h:i:s A');
     }
 
     public function getUpdatedAtAttribute($value)
     {
         $carbon = Carbon::parse($value)->timezone(config('app.timezone'));
-        return $carbon->format('d-m-Y h:i:s A');
+        return $carbon->format('d/m/Y h:i:s A');
+    }
+
+    public function scopeFilter($query, $filter)
+    {
+        $query->when($filter ?? null, function ($query, $search) {
+            $query->where('title', 'like', '%' . $search . '%')
+                ->orWhere('icon', 'like', '%' . $search . '%')
+                ->orWhere('description', 'like', '%' . $search . '%')
+                ->orWhere('color', 'like', '%' . $search . '%')
+                ->orWhere('created_at', 'like', '%' . $search . '%');
+        });
     }
 }
