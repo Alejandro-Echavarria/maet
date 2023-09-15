@@ -22,7 +22,7 @@ class UserSocialMediaController extends Controller
 
         $socialMedias = SocialMedia::get(['id', 'name']);
 
-        return Inertia::render('Admin/UserSocialMedias/Index', compact('userSocialMedias', 'socialMedias', 'filter', 'page'));
+        return Inertia::render('Admin/UserSocialMedias/Index', compact('userSocialMedias', 'socialMedias', 'page', 'filter'));
     }
 
     public function store(Request $request)

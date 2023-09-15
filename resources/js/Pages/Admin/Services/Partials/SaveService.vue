@@ -7,26 +7,26 @@ import SecondaryButton from '@/Components/SecondaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
-import VueSelect from '@/Components/Main/Admin/Components/Selects/VueSelect.vue';
 import SaveAlert from '@/Helpers/Alerts/SaveAlert';
 import SimpleForm from '@/Components/Main/Admin/Components/Forms/SimpleForm.vue';
+import Ckeditor from '@/Components/Main/Admin/Components/Forms/Inputs/ckeditor/Ckeditor.vue';
 
 const props = defineProps({
-    socialMedias: Object,
+    data: Object,
     filter: String,
     page: String
 });
 
-const urlInput = ref(null);
 const title = ref('');
 const modal = ref(false);
-const userSocialMedia = ref(null);
 const opration = ref(1);
-const options = ref(props.socialMedias);
+const service = ref(null);
 
 const form = useForm({
-    social_media_id: '',
-    url: '',
+    title: '',
+    icon: '',
+    description: '',
+    color: ''
 });
 
 const save = () => {
@@ -35,15 +35,13 @@ const save = () => {
             ...data,
             search: props.filter,
             page: props.page
-        })).post(route('admin.usersocialmedias.store'), {
+        })).post(route('admin.services.store'), {
             preserveScroll: true,
             onSuccess: () => {
-                ok('User social media created successfully');
+                ok('Service created successfully');
             },
             onError: () => {
-                if (form.errors.url) {
-                    urlInput.value.focus();
-                }
+
             }
         });
     } else {
@@ -51,31 +49,31 @@ const save = () => {
             ...data,
             search: props.filter,
             page: props.page
-        })).put(route('admin.usersocialmedias.update', userSocialMedia.value), {
+        })).put(route('admin.services.update', service.value), {
             preserveScroll: true,
             onSuccess: () => {
-                ok('User social media updated successfully');
+                ok('Service updated successfully');
             },
             onError: () => {
-                if (form.errors.url) {
-                    urlInput.value.focus();
-                }
+
             }
         });
     }
 };
 
-const openModal = (op, id, social_media_id, url) => {
+const openModal = (op, id, titleData, icon, description, color) => {
     modal.value = true;
     opration.value = op;
 
     if (op === 1) {
-        title.value = 'Create a new social media';
+        title.value = 'Create a new service';
     } else {
-        title.value = 'Edit social media';
-        userSocialMedia.value = id;
-        form.social_media_id = social_media_id;
-        form.url = url;
+        title.value = 'Edit service';
+        service.value = id;
+        form.title = titleData;
+        form.icon = icon;
+        form.description = description;
+        form.color = color;
     }
 };
 
@@ -100,7 +98,7 @@ defineExpose({ openModal });
             Add social media
         </PrimaryButton>
 
-        <DialogModal :show="modal" :maxWidth="'2xl'" @close="closeModal">
+        <DialogModal :show="modal" :maxWidth="'6xl'" @close="closeModal">
             <template #title>
                 {{ title }}
             </template>
@@ -108,19 +106,34 @@ defineExpose({ openModal });
             <template #content>
                 <SimpleForm :actions="true" @submitted="save">
                     <template #form>
-                        <div class="grid grid-cols-1 gap-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
                             <div>
-                                <InputLabel for="social-media" value="Social media" />
-                                <VueSelect id="social_media_id" label="name" v-model="form.social_media_id" :append="true"
-                                    :options="options" :reduce="options => options.id" :select-on-tab="true" />
-                                <InputError :message="form.errors.social_media_id" class="mt-2" />
+                                <InputLabel for="title" value="Title" />
+                                <TextInput id="title" ref="titleInput" v-model="form.title" type="text" />
+
+                                <InputError :message="form.errors.title" class="mt-2" />
                             </div>
-            
+
                             <div>
-                                <InputLabel for="url" value="URL" />
-                                <TextInput id="url" ref="urlInput" v-model="form.url" type="url" placeholder="https://example.com" />
-            
-                                <InputError :message="form.errors.url" class="mt-2" />
+                                <InputLabel for="icon" value="Icon" />
+                                <TextInput id="icon" ref="iconInput" v-model="form.icon" type="text" />
+
+                                <InputError :message="form.errors.icon" class="mt-2" />
+                            </div>
+
+                            <div>
+                                <InputLabel for="color" value="Color" />
+                                <TextInput id="color" ref="colorInput" v-model="form.color" type="text" />
+
+                                <InputError :message="form.errors.color" class="mt-2" />
+                            </div>
+
+                            <div class="col-span-3">
+                                <InputLabel for="description" value="Description" class="mb-3" />
+                                <!-- <TextInput id="description" ref="descriptionInput" v-model="form.description" type="text" /> -->
+                                <Ckeditor v-model="form.description" :value="form.description" id="description" ref="descriptionInput" />
+
+                                <InputError :message="form.errors.description" class="mt-2" />
                             </div>
                         </div>
                     </template>
@@ -132,7 +145,8 @@ defineExpose({ openModal });
                     Cancel
                 </SecondaryButton>
 
-                <PrimaryButton form="simpleForm" @click="save" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <PrimaryButton form="simpleForm" type="submit" @click="save" :class="{ 'opacity-25': form.processing }"
+                    :disabled="form.processing">
                     Save
                 </PrimaryButton>
             </template>

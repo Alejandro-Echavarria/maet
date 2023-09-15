@@ -119,12 +119,22 @@ const logout = () => {
                         <span class="ml-3">Jobs</span>
                         </Link>
                     </li>
+
+                    <li>
+                        <Link :href="route('admin.services.index')" data-drawer-hide="logo-sidebar"
+                            class="flex items-center p-2 font-bold text-gray-700 rounded-lg dark:text-gray-200 hover:bg-indigo-200 dark:hover:bg-indigo-700 group transition duration-300 ease-linear"
+                            role="menuitem"
+                            :class="route().current('admin.services.index') ? 'bg-indigo-100 text-indigo-700' : ''">
+                        <font-awesome-icon class="w-5 h-5" :icon="['fas', 'store']" />
+                        <span class="ml-3">Services</span>
+                        </Link>
+                    </li>
                     <li>
                         <button type="button"
-                            class="flex items-center w-full p-2 text-base text-gray-700 rounded-lg group dark:text-gray-200 hover:bg-indigo-200 dark:hover:bg-indigo-700 transition duration-300 ease-linear"
+                            class="flex items-center w-full mt-2 p-2 text-base text-gray-700 rounded-lg group dark:text-gray-200 hover:bg-indigo-200 dark:hover:bg-indigo-700 transition duration-300 ease-linear"
                             aria-controls="dropdown-playground" data-collapse-toggle="dropdown-playground">
                             <font-awesome-icon class="w-5 h-5" :icon="['far', 'file']" />
-                            <span class="flex-1 ml-3 text-left whitespace-nowrap font-bold" sidebar-toggle-item>About</span>
+                            <span class="flex-1 ml-3 text-left whitespace-nowrap font-bold" sidebar-toggle-item>Personal info</span>
                             <svg sidebar-toggle-item class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
@@ -134,7 +144,21 @@ const logout = () => {
                         </button>
 
                         <ul id="dropdown-playground" class="space-y-2 py-2"
-                            :class="route().current('admin.usersocialmedias.index') ? '' : 'hidden'">
+                            :class="
+                                route().current('admin.usersocialmedias.index') ||
+                                route().current('admin.aboutme.index')
+                                ? ''
+                                : 'hidden'"
+                        >
+                            <li>
+                                <Link :href="route('admin.aboutme.index')" data-drawer-hide="logo-sidebar"
+                                    class="flex items-center active p-2 font-bold text-gray-700 rounded-lg dark:text-gray-200 hover:bg-indigo-200 dark:hover:bg-indigo-700 group transition duration-300 ease-linear"
+                                    role="menuitem"
+                                    :class="route().current('admin.aboutme.index') ? 'bg-indigo-100 text-indigo-700' : ''">
+                                <span class="ml-8">About me</span>
+                                </Link>
+                            </li>
+
                             <li>
                                 <Link :href="route('admin.usersocialmedias.index')" data-drawer-hide="logo-sidebar"
                                     class="flex items-center active p-2 font-bold text-gray-700 rounded-lg dark:text-gray-200 hover:bg-indigo-200 dark:hover:bg-indigo-700 group transition duration-300 ease-linear"
@@ -143,20 +167,11 @@ const logout = () => {
                                 <span class="ml-8">User social medias</span>
                                 </Link>
                             </li>
-
-                            <li>
-                                <Link :href="route('admin.jobs.index')" data-drawer-hide="logo-sidebar"
-                                    class="flex items-center active p-2 font-bold text-gray-700 rounded-lg dark:text-gray-200 hover:bg-indigo-200 dark:hover:bg-indigo-700 group transition duration-300 ease-linear"
-                                    role="menuitem"
-                                    :class="route().current('admin.jobs.index') ? 'bg-indigo-100 text-indigo-700' : ''">
-                                <span class="ml-8">Jobs</span>
-                                </Link>
-                            </li>
                         </ul>
 
                         <!-- Config section -->
                         <button type="button"
-                            class="flex items-center w-full p-2 text-base text-gray-700 rounded-lg group dark:text-gray-200 hover:bg-indigo-200 dark:hover:bg-indigo-700 transition duration-300 ease-linear"
+                            class="flex items-center w-full mt-2 p-2 text-base text-gray-700 rounded-lg group dark:text-gray-200 hover:bg-indigo-200 dark:hover:bg-indigo-700 transition duration-300 ease-linear"
                             aria-controls="dropdown-config" data-collapse-toggle="dropdown-config">
                             <font-awesome-icon class="w-5 h-5" :icon="['fas', 'gear']" />
                             <span class="flex-1 ml-3 text-left whitespace-nowrap font-bold"

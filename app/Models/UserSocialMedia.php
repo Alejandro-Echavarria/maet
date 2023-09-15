@@ -31,21 +31,22 @@ class UserSocialMedia extends Model
     public function getCreatedAtAttribute($value)
     {
         $carbon = Carbon::parse($value)->timezone(config('app.timezone'));
-        return $carbon->format('Y-m-d h:i:s A');
+        return $carbon->format('d/m/Y h:i:s A');
     }
 
     public function getUpdatedAtAttribute($value)
     {
         $carbon = Carbon::parse($value)->timezone(config('app.timezone'));
-        return $carbon->format('Y-m-d h:i:s A');
+        return $carbon->format('d/m/Y h:i:s A');
     }
 
     public function scopeFilter($query, $filter)
     {
         $query->when($filter ?? null, function ($query, $search) {
             $query
-                ->join('social_medias', 'social_media_user.social_media_id', '=', 'social_medias.id')
-                ->where('social_medias.name', 'like', '%' . $search . '%')
+                ->select('social_media_user.*', 'social_medias.name as social_media_name')
+                ->join('social_medias', 'social_medias.id', '=', 'social_media_user.social_media_id')
+                ->orWhere('social_medias.name', 'like', '%' . "$search" . '%')
                 ->orWhere('social_media_user.url', 'like', '%' . $search . '%')
                 ->orWhere('social_media_user.created_at', 'like', '%' . $search . '%');
         });

@@ -25,10 +25,10 @@ const destroy = (id) => {
                 ...data,
                 search: props.filter,
                 page: props.page
-            })).delete(route('admin.socialmedias.destroy', id), {
+            })).delete(route('admin.services.destroy', id), {
                 preserveScroll: true,
                 onSuccess: () => {
-                    ok('Social media deleted successfully');
+                    ok('Service deleted susccessfully');
                 },
                 onError: () => {
                     console.log('error');
