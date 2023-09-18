@@ -36,7 +36,6 @@ const editorConfig = ref({
     border-right: 2px solid #e5e7eb !important;
     border-left: 2px solid #e5e7eb !important;
     border-radius: 12px 12px 0px 0px !important;
-    overflow: hidden !important;
 }
 
 .ck-dropdown__panel {
