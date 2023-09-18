@@ -10,7 +10,6 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SaveAlert from '@/Helpers/Alerts/SaveAlert';
 import Datepicker from 'flowbite-datepicker/Datepicker';
-import { initFlowbite } from 'flowbite';
 import Ckeditor from '@/Components/Main/Admin/Components/Forms/Inputs/ckeditor/Ckeditor.vue';
 
 defineOptions({
@@ -22,7 +21,6 @@ const props = defineProps({
 });
 
 onMounted(() => {
-    initFlowbite();
     const datedatepickerId2pickerEl = document.querySelector('#datepickerId');
 
     new Datepicker(datedatepickerId2pickerEl, {

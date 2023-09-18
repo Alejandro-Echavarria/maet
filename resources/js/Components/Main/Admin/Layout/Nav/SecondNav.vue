@@ -131,25 +131,22 @@ const logout = () => {
                     </li>
                     <li>
                         <button type="button"
-                            class="flex items-center w-full mt-2 p-2 text-base text-gray-700 rounded-lg group dark:text-gray-200 hover:bg-indigo-200 dark:hover:bg-indigo-700 transition duration-300 ease-linear"
+                            class="flex items-center w-full p-2 text-base text-gray-700 rounded-lg group dark:text-gray-200 hover:bg-indigo-200 dark:hover:bg-indigo-700 transition duration-300 ease-linear"
                             aria-controls="dropdown-playground" data-collapse-toggle="dropdown-playground">
                             <font-awesome-icon class="w-5 h-5" :icon="['far', 'file']" />
-                            <span class="flex-1 ml-3 text-left whitespace-nowrap font-bold" sidebar-toggle-item>Personal info</span>
-                            <svg sidebar-toggle-item class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg">
+                            <span class="flex-1 ml-3 text-left whitespace-nowrap font-bold" sidebar-toggle-item>Personal
+                                info</span>
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
                                     d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
                                     clip-rule="evenodd"></path>
                             </svg>
                         </button>
 
-                        <ul id="dropdown-playground" class="space-y-2 py-2"
-                            :class="
-                                route().current('admin.usersocialmedias.index') ||
+                        <ul id="dropdown-playground" class="space-y-2 pt-2" :class="route().current('admin.usersocialmedias.index') ||
                                 route().current('admin.aboutme.index')
                                 ? ''
-                                : 'hidden'"
-                        >
+                                : 'hidden'">
                             <li>
                                 <Link :href="route('admin.aboutme.index')" data-drawer-hide="logo-sidebar"
                                     class="flex items-center active p-2 font-bold text-gray-700 rounded-lg dark:text-gray-200 hover:bg-indigo-200 dark:hover:bg-indigo-700 group transition duration-300 ease-linear"
@@ -168,10 +165,11 @@ const logout = () => {
                                 </Link>
                             </li>
                         </ul>
-
+                    </li>
+                    <li>
                         <!-- Config section -->
                         <button type="button"
-                            class="flex items-center w-full mt-2 p-2 text-base text-gray-700 rounded-lg group dark:text-gray-200 hover:bg-indigo-200 dark:hover:bg-indigo-700 transition duration-300 ease-linear"
+                            class="flex items-center w-full p-2 text-base text-gray-700 rounded-lg group dark:text-gray-200 hover:bg-indigo-200 dark:hover:bg-indigo-700 transition duration-300 ease-linear"
                             aria-controls="dropdown-config" data-collapse-toggle="dropdown-config">
                             <font-awesome-icon class="w-5 h-5" :icon="['fas', 'gear']" />
                             <span class="flex-1 ml-3 text-left whitespace-nowrap font-bold"
@@ -183,7 +181,7 @@ const logout = () => {
                                     clip-rule="evenodd"></path>
                             </svg>
                         </button>
-                        <ul id="dropdown-config" class="space-y-2 py-2"
+                        <ul id="dropdown-config" class="space-y-2 pt-2"
                             :class="route().current('admin.socialmedias.index') ? '' : 'hidden'">
                             <li>
                                 <Link :href="route('admin.socialmedias.index')" data-drawer-hide="logo-sidebar"
