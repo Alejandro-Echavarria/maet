@@ -7,7 +7,7 @@ use App\Http\Controllers\Admin\SocialMediaController;
 use App\Http\Controllers\Admin\UserSocialMediaController;
 use App\Http\Controllers\Admin\AboutMeController;
 use App\Http\Controllers\Admin\ServiceController;
-use App\Http\Controllers\Admin\EducationController;
+use App\Http\Controllers\Admin\ResumeController;
 
 Route::get('', [DashboardController::class, 'index'])->name('admin.dashboard');
 Route::get('jobs', [JobController::class, 'index'])->name('admin.jobs.index');
@@ -26,4 +26,4 @@ Route::put('about-me/{user}', [AboutMeController::class, 'update'])->name('admin
 Route::resource('social-medias', SocialMediaController::class)->names('admin.socialmedias');
 
 // Educations
-Route::resource('educations', EducationController::class)->names('admin.educations');
+Route::resource('resume', ResumeController::class)->names('admin.resume');

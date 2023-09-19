@@ -145,7 +145,7 @@ const logout = () => {
 
                         <ul id="dropdown-playground" class="space-y-2 pt-2" :class="route().current('admin.usersocialmedias.index') ||
                                 route().current('admin.aboutme.index') ||
-                                route().current('admin.educations.index')
+                                route().current('admin.resume.index')
                                 ? ''
                                 : 'hidden'">
                             <li>
@@ -167,11 +167,11 @@ const logout = () => {
                             </li>
 
                             <li>
-                                <Link :href="route('admin.educations.index')" data-drawer-hide="logo-sidebar"
+                                <Link :href="route('admin.resume.index')" data-drawer-hide="logo-sidebar"
                                     class="flex items-center active p-2 font-bold text-gray-700 rounded-lg dark:text-gray-200 hover:bg-indigo-200 dark:hover:bg-indigo-700 group transition duration-300 ease-linear"
                                     role="menuitem"
-                                    :class="route().current('admin.educations.index') ? 'bg-indigo-100 text-indigo-700' : ''">
-                                <span class="ml-8">Educations</span>
+                                    :class="route().current('admin.resume.index') ? 'bg-indigo-100 text-indigo-700' : ''">
+                                <span class="ml-8">Resume</span>
                                 </Link>
                             </li>
                         </ul>
