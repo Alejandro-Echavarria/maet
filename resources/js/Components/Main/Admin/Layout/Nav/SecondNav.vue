@@ -17,7 +17,7 @@ const logout = () => {
 
 <template>
     <div>
-        <nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+        <nav class="sticky top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
             <div class="px-3 py-3 lg:px-5 lg:pl-3">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center justify-start">
@@ -144,7 +144,8 @@ const logout = () => {
                         </button>
 
                         <ul id="dropdown-playground" class="space-y-2 pt-2" :class="route().current('admin.usersocialmedias.index') ||
-                                route().current('admin.aboutme.index')
+                                route().current('admin.aboutme.index') ||
+                                route().current('admin.resume.index')
                                 ? ''
                                 : 'hidden'">
                             <li>
@@ -162,6 +163,15 @@ const logout = () => {
                                     role="menuitem"
                                     :class="route().current('admin.usersocialmedias.index') ? 'bg-indigo-100 text-indigo-700' : ''">
                                 <span class="ml-8">User social medias</span>
+                                </Link>
+                            </li>
+
+                            <li>
+                                <Link :href="route('admin.resume.index')" data-drawer-hide="logo-sidebar"
+                                    class="flex items-center active p-2 font-bold text-gray-700 rounded-lg dark:text-gray-200 hover:bg-indigo-200 dark:hover:bg-indigo-700 group transition duration-300 ease-linear"
+                                    role="menuitem"
+                                    :class="route().current('admin.resume.index') ? 'bg-indigo-100 text-indigo-700' : ''">
+                                <span class="ml-8">Resume</span>
                                 </Link>
                             </li>
                         </ul>
@@ -205,5 +215,11 @@ const logout = () => {
                 </ul>
             </div>
         </aside>
+
+        <div class="xs:px-0 sm:p-4 lg:p-6 mx-4 sm:ml-64">
+            <div class="2xl:max-w-[1500px] max-w-full mx-auto">
+                <slot />
+            </div>
+        </div>
     </div>
 </template>

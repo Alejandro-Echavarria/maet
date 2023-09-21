@@ -1,6 +1,6 @@
 <script setup>
 import { Head, useForm, Link } from '@inertiajs/vue3';
-import { onMounted } from 'vue';
+import { onMounted, onUnmounted } from 'vue';
 import MainLayout from '@/Components/Main/Admin/Layout/MainLayout.vue';
 import MainTitle from '@/Components/Main/Admin/Components/Titles/MainTitle.vue';
 import SimpleForm from '@/Components/Main/Admin/Components/Forms/SimpleForm.vue';
@@ -30,6 +30,12 @@ onMounted(() => {
     });
 });
 
+onUnmounted(() => {
+    const datedatepickerId2pickerEl = document.querySelector('.datepicker');
+
+    datedatepickerId2pickerEl.remove();
+});
+
 const form = useForm({
     position: props.auth.user.position,
     bio: props.auth.user.bio,
@@ -50,13 +56,7 @@ const save = () => {
             ok('Your ifnormation was updated successfully');
         },
         onError: () => {
-            if (form.errors.name) {
-                nameInput.value.focus();
-            }
 
-            if (form.errors.icon) {
-                iconInput.value.focus();
-            }
         }
     });
 };
