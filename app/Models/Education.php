@@ -9,6 +9,15 @@ class Education extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'user_id',
+        'title',
+        'description',
+        'start_date',
+        'end_date',
+        'color'
+    ];
+
     // Relación uno a muchos inversa
     public function user()
     {

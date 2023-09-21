@@ -26,4 +26,5 @@ Route::put('about-me/{user}', [AboutMeController::class, 'update'])->name('admin
 Route::resource('social-medias', SocialMediaController::class)->names('admin.socialmedias');
 
 // Educations
-Route::resource('resume', ResumeController::class)->names('admin.resume');
+Route::get('resume', [ResumeController::class, 'index'])->name('admin.resume.index');
+Route::post('resume', [ResumeController::class, 'storeEducation'])->name('admin.resume.education.store');
