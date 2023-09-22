@@ -36,32 +36,49 @@ const save = () => {
     const start_date = document.querySelector('#start');
     const end_date = document.querySelector('#end');
 
-    form.transform((data) => ({
-        ...data,
-        start_date: start_date.value,
-        end_date: end_date.value
-    })).post(route('admin.resume.education.store'), {
-        preserveScroll: true,
-        onSuccess: () => {
-            ok('Your education\'s ifnormation was updated successfully');
-        },
-        onError: () => {
+    if (opration.value === 1) {
+        form.transform((data) => ({
+            ...data,
+            start_date: start_date.value,
+            end_date: end_date.value
+        })).post(route('admin.resume.education.store'), {
+            preserveScroll: true,
+            onSuccess: () => {
+                ok('Your education\'s ifnormation was created successfully');
+            },
+            onError: () => {
+    
+            }
+        });
+    } else {
+        form.transform((data) => ({
+            ...data,
+            start_date: start_date.value,
+            end_date: end_date.value
+        })).put(route('admin.resume.education.update', education.value), {
+            preserveScroll: true,
+            onSuccess: () => {
+                ok('Your education\'s ifnormation was updated successfully');
+            },
+            onError: () => {
 
-        }
-    });
+            }
+        });
+    }
 };
 
-const openModal = (op, id, titleData, icon, description, color) => {
+const openModal = (op, id, titleData, start_date, end_date, description, color) => {
     modal.value = true;
     opration.value = op;
 
     if (op === 1) {
         title.value = 'Add an education';
     } else {
-        title.value = 'Edit service';
-        service.value = id;
+        title.value = 'Edit education';
+        education.value = id;
         form.title = titleData;
-        form.icon = icon;
+        form.start_date = start_date;
+        form.end_date = end_date;
         form.description = description;
         form.color = color;
     }
@@ -89,19 +106,27 @@ const ok = (msj, type, timer) => {
         </div>
 
         <ol class="relative border-l border-gray-200 dark:border-indigo-700">
-            <li v-for="education in educations" :key="education.id + '-education'" class="mb-10 ml-4">
-                <div
-                    class="absolute w-3 h-3 bg-indigo-100 rounded-full mt-1.5 -left-1.5 border border-white dark:border-indigo-900 dark:bg-indigo-700">
-                </div>
-                <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
-                    {{ education.start_date }} - {{ education.end_date }}
-                </time>
-                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                    {{ education.title }}
-                </h3>
-                <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400" v-html="education.description">
-                </p>
-            </li>
+            <TransitionGroup name="list" tag="li">
+                <li v-for="education in educations" :key="education.id + '-education'" class="mb-10 ml-4">
+                    <div
+                        class="absolute w-3 h-3 bg-indigo-100 rounded-full mt-1.5 -left-1.5 border border-white dark:border-indigo-900 dark:bg-indigo-700">
+                    </div>
+                    <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
+                        {{ education.start_date }} - {{ education.end_date }}
+                    </time>
+                    <div class="flex sm:gap-4">
+                        <h3 class="text-lg font-semibold text-gray-700 dark:text-white">
+                            {{ education.title }}
+                        </h3>
+                        <button class="mr-2">
+                            <font-awesome-icon @click="openModal(2, education.id, education.title, education.start_date, education.end_date, education.description, education.color)"
+                                class="w-4 h-4 text-gray-400 dark:text-white hover:text-indigo-500  transition duration-300 ease-linear" :icon="['far', 'pen-to-square']" />
+                        </button>
+                    </div>
+                    <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400" v-html="education.description">
+                    </p>
+                </li>
+            </TransitionGroup>
         </ol>
 
         <DialogModal :show="modal" :maxWidth="'6xl'" @close="closeModal">
@@ -122,7 +147,7 @@ const ok = (msj, type, timer) => {
 
                             <div>
                                 <InputLabel for="dates" value="Dates" />
-                                <DateRangePicker :value="form.start_date" />
+                                <DateRangePicker :data="{'start_date': form.start_date, 'end_date': form.end_date}" />
 
                                 <div class="flex gap-2">
                                     <InputError :message="form.errors.start_date" class="mt-2" />
@@ -132,7 +157,7 @@ const ok = (msj, type, timer) => {
 
                             <div class="sm:col-span-3">
                                 <InputLabel for="color" value="Color" />
-                                <TextInput v-model="form.color" type="color" />
+                                <TextInput v-model="form.color" type="color" class="border-b-0 h-10" />
 
                                 <InputError :message="form.errors.color" class="mt-2" />
                             </div>
@@ -160,9 +185,25 @@ const ok = (msj, type, timer) => {
                 </PrimaryButton>
             </template>
         </DialogModal>
-
-        <pre>
-            {{ form.dates }}
-        </pre>
     </div>
 </template>
+
+<style>
+.list-move, /* apply transition to moving elements */
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+/* ensure leaving items are taken out of layout flow so that moving
+   animations can be calculated correctly. */
+.list-leave-active {
+  position: absolute;
+}
+</style>

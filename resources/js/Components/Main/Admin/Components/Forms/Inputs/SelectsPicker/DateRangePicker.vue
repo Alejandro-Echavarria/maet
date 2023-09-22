@@ -4,16 +4,20 @@ import TextInput from '@/Components/TextInput.vue';
 import DateRangePicker from 'flowbite-datepicker/DateRangePicker';
 
 const props = defineProps({
-    modelValue: String,
+    data: {
+        type: Object,
+        required: true
+    },
 });
 
-const modelValue = ref(props.modelValue);
+const value = ref(props.data);
 
 onMounted(() => {
     const datedatepickerId2pickerEl = document.getElementById('dateRangePickerId');
     new DateRangePicker(datedatepickerId2pickerEl, {
         autohide: true,
-        format: 'dd/mm/yyyy'
+        format: 'dd/mm/yyyy',
+        todayHighlight: true
     });
 });
 
@@ -36,7 +40,7 @@ onUnmounted(() => {
                 </svg>
             </div>
 
-            <TextInput id="start" name="start" type="text" class="pl-7" v-model="modelValue" :value="modelValue"
+            <TextInput id="start" name="start" type="text" class="pl-7" :value="value.start_date"
                 placeholder="Select date start" />
         </div>
         <span class="mx-4 text-gray-500">to</span>
@@ -49,7 +53,8 @@ onUnmounted(() => {
                 </svg>
             </div>
 
-            <TextInput id="end" name="end" type="text" class="pl-7" placeholder="Select date end" />
+            <TextInput id="end" name="end" type="text" class="pl-7" :value="value.end_date"
+                placeholder="Select date end" />
         </div>
     </div>
 </template>
