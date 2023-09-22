@@ -114,7 +114,7 @@ const ok = (msj, type, timer) => {
                     <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
                         {{ education.start_date }} - {{ education.end_date }}
                     </time>
-                    <div class="flex sm:gap-4">
+                    <div class="flex gap-4">
                         <h3 class="text-lg font-semibold text-gray-700 dark:text-white">
                             {{ education.title }}
                         </h3>
