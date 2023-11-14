@@ -29,3 +29,4 @@ Route::resource('social-medias', SocialMediaController::class)->names('admin.soc
 Route::get('resume', [ResumeController::class, 'index'])->name('admin.resume.index');
 Route::post('resume', [ResumeController::class, 'storeEducation'])->name('admin.resume.education.store');
 Route::put('resume/{education}', [ResumeController::class, 'updateEducation'])->name('admin.resume.education.update');
+Route::delete('resume/{education}', [ResumeController::class, 'destroyEducation'])->name('admin.resume.education.destroy');

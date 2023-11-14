@@ -63,4 +63,11 @@ class ResumeController extends Controller
 
         return to_route('admin.resume.index');
     }
+
+    public function destroyEducation(Education $education)
+    {
+        $education->delete();
+
+        return to_route('admin.resume.index');
+    }
 }

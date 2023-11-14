@@ -2,7 +2,7 @@
 import { Head } from '@inertiajs/vue3';
 import MainLayout from '@/Components/Main/Admin/Layout/MainLayout.vue';
 import MainTitle from '@/Components/Main/Admin/Components/Titles/MainTitle.vue';
-import SaveEducation from './Partials/SaveEducation.vue';
+import Education from './Partials/Education.vue';
 
 defineOptions({
     layout: MainLayout
@@ -36,7 +36,7 @@ const props = defineProps({
         </MainTitle>
 
         <section id="educations">
-            <SaveEducation :educations="educations" />
+            <Education :educations="educations" />
         </section>
     </div>
 </template>
