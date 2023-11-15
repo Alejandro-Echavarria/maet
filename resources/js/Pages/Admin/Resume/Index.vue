@@ -1,12 +1,19 @@
 <script setup>
-import { Head } from '@inertiajs/vue3';
-import MainLayout from '@/Components/Main/Admin/Layout/MainLayout.vue';
-import MainTitle from '@/Components/Main/Admin/Components/Titles/MainTitle.vue';
-import Education from './Partials/Education.vue';
+import { ref, onMounted } from "vue";
+import { Head } from "@inertiajs/vue3";
+import MainLayout from "@/Components/Main/Admin/Layout/MainLayout.vue";
+import MainTitle from "@/Components/Main/Admin/Components/Titles/MainTitle.vue";
+import Education from "./Partials/Education.vue";
+import Section from "@/Components/Main/Containers/Sections/Section.vue";
 
 defineOptions({
-    layout: MainLayout
+    layout: MainLayout,
 });
+
+const tabs = ref([
+    { id: "education", label: "Educations", selected: false },
+    { id: "experience", label: "Experiences", selected: false },
+]);
 
 const props = defineProps({
     educations: {
@@ -23,7 +30,7 @@ const props = defineProps({
     },
     knows: {
         type: Object,
-    }
+    },
 });
 </script>
 
@@ -31,12 +38,16 @@ const props = defineProps({
     <div>
         <Head title="Resume" />
 
-        <MainTitle>
-            Resume
-        </MainTitle>
+        <MainTitle> Resume </MainTitle>
 
-        <section id="educations">
-            <Education :educations="educations" />
-        </section>
+        <Section :tabsOptions="tabs">
+            <template #tabeducation>
+                <Education :educations="educations" />
+            </template>
+
+            <template #tabexperience>
+                hola
+            </template>
+        </Section>
     </div>
 </template>
