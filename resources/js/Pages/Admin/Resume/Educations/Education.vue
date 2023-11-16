@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useForm } from '@inertiajs/vue3';
+import MainLayout from '@/Components/Main/Admin/Layout/MainLayout.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import DangerButton from '@/Components/DangerButton.vue';
@@ -13,6 +14,11 @@ import Ckeditor from '@/Components/Main/Admin/Components/Forms/Inputs/ckeditor/C
 import SaveAlert from '@/Helpers/Alerts/SaveAlert';
 import DeleteAlert from '@/Helpers/Alerts/DeleteAlert';
 import DateRangePicker from '@/Components/Main/Admin/Components/Forms/Inputs/SelectsPicker/DateRangePicker.vue';
+
+defineOptions({
+    layout: MainLayout
+});
+
 
 const props = defineProps({
     educations: {

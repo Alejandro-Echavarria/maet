@@ -70,4 +70,43 @@ class ResumeController extends Controller
 
         return to_route('admin.resume.index');
     }
+
+    // Experience
+    public function storeExperience(Request $request)
+    {
+        $data = $request->validate([
+            'title' => "required|max:255|string",
+            'description' => 'required',
+            'start_date' => 'required|date_format:d/m/Y',
+            'end_date' => 'required|date_format:d/m/Y',
+            'color' => 'required|max:10|string',
+        ]);
+
+        $data['user_id'] = auth()->user()->id;
+        $data['start_date'] = Carbon::createFromFormat('d/m/Y', $data['start_date'])->format('Y-m-d');
+        $data['end_date'] = Carbon::createFromFormat('d/m/Y', $data['end_date'])->format('Y-m-d');
+
+        Experience::create($data);
+
+        return to_route('admin.resume.index');
+    }
+
+    public function updateExperience(Request $request, Experience $experience)
+    {
+        $data = $request->validate([
+            'title' => "required|max:255|string|unique:experiences,title,$experience->id",
+            'description' => 'required',
+            'start_date' => 'required|date_format:d/m/Y',
+            'end_date' => 'required|date_format:d/m/Y',
+            'color' => 'required|max:10|string',
+        ]);
+
+        $data['user_id'] = auth()->user()->id;
+        $data['start_date'] = Carbon::createFromFormat('d/m/Y', $data['start_date'])->format('Y-m-d');
+        $data['end_date'] = Carbon::createFromFormat('d/m/Y', $data['end_date'])->format('Y-m-d');
+
+        $experience->update($data);
+
+        return to_route('admin.resume.index');
+    }
 }

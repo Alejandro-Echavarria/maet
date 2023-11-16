@@ -30,3 +30,8 @@ Route::get('resume', [ResumeController::class, 'index'])->name('admin.resume.ind
 Route::post('resume', [ResumeController::class, 'storeEducation'])->name('admin.resume.education.store');
 Route::put('resume/{education}', [ResumeController::class, 'updateEducation'])->name('admin.resume.education.update');
 Route::delete('resume/{education}', [ResumeController::class, 'destroyEducation'])->name('admin.resume.education.destroy');
+
+// Experiences
+Route::post('resume/experiences', [ResumeController::class, 'storeExperience'])->name('admin.resume.experience.store');
+Route::put('resume/experience/{experience}', [ResumeController::class, 'updateExperience'])->name('admin.resume.experience.update');
+// Route::delete('resume/{experience}', [ResumeController::class, 'destroyExperience'])->name('admin.resume.experience.destroy');
