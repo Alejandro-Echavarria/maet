@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import SaveExperience from "@/Pages/Admin/Resume/Experiences/Partials/SaveExperience.vue";
-import Time from "@/Components/Main/Admin/Components/OtherComponents/Timelines/Time.vue";
+import Time from "@/Components/Main/Admin/Components/OtherComponents/Time.vue";
 
 const props = defineProps({
     experiences: {
