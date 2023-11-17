@@ -1,8 +1,10 @@
 <script setup>
 import { ref } from 'vue';
 import { useForm } from '@inertiajs/vue3';
+import MainLayout from '@/Components/Main/Admin/Layout/MainLayout.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
+import DangerButton from '@/Components/DangerButton.vue';
 import DialogModal from '@/Components/DialogModal.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
@@ -10,7 +12,13 @@ import InputError from '@/Components/InputError.vue';
 import SimpleForm from '@/Components/Main/Admin/Components/Forms/SimpleForm.vue';
 import Ckeditor from '@/Components/Main/Admin/Components/Forms/Inputs/ckeditor/Ckeditor.vue';
 import SaveAlert from '@/Helpers/Alerts/SaveAlert';
+import DeleteAlert from '@/Helpers/Alerts/DeleteAlert';
 import DateRangePicker from '@/Components/Main/Admin/Components/Forms/Inputs/SelectsPicker/DateRangePicker.vue';
+
+defineOptions({
+    layout: MainLayout
+});
+
 
 const props = defineProps({
     educations: {
@@ -23,6 +31,7 @@ const title = ref('');
 const modal = ref(false);
 const opration = ref(1);
 const education = ref(null);
+const canDeleteEducation = ref(false);
 
 const form = useForm({
     title: '',
@@ -47,7 +56,7 @@ const save = () => {
                 ok('Your education\'s ifnormation was created successfully');
             },
             onError: () => {
-    
+                console.log('error');
             }
         });
     } else {
@@ -61,15 +70,32 @@ const save = () => {
                 ok('Your education\'s ifnormation was updated successfully');
             },
             onError: () => {
-
+                console.log('error');
             }
         });
     }
 };
 
+const destroy = () => {
+    DeleteAlert().then((result) => {
+        if (result.isConfirmed) {
+            form.delete(route('admin.resume.education.destroy', education.value), {
+                preserveScroll: true,
+                onSuccess: () => {
+                    ok('Your education\'s ifnormation was deleted successfully');
+                },
+                onError: () => {
+                    console.log('error');
+                },
+            });
+        }
+    });
+};
+
 const openModal = (op, id, titleData, start_date, end_date, description, color) => {
     modal.value = true;
     opration.value = op;
+    canDeleteEducation.value = op;
 
     if (op === 1) {
         title.value = 'Add an education';
@@ -162,6 +188,14 @@ const ok = (msj, type, timer) => {
                                 <InputError :message="form.errors.color" class="mt-2" />
                             </div>
 
+                            <div v-if="opration === 2">
+                                <InputLabel for="color" value="Delete this education" />
+
+                                <DangerButton @click="destroy" :class="{ 'opacity-25': form.processing }" class="mt-2" :disabled="form.processing">
+                                    Delete
+                                </DangerButton>
+                            </div>
+
                             <div class="grid-cols-1 sm:col-span-3">
                                 <!-- <InputLabel for="description" value="Description" class="mb-3" /> -->
                                 <Ckeditor v-model="form.description" :value="form.description" id="description"
@@ -176,7 +210,7 @@ const ok = (msj, type, timer) => {
 
             <template #footer>
                 <SecondaryButton @click="closeModal" class="mr-3">
-                    Cancel
+                    Close
                 </SecondaryButton>
 
                 <PrimaryButton form="simpleForm" type="submit" @click="save" :class="{ 'opacity-25': form.processing }"
