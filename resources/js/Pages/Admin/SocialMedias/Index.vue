@@ -22,7 +22,6 @@ const props = defineProps({
 const thead = ['icon', 'name', 'created', 'updated'];
 const url = 'admin.socialmedias.index';
 
-
 const callOpenModal = ref(null);
 
 const openModal = (op, id, socialMediaId, url) => {
