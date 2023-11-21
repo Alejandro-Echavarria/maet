@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import SaveExperience from "@/Pages/Admin/Resume/Experiences/Partials/SaveExperience.vue";
-import TimeLine from "@/Components/Main/Admin/Components/Others/Timelines/TimeLine.vue";
+import Time from "@/Components/Main/Admin/Components/OtherComponents/Time.vue";
 
 const props = defineProps({
     experiences: {
@@ -21,7 +21,7 @@ const openModal = (op, id, titleData, start_date, end_date, description, color) 
     <div>
         <SaveExperience ref="callOpenModal" :data="experiences" />
 
-        <TimeLine>
+        <Time>
             <template #list>
                 <li
                     class="mb-10 ml-4"
@@ -67,6 +67,6 @@ const openModal = (op, id, titleData, start_date, end_date, description, color) 
                     />
                 </li>
             </template>
-        </TimeLine>
+        </Time>
     </div>
 </template>

@@ -17,7 +17,8 @@ onMounted(() => {
     new DateRangePicker(datedatepickerId2pickerEl, {
         autohide: true,
         format: 'dd/mm/yyyy',
-        todayHighlight: true
+        todayHighlight: true,
+        container: '#modal',
     });
 });
 
