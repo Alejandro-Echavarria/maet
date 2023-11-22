@@ -4,7 +4,7 @@ import SecondNav from "@/Components/Main/Admin/Layout/Nav/SecondNav.vue";
 
 <template>
     <div>
-        <SecondNav :key="$page.url + 'nav'" >
+        <SecondNav>
             <slot />
         </SecondNav>
     </div>
