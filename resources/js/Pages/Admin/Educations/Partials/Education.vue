@@ -50,7 +50,7 @@ const save = () => {
             ...data,
             start_date: start_date.value,
             end_date: end_date.value
-        })).post(route('admin.resume.education.store'), {
+        })).post(route('admin.resume.educations.store'), {
             preserveScroll: true,
             onSuccess: () => {
                 ok('Your education\'s ifnormation was created successfully');
@@ -64,7 +64,7 @@ const save = () => {
             ...data,
             start_date: start_date.value,
             end_date: end_date.value
-        })).put(route('admin.resume.education.update', education.value), {
+        })).put(route('admin.resume.educations.update', education.value), {
             preserveScroll: true,
             onSuccess: () => {
                 ok('Your education\'s ifnormation was updated successfully');
@@ -79,7 +79,7 @@ const save = () => {
 const destroy = () => {
     DeleteAlert().then((result) => {
         if (result.isConfirmed) {
-            form.delete(route('admin.resume.education.destroy', education.value), {
+            form.delete(route('admin.resume.educations.destroy', education.value), {
                 preserveScroll: true,
                 onSuccess: () => {
                     ok('Your education\'s ifnormation was deleted successfully');
@@ -124,9 +124,12 @@ const ok = (msj, type, timer) => {
 
 <template>
     <div>
-        <div class="flex my-3 justify-between">
-            <h3 class="text-lg font-bold text-gray-700 dark:text-gray-300">Educations</h3>
-            <PrimaryButton @click="openModal(1)">
+        <div class="flex my-3 justify-between gap-3">
+            <h3 class="text-lg font-bold text-gray-700 dark:text-gray-300">
+                Educations
+            </h3>
+            <PrimaryButton class="sm:w-auto w-full" @click="openModal(1)">
+                <font-awesome-icon class="mr-2" :icon="['fas', 'plus']" />
                 Add education
             </PrimaryButton>
         </div>
