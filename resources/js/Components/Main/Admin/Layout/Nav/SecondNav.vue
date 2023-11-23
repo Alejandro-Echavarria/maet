@@ -16,7 +16,7 @@ const logout = () => {
             <div class="px-3 py-3 lg:px-5 lg:pl-3">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center justify-start">
-                        <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" 
+                        <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar"
                             data-drawer-backdrop="true" data-drawer-body-scrolling="true" aria-controls="logo-sidebar"
                             type="button"
                             class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
@@ -126,6 +126,11 @@ const logout = () => {
                     </li>
                     <li>
                         <button type="button"
+                        :aria-expanded="route().current('admin.usersocialmedias.index') ||
+                            route().current('admin.aboutme.index') ||
+                            route().current('admin.resume.*')
+                            ? 'true'
+                            : 'false'"
                             class="flex items-center w-full p-2 text-base text-gray-700 rounded-lg group dark:text-gray-200 hover:bg-indigo-200 dark:hover:bg-indigo-700 transition duration-300 ease-linear"
                             aria-controls="dropdown-playground" data-collapse-toggle="dropdown-playground">
                             <font-awesome-icon class="w-5 h-5" :icon="['far', 'file']" />
@@ -139,10 +144,10 @@ const logout = () => {
                         </button>
 
                         <ul id="dropdown-playground" class="space-y-2 pt-2" :class="route().current('admin.usersocialmedias.index') ||
-                                route().current('admin.aboutme.index') ||
-                                route().current('admin.resume.*')
-                                ? ''
-                                : 'hidden'">
+                            route().current('admin.aboutme.index') ||
+                            route().current('admin.resume.*')
+                            ? 'show'
+                            : 'hidden'">
                             <li>
                                 <Link :href="route('admin.aboutme.index')" data-drawer-hide="logo-sidebar"
                                     class="flex items-center active p-2 font-bold text-gray-700 rounded-lg dark:text-gray-200 hover:bg-indigo-200 dark:hover:bg-indigo-700 group transition duration-300 ease-linear"
