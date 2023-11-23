@@ -38,7 +38,7 @@ const save = () => {
             ...data,
             start_date: start_date.value,
             end_date: end_date.value,
-        })).post(route("admin.resume.experience.store"), {
+        })).post(route("admin.resume.experiences.store"), {
             preserveScroll: true,
             onSuccess: () => {
                 ok("Experience created successfully");
@@ -52,7 +52,7 @@ const save = () => {
             ...data,
             start_date: start_date.value,
             end_date: end_date.value,
-        })).put(route("admin.resume.experience.update", experience.value), {
+        })).put(route("admin.resume.experiences.update", experience.value), {
             preserveScroll: true,
             onSuccess: () => {
                 ok("Experience updated successfully");
@@ -64,15 +64,7 @@ const save = () => {
     }
 };
 
-const openModal = (
-    op,
-    id,
-    titleData,
-    start_date,
-    end_date,
-    description,
-    color
-) => {
+const openModal = (op, id, titleData, start_date, end_date, description, color) => {
     modal.value = true;
     opration.value = op;
 
@@ -105,11 +97,12 @@ defineExpose({ openModal });
 
 <template>
     <div>
-        <div class="flex my-3 justify-between">
+        <div class="flex my-3 justify-between gap-3">
             <h3 class="text-lg font-bold text-gray-700 dark:text-gray-300">
                 Experiences
             </h3>
-            <PrimaryButton @click="openModal(1)">
+            <PrimaryButton class="sm:w-auto w-full" @click="openModal(1)">
+                <font-awesome-icon class="mr-2" :icon="['fas', 'plus']" />
                 Add experience
             </PrimaryButton>
         </div>
@@ -125,52 +118,29 @@ defineExpose({ openModal });
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                             <div>
                                 <InputLabel for="title" value="Title" />
-                                <TextInput
-                                    id="title"
-                                    ref="titleInput"
-                                    v-model="form.title"
-                                    type="text"
-                                />
+                                <TextInput id="title" ref="titleInput" v-model="form.title" type="text" />
 
-                                <InputError
-                                    :message="form.errors.title"
-                                    class="mt-2"
-                                />
+                                <InputError :message="form.errors.title" class="mt-2" />
                             </div>
 
                             <div>
                                 <InputLabel for="dates" value="Dates" />
-                                <DateRangePicker
-                                    :data="{
-                                        start_date: form.start_date,
-                                        end_date: form.end_date,
-                                    }"
-                                />
+                                <DateRangePicker :data="{
+                                    start_date: form.start_date,
+                                    end_date: form.end_date,
+                                }" />
 
                                 <div class="flex gap-2">
-                                    <InputError
-                                        :message="form.errors.start_date"
-                                        class="mt-2"
-                                    />
-                                    <InputError
-                                        :message="form.errors.end_date"
-                                        class="mt-2"
-                                    />
+                                    <InputError :message="form.errors.start_date" class="mt-2" />
+                                    <InputError :message="form.errors.end_date" class="mt-2" />
                                 </div>
                             </div>
 
                             <div class="sm:col-span-3">
                                 <InputLabel for="color" value="Color" />
-                                <TextInput
-                                    v-model="form.color"
-                                    type="color"
-                                    class="border-b-0 h-10"
-                                />
+                                <TextInput v-model="form.color" type="color" class="border-b-0 h-10" />
 
-                                <InputError
-                                    :message="form.errors.color"
-                                    class="mt-2"
-                                />
+                                <InputError :message="form.errors.color" class="mt-2" />
                             </div>
 
                             <!-- <div v-if="opration === 2">
@@ -183,17 +153,10 @@ defineExpose({ openModal });
 
                             <div class="grid-cols-1 sm:col-span-3">
                                 <!-- <InputLabel for="description" value="Description" class="mb-3" /> -->
-                                <Ckeditor
-                                    v-model="form.description"
-                                    :value="form.description"
-                                    id="description"
-                                    ref="descriptionInput"
-                                />
+                                <Ckeditor v-model="form.description" :value="form.description" id="description"
+                                    ref="descriptionInput" />
 
-                                <InputError
-                                    :message="form.errors.description"
-                                    class="mt-2"
-                                />
+                                <InputError :message="form.errors.description" class="mt-2" />
                             </div>
                         </div>
                     </template>
@@ -205,13 +168,8 @@ defineExpose({ openModal });
                     Close
                 </SecondaryButton>
 
-                <PrimaryButton
-                    form="simpleForm"
-                    type="submit"
-                    @click="save"
-                    :class="{ 'opacity-25': form.processing }"
-                    :disabled="form.processing"
-                >
+                <PrimaryButton form="simpleForm" type="submit" @click="save" :class="{ 'opacity-25': form.processing }"
+                    :disabled="form.processing">
                     Save
                 </PrimaryButton>
             </template>
