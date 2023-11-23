@@ -152,7 +152,7 @@ const ok = (msj, type, timer) => {
                                 class="w-4 h-4 text-gray-400 dark:text-white hover:text-indigo-500  transition duration-300 ease-linear" :icon="['far', 'pen-to-square']" />
                         </button>
                     </div>
-                    <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400" v-html="education.description">
+                    <p class="mb-4 dark:text-gray-400" v-html="education.description">
                     </p>
                 </li>
             </TransitionGroup>

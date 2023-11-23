@@ -64,7 +64,7 @@ const openModal = (op, id, titleData, start_date, end_date, description, color) 
                                         :icon="['far', 'pen-to-square']" />
                                 </button>
                             </div>
-                            <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400"
+                            <p class="mb-4 dark:text-gray-400"
                                 v-html="experience.description" />
                         </li>
                     </template>
