@@ -28,9 +28,6 @@ Route::resource('social-medias', SocialMediaController::class)->only(['index', '
 
 // Educations
 Route::resource('resume/educations', EducationController::class)->only(['index', 'store', 'update', 'destroy'])->names('admin.resume.educations');
-// Route::post('resume', [ResumeController::class, 'storeEducation'])->name('admin.resume.education.store');
-// Route::put('resume/{education}', [ResumeController::class, 'updateEducation'])->name('admin.resume.education.update');
-// Route::delete('resume/{education}', [ResumeController::class, 'destroyEducation'])->name('admin.resume.education.destroy');
 
 // Experiences
 Route::resource('resume/experiences', ExperienceController::class)->only(['index', 'store', 'update', 'destroy'])->names('admin.resume.experiences');
