@@ -3,7 +3,7 @@ import { onMounted, onUpdated } from 'vue';
 import { Link, router } from "@inertiajs/vue3";
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
-import { initCollapses } from 'flowbite';
+import { initCollapses } from "flowbite";
 
 onMounted(() => {
     initCollapses();
@@ -23,7 +23,7 @@ const logout = () => {
         <div class="px-3 py-3 lg:px-5 lg:pl-3">
             <div class="flex items-center justify-between">
                 <div class="flex items-center justify-start">
-                    <button key="logo" data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" v-inertia-ignore
+                    <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" 
                         data-drawer-backdrop="true" data-drawer-body-scrolling="true" aria-controls="logo-sidebar"
                         type="button"
                         class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
