@@ -5,17 +5,17 @@ import NavItem from '@/Components/Main/Admin/Layout/Nav/NavItem.vue';
 const isSidebarVisible = ref(true);
 
 const navItems = [
-    { href: 'admin.dashboard', active:'/admin/dashboard', label: 'Dashboard', children: [], icon: null },
-    { href: 'admin.jobs.index', active: '/admin/jobs', label: 'Jobs', children: [], icon: null },
-    { href: 'admin.services.index', active: '/admin/services', label: 'Services', children: [], icon: null },
+    { href: 'admin.dashboard', active: route().current('admin.dashboard'), activeClass: '/admin/dashboard', label: 'Dashboard', children: [], icon: null },
+    { href: 'admin.jobs.index', active: route().current('admin.jobs.index'), activeClass: '/admin/jobs', label: 'Jobs', children: [], icon: null },
+    { href: 'admin.services.index', active: route().current('admin.services.index'), activeClass: '/admin/services', label: 'Services', children: [], icon: null },
     {
-        href: '#', label: 'Personal info', active: (route().current('admin.resume.*') ? '/resume' : '' || route().current('admin.aboutme.index') ? '/about-me' : ''), children: [
-            { href: 'admin.aboutme.index', active: '/admin/about-me', label: 'About me', children: [], icon: null },
-            { href: 'admin.usersocialmedias.index', active: '/admin/user-social-medias', label: 'User social medias', children: [], icon: null },
-            { href: 'admin.resume.educations.index', active: '/admin/resume', label: 'Personal info', children: [], icon: null },
+        href: '#', label: 'Personal info', active: route().current('admin.resume.*'), activeClass: (route().current('admin.resume.*') ? '/resume' : '' || route().current('admin.aboutme.index') ? '/about-me' : ''), children: [
+            { href: 'admin.aboutme.index', active: route().current('admin.aboutme.index'), activeClass: '/admin/about-me', label: 'About me', children: [], icon: null },
+            { href: 'admin.usersocialmedias.index', active: route().current('admin.usersocialmedias.index'), activeClass: '/admin/user-social-medias', label: 'User social medias', children: [], icon: null },
+            { href: 'admin.resume.educations.index', active: route().current('admin.resume.*'), activeClass: '/admin/resume', label: 'Personal info', children: [], icon: null },
             {
                 href: '#', label: 'Configuration', active: route().current('admin.socialmedias.*'), activeClass: '/admin/social-medias', children: [
-                    { href: 'admin.socialmedias.index', active: '/admin/social-medias', label: 'Social medias', children: [], icon: null },
+                    { href: 'admin.socialmedias.index', active: route().current('admin.socialmedias.index'), activeClass: '/admin/social-medias', label: 'Social medias', children: [], icon: null },
                 ], icon: null
             },
         ], icon: null

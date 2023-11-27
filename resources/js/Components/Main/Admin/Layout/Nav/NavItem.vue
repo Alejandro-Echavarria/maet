@@ -16,19 +16,12 @@ const hasActiveChild = computed(() => {
 
     return hasActiveItem(props.item.children);
 });
-
-const isUrl = (...urls) => {
-    if (urls[0] === '') {
-        return url === '';
-    }
-    return urls.filter(url => props.item.url.startsWith(url)).length;
-}
 </script>
 
 <template>
     <Link v-if="!item.children.length" :href="route(item.href)" :class="[
         'flex items-center py-2 px-3 text-sm font-semibold text-gray-700 rounded-lg dark:text-gray-200 hover:bg-indigo-200 dark:hover:bg-indigo-700 group transition duration-300 ease-linear',
-        { 'bg-indigo-100 text-indigo-700': $page.url.startsWith(item.active) },
+        { 'bg-indigo-100 text-indigo-700': $page.url.startsWith(item.activeClass) },
     ]">
     <!-- <font-awesome-icon class="w-5 h-5" :icon="['fas', 'chart-line']" /> -->
     <span class="flex-1 ">{{ item.label }}</span>
