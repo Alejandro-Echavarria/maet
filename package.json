@@ -27,8 +27,10 @@
         "@fortawesome/free-regular-svg-icons": "^6.4.0",
         "@fortawesome/free-solid-svg-icons": "^6.4.0",
         "@fortawesome/vue-fontawesome": "^3.0.3",
+        "@headlessui/vue": "^1.7.16",
         "flowbite": "^1.8.1",
         "flowbite-datepicker": "^1.2.2",
+        "flowbite-vue": "^0.1.0",
         "lodash": "^4.17.21",
         "sweetalert2": "^11.7.20",
         "vue-select": "^4.0.0-beta.6"
