@@ -1,23 +1,25 @@
 <script setup>
 import { ref, onBeforeUnmount, onMounted } from 'vue';
 import NavItem from '@/Components/Main/Admin/Layout/Nav/NavItem.vue';
+import Dropdown from '@/Components/Dropdown.vue';
+import DropdownLink from '@/Components/DropdownLink.vue'
 
 const isSidebarVisible = ref(true);
 
 const navItems = [
-    { href: 'admin.dashboard', active:'/admin/dashboard', label: 'Dashboard', children: [], icon: null },
-    { href: 'admin.jobs.index', active: '/admin/jobs', label: 'Jobs', children: [], icon: null },
-    { href: 'admin.services.index', active: '/admin/services', label: 'Services', children: [], icon: null },
+    { href: 'admin.dashboard', active: route().current('admin.dashboard'), activeClass: '/admin/dashboard', label: 'Dashboard', children: [], icon: null },
+    { href: 'admin.jobs.index', active: route().current('admin.jobs.index'), activeClass: '/admin/jobs', label: 'Jobs', children: [], icon: null },
+    { href: 'admin.services.index', active: route().current('admin.services.index'), activeClass: '/admin/services', label: 'Services', children: [], icon: null },
     {
-        href: '#', label: 'Personal info', active: (route().current('admin.resume.*') ? '/resume' : '' || route().current('admin.aboutme.index') ? '/about-me' : ''), children: [
-            { href: 'admin.aboutme.index', active: '/admin/about-me', label: 'About me', children: [], icon: null },
-            { href: 'admin.usersocialmedias.index', active: '/admin/user-social-medias', label: 'User social medias', children: [], icon: null },
-            { href: 'admin.resume.educations.index', active: '/admin/resume', label: 'Personal info', children: [], icon: null },
-            {
-                href: '#', label: 'Configuration', active: route().current('admin.socialmedias.*'), activeClass: '/admin/social-medias', children: [
-                    { href: 'admin.socialmedias.index', active: '/admin/social-medias', label: 'Social medias', children: [], icon: null },
-                ], icon: null
-            },
+        href: '#', label: 'Personal info', active: route().current('admin.resume.*'), activeClass: (route().current('admin.resume.*') ? '/resume' : '' || route().current('admin.aboutme.index') ? '/about-me' : ''), children: [
+            { href: 'admin.aboutme.index', active: route().current('admin.aboutme.index'), activeClass: '/admin/about-me', label: 'About me', children: [], icon: null },
+            { href: 'admin.usersocialmedias.index', active: route().current('admin.usersocialmedias.index'), activeClass: '/admin/user-social-medias', label: 'User social medias', children: [], icon: null },
+            { href: 'admin.resume.educations.index', active: route().current('admin.resume.*'), activeClass: '/admin/resume', label: 'Personal info', children: [], icon: null },
+        ], icon: null
+    },
+    {
+        href: '#', label: 'Configuration', active: route().current('admin.socialmedias.*'), activeClass: '/admin/social-medias', children: [
+            { href: 'admin.socialmedias.index', active: route().current('admin.socialmedias.index'), activeClass: '/admin/social-medias', label: 'Social medias', children: [], icon: null },
         ], icon: null
     },
 ];
@@ -42,37 +44,76 @@ const handleResize = () => {
 
 <template>
     <nav class="sticky top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-        <div class="px-3 py-3 lg:px-5 lg:pl-3">
+        <div class="px-4 py-3 lg:px-5 lg:pl-3">
             <div class="flex items-center justify-between">
                 <div class="flex items-center justify-start">
-                    <button @click="toggleSidebarVisibility" class="mr-2 text-gray-500 lg:hidden">
-                        <svg v-if="isSidebarVisible" class="h-6 w-6 transition-transform duration-300 transform rotate-180"
-                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path>
-                        </svg>
-                        <svg v-else class="h-6 w-6 transition-transform duration-300 transform rotate-0" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
+                    <button @click="toggleSidebarVisibility" class="mr-2 w-5 h-5 text-gray-500 lg:hidden">
+                        <div class="items-center space-y-1">
+                            <div
+                                :class="['w-3.5 h-[2px] rounded-lg bg-gray-600', isSidebarVisible ? 'translate-y-[6px] -rotate-[45deg] transition duration-150 ease-linear' : 'rotate-0 transition duration-150 ease-linear']">
+                            </div>
+                            <div
+                                :class="['w-1.5 h-[2px] rounded-lg bg-gray-600', isSidebarVisible ? 'opacity-0 transition-all duration-150 ease-linear translate-x-4' : 'rotate-0 transition duration-150 ease-linear']">
+                            </div>
+                            <div
+                                :class="['w-2 h-[2px] rounded-lg bg-gray-600', isSidebarVisible ? 'w-3.5 -translate-y-[1px] -translate-x-[2px] origin-right rotate-[45deg] transition duration-150 ease-linear' : 'rotate-0 transition duration-150 ease-linear']">
+                            </div>
+                        </div>
                     </button>
-                    <!-- <img src="logo.png" alt="Logo" class="h-8"> -->
-                    LOGO
+                    <a href="/" class="flex md:mr-24">
+                        <span class="self-center text-1xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
+                            MAET
+                        </span>
+                    </a>
                 </div>
-                <div>
-                    <!-- Botones de navegación -->
+                <div class="flex items-center">
+                    <div class="flex items-center ml-3">
+                        <Dropdown align="right" width="48">
+                            <template #trigger>
+                                <button
+                                    class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
+                                    <img class="h-5 w-5 sm:h-7 sm:w-7 rounded-full object-cover"
+                                        :src="$page.props.auth.user.profile_photo_url" :alt="$page.props.auth.user.name">
+                                </button>
+                            </template>
+
+                            <template #content>
+                                <!-- Account Management -->
+                                <div class="block px-4 py-2 text-xs text-gray-400">
+                                    Manage Account
+                                </div>
+
+                                <DropdownLink :href="route('profile.show')">
+                                    Profile
+                                </DropdownLink>
+
+                                <DropdownLink v-if="$page.props.jetstream.hasApiFeatures" :href="route('api-tokens.index')">
+                                    API Tokens
+                                </DropdownLink>
+
+                                <div class="border-t border-gray-200" />
+
+                                <!-- Authentication -->
+                                <form @submit.prevent="logout">
+                                    <DropdownLink as="button">
+                                        Log Out
+                                    </DropdownLink>
+                                </form>
+                            </template>
+                        </Dropdown>
+                    </div>
                 </div>
             </div>
         </div>
     </nav>
 
     <aside :class="['sidebar', { 'collapsed': !isSidebarVisible }]"
-        class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+        class="fixed top-0 left-0 z-40 w-64 h-screen pt-14 sm:pt-16 bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700">
 
         <!-- Contenido del sidebar y transición -->
         <transition name="sidebar-transition">
             <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
-                <ul class="space-y-2" :class="{ 'hidden': !isSidebarVisible }">
+                <div class="space-y-2" :class="{ 'hidden': !isSidebarVisible }">
                     <NavItem :item="item" v-for="item in navItems" :key="item.label" />
                     <!-- <li :key="'li-1'">
                         <Link :href="route('admin.dashboard')"
@@ -121,7 +162,7 @@ const handleResize = () => {
                         </svg>
                         Configuración
                     </li> -->
-                </ul>
+                </div>
             </div>
         </transition>
     </aside>
