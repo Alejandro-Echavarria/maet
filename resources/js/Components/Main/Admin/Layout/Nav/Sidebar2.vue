@@ -2,7 +2,8 @@
 import { ref, onBeforeUnmount, onMounted } from 'vue';
 import NavItem from '@/Components/Main/Admin/Layout/Nav/NavItem.vue';
 import Dropdown from '@/Components/Dropdown.vue';
-import DropdownLink from '@/Components/DropdownLink.vue'
+import DropdownLink from '@/Components/DropdownLink.vue';
+import Drawer2 from '@/Components/Main/Admin/Layout/Nav/Drawer2.vue';
 
 const isSidebarVisible = ref(true);
 
@@ -34,12 +35,20 @@ onBeforeUnmount(() => {
 });
 
 const toggleSidebarVisibility = () => {
-    isSidebarVisible.value = !isSidebarVisible.value;
+    if (window.innerWidth < 1024) {
+        isSidebarVisible.value = !isSidebarVisible.value;
+    }
 };
 
 const handleResize = () => {
     isSidebarVisible.value = window.innerWidth >= 1024; // Cambiar 1024 por el ancho de resolución deseado para ocultar el sidebar
 };
+
+const closeSidebar = () => {
+      isSidebarVisible.value = false;
+    }
+
+defineExpose({ toggleSidebarVisibility });
 </script>
 
 <template>
@@ -47,21 +56,18 @@ const handleResize = () => {
         <div class="px-4 py-3 lg:px-5 lg:pl-3">
             <div class="flex items-center justify-between">
                 <div class="flex items-center justify-start">
-                    <button @click="toggleSidebarVisibility" class="mr-2 w-5 h-5 text-gray-500 lg:hidden">
-                        <div class="items-center space-y-1">
+                    <button @click="toggleSidebarVisibility" class="mr-4 w-5 h-5 text-gray-500 lg:hidden">
+                        <div class="space-y-[0.375rem]">
                             <div
-                                :class="['w-3.5 h-[2px] rounded-lg bg-gray-600', isSidebarVisible ? 'translate-y-[6px] -rotate-[45deg] transition duration-150 ease-linear' : 'rotate-0 transition duration-150 ease-linear']">
+                                :class="['w-5 h-[2px] rounded-lg bg-gray-600', isSidebarVisible ? '-translate-y-[2.5px] origin-left rotate-[44deg] transition duration-150' : 'rotate-0 transition-all duration-150 ease-linear']">
                             </div>
                             <div
-                                :class="['w-1.5 h-[2px] rounded-lg bg-gray-600', isSidebarVisible ? 'opacity-0 transition-all duration-150 ease-linear translate-x-4' : 'rotate-0 transition duration-150 ease-linear']">
-                            </div>
-                            <div
-                                :class="['w-2 h-[2px] rounded-lg bg-gray-600', isSidebarVisible ? 'w-3.5 -translate-y-[1px] -translate-x-[2px] origin-right rotate-[45deg] transition duration-150 ease-linear' : 'rotate-0 transition duration-150 ease-linear']">
+                                :class="['w-3 h-[2px] rounded-lg bg-gray-600', isSidebarVisible ? 'w-5 translate-y-[3.5px] translate-x-[1px] origin-left -rotate-[48deg] transition duration-150 ease-linear' : 'rotate-0 transition-all duration-150 ease-linear']">
                             </div>
                         </div>
                     </button>
                     <a href="/" class="flex md:mr-24">
-                        <span class="self-center text-1xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
+                        <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
                             MAET
                         </span>
                     </a>
@@ -72,7 +78,7 @@ const handleResize = () => {
                             <template #trigger>
                                 <button
                                     class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
-                                    <img class="h-5 w-5 sm:h-7 sm:w-7 rounded-full object-cover"
+                                    <img class="h-7 w-7 rounded-full object-cover"
                                         :src="$page.props.auth.user.profile_photo_url" :alt="$page.props.auth.user.name">
                                 </button>
                             </template>
@@ -108,64 +114,19 @@ const handleResize = () => {
     </nav>
 
     <aside :class="['sidebar', { 'collapsed': !isSidebarVisible }]"
-        class="fixed top-0 left-0 z-40 w-64 h-screen pt-14 sm:pt-16 bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+        class="fixed top-0 left-0 z-40 w-64 h-screen pt-16 bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700">
 
         <!-- Contenido del sidebar y transición -->
         <transition name="sidebar-transition">
             <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
                 <div class="space-y-2" :class="{ 'hidden': !isSidebarVisible }">
-                    <NavItem :item="item" v-for="item in navItems" :key="item.label" />
-                    <!-- <li :key="'li-1'">
-                        <Link :href="route('admin.dashboard')"
-                            class="flex items-center p-2 font-bold text-gray-700 rounded-lg dark:text-gray-200 hover:bg-indigo-200 dark:hover:bg-indigo-700 group transition duration-300 ease-linear"
-                            :class="route().current('admin.dashboard') ? 'bg-indigo-100 text-indigo-700' : 'bg-white'">
-                        <font-awesome-icon class="w-5 h-5" :icon="['fas', 'chart-line']" />
-                        <span class="ml-3">Dashboard</span>
-                        </Link>
-                    </li>
-
-                    <li :key="'li-2'">
-                        <Link :href="route('admin.jobs.index')"
-                            class="flex items-center p-2 font-bold text-gray-700 rounded-lg dark:text-gray-200 hover:bg-indigo-200 dark:hover:bg-indigo-700 group transition duration-300 ease-linear"
-                            :class="route().current('admin.jobs.index') ? 'bg-indigo-100 text-indigo-700' : 'bg-white'">
-                        <font-awesome-icon class="w-5 h-5" :icon="['fas', 'file-arrow-down']" />
-                        <span class="ml-3">Jobs</span>
-                        </Link>
-                    </li>
-
-                    <li :key="'li-3'">
-                        <Link :href="route('admin.services.index')"
-                            class="flex items-center p-2 font-bold text-gray-700 rounded-lg dark:text-gray-200 hover:bg-indigo-200 dark:hover:bg-indigo-700 group transition duration-300 ease-linear"
-                            :class="route().current('admin.services.index') ? 'bg-indigo-100 text-indigo-700' : ''">
-                        <font-awesome-icon class="w-5 h-5" :icon="['fas', 'store']" />
-                        <span class="ml-3">Services</span>
-                        </Link>
-                    </li> -->
-                    <!-- <li :class="{ 'active': activeMenuItem === 'inicio' }"
-                        class="flex items-center py-2 px-8 text-gray-300 hover:bg-gray-700 hover:text-white">
-                        <svg class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path>
-                        </svg>
-                        Inicio
-                    </li>
-                    <li :class="{ 'active': activeMenuItem === 'conversaciones' }"
-                        class="flex items-center py-2 px-8 text-gray-300 hover:bg-gray-700 hover:text-white">
-                        <svg class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path>
-                        </svg>
-                        Conversaciones
-                    </li>
-                    <li :class="{ 'active': activeMenuItem === 'configuracion' }"
-                        class="flex items-center py-2 px-8 text-gray-300 hover:bg-gray-700 hover:text-white">
-                        <svg class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path>
-                        </svg>
-                        Configuración
-                    </li> -->
+                    <NavItem :item="item" v-for="item in navItems" @click="toggleSidebarVisibility" :key="item.label" />
                 </div>
             </div>
         </transition>
     </aside>
+
+    <Drawer2 :is-open="isSidebarVisible" @close="closeSidebar" />
 </template>
 
 <style scoped>
