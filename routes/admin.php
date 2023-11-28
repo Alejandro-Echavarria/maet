@@ -10,8 +10,8 @@ use App\Http\Controllers\Admin\ExperienceController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\EducationController;
 
-Route::get('', [DashboardController::class, 'index'])->name('admin.dashboard');
-Route::get('jobs', [JobController::class, 'index'])->name('admin.jobs.index');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+Route::get('/jobs', [JobController::class, 'index'])->name('admin.jobs.index');
 
 // Social medias for user
 Route::resource('user-social-medias', UserSocialMediaController::class)->only(['index', 'store', 'update', 'destroy'])->names('admin.usersocialmedias');
