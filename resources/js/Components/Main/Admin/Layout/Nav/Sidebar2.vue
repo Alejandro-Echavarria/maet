@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onBeforeUnmount, onMounted } from 'vue';
+import { router } from "@inertiajs/vue3";
 import NavItem from '@/Components/Main/Admin/Layout/Nav/NavItem.vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
@@ -45,8 +46,12 @@ const handleResize = () => {
 };
 
 const closeSidebar = () => {
-      isSidebarVisible.value = false;
-    }
+    isSidebarVisible.value = false;
+}
+
+const logout = () => {
+    router.post(route('logout'));
+};
 
 defineExpose({ toggleSidebarVisibility });
 </script>
