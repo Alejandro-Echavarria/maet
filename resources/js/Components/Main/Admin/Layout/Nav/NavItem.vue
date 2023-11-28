@@ -1,17 +1,15 @@
 <script setup>
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { Link } from "@inertiajs/vue3";
 import { Disclosure, DisclosureButton, DisclosurePanel, TransitionRoot, TransitionChild } from "@headlessui/vue";
-import { ref } from 'vue'
-
-const isShowing = ref(true)
-
-
 const props = defineProps({
     item: {
         type: Object,
     }
 });
+
+const isShowing = ref(true);
+const emit = defineEmits(['click']);
 
 const hasActiveChild = computed(() => {
     function hasActiveItem(items) {
@@ -20,6 +18,10 @@ const hasActiveChild = computed(() => {
 
     return hasActiveItem(props.item.children);
 });
+
+const toggleSidebarVisibility = () => {
+    emit("click");
+}
 </script>
 
 <template>
@@ -28,7 +30,7 @@ const hasActiveChild = computed(() => {
         <TransitionChild class="space-y-2" enter="transition ease-in-out duration-300 transform"
             enter-from="-translate-x-full" enter-to="translate-x-0" leave="transition ease-in-out duration-150 transform"
             leave-from="translate-x-0" leave-to="-translate-x-full">
-            <Link v-if="!item.children.length" :href="route(item.href)" :class="[
+            <Link v-if="!item.children.length" :href="route(item.href)" @click="toggleSidebarVisibility" :class="[
                 'flex whitespace-nowrap items-center py-2 px-3 text-sm font-semibold text-gray-700 rounded-lg dark:text-gray-200 hover:bg-indigo-200 dark:hover:bg-indigo-700 group transition duration-300 ease-linear',
                 { 'bg-indigo-100 text-indigo-700': $page.url.startsWith(item.activeClass) },
             ]">
@@ -66,7 +68,7 @@ const hasActiveChild = computed(() => {
                     leave-active-class="transition duration-75 ease-out" leave-from-class="transform scale-100 opacity-100"
                     leave-to-class="transform scale-95 opacity-0">
                     <DisclosurePanel class="ml-4 space-y-2">
-                        <NavItem v-for="child in item.children" :item="child"/>
+                        <NavItem v-for="child in item.children" :item="child" @click="toggleSidebarVisibility" />
                     </DisclosurePanel>
                 </transition>
             </Disclosure>

@@ -124,10 +124,7 @@ const ok = (msj, type, timer) => {
 
 <template>
     <div>
-        <div class="flex my-3 justify-between gap-3">
-            <h3 class="text-lg font-bold text-gray-700 dark:text-gray-300">
-                Educations
-            </h3>
+        <div class="flex my-3 justify-end">
             <PrimaryButton class="sm:w-auto w-full" @click="openModal(1)">
                 <font-awesome-icon class="mr-2" :icon="['fas', 'plus']" />
                 Add education
