@@ -1,27 +1,28 @@
 <script setup>
 import { ref, onBeforeUnmount, onMounted } from 'vue';
+import { router } from "@inertiajs/vue3";
 import NavItem from '@/Components/Main/Admin/Layout/Nav/NavItem.vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
-import Drawer2 from '@/Components/Main/Admin/Layout/Nav/Drawer2.vue';
 
 const isSidebarVisible = ref(true);
+const isBackDropVisible = ref(false);
 
 const navItems = [
-    { href: 'admin.dashboard', active: route().current('admin.dashboard'), activeClass: '/admin/dashboard', label: 'Dashboard', children: [], icon: null },
-    { href: 'admin.jobs.index', active: route().current('admin.jobs.index'), activeClass: '/admin/jobs', label: 'Jobs', children: [], icon: null },
-    { href: 'admin.services.index', active: route().current('admin.services.index'), activeClass: '/admin/services', label: 'Services', children: [], icon: null },
+    { href: 'admin.dashboard', active: route().current('admin.dashboard'), activeClass: '/admin/dashboard', label: 'Dashboard', children: [], icon: ['fas', 'chart-line'] },
+    { href: 'admin.jobs.index', active: route().current('admin.jobs.index'), activeClass: '/admin/jobs', label: 'Jobs', children: [], icon: ['fas', 'file-arrow-down'] },
+    { href: 'admin.services.index', active: route().current('admin.services.index'), activeClass: '/admin/services', label: 'Services', children: [], icon: ['fas', 'store'] },
     {
         href: '#', label: 'Personal info', active: route().current('admin.resume.*'), activeClass: (route().current('admin.resume.*') ? '/resume' : '' || route().current('admin.aboutme.index') ? '/about-me' : ''), children: [
             { href: 'admin.aboutme.index', active: route().current('admin.aboutme.index'), activeClass: '/admin/about-me', label: 'About me', children: [], icon: null },
             { href: 'admin.usersocialmedias.index', active: route().current('admin.usersocialmedias.index'), activeClass: '/admin/user-social-medias', label: 'User social medias', children: [], icon: null },
             { href: 'admin.resume.educations.index', active: route().current('admin.resume.*'), activeClass: '/admin/resume', label: 'Personal info', children: [], icon: null },
-        ], icon: null
+        ], icon: ['far', 'file']
     },
     {
         href: '#', label: 'Configuration', active: route().current('admin.socialmedias.*'), activeClass: '/admin/social-medias', children: [
             { href: 'admin.socialmedias.index', active: route().current('admin.socialmedias.index'), activeClass: '/admin/social-medias', label: 'Social medias', children: [], icon: null },
-        ], icon: null
+        ], icon: ['fas', 'gear']
     },
 ];
 
@@ -37,16 +38,18 @@ onBeforeUnmount(() => {
 const toggleSidebarVisibility = () => {
     if (window.innerWidth < 1024) {
         isSidebarVisible.value = !isSidebarVisible.value;
+        document.body.classList.toggle('overflow-hidden', isSidebarVisible.value);
     }
 };
 
 const handleResize = () => {
     isSidebarVisible.value = window.innerWidth >= 1024; // Cambiar 1024 por el ancho de resolución deseado para ocultar el sidebar
+    isBackDropVisible.value = window.innerWidth < 1024;
 };
 
-const closeSidebar = () => {
-      isSidebarVisible.value = false;
-    }
+const logout = () => {
+    router.post(route('logout'));
+};
 
 defineExpose({ toggleSidebarVisibility });
 </script>
@@ -89,7 +92,7 @@ defineExpose({ toggleSidebarVisibility });
                                     Manage Account
                                 </div>
 
-                                <DropdownLink :href="route('profile.show')">
+                                <DropdownLink :href="route('profile.show')" @click="handleResize">
                                     Profile
                                 </DropdownLink>
 
@@ -126,7 +129,8 @@ defineExpose({ toggleSidebarVisibility });
         </transition>
     </aside>
 
-    <Drawer2 :is-open="isSidebarVisible" @close="closeSidebar" />
+    <div v-if="isBackDropVisible && isSidebarVisible" @click="toggleSidebarVisibility"
+        class="fixed inset-0 backdrop-blur-sm bg-gray-800/60 z-30" />
 </template>
 
 <style scoped>

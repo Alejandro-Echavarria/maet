@@ -37,7 +37,7 @@ const openModal = (op, id, titleData, start_date, end_date, description, color) 
 
                 <Time>
                     <template #list>
-                        <li class="mb-10 ml-4" v-for="experience in experiences" :key="experience.id + '-experience'">
+                        <li class="my-8 ml-4" v-for="experience in experiences" :key="experience.id + '-experience'">
                             <div
                                 class="absolute w-3 h-3 bg-indigo-100 rounded-full mt-1.5 -left-1.5 border border-white dark:border-indigo-900 dark:bg-indigo-700" />
                             <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
