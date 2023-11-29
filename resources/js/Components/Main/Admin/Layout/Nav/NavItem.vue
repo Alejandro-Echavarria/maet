@@ -35,7 +35,9 @@ const toggleSidebarVisibility = () => {
                 { 'bg-indigo-100 text-indigo-700': $page.url.startsWith(item.activeClass) },
             ]">
             <span class="flex-1">
-                <font-awesome-icon class="w-4 h-4 mr-2" :icon="item.icon" />
+                <template v-if="item.icon">
+                    <font-awesome-icon class="w-4 h-4 mr-2" :icon="item.icon" />
+                </template>
                 {{ item.label }}
             </span>
             </Link>
@@ -47,7 +49,9 @@ const toggleSidebarVisibility = () => {
                     <span :class="['flex-1',
                         open ? 'text-indigo-700' : '',
                     ]">
-                        <font-awesome-icon class="w-4 h-4 mr-2" :icon="item.icon" />
+                        <template v-if="item.icon">
+                            <font-awesome-icon class="w-4 h-4 mr-2" :icon="item.icon" />
+                        </template>
                         {{ item.label }}
                     </span>
 
@@ -58,7 +62,7 @@ const toggleSidebarVisibility = () => {
                         </path>
                     </svg>
                 </DisclosureButton>
-                <transition enter-active-class="transition duration-100 ease-out"
+                <transition enter-active-class="transition duration-150 ease-out"
                     enter-from-class="transform scale-95 opacity-0" enter-to-class="transform scale-100 opacity-100"
                     leave-active-class="transition duration-75 ease-out" leave-from-class="transform scale-100 opacity-100"
                     leave-to-class="transform scale-95 opacity-0">
