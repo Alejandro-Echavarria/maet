@@ -129,8 +129,8 @@ defineExpose({ toggleSidebarVisibility });
         </transition>
     </aside>
 
-    <transition enter-active-class="ease-out duration-300" enter-from-class="opacity-0" enter-to-class="opacity-100"
-        leave-active-class="ease-in duration-200" leave-from-class="opacity-100" leave-to-class="opacity-0">
+    <transition enter-active-class="ease-out duration-200" enter-from-class="opacity-0" enter-to-class="opacity-100"
+        leave-active-class="ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
         <div v-if="isBackDropVisible && isSidebarVisible" @click="toggleSidebarVisibility"
             class="fixed inset-0 transform transition-all bg-gray-900/50 backdrop-blur backdrop-filter opacity-100 z-30" />
     </transition>
