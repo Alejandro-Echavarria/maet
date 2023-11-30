@@ -4,9 +4,10 @@ import { useForm } from "@inertiajs/vue3";
 import DialogModal from "@/Components/DialogModal.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
-import TextInput from "@/Components/TextInput.vue";
-import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
+import TextInput from "@/Components/TextInput.vue";
+import ColorPicker from "@/Components/Main/Admin/Components/Forms/Inputs/SelectsPicker/ColorsPicker/ColorPicker.vue";
+import InputError from "@/Components/InputError.vue";
 import SaveAlert from "@/Helpers/Alerts/SaveAlert";
 import SimpleForm from "@/Components/Main/Admin/Components/Forms/SimpleForm.vue";
 import Ckeditor from "@/Components/Main/Admin/Components/Forms/Inputs/ckeditor/Ckeditor.vue";
@@ -135,7 +136,8 @@ defineExpose({ openModal });
 
                             <div class="sm:col-span-3">
                                 <InputLabel for="color" value="Color" />
-                                <TextInput v-model="form.color" type="color" class="border-b-0 h-10" />
+                                <!-- <TextInput v-model="form.color" type="color" class="border-b-0 h-10" /> -->
+                                <ColorPicker />
 
                                 <InputError :message="form.errors.color" class="mt-2" />
                             </div>
