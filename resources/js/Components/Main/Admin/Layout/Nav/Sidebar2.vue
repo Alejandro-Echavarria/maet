@@ -56,11 +56,11 @@ defineExpose({ toggleSidebarVisibility });
 
 <template>
     <nav class="sticky top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-        <div class="px-4 py-3 lg:px-5 lg:pl-3">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center justify-start">
-                    <button @click="toggleSidebarVisibility" class="mr-4 w-5 h-5 text-gray-500 lg:hidden">
-                        <div class="space-y-[0.375rem]">
+        <div class="px-4 h-12 flex items-center lg:px-5 lg:pl-3">
+            <div class="w-full h-full flex items-center justify-between">
+                <div class="flex items-center justify-start h-full">
+                    <button @click="toggleSidebarVisibility" class="mr-4 w-5 h-full text-gray-500 lg:hidden">
+                        <div class="space-y-[0.375rem] h-auto">
                             <div
                                 :class="['w-5 h-[2px] rounded-lg bg-gray-600', isSidebarVisible ? '-translate-y-[2.5px] origin-left rotate-[44deg] transition duration-150' : 'rotate-0 transition-all duration-150 ease-linear']">
                             </div>
@@ -129,8 +129,8 @@ defineExpose({ toggleSidebarVisibility });
         </transition>
     </aside>
 
-    <transition enter-active-class="ease-out duration-300" enter-from-class="opacity-0" enter-to-class="opacity-100"
-        leave-active-class="ease-in duration-200" leave-from-class="opacity-100" leave-to-class="opacity-0">
+    <transition enter-active-class="ease-out duration-200" enter-from-class="opacity-0" enter-to-class="opacity-100"
+        leave-active-class="ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
         <div v-if="isBackDropVisible && isSidebarVisible" @click="toggleSidebarVisibility"
             class="fixed inset-0 transform transition-all bg-gray-900/50 backdrop-blur backdrop-filter opacity-100 z-30" />
     </transition>

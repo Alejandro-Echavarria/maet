@@ -95,7 +95,7 @@ defineExpose({ openModal });
     <div>
         <PrimaryButton class="w-full" @click="openModal(1)">
             <font-awesome-icon class="mr-2" :icon="['fas', 'plus']" />
-            Add social media
+            Add service
         </PrimaryButton>
 
         <DialogModal :show="modal" :maxWidth="'6xl'" @close="closeModal">
