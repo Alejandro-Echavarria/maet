@@ -4,9 +4,10 @@ import { useForm } from "@inertiajs/vue3";
 import DialogModal from "@/Components/DialogModal.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
-import TextInput from "@/Components/TextInput.vue";
-import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
+import TextInput from "@/Components/TextInput.vue";
+import ColorPicker from "@/Components/Main/Admin/Components/Forms/Inputs/SelectsPicker/ColorsPicker/ColorPicker.vue";
+import InputError from "@/Components/InputError.vue";
 import SaveAlert from "@/Helpers/Alerts/SaveAlert";
 import SimpleForm from "@/Components/Main/Admin/Components/Forms/SimpleForm.vue";
 import Ckeditor from "@/Components/Main/Admin/Components/Forms/Inputs/ckeditor/Ckeditor.vue";
@@ -26,7 +27,7 @@ const form = useForm({
     description: "",
     start_date: "",
     end_date: "",
-    color: "#000000",
+    color: "gray-100",
 });
 
 const save = () => {
@@ -112,15 +113,15 @@ defineExpose({ openModal });
             <template #content>
                 <SimpleForm :actions="true" @submitted="save">
                     <template #form>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            <div>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                            <div class="sm:col-span-3">
                                 <InputLabel for="title" value="Title" />
                                 <TextInput id="title" ref="titleInput" v-model="form.title" type="text" />
 
                                 <InputError :message="form.errors.title" class="mt-2" />
                             </div>
 
-                            <div>
+                            <div class="sm:col-span-2">
                                 <InputLabel for="dates" value="Dates" />
                                 <DateRangePicker :data="{
                                     start_date: form.start_date,
@@ -133,23 +134,16 @@ defineExpose({ openModal });
                                 </div>
                             </div>
 
-                            <div class="sm:col-span-3">
+                            <div>
                                 <InputLabel for="color" value="Color" />
-                                <TextInput v-model="form.color" type="color" class="border-b-0 h-10" />
+
+                                <ColorPicker v-model="form.color" />
 
                                 <InputError :message="form.errors.color" class="mt-2" />
                             </div>
 
-                            <!-- <div v-if="opration === 2">
-                                <InputLabel for="color" value="Delete this education" />
-
-                                <DangerButton @click="destroy" :class="{ 'opacity-25': form.processing }" class="mt-2" :disabled="form.processing">
-                                    Delete
-                                </DangerButton>
-                            </div> -->
-
-                            <div class="grid-cols-1 sm:col-span-3">
-                                <!-- <InputLabel for="description" value="Description" class="mb-3" /> -->
+                            <div class="sm:col-span-3">
+                                <InputLabel for="description" value="Description" class="mb-3" />
                                 <Ckeditor v-model="form.description" :value="form.description" id="description"
                                     ref="descriptionInput" />
 

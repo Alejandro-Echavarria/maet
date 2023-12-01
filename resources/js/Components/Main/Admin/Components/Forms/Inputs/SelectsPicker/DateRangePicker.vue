@@ -32,7 +32,7 @@ onUnmounted(() => {
 
 <template>
     <div id="dateRangePickerId" date-rangepicker class="flex items-center w-full">
-        <div class="relative">
+        <div class="relative w-full">
             <div class="absolute inset-y-0 left-0 flex items-center pointer-events-none">
                 <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor" viewBox="0 0 20 20">
@@ -45,7 +45,7 @@ onUnmounted(() => {
                 placeholder="Select date start" />
         </div>
         <span class="mx-4 text-gray-500">to</span>
-        <div class="relative">
+        <div class="relative w-full">
             <div class="absolute inset-y-0 left-0 flex items-center pointer-events-none">
                 <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor" viewBox="0 0 20 20">
