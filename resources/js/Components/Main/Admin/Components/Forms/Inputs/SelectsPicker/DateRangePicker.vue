@@ -42,7 +42,7 @@ onUnmounted(() => {
             </div>
 
             <TextInput id="start" name="start" type="text" class="pl-7" :value="value.start_date"
-                placeholder="Select date start" />
+                placeholder="Start date" />
         </div>
         <span class="mx-4 text-gray-500">to</span>
         <div class="relative w-full">
@@ -55,7 +55,7 @@ onUnmounted(() => {
             </div>
 
             <TextInput id="end" name="end" type="text" class="pl-7" :value="value.end_date"
-                placeholder="Select date end" />
+                placeholder="End date" />
         </div>
     </div>
 </template>
