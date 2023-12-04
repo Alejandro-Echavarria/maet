@@ -32,9 +32,9 @@ onMounted(() => {
 
     if (result) {
         baseColor.value = result.base;
-        shade.value = result.shadeValue;
+        shade.value = parseInt(result.shadeValue);
 
-        if (parseInt(shade.value) > 500 ) {
+        if (shade.value > 500) {
             iconColor.value = 'text-gray-200';
         }
     }
@@ -79,15 +79,16 @@ const splitColor = (color) => {
         <div v-show="open" class="fixed inset-0 z-40" @click="open = false" />
 
         <div class="flex flex-row w-full justify-between">
-            <div class="w-full">
+            <div class="w-full mr-2">
                 <span
                     class="cursor-pointer block py-2.5 px-0 w-full text-sm text-gray-700 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:ring-indigo-700 focus:border-indigo-700 peer transition"
                     @click="open = true">
                     {{ currentColor }}
                 </span>
             </div>
-            <div @click="open = !open" :class="['cursor-pointer rounded-full my-auto h-10 w-10 flex shrink-0', `bg-${currentColor}`]">
-                <svg xmlns="http://www.w3.org/2000/svg" :class="['h-6 w-6 mx-auto my-auto', iconColor ]" fill="none"
+            <div @click="open = !open"
+                :class="['cursor-pointer rounded-full my-auto h-8 w-8 flex shrink-0', `bg-${currentColor}`]">
+                <svg xmlns="http://www.w3.org/2000/svg" :class="['h-5 w-5 mx-auto my-auto', iconColor]" fill="none"
                     viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
@@ -103,11 +104,16 @@ const splitColor = (color) => {
                         <template v-for="color in colors">
                             <div>
                                 <template v-for="variant in variants">
-                                    <div @click="selectColor(color, variant)" :class="[
-                                        'cursor-pointer w-6 h-6 rounded-md mx-1 my-1',
-                                        `bg-${color}-${variant}`,
-                                        { 'border-4 border-x-black border-y-gray-200 border-dashed': currentColor === `${color}-${variant}` }
-                                    ]">
+                                    <div class="relative">
+                                        <span v-if="currentColor === `${color}-${variant}`"
+                                            class="absolute justify-center items-center inset-0 flex">
+                                            <font-awesome-icon :class="['w-4 h-4', { 'text-gray-200': variant > 400 }]" :icon="['fas', 'xmark']" />
+                                        </span>
+                                        <div @click="selectColor(color, variant)" :class="[
+                                            'cursor-pointer w-6 h-6 rounded-md mx-1 my-1',
+                                            `bg-${color}-${variant}`,
+                                        ]">
+                                        </div>
                                     </div>
                                 </template>
                             </div>

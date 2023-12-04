@@ -12,7 +12,7 @@ class ExperienceController extends Controller
 {
     public function index()
     {
-        $experiences = Experience::all();
+        $experiences = Experience::orderBy('start_date', 'desc')->get();
 
         return Inertia::render('Admin/Experiences/Index', compact('experiences'));
     }
@@ -51,6 +51,13 @@ class ExperienceController extends Controller
         $data['end_date'] = Carbon::createFromFormat('d/m/Y', $data['end_date'])->format('Y-m-d');
 
         $experience->update($data);
+
+        return to_route('admin.resume.experiences.index');
+    }
+
+    public function destroy(Experience $experience)
+    {
+        $experience->delete();
 
         return to_route('admin.resume.experiences.index');
     }
