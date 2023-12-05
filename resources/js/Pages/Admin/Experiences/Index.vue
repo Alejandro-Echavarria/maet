@@ -33,7 +33,7 @@ const openModal = (op, id, titleData, start_date, end_date, description, color) 
         <MainTitle> Experieces </MainTitle>
 
         <SectionTabs :tabsOptions="tabs">
-            <template #tabeducation>
+            <template #tabexperience>
                 <SaveExperience ref="callOpenModal" :data="experiences" />
 
                 <Time>
