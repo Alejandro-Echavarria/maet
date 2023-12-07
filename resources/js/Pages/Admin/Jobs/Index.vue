@@ -1,8 +1,10 @@
 <script setup>
+import { ref } from 'vue';
 import { Head } from '@inertiajs/vue3';
 import MainLayout from '@/Components/Main/Admin/Layout/MainLayout.vue';
 import MainTitle from '@/Components/Main/Admin/Components/Titles/MainTitle.vue';
-import SectionJobs from '@/Components/Main/Containers/Sections/SectionJobs.vue';
+import SaveJob from '@/Pages/Admin/Jobs/Partials/SaveJob.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
 
 defineOptions({
     layout: MainLayout
@@ -11,20 +13,34 @@ defineOptions({
 const props = defineProps({
     jobs: {
         type: Object,
+    },
+    categories: {
+        type: Object,
+    },
+    clients: {
+        type: Object,
+    },
+    languages: {
+        type: Object
     }
 });
+
+const callOpenModal = ref(null);
+
+const openModal = (op, id, titleData, start_date, end_date, description, color) => {
+    callOpenModal.value.openModal(op, id, titleData, start_date, end_date, description, color);
+};
 </script>
 
 <template>
     <div>
+
         <Head title="Jobs" />
 
         <MainTitle>
             Jobs
         </MainTitle>
 
-        <div>
-            <SectionJobs :jobs="jobs" />
-        </div>
+        <SaveJob ref="callOpenModal" :data="{jobs, categories, clients, languages}" />
     </div>
 </template>
