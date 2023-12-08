@@ -8,6 +8,6 @@
 
 @layer base {
     body {
-      @apply text-base font-normal text-gray-600;
+        @apply text-base font-normal text-gray-600;
     }
-  }
+}
