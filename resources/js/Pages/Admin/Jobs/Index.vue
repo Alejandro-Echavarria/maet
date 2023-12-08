@@ -20,7 +20,7 @@ const props = defineProps({
     clients: {
         type: Object,
     },
-    languages: {
+    technologies: {
         type: Object
     }
 });
@@ -41,6 +41,6 @@ const openModal = (op, id, titleData, start_date, end_date, description, color) 
             Jobs
         </MainTitle>
 
-        <SaveJob ref="callOpenModal" :data="{jobs, categories, clients, languages}" />
+        <SaveJob ref="callOpenModal" :data="{jobs, categories, clients, technologies}" />
     </div>
 </template>

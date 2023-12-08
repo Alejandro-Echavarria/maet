@@ -9,6 +9,18 @@ class Job extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'category_id',
+        'client_id',
+        'title',
+        'logo_url',
+        'color',
+        'project_name',
+        'preview',
+        'body',
+        'technologies',
+    ];
+
     // Relación uno a muchos
     public function category()
     {
@@ -18,5 +30,11 @@ class Job extends Model
     public function client()
     {
         return $this->belongsTo(Client::class);
+    }
+
+    // Relación muchos a muchos
+    public function technologies(){
+
+        return $this->belongsToMany(Technology::class);
     }
 }

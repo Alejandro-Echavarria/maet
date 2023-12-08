@@ -25,7 +25,7 @@ const opration = ref(1);
 const job = ref(null);
 const categoriesOptions = ref(props.data.categories);
 const clientOptions = ref(props.data.clients);
-const languageOptions = ref(props.data.languages);
+const technologyOptions = ref(props.data.technologies);
 
 const form = useForm({
     category_id: "",
@@ -33,11 +33,41 @@ const form = useForm({
     title: "",
     logo_url: "",
     color: "gray-100",
-    proyect_name: "",
-    language_id: [],
+    project_name: "",
+    technologies: [],
     preview: "",
     body: "",
 });
+
+const save = () => {
+    if (opration.value === 1) {
+        form.post(route("admin.jobs.store"), {
+            preserveScroll: true,
+            preserveState: true,
+            onSuccess: () => {
+                ok("Job created successfully");
+            },
+            onError: () => {
+                console.log("error");
+            },
+        });
+    } else {
+        form.transform((data) => ({
+            ...data,
+            start_date: start_date.value,
+            end_date: end_date.value,
+        })).put(route("admin.jobs.update", Job.value), {
+            preserveScroll: true,
+            preserveState: true,
+            onSuccess: () => {
+                ok("Job updated successfully");
+            },
+            onError: () => {
+                console.log("error");
+            },
+        });
+    }
+};
 
 const openModal = (op, id, titleData, proyect_name, end_date, body, color) => {
     modal.value = true;
@@ -62,6 +92,11 @@ const closeModal = () => {
     form.reset();
 };
 
+const ok = (msj, type, timer) => {
+    closeModal();
+    SaveAlert(msj, type, timer);
+};
+
 defineExpose({ openModal });
 </script>
 
@@ -80,7 +115,7 @@ defineExpose({ openModal });
                     {{ job.title }}
                 </template>
                 <template #preview>
-                    {{ job.preview }}
+                    <span v-html="job.preview"/>
                 </template>
                 <template #actions>
                     <div class="flex my-3 justify-end">
@@ -123,7 +158,7 @@ defineExpose({ openModal });
                                     :options="categoriesOptions" :reduce="categoriesOptions => categoriesOptions.id"
                                     :select-on-tab="true" />
 
-                                <InputError :message="form.errors.title" class="mt-2" />
+                                <InputError :message="form.errors.category_id" class="mt-2" />
                             </div>
 
                             <div class="sm:col-span-2">
@@ -132,31 +167,31 @@ defineExpose({ openModal });
                                     :options="clientOptions" :reduce="clientOptions => clientOptions.id"
                                     :select-on-tab="true" />
 
-                                <InputError :message="form.errors.title" class="mt-2" />
+                                <InputError :message="form.errors.client_id" class="mt-2" />
                             </div>
 
                             <div class="sm:col-span-2">
-                                <InputLabel for="proyect_name" value="Proyect name" />
-                                <TextInput id="proyect_name" ref="proyectNameInput" v-model="form.proyect_name"
+                                <InputLabel for="project_name" value="Proyect name" />
+                                <TextInput id="project_name" ref="proyectNameInput" v-model="form.project_name"
                                     type="text" />
 
-                                <InputError :message="form.errors.title" class="mt-2" />
+                                <InputError :message="form.errors.project_name" class="mt-2" />
                             </div>
 
                             <div class="sm:col-span-2">
-                                <InputLabel for="proyect_name" value="Languages" />
-                                <VueSelect id="language_id" label="name" v-model="form.language_id" :append="true"
-                                    :multiple="true" :close-on-select="false" :options="languageOptions"
-                                    :reduce="languageOptions => languageOptions.id" :select-on-tab="true" />
+                                <InputLabel for="technologies" value="Technologies" />
+                                <VueSelect id="technology_id" label="name" v-model="form.technologies" :append="true"
+                                    :multiple="true" :close-on-select="false" :options="technologyOptions"
+                                    :reduce="technologyOptions => technologyOptions.id" :select-on-tab="true" />
 
-                                <InputError :message="form.errors.title" class="mt-2" />
+                                <InputError :message="form.errors.technologies" class="mt-2" />
                             </div>
 
                             <div class="sm:col-span-4">
                                 <InputLabel for="preview" value="Preview" class="mb-3" />
                                 <Ckeditor v-model="form.preview" :value="form.preview" id="preview" ref="previewInput" />
 
-                                <InputError :message="form.errors.body" class="mt-2" />
+                                <InputError :message="form.errors.preview" class="mt-2" />
                             </div>
 
                             <div class="sm:col-span-4">
