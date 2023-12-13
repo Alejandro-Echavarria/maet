@@ -52,11 +52,7 @@ const save = () => {
             },
         });
     } else {
-        form.transform((data) => ({
-            ...data,
-            start_date: start_date.value,
-            end_date: end_date.value,
-        })).put(route("admin.jobs.update", Job.value), {
+        form.put(route("admin.jobs.update", job.value), {
             preserveScroll: true,
             preserveState: true,
             onSuccess: () => {
@@ -69,7 +65,7 @@ const save = () => {
     }
 };
 
-const openModal = (op, id, titleData, proyect_name, end_date, body, color) => {
+const openModal = (op, id, category_id, client_id, titleData, logo_url, color, project_name, technologies, preview, body) => {
     modal.value = true;
     opration.value = op;
 
@@ -78,13 +74,25 @@ const openModal = (op, id, titleData, proyect_name, end_date, body, color) => {
     } else {
         title.value = "Edit job";
         job.value = id;
+        form.category_id = category_id;
+        form.client_id = client_id;
         form.title = titleData;
-        form.start_date = start_date;
-        form.end_date = end_date;
-        form.description = description;
+        form.logo_url = logo_url;
         form.color = color;
+        form.project_name = project_name;
+        form.technologies = technologies.map(tech => tech.id);
+        form.preview = preview;
+        form.body = body;
     }
 };
+
+const truncateData = (data) => {
+    if (data.length > 90) {
+        return data.substring(0, 90) + '...';
+    } else {
+        return data;
+    }
+}
 
 const closeModal = () => {
     modal.value = false;
@@ -109,17 +117,18 @@ defineExpose({ openModal });
             </PrimaryButton>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 ">
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
             <SectionJobs v-for="job in data.jobs">
                 <template #title>
                     {{ job.title }}
                 </template>
                 <template #preview>
-                    <span v-html="job.preview"/>
+                    <span v-html="truncateData(job.preview)" />
                 </template>
                 <template #actions>
                     <div class="flex my-3 justify-end">
-                        <PrimaryButton class="sm:w-auto w-full" @click="openModal(1)">
+                        <PrimaryButton class="sm:w-auto w-full"
+                            @click="openModal(2, job.id, job.category_id, job.client_id, job.title, job.logo_url, job.color, job.project_name, job.technologies, job.preview, job.body)">
                             <font-awesome-icon class="mr-2" :icon="['far', 'pen-to-square']" />
                             edit job
                         </PrimaryButton>
@@ -180,9 +189,10 @@ defineExpose({ openModal });
 
                             <div class="sm:col-span-2">
                                 <InputLabel for="technologies" value="Technologies" />
-                                <VueSelect id="technology_id" label="name" v-model="form.technologies" :append="true"
-                                    :multiple="true" :close-on-select="false" :options="technologyOptions"
-                                    :reduce="technologyOptions => technologyOptions.id" :select-on-tab="true" />
+                                <VueSelect id="technology_id[]" label="name" :append="true" :multiple="true"
+                                    :close-on-select="false" :options="technologyOptions" v-model="form.technologies"
+                                    :reduce="technologyOptions => technologyOptions.id" :value="form.technologies.id" :select-on-tab="true">
+                                </VueSelect>
 
                                 <InputError :message="form.errors.technologies" class="mt-2" />
                             </div>

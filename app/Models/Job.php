@@ -9,6 +9,8 @@ class Job extends Model
 {
     use HasFactory;
 
+    protected $hidden = ['pivot'];
+
     protected $fillable = [
         'category_id',
         'client_id',
