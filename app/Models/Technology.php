@@ -9,6 +9,8 @@ class Technology extends Model
 {
     use HasFactory;
 
+    protected $hidden = ['pivot'];
+
     // Relacion muchos a muchos inversa
     public function jobs(){
 
