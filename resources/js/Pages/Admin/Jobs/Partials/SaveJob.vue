@@ -189,7 +189,7 @@ defineExpose({ openModal });
 
                             <div class="sm:col-span-2">
                                 <InputLabel for="technologies" value="Technologies" />
-                                <VueSelect id="technology_id[]" label="name" :append="true" :multiple="true"
+                                <VueSelect id="technology_id" label="name" :append="true" :multiple="true"
                                     :close-on-select="false" :options="technologyOptions" v-model="form.technologies"
                                     :reduce="technologyOptions => technologyOptions.id" :value="form.technologies.id" :select-on-tab="true">
                                 </VueSelect>
