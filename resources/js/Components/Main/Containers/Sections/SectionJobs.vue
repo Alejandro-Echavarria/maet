@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <div class="w-full md:max-w-sm bg-white border border-gray-200 rounded-xl dark:bg-gray-800 dark:border-gray-700">
+    <div class="w-full">
+        <div class="w-full bg-white border border-gray-200 rounded-xl dark:bg-gray-800 dark:border-gray-700">
             <a href="#">
                 <img class="rounded-t-lg" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
             </a>
@@ -10,8 +10,10 @@
                         <slot name="title" />
                     </h3>
                 </a>
-                <div class="mb-3 h-full text-gray-700 dark:text-gray-400 overflow-hidden">
-                    <slot name="preview" />
+                <div class="mb-3 h-auto text-gray-700 dark:text-gray-400 overflow-hidden">
+                    <div class="h-[4.5rem]">
+                        <slot name="preview" />
+                    </div>
                 </div>
                 <slot name="actions" />
             </div>
