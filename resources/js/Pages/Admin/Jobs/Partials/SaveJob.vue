@@ -2,7 +2,6 @@
 import { ref } from "vue";
 import { useForm } from "@inertiajs/vue3";
 import DialogModal from "@/Components/DialogModal.vue";
-import SectionJobs from '@/Components/Main/Containers/Sections/SectionJobs.vue';
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import InputLabel from "@/Components/InputLabel.vue";
@@ -86,14 +85,6 @@ const openModal = (op, id, category_id, client_id, titleData, logo_url, color, p
     }
 };
 
-const truncateData = (data) => {
-    if (data.length > 90) {
-        return data.substring(0, 90) + '...';
-    } else {
-        return data;
-    }
-}
-
 const closeModal = () => {
     modal.value = false;
     form.clearErrors();
@@ -110,31 +101,11 @@ defineExpose({ openModal });
 
 <template>
     <div>
-        <div class="flex mb-6 justify-end">
+        <div class="flex justify-end">
             <PrimaryButton class="sm:w-auto w-full" @click="openModal(1)">
                 <font-awesome-icon class="mr-2" :icon="['fas', 'plus']" />
                 Add job
             </PrimaryButton>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-            <SectionJobs v-for="job in data.jobs">
-                <template #title>
-                    {{ job.title }}
-                </template>
-                <template #preview>
-                    <span v-html="truncateData(job.preview)" />
-                </template>
-                <template #actions>
-                    <div class="flex my-3 justify-end">
-                        <PrimaryButton class="sm:w-auto w-full"
-                            @click="openModal(2, job.id, job.category_id, job.client_id, job.title, job.logo_url, job.color, job.project_name, job.technologies, job.preview, job.body)">
-                            <font-awesome-icon class="mr-2" :icon="['far', 'pen-to-square']" />
-                            edit job
-                        </PrimaryButton>
-                    </div>
-                </template>
-            </SectionJobs>
         </div>
 
         <DialogModal :show="modal" :maxWidth="'6xl'" @close="closeModal">

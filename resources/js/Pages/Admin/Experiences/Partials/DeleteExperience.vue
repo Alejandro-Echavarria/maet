@@ -11,10 +11,6 @@ const form = useForm({
     id: props.id
 });
 
-const ok = (msj, type, timer) => {
-    SaveAlert(msj, type, timer);
-};
-
 const destroy = (id) => {
     DeleteAlert().then((result) => {
         if (result.isConfirmed) {
@@ -29,6 +25,10 @@ const destroy = (id) => {
             });
         }
     });
+};
+
+const ok = (msj, type, timer) => {
+    SaveAlert(msj, type, timer);
 };
 </script>
 
