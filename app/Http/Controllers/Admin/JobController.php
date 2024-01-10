@@ -12,14 +12,20 @@ use App\Models\Technology;
 
 class JobController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $jobs = Job::with(['technologies:id,name'])->orderBy('created_at', 'desc')->get();
+        $page = $request?->page;
+        $filter = $request?->search;
+
+        $jobs = Job::with(['technologies:id,name'])
+            ->filter($filter)
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
         $clients = Client::all();
         $categories = Category::all();
         $technologies = Technology::all();
 
-        return Inertia::render('Admin/Jobs/Index', compact('jobs', 'clients', 'categories', 'technologies'));
+        return Inertia::render('Admin/Jobs/Index', compact('page', 'filter', 'jobs', 'clients', 'categories', 'technologies'));
     }
 
     public function store(Request $request)
@@ -66,6 +72,13 @@ class JobController extends Controller
         $job->update($data);
 
         $job->technologies()->sync($technologies['technologies']);
+
+        return to_route('admin.jobs.index');
+    }
+
+    public function destroy(Job $job)
+    {
+        $job->delete();
 
         return to_route('admin.jobs.index');
     }
