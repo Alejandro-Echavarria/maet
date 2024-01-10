@@ -2,9 +2,9 @@
     <div class="w-full">
         <div class="w-full bg-white border border-gray-200 rounded-xl dark:bg-gray-800 dark:border-gray-700">
             <div class="relative">
-                <a href="#">
-                    <img class="rounded-t-lg" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
-                </a>
+                <div>
+                    <img class="rounded-t-lg h-64 w-full overflow-auto object-cover" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
+                </div>
                 <div class="absolute top-0 right-0 py-4 px-5">
                     <slot name="deleteButton" />
                 </div>

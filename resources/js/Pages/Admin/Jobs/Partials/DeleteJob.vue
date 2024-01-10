@@ -5,6 +5,8 @@ import DeleteAlert from '@/Helpers/Alerts/DeleteAlert';
 
 const props = defineProps({
     id: Number,
+    filter: String,
+    page: String
 });
 
 const form = useForm({
@@ -14,7 +16,11 @@ const form = useForm({
 const destroy = (id) => {
     DeleteAlert().then((result) => {
         if (result.isConfirmed) {
-            form.delete(route('admin.jobs.destroy', id), {
+            form.transform((data) => ({
+                ...data,
+                search: props.filter,
+                page: props.page
+            })).delete(route('admin.jobs.destroy', id), {
                 preserveScroll: true,
                 onSuccess: () => {
                     ok('Job deleted successfully');

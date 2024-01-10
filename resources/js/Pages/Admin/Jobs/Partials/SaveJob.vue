@@ -16,6 +16,8 @@ import VueSelect from "@/Components/Main/Admin/Components/Selects/VueSelect.vue"
 
 const props = defineProps({
     data: Object,
+    filter: String,
+    page: String
 });
 
 const title = ref("");
@@ -40,7 +42,11 @@ const form = useForm({
 
 const save = () => {
     if (opration.value === 1) {
-        form.post(route("admin.jobs.store"), {
+        form.transform((data) => ({
+            ...data,
+            search: props.filter,
+            page: props.page
+        })).post(route("admin.jobs.store"), {
             preserveScroll: true,
             preserveState: true,
             onSuccess: () => {
@@ -51,7 +57,11 @@ const save = () => {
             },
         });
     } else {
-        form.put(route("admin.jobs.update", job.value), {
+        form.transform((data) => ({
+            ...data,
+            search: props.filter,
+            page: props.page
+        })).put(route("admin.jobs.update", job.value), {
             preserveScroll: true,
             preserveState: true,
             onSuccess: () => {
