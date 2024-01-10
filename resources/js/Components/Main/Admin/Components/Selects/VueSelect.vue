@@ -11,7 +11,7 @@ defineProps({
 </script>
 
 <template>
-    <vSelect class="mt-3 style-chooser" :appendToBody="append">
+    <vSelect class="mt-2 style-chooser text-sm" :appendToBody="append">
     </vSelect>
 </template>
 
@@ -42,6 +42,8 @@ defineProps({
     border-radius: 8px 8px 8px 8px;
     margin-top: 1px;
     box-shadow: none;
+    font-size: 0.875rem/* 14px */;
+    line-height: 1.25rem/* 20px */;
 }
 
 .style-chooser .vs__search::placeholder {
@@ -52,6 +54,9 @@ defineProps({
     border: 0px;
     padding: 0px;
     margin: 4px;
+    height: 19px;
+    font-size: 0.875rem/* 14px */;
+    line-height: 1.25rem/* 20px */;
 }
 
 .style-chooser input.vs__search:focus {

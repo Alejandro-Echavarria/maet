@@ -33,8 +33,7 @@ const getData = () => {
     router.get(route(props.url), pickBy({ search: search.value, page: page.value }), {
         preserveScroll: true,
         preserveState: true,
-        only: ['socialMedias', 'errors','filter', 'page'],
-        // replace: true
+        replace: true
     });
 };
 

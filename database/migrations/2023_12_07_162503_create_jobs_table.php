@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('logo_url')->nullable();
             $table->string('color');
             $table->string('project_name');
-            $table->string('languages');
             $table->text('preview');
             $table->text('body');
             $table->timestamps();

@@ -1,14 +1,17 @@
 <script setup>
 import { ref } from 'vue';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import ClassicEditor from '@ckeditor/ckeditor5-build-inline';
 import { component as CKEditor } from '@ckeditor/ckeditor5-vue';
 
 const props = defineProps({
-    modelValue: String,
+    modelValue: {
+        type: String,
+        default: '',
+    }
 });
 
 const emit = defineEmits(['update:modelValue']);
-const value = ref(props.modelValue);
+const value = ref(props.modelValue ? props.modelValue : '');
 
 const editorConfig = ref({
     toolbar: ['undo', 'redo', '|', 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'codeBlock', 'insertTable', 'indent', 'outdent', 'alignment'],
@@ -32,15 +35,18 @@ const editorConfig = ref({
 
 <style>
 .ck-toolbar {
-    border-top: 2px solid #e5e7eb !important;
-    border-right: 2px solid #e5e7eb !important;
-    border-left: 2px solid #e5e7eb !important;
-    border-radius: 12px 12px 0px 0px !important;
+    border-radius: 12px 12px 12px 12px !important;
+}
+
+.ck-toolbar-container {
+    border: 2px solid #e5e7eb !important;
+    border-radius: 12px 12px 12px 12px !important;
+    margin-bottom: 20px !important;
+    box-shadow: none !important;
 }
 
 .ck-dropdown__panel {
     border-radius: 12px !important;
-    /* overflow: hidden !important; */
 }
 
 .ck-dropdown__panel .ck-toolbar {
@@ -49,7 +55,7 @@ const editorConfig = ref({
 
 .ck-content {
     border: 2px solid #e5e7eb !important;
-    border-radius: 0px 0px 12px 12px !important;
+    border-radius: 12px 12px 12px 12px !important;
     box-shadow: none !important;
 }
 </style>
