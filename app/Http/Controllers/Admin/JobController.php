@@ -20,7 +20,7 @@ class JobController extends Controller
         $jobs = Job::with(['technologies:id,name'])
             ->filter($filter)
             ->orderBy('created_at', 'desc')
-            ->paginate(10);
+            ->paginate(11);
         $clients = Client::all();
         $categories = Category::all();
         $technologies = Technology::all();
@@ -49,7 +49,13 @@ class JobController extends Controller
 
         $job->technologies()->attach($technologies['technologies']);
 
-        return to_route('admin.jobs.index');
+        $page = $request?->page;
+        $search = $request?->search;
+
+        return to_route('admin.jobs.index', [
+            'search' => $search,
+            'page' => $page
+        ])->with('flash', 'Job Created');
     }
 
     public function update(Request $request, Job $job)
@@ -73,13 +79,25 @@ class JobController extends Controller
 
         $job->technologies()->sync($technologies['technologies']);
 
-        return to_route('admin.jobs.index');
+        $page = $request?->page;
+        $search = $request?->search;
+
+        return to_route('admin.jobs.index', [
+            'search' => $search,
+            'page' => $page
+        ])->with('flash', 'Job Updated');
     }
 
-    public function destroy(Job $job)
+    public function destroy(Request $request, Job $job)
     {
         $job->delete();
 
-        return to_route('admin.jobs.index');
+        $page = $request?->page;
+        $search = $request?->search;
+
+        return to_route('admin.jobs.index', [
+            'search' => $search,
+            'page' => $page
+        ])->with('flash', 'Job Deleted');
     }
 }
