@@ -10,6 +10,8 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Welcome');
+        $user = User::select(['name', 'email', 'position'])->first();
+
+        return Inertia::render('Welcome', compact('user'));
     }
 }
