@@ -9,6 +9,8 @@ class Job extends Model
 {
     use HasFactory;
 
+    protected $hidden = ['pivot'];
+
     protected $fillable = [
         'category_id',
         'client_id',
@@ -36,5 +38,16 @@ class Job extends Model
     public function technologies(){
 
         return $this->belongsToMany(Technology::class);
+    }
+
+    public function scopeFilter($query, $filter)
+    {
+        $query->when($filter ?? null, function ($query, $search) {
+            $query
+                ->select('jobs.*')
+                // ->join('social_medias', 'social_medias.id', '=', 'jobs.social_media_id')
+                ->orWhere('jobs.title', 'like', '%' . "$search" . '%')
+                ->orWhere('jobs.created_at', 'like', '%' . $search . '%');
+        });
     }
 }

@@ -2,7 +2,6 @@
 import { ref } from "vue";
 import { useForm } from "@inertiajs/vue3";
 import DialogModal from "@/Components/DialogModal.vue";
-import SectionJobs from '@/Components/Main/Containers/Sections/SectionJobs.vue';
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import InputLabel from "@/Components/InputLabel.vue";
@@ -17,6 +16,8 @@ import VueSelect from "@/Components/Main/Admin/Components/Selects/VueSelect.vue"
 
 const props = defineProps({
     data: Object,
+    filter: String,
+    page: String
 });
 
 const title = ref("");
@@ -41,7 +42,11 @@ const form = useForm({
 
 const save = () => {
     if (opration.value === 1) {
-        form.post(route("admin.jobs.store"), {
+        form.transform((data) => ({
+            ...data,
+            search: props.filter,
+            page: props.page
+        })).post(route("admin.jobs.store"), {
             preserveScroll: true,
             preserveState: true,
             onSuccess: () => {
@@ -54,9 +59,9 @@ const save = () => {
     } else {
         form.transform((data) => ({
             ...data,
-            start_date: start_date.value,
-            end_date: end_date.value,
-        })).put(route("admin.jobs.update", Job.value), {
+            search: props.filter,
+            page: props.page
+        })).put(route("admin.jobs.update", job.value), {
             preserveScroll: true,
             preserveState: true,
             onSuccess: () => {
@@ -69,7 +74,7 @@ const save = () => {
     }
 };
 
-const openModal = (op, id, titleData, proyect_name, end_date, body, color) => {
+const openModal = (op, id, category_id, client_id, titleData, logo_url, color, project_name, technologies, preview, body) => {
     modal.value = true;
     opration.value = op;
 
@@ -78,11 +83,15 @@ const openModal = (op, id, titleData, proyect_name, end_date, body, color) => {
     } else {
         title.value = "Edit job";
         job.value = id;
+        form.category_id = category_id;
+        form.client_id = client_id;
         form.title = titleData;
-        form.start_date = start_date;
-        form.end_date = end_date;
-        form.description = description;
+        form.logo_url = logo_url;
         form.color = color;
+        form.project_name = project_name;
+        form.technologies = technologies.map(tech => tech.id);
+        form.preview = preview;
+        form.body = body;
     }
 };
 
@@ -102,30 +111,11 @@ defineExpose({ openModal });
 
 <template>
     <div>
-        <div class="flex mb-6 justify-end">
+        <div class="flex justify-end">
             <PrimaryButton class="sm:w-auto w-full" @click="openModal(1)">
                 <font-awesome-icon class="mr-2" :icon="['fas', 'plus']" />
                 Add job
             </PrimaryButton>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 ">
-            <SectionJobs v-for="job in data.jobs">
-                <template #title>
-                    {{ job.title }}
-                </template>
-                <template #preview>
-                    <span v-html="job.preview"/>
-                </template>
-                <template #actions>
-                    <div class="flex my-3 justify-end">
-                        <PrimaryButton class="sm:w-auto w-full" @click="openModal(1)">
-                            <font-awesome-icon class="mr-2" :icon="['far', 'pen-to-square']" />
-                            edit job
-                        </PrimaryButton>
-                    </div>
-                </template>
-            </SectionJobs>
         </div>
 
         <DialogModal :show="modal" :maxWidth="'6xl'" @close="closeModal">
@@ -180,9 +170,10 @@ defineExpose({ openModal });
 
                             <div class="sm:col-span-2">
                                 <InputLabel for="technologies" value="Technologies" />
-                                <VueSelect id="technology_id" label="name" v-model="form.technologies" :append="true"
-                                    :multiple="true" :close-on-select="false" :options="technologyOptions"
-                                    :reduce="technologyOptions => technologyOptions.id" :select-on-tab="true" />
+                                <VueSelect id="technology_id" label="name" :append="true" :multiple="true"
+                                    :close-on-select="false" :options="technologyOptions" v-model="form.technologies"
+                                    :reduce="technologyOptions => technologyOptions.id" :value="form.technologies.id" :select-on-tab="true">
+                                </VueSelect>
 
                                 <InputError :message="form.errors.technologies" class="mt-2" />
                             </div>
