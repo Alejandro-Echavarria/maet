@@ -12,7 +12,7 @@ import SimpleForm from "@/Components/Main/Admin/Components/Forms/SimpleForm.vue"
 import Ckeditor from "@/Components/Main/Admin/Components/Forms/Inputs/ckeditor/Ckeditor.vue";
 import ColorPicker from "@/Components/Main/Admin/Components/Forms/Inputs/SelectsPicker/ColorsPicker/ColorPicker.vue";
 import VueSelect from "@/Components/Main/Admin/Components/Selects/VueSelect.vue";
-
+import Images from "@/Components/Main/Admin/Components/Forms/Inputs/Images/Images.vue";
 
 const props = defineProps({
     data: Object,
@@ -142,6 +142,10 @@ defineExpose({ openModal });
                                 <InputError :message="form.errors.color" class="mt-2" />
                             </div>
 
+                            <div class="sm:col-span-4">
+                                <Images />
+                            </div>
+
                             <div class="sm:col-span-2">
                                 <InputLabel for="category_id" value="Category" />
                                 <VueSelect id="category_id" label="name" v-model="form.category_id" :append="true"
@@ -180,14 +184,14 @@ defineExpose({ openModal });
 
                             <div class="sm:col-span-4">
                                 <InputLabel for="preview" value="Preview" class="mb-3" />
-                                <Ckeditor v-model="form.preview" :value="form.preview" id="preview" ref="previewInput" />
+                                <Ckeditor v-model="form.preview" :value="form.preview" id="preview" ref="previewInput" key="preview" />
 
                                 <InputError :message="form.errors.preview" class="mt-2" />
                             </div>
 
                             <div class="sm:col-span-4">
                                 <InputLabel for="body" value="Body" class="mb-3" />
-                                <Ckeditor v-model="form.body" :value="form.body" id="body" ref="bodyInput" />
+                                <Ckeditor v-model="form.body" :value="form.body" id="body" ref="bodyInput" key="body" />
 
                                 <InputError :message="form.errors.body" class="mt-2" />
                             </div>
