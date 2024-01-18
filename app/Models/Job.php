@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Image;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -35,9 +36,14 @@ class Job extends Model
     }
 
     // Relación muchos a muchos
-    public function technologies(){
-
+    public function technologies()
+    {
         return $this->belongsToMany(Technology::class);
+    }
+
+    public function image()
+    {
+        return $this->morphOne(Image::class, 'imageable');
     }
 
     public function scopeFilter($query, $filter)
