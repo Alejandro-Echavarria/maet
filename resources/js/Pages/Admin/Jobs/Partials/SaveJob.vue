@@ -34,6 +34,7 @@ const form = useForm({
     title: "",
     logo_url: "",
     color: "gray-100",
+    file: null,
     project_name: "",
     technologies: [],
     preview: "",
@@ -74,7 +75,7 @@ const save = () => {
     }
 };
 
-const openModal = (op, id, category_id, client_id, titleData, logo_url, color, project_name, technologies, preview, body) => {
+const openModal = (op, id, category_id, client_id, titleData, logo_url, color, file, project_name, technologies, preview, body) => {
     modal.value = true;
     opration.value = op;
 
@@ -88,6 +89,7 @@ const openModal = (op, id, category_id, client_id, titleData, logo_url, color, p
         form.title = titleData;
         form.logo_url = logo_url;
         form.color = color;
+        form.file = file;
         form.project_name = project_name;
         form.technologies = technologies.map(tech => tech.id);
         form.preview = preview;
@@ -143,7 +145,7 @@ defineExpose({ openModal });
                             </div>
 
                             <div class="sm:col-span-4">
-                                <Images />
+                                <Images v-model="form.file" :file="form.file" />
                             </div>
 
                             <div class="sm:col-span-2">

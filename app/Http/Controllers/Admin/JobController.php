@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\ImageController;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Category;
 use App\Models\Client;
 use App\Models\Job;
 use App\Models\Technology;
+use Illuminate\Support\Facades\Storage;
 
 class JobController extends Controller
 {
@@ -17,7 +19,7 @@ class JobController extends Controller
         $page = $request?->page;
         $filter = $request?->search;
 
-        $jobs = Job::with(['technologies:id,name'])
+        $jobs = Job::with(['technologies:id,name', 'image'])
             ->filter($filter)
             ->orderBy('created_at', 'desc')
             ->paginate(11);
@@ -48,6 +50,12 @@ class JobController extends Controller
         $job = Job::create($data);
 
         $job->technologies()->attach($technologies['technologies']);
+
+        if ($request->file('file')) {
+            $file = new ImageController;
+
+            $file = $file->store($request->file('file'), $job);
+        }
 
         $page = $request?->page;
         $search = $request?->search;
