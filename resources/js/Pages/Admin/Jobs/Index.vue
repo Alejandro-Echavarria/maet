@@ -72,11 +72,11 @@ const openModal = (op, id, titleData, start_date, end_date, description, color, 
         </CreateContainer>
 
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 mb-8">
-            <TransitionGroup name="card">
+            <TransitionGroup name="card" appear>
                 <SectionJobs v-for="(job, index) in jobs.data" :key="'card-' + job.id"
                     :class="{ 'md:col-span-2': index === 0 }">
                     <template #image>
-                        <img class="rounded-t-lg h-64 w-full overflow-auto object-cover" :src="`/storage/${job.image.url}`" alt="" />
+                        <img class="rounded-t-lg h-64 w-full overflow-auto object-cover" :src="`/storage/${job?.images?.url}`" alt="" />
                     </template>
                     <template #deleteButton>
                         <DeleteJob :id="job.id" :filter="filter" :page="page" :key="'delete-' + job.id" />
@@ -90,7 +90,7 @@ const openModal = (op, id, titleData, start_date, end_date, description, color, 
                     <template #actions>
                         <div class="flex my-3 justify-end">
                             <PrimaryButton class="sm:w-auto w-full"
-                                @click="openModal(2, job.id, job.category_id, job.client_id, job.title, job.logo_url, job.color, job.image.url, job.project_name, job.technologies, job.preview, job.body)">
+                                @click="openModal(2, job.id, job.category_id, job.client_id, job.title, job.logo_url, job.color, job?.images?.url, job.project_name, job.technologies, job.preview, job.body)">
                                 <font-awesome-icon class="mr-2" :icon="['far', 'pen-to-square']" />
                                 edit job
                             </PrimaryButton>
@@ -108,7 +108,7 @@ const openModal = (op, id, titleData, start_date, end_date, description, color, 
 .card-move,
 .card-enter-active,
 .card-leave-active {
-    transition: 0.3s ease;
+    transition: 0.35s ease;
 }
 
 .card-enter-from,

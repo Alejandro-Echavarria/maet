@@ -146,6 +146,8 @@ defineExpose({ openModal });
 
                             <div class="sm:col-span-4">
                                 <Images v-model="form.file" :file="form.file" />
+
+                                <InputError :message="form.errors.file" class="mt-2" />
                             </div>
 
                             <div class="sm:col-span-2">

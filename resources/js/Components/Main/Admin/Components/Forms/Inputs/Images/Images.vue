@@ -4,17 +4,13 @@ import InputLabel from '@/Components/InputLabel.vue';
 
 const props = defineProps({
     modelValue: Object,
-    file: String
+    file: null
 });
 
 const emit = defineEmits(['update:modelValue', 'nameFile']);
 const fileName = ref('');
-const showImage = ref(false);
 
 const cambiarImagen = (event) => {
-    showImage.value = true;
-
-    
     const file = event.target.files[0];
     const reader = new FileReader();
     emit('update:modelValue', file);
@@ -29,13 +25,12 @@ const cambiarImagen = (event) => {
 };
 </script>
 
-
 <template>
     <div>
         <div class="flex items-center justify-center w-full">
             <label for="file"
                 class="flex flex-col items-center justify-center w-full h-96 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                <template v-if="!showImage && file === ''">
+                <template v-if="file == null">
                     <div class="flex flex-col items-center justify-center pt-5 pb-6">
                         <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
@@ -49,7 +44,7 @@ const cambiarImagen = (event) => {
                     </div>
                 </template>
                 <template v-else>
-                    <img class="h-96 w-full overflow-auto object-cover rounded-md" id="img-post" :src="`/storage/${url}`"  alt="">
+                    <img class="h-96 w-full overflow-auto object-cover rounded-md" id="img-post" :src="`/storage/${file}`" alt="">
                 </template>
                 <input id="file" type="file" @change="cambiarImagen" class="hidden" />
             </label>
