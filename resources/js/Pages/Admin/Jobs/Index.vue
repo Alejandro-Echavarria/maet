@@ -76,7 +76,7 @@ const openModal = (op, id, titleData, start_date, end_date, description, color, 
                 <SectionJobs v-for="(job, index) in jobs.data" :key="'card-' + job.id"
                     :class="{ 'md:col-span-2': index === 0 }">
                     <template #image>
-                        <img class="rounded-t-xl h-64 w-full overflow-auto object-cover" :src="`/storage/${job?.images?.url}`" alt="" />
+                        <img class="rounded-t-xl h-64 w-full overflow-auto object-cover" :src="`/storage/${job?.images[0]?.url}`" alt="" />
                     </template>
                     <template #deleteButton>
                         <DeleteJob :id="job.id" :filter="filter" :page="page" :key="'delete-' + job.id" />
@@ -90,7 +90,7 @@ const openModal = (op, id, titleData, start_date, end_date, description, color, 
                     <template #actions>
                         <div class="flex my-3 justify-end">
                             <PrimaryButton class="sm:w-auto w-full"
-                                @click="openModal(2, job.id, job.category_id, job.client_id, job.title, job.logo_url, job.color, job?.images?.url, job.project_name, job.technologies, job.preview, job.body)">
+                                @click="openModal(2, job.id, job.category_id, job.client_id, job.title, job.logo_url, job.color, job?.images[0]?.url, job.project_name, job.technologies, job.preview, job.body)">
                                 <font-awesome-icon class="mr-2" :icon="['far', 'pen-to-square']" />
                                 edit job
                             </PrimaryButton>

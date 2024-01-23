@@ -35,27 +35,27 @@ const editorConfig = ref({
 
 <style>
 .ck-toolbar {
-    border-radius: 12px 12px 12px 12px !important;
+    border-radius: 8px !important;
 }
 
 .ck-toolbar-container {
     border: 2px solid #e5e7eb !important;
-    border-radius: 12px 12px 12px 12px !important;
+    border-radius: 8px !important;
     margin-bottom: 20px !important;
     box-shadow: none !important;
 }
 
 .ck-dropdown__panel {
-    border-radius: 12px !important;
+    border-radius: 8px !important;
 }
 
 .ck-dropdown__panel .ck-toolbar {
-    border-radius: 12px !important;
+    border-radius: 8px !important;
 }
 
 .ck-content {
     border: 2px solid #e5e7eb !important;
-    border-radius: 12px 12px 12px 12px !important;
+    border-radius: 8px !important;
     box-shadow: none !important;
 }
 </style>

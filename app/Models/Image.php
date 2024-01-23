@@ -14,9 +14,8 @@ class Image extends Model
         'default'
     ];
 
-    // Ralcion polimorfica
-    public function imageable()
+    public function Job()
     {
-        return $this->morphTo();
+        return $this->morphTo(Job::class);
     }
 }

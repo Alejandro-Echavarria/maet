@@ -18,7 +18,11 @@ class JobController extends Controller
         $page = $request?->page;
         $filter = $request?->search;
 
-        $jobs = Job::with(['technologies:id,name', 'images:id,url,default,imageable_id'])
+        $jobs = Job::with(['technologies:id,name', 'images' => function ($query) {
+            $query->select('id','url','default','imageable_id')
+                ->where('default', '=', '1')
+                ->orderBy('id', 'desc');
+        }])
             ->filter($filter)
             ->orderBy('created_at', 'desc')
             ->paginate(11);
@@ -33,21 +37,21 @@ class JobController extends Controller
     {
         $data = $request->validate(
             [
-                'category_id'    => "required|exists:categories,id",
-                'client_id'      => "required|exists:clients,id",
-                'title'          => "required|max:255|unique:jobs,title",
-                'color'          => "required|max:255|string",
-                'file'           => "required|image",
-                'project_name'   => "required|max:255|string",
-                'preview'        => "required|string",
-                'body'           => "required|string"
+                'category_id'  => "required|exists:categories,id",
+                'client_id'    => "required|exists:clients,id",
+                'title'        => "required|max:255|unique:jobs,title",
+                'color'        => "required|max:255|string",
+                'file'         => "required|image",
+                'project_name' => "required|max:255|string",
+                'preview'      => "required|string",
+                'body'         => "required|string"
             ],
             [
                 // Custom error messages
             ],
             [
                 // Custom attribute names
-                'file'           => 'image',
+                'file'         => 'image',
             ]
         );
 
@@ -75,24 +79,23 @@ class JobController extends Controller
 
     public function update(Request $request, Job $job)
     {
-        // dd($request->all());
         $data = $request->validate(
             [
-                'category_id'    => "required|exists:categories,id",
-                'client_id'      => "required|exists:clients,id",
-                'title'          => "required|max:255|unique:jobs,title,$job->id",
-                'color'          => "required|max:255|string",
-                'file'           => $request->file('file') ? "required|image" : "required|string",
-                'project_name'   => "required|max:255|string",
-                'preview'        => "required|string",
-                'body'           => "required|string",
+                'category_id'  => "required|exists:categories,id",
+                'client_id'    => "required|exists:clients,id",
+                'title'        => "required|max:255|unique:jobs,title,$job->id",
+                'color'        => "required|max:255|string",
+                'file'         => $request->file('file') ? "required|image" : "required|string",
+                'project_name' => "required|max:255|string",
+                'preview'      => "required|string",
+                'body'         => "required|string",
             ],
             [
                 // Custom error messages
             ],
             [
                 // Custom attribute names
-                'file'           => 'image',
+                'file'         => 'image',
             ]
         );
 
@@ -121,6 +124,8 @@ class JobController extends Controller
     public function destroy(Request $request, Job $job)
     {
         $job->delete();
+
+        // Storage::delete($post->image->url);
 
         $page = $request?->page;
         $search = $request?->search;
