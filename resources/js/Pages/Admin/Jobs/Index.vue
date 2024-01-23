@@ -76,7 +76,7 @@ const openModal = (op, id, titleData, start_date, end_date, description, color, 
                 <SectionJobs v-for="(job, index) in jobs.data" :key="'card-' + job.id"
                     :class="{ 'md:col-span-2': index === 0 }">
                     <template #image>
-                        <img class="rounded-t-lg h-64 w-full overflow-auto object-cover" :src="`/storage/${job?.images?.url}`" alt="" />
+                        <img class="rounded-t-xl h-64 w-full overflow-auto object-cover" :src="`/storage/${job?.images?.url}`" alt="" />
                     </template>
                     <template #deleteButton>
                         <DeleteJob :id="job.id" :filter="filter" :page="page" :key="'delete-' + job.id" />

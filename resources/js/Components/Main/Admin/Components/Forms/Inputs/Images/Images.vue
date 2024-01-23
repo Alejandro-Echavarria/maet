@@ -1,27 +1,29 @@
 <script setup>
 import { ref } from 'vue';
-import InputLabel from '@/Components/InputLabel.vue';
 
 const props = defineProps({
     modelValue: Object,
-    file: null
+    file: String
 });
 
-const emit = defineEmits(['update:modelValue', 'nameFile']);
+const emit = defineEmits('update:modelValue');
 const fileName = ref('');
 
 const cambiarImagen = (event) => {
     const file = event.target.files[0];
     const reader = new FileReader();
-    emit('update:modelValue', file);
 
     reader.onload = (event) => {
         document.getElementById('img-post').setAttribute('src', event.target.result);
         fileName.value = file.name;
-        document.getElementById('fileLabel').innerHTML = fileName.value;
+    };
+
+    reader.onerror = (error) => {
+        console.error('Error al leer el archivo:', error);
     };
 
     reader.readAsDataURL(file);
+    emit('update:modelValue', file);
 };
 </script>
 
@@ -30,7 +32,7 @@ const cambiarImagen = (event) => {
         <div class="flex items-center justify-center w-full">
             <label for="file"
                 class="flex flex-col items-center justify-center w-full h-96 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                <template v-if="file == null">
+                <template v-if="file === null">
                     <div class="flex flex-col items-center justify-center pt-5 pb-6">
                         <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
@@ -46,19 +48,9 @@ const cambiarImagen = (event) => {
                 <template v-else>
                     <img class="h-96 w-full overflow-auto object-cover rounded-md" id="img-post" :src="`/storage/${file}`" alt="">
                 </template>
-                <input id="file" type="file" @change="cambiarImagen" class="hidden" />
+                <input id="file" type="file" @change="cambiarImagen" accept="image/*" class="hidden" />
             </label>
         </div>
-        <InputLabel id="fileLabel" for="file" value="Image" />
-        <!-- <div class="flex justify-between gap-8">
-            <div>
-                <InputLabel id="fileLabel" for="file" value="Image" />
-                <input id="file" type="file" @change="cambiarImagen" />
-            </div>
-            <div>
-                <img class="h-64 w-full overflow-auto object-cover rounded-xl" id="img-post" src="{{asset('img/img-ask.jpg')}}" alt="">
-            </div>
-        </div> -->
     </div>
 </template>
 

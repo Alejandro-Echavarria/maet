@@ -60,9 +60,10 @@ const save = () => {
     } else {
         form.transform((data) => ({
             ...data,
+            _method: 'put',
             search: props.filter,
-            page: props.page
-        })).put(route("admin.jobs.update", job.value), {
+            page: props.page,
+        })).post(route("admin.jobs.update", job.value), {
             preserveScroll: true,
             preserveState: true,
             onSuccess: () => {

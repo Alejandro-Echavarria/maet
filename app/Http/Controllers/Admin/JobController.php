@@ -18,7 +18,7 @@ class JobController extends Controller
         $page = $request?->page;
         $filter = $request?->search;
 
-        $jobs = Job::with(['technologies:id,name', 'images'])
+        $jobs = Job::with(['technologies:id,name', 'images:id,url,default,imageable_id'])
             ->filter($filter)
             ->orderBy('created_at', 'desc')
             ->paginate(11);
@@ -75,15 +75,26 @@ class JobController extends Controller
 
     public function update(Request $request, Job $job)
     {
-        $data = $request->validate([
-            'category_id'    => "required|exists:categories,id",
-            'client_id'      => "required|exists:clients,id",
-            'title'          => "required|max:255|unique:jobs,title,$job->id",
-            'color'          => "required|max:255|string",
-            'project_name'   => "required|max:255|string",
-            'preview'        => "required|string",
-            'body'           => "required|string",
-        ]);
+        // dd($request->all());
+        $data = $request->validate(
+            [
+                'category_id'    => "required|exists:categories,id",
+                'client_id'      => "required|exists:clients,id",
+                'title'          => "required|max:255|unique:jobs,title,$job->id",
+                'color'          => "required|max:255|string",
+                'file'           => $request->file('file') ? "required|image" : "required|string",
+                'project_name'   => "required|max:255|string",
+                'preview'        => "required|string",
+                'body'           => "required|string",
+            ],
+            [
+                // Custom error messages
+            ],
+            [
+                // Custom attribute names
+                'file'           => 'image',
+            ]
+        );
 
         $technologies = $request->validate([
             'technologies'   => 'required|array',
@@ -93,6 +104,10 @@ class JobController extends Controller
         $job->update($data);
 
         $job->technologies()->sync($technologies['technologies']);
+
+        if ($request->file('file')) {
+            ImageController::store($request->file('file'), $job);
+        }
 
         $page = $request?->page;
         $search = $request?->search;

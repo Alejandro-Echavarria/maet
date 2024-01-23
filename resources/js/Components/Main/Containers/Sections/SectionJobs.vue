@@ -2,7 +2,7 @@
     <div class="w-full">
         <div class="w-full bg-white border border-gray-200 rounded-xl dark:bg-gray-800 dark:border-gray-700">
             <div class="relative">
-                <div>
+                <div class="overflow-auto">
                     <slot name="image" />
                 </div>
                 <div class="absolute top-0 right-0 py-4 px-5">
