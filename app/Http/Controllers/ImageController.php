@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
@@ -40,5 +41,15 @@ class ImageController extends Controller
             ]);
         }
 
+    }
+
+    public static function destroy($job)
+    {
+        $images = $job->images()->select('id', 'url')->get();
+
+        foreach ($images as $image) {
+            Image::destroy($image->id);
+            Storage::delete($image->url);
+        }
     }
 }

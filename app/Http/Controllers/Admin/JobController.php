@@ -124,8 +124,7 @@ class JobController extends Controller
     public function destroy(Request $request, Job $job)
     {
         $job->delete();
-
-        // Storage::delete($post->image->url);
+        ImageController::destroy($job);
 
         $page = $request?->page;
         $search = $request?->search;
