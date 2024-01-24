@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\ImageController;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Category;
@@ -17,7 +18,11 @@ class JobController extends Controller
         $page = $request?->page;
         $filter = $request?->search;
 
-        $jobs = Job::with(['technologies:id,name'])
+        $jobs = Job::with(['technologies:id,name', 'images' => function ($query) {
+            $query->select('id','url','default','imageable_id')
+                ->where('default', '=', '1')
+                ->orderBy('id', 'desc');
+        }])
             ->filter($filter)
             ->orderBy('created_at', 'desc')
             ->paginate(11);
@@ -30,15 +35,25 @@ class JobController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'category_id'    => "required|exists:categories,id",
-            'client_id'      => "required|exists:clients,id",
-            'title'          => "required|max:255|unique:jobs,title",
-            'color'          => "required|max:255|string",
-            'project_name'   => "required|max:255|string",
-            'preview'        => "required|string",
-            'body'           => "required|string",
-        ]);
+        $data = $request->validate(
+            [
+                'category_id'  => "required|exists:categories,id",
+                'client_id'    => "required|exists:clients,id",
+                'title'        => "required|max:255|unique:jobs,title",
+                'color'        => "required|max:255|string",
+                'file'         => "required|image",
+                'project_name' => "required|max:255|string",
+                'preview'      => "required|string",
+                'body'         => "required|string"
+            ],
+            [
+                // Custom error messages
+            ],
+            [
+                // Custom attribute names
+                'file'         => 'image',
+            ]
+        );
 
         $technologies = $request->validate([
             'technologies'   => 'required|array',
@@ -48,6 +63,10 @@ class JobController extends Controller
         $job = Job::create($data);
 
         $job->technologies()->attach($technologies['technologies']);
+
+        if ($request->file('file')) {
+            ImageController::store($request->file('file'), $job);
+        }
 
         $page = $request?->page;
         $search = $request?->search;
@@ -60,15 +79,25 @@ class JobController extends Controller
 
     public function update(Request $request, Job $job)
     {
-        $data = $request->validate([
-            'category_id'    => "required|exists:categories,id",
-            'client_id'      => "required|exists:clients,id",
-            'title'          => "required|max:255|unique:jobs,title,$job->id",
-            'color'          => "required|max:255|string",
-            'project_name'   => "required|max:255|string",
-            'preview'        => "required|string",
-            'body'           => "required|string",
-        ]);
+        $data = $request->validate(
+            [
+                'category_id'  => "required|exists:categories,id",
+                'client_id'    => "required|exists:clients,id",
+                'title'        => "required|max:255|unique:jobs,title,$job->id",
+                'color'        => "required|max:255|string",
+                'file'         => $request->file('file') ? "required|image" : "required|string",
+                'project_name' => "required|max:255|string",
+                'preview'      => "required|string",
+                'body'         => "required|string",
+            ],
+            [
+                // Custom error messages
+            ],
+            [
+                // Custom attribute names
+                'file'         => 'image',
+            ]
+        );
 
         $technologies = $request->validate([
             'technologies'   => 'required|array',
@@ -78,6 +107,10 @@ class JobController extends Controller
         $job->update($data);
 
         $job->technologies()->sync($technologies['technologies']);
+
+        if ($request->file('file')) {
+            ImageController::store($request->file('file'), $job);
+        }
 
         $page = $request?->page;
         $search = $request?->search;
@@ -91,6 +124,8 @@ class JobController extends Controller
     public function destroy(Request $request, Job $job)
     {
         $job->delete();
+
+        // Storage::delete($post->image->url);
 
         $page = $request?->page;
         $search = $request?->search;
