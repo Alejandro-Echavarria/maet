@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Image;
+use App\Models\Job;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
@@ -40,7 +41,37 @@ class ImageController extends Controller
                 'default' => '1'
             ]);
         }
+    }
 
+    public static function ckeditorStore($job, $request)
+    {
+        /* Creating a directory called posts in the storage folder. */
+        Storage::makeDirectory('images/ckeditor');
+
+        $name = Str::random(10) . $request->getClientOriginalName();
+        $path = storage_path('app/public/images/ckeditor/' . $name);
+        $pathRelative = 'images/ckeditor/' . $name;
+
+        $manager = new ImageManager(new Driver());
+
+        $manager->read($request)
+            ->resizeDown(1200, 800, function($constraint) {
+                $constraint->aspectRatio();
+            })
+            ->save($path);
+
+        $job = Job::find($job)->first();
+
+        $job->images()->create([
+            'url'     => $pathRelative
+        ]);
+
+        return [
+            "resourceType" => "Files",
+            'url' => Storage::url($pathRelative),
+            "fileName" => $name,
+            "uploaded" => 1
+        ];
     }
 
     public static function destroy($job)

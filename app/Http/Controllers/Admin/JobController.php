@@ -19,7 +19,7 @@ class JobController extends Controller
         $filter = $request?->search;
 
         $jobs = Job::with(['technologies:id,name', 'images' => function ($query) {
-            $query->select('id','url','default','imageable_id')
+            $query->select('id', 'url', 'default', 'imageable_id')
                 ->where('default', '=', '1')
                 ->orderBy('id', 'desc');
         }])
@@ -119,6 +119,19 @@ class JobController extends Controller
             'search' => $search,
             'page' => $page
         ])->with('flash', 'Job Updated');
+    }
+
+    public function ckeditorStore(Request $request)
+    {
+        $data = $request->validate(
+            [
+                'upload' => "required|image"
+            ],
+        );
+
+        $url = ImageController::ckeditorStore($request['id'], $request->file('upload'));
+
+        return $url;
     }
 
     public function destroy(Request $request, Job $job)
