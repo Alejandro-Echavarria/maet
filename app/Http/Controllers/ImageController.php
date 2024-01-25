@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Image;
 use App\Models\Job;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
@@ -12,13 +11,13 @@ use Illuminate\Support\Str;
 
 class ImageController extends Controller
 {
-    public static function store($request, $job)
+    public static function store($request, $data, $directory)
     {
-        Storage::makeDirectory('images/jobs');
+        Storage::makeDirectory($directory);
 
         $name = Str::random(10) . $request->getClientOriginalName();
-        $path = storage_path('app/public/images/jobs/' . $name);
-        $pathRelative = 'images/jobs/' . $name;
+        $path = storage_path("app/public/$directory/$name");
+        $pathRelative = "$directory/$name";
 
         $manager = new ImageManager(new Driver());
 
@@ -28,29 +27,29 @@ class ImageController extends Controller
             })
             ->save($path);
 
-        if ($job->images()->where('default', '=', '1')->count() == 0) {
-            $job->images()->create([
+        if ($data->images()->where('default', '=', '1')->count() == 0) {
+            $data->images()->create([
                 'url'     => $pathRelative,
                 'default' => '1'
             ]);
         } else {
-            Storage::delete($job->images()->select('url')->where('default', '=', '1')->first()->url);
+            Storage::delete($data->images()->select('url')->where('default', '=', '1')->first()->url);
 
-            $job->images()->update([
+            $data->images()->update([
                 'url'     => $pathRelative,
                 'default' => '1'
             ]);
         }
     }
 
-    public static function ckeditorStore($job, $request)
+    public static function ckeditorStore($request, $data, $directory)
     {
         /* Creating a directory called posts in the storage folder. */
-        Storage::makeDirectory('images/ckeditor');
+        Storage::makeDirectory($directory);
 
         $name = Str::random(10) . $request->getClientOriginalName();
-        $path = storage_path('app/public/images/ckeditor/' . $name);
-        $pathRelative = 'images/ckeditor/' . $name;
+        $path = storage_path("app/public/$directory/$name");
+        $pathRelative = "$directory/$name";
 
         $manager = new ImageManager(new Driver());
 
@@ -60,9 +59,9 @@ class ImageController extends Controller
             })
             ->save($path);
 
-        $job = Job::find($job)->first();
+        $data = Job::find($data)->first();
 
-        $job->images()->create([
+        $data->images()->create([
             'url'     => $pathRelative
         ]);
 
@@ -74,9 +73,9 @@ class ImageController extends Controller
         ];
     }
 
-    public static function destroy($job)
+    public static function destroy($data)
     {
-        $images = $job->images()->select('id', 'url')->get();
+        $images = $data->images()->select('id', 'url')->get();
 
         foreach ($images as $image) {
             Image::destroy($image->id);

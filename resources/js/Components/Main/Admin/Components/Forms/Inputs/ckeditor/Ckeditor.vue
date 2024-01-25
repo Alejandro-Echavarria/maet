@@ -18,7 +18,7 @@ const emit = defineEmits(['update:modelValue']);
 const value = ref(props.modelValue ? props.modelValue : '');
 
 const editorConfig = ref({
-    toolbar: ['undo', 'redo', '|', 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'codeBlock', 'insertTable', 'indent', 'outdent', 'alignment'],
+    toolbar: ['undo', 'redo', '|', 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'codeBlock', '|', 'uploadImage', 'insertTable', '|', 'indent', 'outdent', 'alignment'],
     heading: {
         options: [
             { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
