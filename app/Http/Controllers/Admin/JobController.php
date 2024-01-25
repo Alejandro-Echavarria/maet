@@ -13,13 +13,22 @@ use App\Models\Technology;
 
 class JobController extends Controller
 {
+    protected $directory;
+    protected $directoryCkeditor;
+
+    public function __construct()
+    {
+        $this->directory = 'images/jobs';
+        $this->directoryCkeditor = 'images/ckeditor';
+    }
+
     public function index(Request $request)
     {
         $page = $request?->page;
         $filter = $request?->search;
 
         $jobs = Job::with(['technologies:id,name', 'images' => function ($query) {
-            $query->select('id','url','default','imageable_id')
+            $query->select('id', 'url', 'default', 'imageable_id')
                 ->where('default', '=', '1')
                 ->orderBy('id', 'desc');
         }])
@@ -65,7 +74,7 @@ class JobController extends Controller
         $job->technologies()->attach($technologies['technologies']);
 
         if ($request->file('file')) {
-            ImageController::store($request->file('file'), $job);
+            ImageController::store($request->file('file'), $job, $this->directory);
         }
 
         $page = $request?->page;
@@ -75,6 +84,17 @@ class JobController extends Controller
             'search' => $search,
             'page' => $page
         ])->with('flash', 'Job Created');
+    }
+
+    public function ckeditorStore(Request $request)
+    {
+        $request->validate([
+            'upload' => "required|image"
+        ]);
+
+        $url = ImageController::ckeditorStore($request->file('upload'), $request['id'], $this->directoryCkeditor);
+
+        return $url;
     }
 
     public function update(Request $request, Job $job)
@@ -109,7 +129,7 @@ class JobController extends Controller
         $job->technologies()->sync($technologies['technologies']);
 
         if ($request->file('file')) {
-            ImageController::store($request->file('file'), $job);
+            ImageController::store($request->file('file'), $job, $this->directory);
         }
 
         $page = $request?->page;
@@ -124,8 +144,7 @@ class JobController extends Controller
     public function destroy(Request $request, Job $job)
     {
         $job->delete();
-
-        // Storage::delete($post->image->url);
+        ImageController::destroy($job);
 
         $page = $request?->page;
         $search = $request?->search;

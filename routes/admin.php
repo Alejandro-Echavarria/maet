@@ -9,11 +9,15 @@ use App\Http\Controllers\Admin\AboutMeController;
 use App\Http\Controllers\Admin\ExperienceController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\EducationController;
+use App\Http\Controllers\ImageController;
 
 Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
 // Jobs
 Route::resource('jobs', JobController::class)->only(['index', 'store', 'update', 'destroy'])->names('admin.jobs');
+
+// Images
+Route::post('ckeditor/images/store', [JobController::class, 'ckeditorStore'])->name('admin.ckeditor.images.store');
 
 // Social medias for user
 Route::resource('user-social-medias', UserSocialMediaController::class)->only(['index', 'store', 'update', 'destroy'])->names('admin.usersocialmedias');
