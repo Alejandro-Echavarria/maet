@@ -92,7 +92,9 @@ class JobController extends Controller
             'upload' => "required|image"
         ]);
 
-        $url = ImageController::ckeditorStore($request->file('upload'), $request['id'], $this->directoryCkeditor);
+        $data = Job::find($request['id'])->first();
+
+        $url = ImageController::ckeditorStore($request->file('upload'), $data, $this->directoryCkeditor);
 
         return $url;
     }

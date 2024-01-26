@@ -31,7 +31,7 @@ const close = () => {
         @close="close"
     >
         <div>
-            <div class="text-lg py-4 px-6 font-medium text-gray-700 border-b">
+            <div class="text-lg py-4 px-4 font-medium text-gray-700 border-b">
                 <div class="flex justify-between">
                     <slot name="title" />
                 <button @click="close" class="text-gray-700 bg-gray-200/60 rounded-full w-8 h-8 shrink-0">
@@ -40,12 +40,12 @@ const close = () => {
             </div>
             </div>
 
-            <div class="max-h-[60vh] py-4 px-6 text-sm text-gray-600 overflow-y-auto">
+            <div class="max-h-[60vh] py-4 px-4 text-sm text-gray-600 overflow-y-auto">
                 <slot name="content" />
             </div>
         </div>
 
-        <div class="flex flex-row justify-end px-6 py-4 bg-gray-100 text-right">
+        <div class="flex flex-row justify-end py-4 px-4 bg-gray-100 text-right">
             <slot name="footer" />
         </div>
     </Modal>

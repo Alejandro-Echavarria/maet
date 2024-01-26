@@ -104,4 +104,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserSocialMedia::class);
     }
+
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'imageable');
+    }
+
 }

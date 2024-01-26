@@ -11,6 +11,9 @@ const props = defineProps({
     },
     idData: {
         type: Number,
+    },
+    urlName: {
+        type: String,
     }
 });
 
@@ -27,7 +30,7 @@ const editorConfig = ref({
         ]
     },
     ckfinder: {
-        uploadUrl: route('admin.ckeditor.images.store', {
+        uploadUrl: route(props.urlName, {
             id: props.idData ? props.idData : null,
             _token: usePage().props.csrf_token,
             'accept': 'application/json'

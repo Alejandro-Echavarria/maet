@@ -27,6 +27,7 @@ const job = ref(null);
 const categoriesOptions = ref(props.data.categories);
 const clientOptions = ref(props.data.clients);
 const technologyOptions = ref(props.data.technologies);
+const urlCkeditorStoreImage = 'admin.ckeditor.images.job.store';
 
 const form = useForm({
     category_id: "",
@@ -189,14 +190,14 @@ defineExpose({ openModal });
 
                             <div class="sm:col-span-4">
                                 <InputLabel for="preview" value="Preview" class="mb-3" />
-                                <Ckeditor v-model="form.preview" :idData="job" :value="form.preview" id="preview" ref="previewInput" key="preview" />
+                                <Ckeditor v-model="form.preview" :idData="job" :urlName="urlCkeditorStoreImage" :value="form.preview" id="preview" ref="previewInput" key="preview" />
 
                                 <InputError :message="form.errors.preview" class="mt-2" />
                             </div>
 
                             <div class="sm:col-span-4">
                                 <InputLabel for="body" value="Body" class="mb-3" />
-                                <Ckeditor v-model="form.body" :idData="job" :value="form.body" id="body" ref="bodyInput" key="body" />
+                                <Ckeditor v-model="form.body" :idData="job" :urlName="urlCkeditorStoreImage" :value="form.body" id="body" ref="bodyInput" key="body" />
 
                                 <InputError :message="form.errors.body" class="mt-2" />
                             </div>
