@@ -15,7 +15,7 @@ class AboutMeController extends Controller
 
     public function __construct()
     {
-        $this->directoryCkeditor = 'images/aboutme';
+        $this->directoryCkeditor = 'images/ckeditor/aboutme';
     }
 
     public function index()
