@@ -11,6 +11,14 @@ const props = defineProps({
     },
     idData: {
         type: Number,
+    },
+    additionalPath: {
+        type: String,
+        default: ''
+    },
+    urlName: {
+        type: String,
+        default: null
     }
 });
 
@@ -18,7 +26,7 @@ const emit = defineEmits(['update:modelValue']);
 const value = ref(props.modelValue ? props.modelValue : '');
 
 const editorConfig = ref({
-    toolbar: ['undo', 'redo', '|', 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'codeBlock', '|', 'uploadImage', 'insertTable', '|', 'indent', 'outdent', 'alignment'],
+    toolbar: ['undo', 'redo', '|', 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'codeBlock', '|', props.urlName !== null ? 'uploadImage' : '', 'insertTable', '|', 'indent', 'outdent', 'alignment'],
     heading: {
         options: [
             { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
@@ -27,11 +35,12 @@ const editorConfig = ref({
         ]
     },
     ckfinder: {
-        uploadUrl: route('admin.ckeditor.images.store', {
+        uploadUrl: props.urlName !== null ? route(props.urlName, {
             id: props.idData ? props.idData : null,
             _token: usePage().props.csrf_token,
+            addPath: props.additionalPath,
             'accept': 'application/json'
-        }),
+        }) : '',
     },
     language: 'es',
 });

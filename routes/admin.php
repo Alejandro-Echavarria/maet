@@ -15,9 +15,7 @@ Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dash
 
 // Jobs
 Route::resource('jobs', JobController::class)->only(['index', 'store', 'update', 'destroy'])->names('admin.jobs');
-
-// Images
-Route::post('ckeditor/images/store', [JobController::class, 'ckeditorStore'])->name('admin.ckeditor.images.store');
+Route::post('ckeditor/images/job/store', [JobController::class, 'ckeditorStore'])->name('admin.ckeditor.images.job.store');
 
 // Social medias for user
 Route::resource('user-social-medias', UserSocialMediaController::class)->only(['index', 'store', 'update', 'destroy'])->names('admin.usersocialmedias');
@@ -28,6 +26,7 @@ Route::resource('services', ServiceController::class)->only(['index', 'store', '
 // About Me
 Route::get('about-me', [AboutMeController::class, 'index'])->name('admin.aboutme.index');
 Route::put('about-me/{user}', [AboutMeController::class, 'update'])->name('admin.aboutme.update');
+Route::post('ckeditor/images/about-me//store', [AboutMeController::class, 'ckeditorStore'])->name('admin.ckeditor.images.aboutme.store');
 
 // Social medias
 Route::resource('social-medias', SocialMediaController::class)->only(['index', 'store', 'update', 'destroy'])->names('admin.socialmedias');

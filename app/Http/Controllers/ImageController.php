@@ -59,8 +59,6 @@ class ImageController extends Controller
             })
             ->save($path);
 
-        $data = Job::find($data)->first();
-
         $data->images()->create([
             'url'     => $pathRelative
         ]);

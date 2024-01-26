@@ -68,7 +68,10 @@ const contactInfo = computed(() => {
 </script>
 
 <template>
-    <Head title="Welcome" />
+    <Head>
+        <title>Home</title>
+        <meta name="description" content="maet.dev - Explora mi portafolio de desarrollo web. Convierte tus ideas en realida e impulsa tu presencia en línea con diseños responsivos y optimizados.">
+    </Head>
 
     <MainBanner :user=user />
 

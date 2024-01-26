@@ -20,6 +20,8 @@ const props = defineProps({
     auth: Object
 });
 
+const urlCkeditorStoreImage = 'admin.ckeditor.images.aboutme.store';
+
 onMounted(() => {
     const datedatepickerId2pickerEl = document.querySelector('#datepickerId');
 
@@ -128,7 +130,7 @@ const ok = (msj, type, timer) => {
 
                     <div class="grid-cols-1 sm:col-span-2">
                         <InputLabel for="bio" value="Bio" class="mb-3" />
-                        <Ckeditor v-model="form.bio" :value="form.bio" id="bio" ref="bioInput" />
+                        <Ckeditor v-model="form.bio" :idData="$page.props.auth.user.id" :urlName="urlCkeditorStoreImage" :value="form.bio" id="bio" ref="bioInput" />
 
                         <InputError :message="form.errors.bio" class="mt-2" />
                     </div>

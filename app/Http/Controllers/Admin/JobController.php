@@ -19,7 +19,7 @@ class JobController extends Controller
     public function __construct()
     {
         $this->directory = 'images/jobs';
-        $this->directoryCkeditor = 'images/ckeditor';
+        $this->directoryCkeditor = 'images/ckeditor/jobs';
     }
 
     public function index(Request $request)
@@ -92,7 +92,9 @@ class JobController extends Controller
             'upload' => "required|image"
         ]);
 
-        $url = ImageController::ckeditorStore($request->file('upload'), $request['id'], $this->directoryCkeditor);
+        $data = Job::find($request['id'])->first();
+
+        $url = ImageController::ckeditorStore($request->file('upload'), $data, $this->directoryCkeditor . $request['addPath']);
 
         return $url;
     }

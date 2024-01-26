@@ -40,12 +40,12 @@ const close = () => {
             </div>
             </div>
 
-            <div class="max-h-[60vh] py-4 px-6 text-sm text-gray-600 overflow-y-auto">
+            <div class="max-h-[65vh] py-4 px-6 text-sm text-gray-600 overflow-y-auto">
                 <slot name="content" />
             </div>
         </div>
 
-        <div class="flex flex-row justify-end px-6 py-4 bg-gray-100 text-right">
+        <div class="flex flex-row justify-end px-4 py-4 bg-gray-100 text-right">
             <slot name="footer" />
         </div>
     </Modal>

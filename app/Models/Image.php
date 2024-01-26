@@ -18,4 +18,9 @@ class Image extends Model
     {
         return $this->morphTo(Job::class);
     }
+
+    public function user()
+    {
+        return $this->morphTo(User::class);
+    }
 }
