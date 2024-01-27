@@ -17,11 +17,13 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained();
             $table->foreignId('client_id')->constrained()->nullable();
             $table->string('title');
+            $table->string('slug')->unique();
             $table->string('logo_url')->nullable();
             $table->string('color');
             $table->string('project_name');
             $table->text('preview');
             $table->text('body');
+            $table->string('alt_banner_image')->nullable();
             $table->timestamps();
         });
     }

@@ -48,8 +48,8 @@ const truncateData = (data, index) => {
 
 const callOpenModal = ref(null);
 
-const openModal = (op, id, titleData, start_date, end_date, description, color, file, project_name, technologies, preview, body) => {
-    callOpenModal.value.openModal(op, id, titleData, start_date, end_date, description, color, file, project_name, technologies, preview, body);
+const openModal = (op, id, titleData, slug, start_date, end_date, description, color, file, project_name, technologies, preview, body, alt_banner_image) => {
+    callOpenModal.value.openModal(op, id, titleData, slug, start_date, end_date, description, color, file, project_name, technologies, preview, body, alt_banner_image);
 };
 </script>
 
@@ -85,12 +85,14 @@ const openModal = (op, id, titleData, start_date, end_date, description, color, 
                         {{ job.title }}
                     </template>
                     <template #preview>
-                        <span v-html="truncateData(job.preview, index)" />
+                        <div id="content-ckeditor">
+                            <span v-html="truncateData(job.preview, index)" />
+                        </div>
                     </template>
                     <template #actions>
                         <div class="flex my-3 justify-end">
                             <PrimaryButton class="sm:w-auto w-full"
-                                @click="openModal(2, job.id, job.category_id, job.client_id, job.title, job.logo_url, job.color, job?.images[0]?.url, job.project_name, job.technologies, job.preview, job.body)">
+                                @click="openModal(2, job.id, job.category_id, job.client_id, job.title, job.slug, job.logo_url, job.color, job?.images[0]?.url, job.project_name, job.technologies, job.preview, job.body, job.alt_banner_image)">
                                 <font-awesome-icon class="mr-2" :icon="['far', 'pen-to-square']" />
                                 edit job
                             </PrimaryButton>

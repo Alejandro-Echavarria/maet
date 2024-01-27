@@ -16,12 +16,14 @@ class Job extends Model
         'category_id',
         'client_id',
         'title',
+        'slug',
         'logo_url',
         'color',
         'project_name',
         'preview',
         'body',
         'technologies',
+        'alt_banner_image',
     ];
 
     // Relación uno a muchos
