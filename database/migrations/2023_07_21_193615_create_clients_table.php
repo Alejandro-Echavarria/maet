@@ -15,7 +15,8 @@ return new class extends Migration
 
             $table->id();
             $table->string('name');
-            $table->string('logo_url');
+            $table->string('email')->unique();
+            $table->string('logo_url')->nullable();
             $table->timestamps();
         });
     }

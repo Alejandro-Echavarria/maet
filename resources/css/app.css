@@ -10,4 +10,49 @@
     body {
         @apply text-base font-normal text-gray-600;
     }
+
+    div#content-ckeditor ul {
+        @apply ml-3 list-disc list-inside;
+    }
+
+    div#content-ckeditor ol {
+        @apply ml-3 list-decimal list-inside;
+    }
+
+    div#content-ckeditor h3,h4,h5 {
+        @apply font-bold text-2xl text-gray-700 dark:text-gray-300 py-4;
+    }
+
+    /* CkEditor */
+    div#preview figure {
+        @apply w-full;
+    }
+
+    div#preview ul, div#body ul {
+        @apply ml-3;
+    }
+
+    div#preview ul, div#body ul {
+        @apply ml-3;
+    }
+
+    div#preview h3,h4,h5, div#body h3,h4,h5 {
+        @apply font-bold text-2xl text-gray-700 dark:text-gray-300 py-4;
+    }
+
+    div#preview table, div#preview table {
+        @apply w-full table-auto text-sm text-left text-gray-500 dark:text-gray-400 rounded-xl border-none;
+    }
+
+    div#preview thead, div#preview thead {
+        @apply text-xs bg-gray-50 dark:bg-gray-700 text-gray-700 uppercase dark:text-gray-400  border-none;
+    }
+
+    div#preview th, div#preview th {
+        @apply text-left border-none px-4 py-3;
+    }
+
+    div#preview td, div#preview td {
+        @apply border-none px-4 py-3;
+    }
 }

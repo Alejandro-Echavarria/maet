@@ -33,6 +33,7 @@ const form = useForm({
     category_id: "",
     client_id: "",
     title: "",
+    slug: "",
     logo_url: "",
     color: "gray-100",
     file: null,
@@ -40,6 +41,7 @@ const form = useForm({
     technologies: [],
     preview: "",
     body: "",
+    alt_banner_image: "",
 });
 
 const save = () => {
@@ -77,7 +79,7 @@ const save = () => {
     }
 };
 
-const openModal = (op, id, category_id, client_id, titleData, logo_url, color, file, project_name, technologies, preview, body) => {
+const openModal = (op, id, category_id, client_id, titleData, slug, logo_url, color, file, project_name, technologies, preview, body, alt_banner_image) => {
     modal.value = true;
     opration.value = op;
 
@@ -89,6 +91,7 @@ const openModal = (op, id, category_id, client_id, titleData, logo_url, color, f
         form.category_id = category_id;
         form.client_id = client_id;
         form.title = titleData;
+        form.slug = slug;
         form.logo_url = logo_url;
         form.color = color;
         form.file = file;
@@ -96,6 +99,7 @@ const openModal = (op, id, category_id, client_id, titleData, logo_url, color, f
         form.technologies = technologies.map(tech => tech.id);
         form.preview = preview;
         form.body = body;
+        form.alt_banner_image = alt_banner_image;
     }
 };
 
@@ -132,7 +136,14 @@ defineExpose({ openModal });
                     <template #form>
                         <div class="grid grid-cols-1 sm:grid-cols-4 gap-6">
                             <div class="sm:col-span-3">
-                                <InputLabel for="title" value="Title" />
+                                <div class="flex">
+                                    <InputLabel for="title" value="Title" />
+                                    <div v-if="form.slug">
+                                        <span class="text-gray-500 text-xs">
+                                            &nbsp; (<span class="font-bold">slug:</span> {{ form.slug }})
+                                        </span>
+                                    </div>
+                                </div>
                                 <TextInput id="title" ref="titleInput" v-model="form.title" type="text" />
 
                                 <InputError :message="form.errors.title" class="mt-2" />
@@ -152,6 +163,13 @@ defineExpose({ openModal });
                                 <InputError :message="form.errors.file" class="mt-2" />
                             </div>
 
+                            <div class="sm:col-span-4">
+                                <InputLabel for="alt_banner_image" value="Alt banner image" />
+                                <TextInput id="alt_banner_image" ref="altBannerImageInput" v-model="form.alt_banner_image" type="text" />
+
+                                <InputError :message="form.errors.alt_banner_image" class="mt-2" />
+                            </div>
+
                             <div class="sm:col-span-2">
                                 <InputLabel for="category_id" value="Category" />
                                 <VueSelect id="category_id" label="name" v-model="form.category_id" :append="true"
@@ -162,12 +180,14 @@ defineExpose({ openModal });
                             </div>
 
                             <div class="sm:col-span-2">
-                                <InputLabel for="client_id" value="Client" />
-                                <VueSelect id="client_id" label="name" v-model="form.client_id" :append="true"
-                                    :options="clientOptions" :reduce="clientOptions => clientOptions.id"
-                                    :select-on-tab="true" />
+                                <InputLabel for="technologies" value="Technologies" />
+                                <VueSelect id="technology_id" label="name" :append="true" :multiple="true"
+                                    :close-on-select="false" :options="technologyOptions" v-model="form.technologies"
+                                    :reduce="technologyOptions => technologyOptions.id" :value="form.technologies.id"
+                                    :select-on-tab="true">
+                                </VueSelect>
 
-                                <InputError :message="form.errors.client_id" class="mt-2" />
+                                <InputError :message="form.errors.technologies" class="mt-2" />
                             </div>
 
                             <div class="sm:col-span-2">
@@ -179,25 +199,28 @@ defineExpose({ openModal });
                             </div>
 
                             <div class="sm:col-span-2">
-                                <InputLabel for="technologies" value="Technologies" />
-                                <VueSelect id="technology_id" label="name" :append="true" :multiple="true"
-                                    :close-on-select="false" :options="technologyOptions" v-model="form.technologies"
-                                    :reduce="technologyOptions => technologyOptions.id" :value="form.technologies.id" :select-on-tab="true">
-                                </VueSelect>
+                                <InputLabel for="client_id" value="Client" />
+                                <VueSelect id="client_id" label="name" v-model="form.client_id" :append="true"
+                                    :options="clientOptions" :reduce="clientOptions => clientOptions.id"
+                                    :select-on-tab="true" />
 
-                                <InputError :message="form.errors.technologies" class="mt-2" />
+                                <InputError :message="form.errors.client_id" class="mt-2" />
                             </div>
 
                             <div class="sm:col-span-4">
                                 <InputLabel for="preview" value="Preview" class="mb-3" />
-                                <Ckeditor v-model="form.preview" :idData="job" :additionalPath="'/preview'" :urlName="urlCkeditorStoreImage" :value="form.preview" id="preview" ref="previewInput" key="preview" />
+                                <Ckeditor v-model="form.preview" :idData="job" :additionalPath="'/preview'"
+                                    :urlName="urlCkeditorStoreImage" :value="form.preview" id="preview" ref="previewInput"
+                                    key="preview" />
 
                                 <InputError :message="form.errors.preview" class="mt-2" />
                             </div>
 
                             <div class="sm:col-span-4">
                                 <InputLabel for="body" value="Body" class="mb-3" />
-                                <Ckeditor v-model="form.body" :idData="job" :additionalPath="'/body'" :urlName="urlCkeditorStoreImage" :value="form.body" id="body" ref="bodyInput" key="body" />
+                                <Ckeditor v-model="form.body" :idData="job" :additionalPath="'/body'"
+                                    :urlName="urlCkeditorStoreImage" :value="form.body" id="body" ref="bodyInput"
+                                    key="body" />
 
                                 <InputError :message="form.errors.body" class="mt-2" />
                             </div>
@@ -216,6 +239,5 @@ defineExpose({ openModal });
                     Save
                 </PrimaryButton>
             </template>
-        </DialogModal>
-    </div>
-</template>
+    </DialogModal>
+</div></template>

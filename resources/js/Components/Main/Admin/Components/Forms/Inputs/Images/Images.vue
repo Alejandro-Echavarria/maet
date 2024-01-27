@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 
 const props = defineProps({
-    modelValue: Object,
+    modelValue: String,
     file: String
 });
 

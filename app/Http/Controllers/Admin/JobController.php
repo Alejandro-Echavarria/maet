@@ -10,6 +10,7 @@ use App\Models\Category;
 use App\Models\Client;
 use App\Models\Job;
 use App\Models\Technology;
+use Illuminate\Support\Str;
 
 class JobController extends Controller
 {
@@ -44,23 +45,26 @@ class JobController extends Controller
 
     public function store(Request $request)
     {
+        $request['slug'] = Str::slug($request->title);
         $data = $request->validate(
             [
-                'category_id'  => "required|exists:categories,id",
-                'client_id'    => "required|exists:clients,id",
-                'title'        => "required|max:255|unique:jobs,title",
-                'color'        => "required|max:255|string",
-                'file'         => "required|image",
-                'project_name' => "required|max:255|string",
-                'preview'      => "required|string",
-                'body'         => "required|string"
+                'category_id'      => "required|exists:categories,id",
+                'client_id'        => "required|exists:clients,id",
+                'title'            => "required|max:255|unique:jobs,title",
+                'slug'             => "required|unique:jobs",
+                'color'            => "required|max:255|string",
+                'file'             => "required|image",
+                'project_name'     => "required|max:255|string",
+                'preview'          => "required|string",
+                'body'             => "required|string",
+                'alt_banner_image' => "string|max:255|nullable",
             ],
             [
                 // Custom error messages
             ],
             [
                 // Custom attribute names
-                'file'         => 'image',
+                'file' => 'image',
             ]
         );
 
@@ -101,23 +105,26 @@ class JobController extends Controller
 
     public function update(Request $request, Job $job)
     {
+        $request['slug'] = Str::slug($request->title);
         $data = $request->validate(
             [
-                'category_id'  => "required|exists:categories,id",
-                'client_id'    => "required|exists:clients,id",
-                'title'        => "required|max:255|unique:jobs,title,$job->id",
-                'color'        => "required|max:255|string",
-                'file'         => $request->file('file') ? "required|image" : "required|string",
-                'project_name' => "required|max:255|string",
-                'preview'      => "required|string",
-                'body'         => "required|string",
+                'category_id'      => "required|exists:categories,id",
+                'client_id'        => "required|exists:clients,id",
+                'title'            => "required|max:255|unique:jobs,title,$job->id",
+                'slug'             => "required|unique:jobs,slug,$job->id",
+                'color'            => "required|max:255|string",
+                'file'             => $request->file('file') ? "required|image" : "required|string",
+                'project_name'     => "required|max:255|string",
+                'preview'          => "required|string",
+                'body'             => "required|string",
+                'alt_banner_image' => "string|max:255|nullable",
             ],
             [
                 // Custom error messages
             ],
             [
                 // Custom attribute names
-                'file'         => 'image',
+                'file' => 'image',
             ]
         );
 
