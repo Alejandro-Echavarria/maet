@@ -13,6 +13,7 @@ import Ckeditor from "@/Components/Main/Admin/Components/Forms/Inputs/ckeditor/C
 import ColorPicker from "@/Components/Main/Admin/Components/Forms/Inputs/SelectsPicker/ColorsPicker/ColorPicker.vue";
 import VueSelect from "@/Components/Main/Admin/Components/Selects/VueSelect.vue";
 import Images from "@/Components/Main/Admin/Components/Forms/Inputs/Images/Images.vue";
+import ToggleSwitch from "@/Components/Main/Admin/Components/Forms/Inputs/ToggleSwitch/ToggleSwitch.vue";
 
 const props = defineProps({
     data: Object,
@@ -42,6 +43,7 @@ const form = useForm({
     preview: "",
     body: "",
     alt_banner_image: "",
+    status: false,
 });
 
 const save = () => {
@@ -79,7 +81,7 @@ const save = () => {
     }
 };
 
-const openModal = (op, id, category_id, client_id, titleData, slug, logo_url, color, file, project_name, technologies, preview, body, alt_banner_image) => {
+const openModal = (op, id, category_id, client_id, titleData, slug, logo_url, color, file, project_name, technologies, preview, body, alt_banner_image, status) => {
     modal.value = true;
     opration.value = op;
 
@@ -100,6 +102,7 @@ const openModal = (op, id, category_id, client_id, titleData, slug, logo_url, co
         form.preview = preview;
         form.body = body;
         form.alt_banner_image = alt_banner_image;
+        form.status = status;
     }
 };
 
@@ -163,11 +166,19 @@ defineExpose({ openModal });
                                 <InputError :message="form.errors.file" class="mt-2" />
                             </div>
 
-                            <div class="sm:col-span-4">
+                            <div class="sm:col-span-3">
                                 <InputLabel for="alt_banner_image" value="Alt banner image" />
-                                <TextInput id="alt_banner_image" ref="altBannerImageInput" v-model="form.alt_banner_image" type="text" />
+                                <TextInput id="alt_banner_image" ref="altBannerImageInput" v-model="form.alt_banner_image"
+                                    type="text" />
 
                                 <InputError :message="form.errors.alt_banner_image" class="mt-2" />
+                            </div>
+
+                            <div class="sm:col-span-1">
+                                <InputLabel for="status" value="Publish" />
+                                <ToggleSwitch id="status" ref="statusInput" v-model="form.status" class="mt-2" />
+
+                                <InputError :message="form.errors.status" class="mt-2" />
                             </div>
 
                             <div class="sm:col-span-2">
@@ -239,5 +250,6 @@ defineExpose({ openModal });
                     Save
                 </PrimaryButton>
             </template>
-    </DialogModal>
-</div></template>
+        </DialogModal>
+    </div>
+</template>
