@@ -18,23 +18,24 @@ const props = defineProps({
     <div>
         <Head :title="job.title" />
 
-        <div :class="`absolute top-0 left-0 z-[-2] h-[40vh] w-full bg-gradient-to-b from-${job.color} to-transparent rounded-b-[1.5rem]`"></div>
+        <!-- <div
+            :class="`absolute top-0 left-0 z-[-2] h-[40vh] w-full bg-gradient-to-b from-${job.color} to-transparent rounded-b-[1.5rem]`">
+        </div> -->
 
-        <div class="my-12">
-            <img class="h-96 w-full overflow-auto object-cover rounded-xl" :src="`/storage/${job?.images[0]?.url}`" alt="" />
-
-            <h1 class="text-3xl font-bold text-gray-700 dark:text-gray-300 py-8">
+        <div class="space-y-6">
+            <h1 :class="`text-3xl font-bold bg-gradient-to-r from-${job.color} via-indigo-700 to-blue-700 bg-clip-text text-transparent`">
                 {{ job.title }}
             </h1>
 
-            <div id="content-ckeditor">
-                <div class="mb-4">
-                    <p v-html="job.preview" />
-                </div>
-    
-                <div class="mb-4">
-                    <p v-html="job.body" />
-                </div>
+            <div class="content-ckeditor mb-4">
+                <p v-html="job.preview" />
+            </div>
+
+            <img class="h-96 w-full overflow-auto object-cover rounded-xl" :src="`/storage/${job?.images[0]?.url}`"
+                :alt="job.alt_banner_image" />
+
+            <div class="content-ckeditor mb-4">
+                <p v-html="job.body" />
             </div>
         </div>
     </div>

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,59 +9,55 @@
 }
 
 @layer base {
-    body {
-        @apply text-base font-normal text-gray-700;
-    }
-
-    div#content-ckeditor ul {
+    div.content-ckeditor ul {
         @apply ml-3 list-disc list-inside;
     }
 
-    div#content-ckeditor ol {
+    div.content-ckeditor ol {
         @apply ml-3 list-decimal list-inside;
     }
 
-    div#content-ckeditor h3,h4,h5 {
+    div.content-ckeditor h3,h4,h5 {
         @apply font-bold text-2xl text-gray-700 dark:text-gray-300 py-4;
     }
 
-    div#content-ckeditor figure {
+    div.content-ckeditor figure {
         @apply flex justify-center;
     }
 
-    div#content-ckeditor figure img {
+    div.content-ckeditor figure img {
         @apply rounded-xl;
     }
 
-    div#content-ckeditor ul {
+    div.content-ckeditor ul {
         @apply ml-3;
     }
 
-    div#content-ckeditor ul {
+    div.content-ckeditor ul {
         @apply ml-3;
     }
 
-    div#content-ckeditor h3,h4,h5 {
+    div.content-ckeditor h3,h4,h5 {
         @apply font-bold text-2xl text-gray-700 dark:text-gray-300 py-4;
     }
 
-    div#content-ckeditor figure:has(table) {
+    div.content-ckeditor figure:has(table) {
         @apply w-full table-auto text-sm text-left text-gray-500 dark:text-gray-400 border rounded-xl overflow-hidden;
     }
 
-    div#content-ckeditor table {
+    div.content-ckeditor table {
         @apply w-full table-auto text-sm text-left text-gray-500 dark:text-gray-400 border-none;
     }
 
-    div#content-ckeditor thead {
+    div.content-ckeditor thead {
         @apply text-xs text-gray-700 uppercase dark:text-gray-400  border-none;
     }
 
-    div#content-ckeditor th {
+    div.content-ckeditor th {
         @apply text-left bg-gray-50 border-none px-4 py-3;
     }
 
-    div#content-ckeditor td {
+    div.content-ckeditor td {
         @apply border-none px-4 py-3;
     }
 
