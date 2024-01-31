@@ -9,7 +9,7 @@ const { user } = defineProps({
 </script>
 
 <template>
-    <div class="w-full h-[80vh] relative overflow-hidden">
+    <div class="w-full h-[60vh] relative overflow-hidden">
         <div class="backdrop-blur-2xl bg-gradient-to-b from-white/80 to-blue-50/10 h-full">
             <Container class="w-full h-full flex items-center">
                 <div class="space-y-2">
@@ -19,7 +19,7 @@ const { user } = defineProps({
                     <h1 class="text-4xl font-bold uppercase bg-gradient-to-r from-zinc-700 via-indigo-700 to-blue-700 bg-clip-text text-transparent">
                         {{ user.name }}
                     </h1>
-                    <h3 class="text-2xl font-bold text-gray-700 dark:text-white">{{ user.position }}</h3>
+                    <h2 class="text-2xl font-bold text-gray-700 dark:text-white">{{ user.position }}</h2>
                     <h3 class="text-2xl font-extrabold bg-gradient-to-r from-zinc-700 via-indigo-700 to-gray-700 bg-clip-text text-transparent">{ Portfolio Under Construction: Work in Progress. Check back soon for updates! }</h3>
                 </div>
             </Container>

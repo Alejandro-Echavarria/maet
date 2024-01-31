@@ -1,6 +1,10 @@
+<script setup>
+import Navbar from '@/components/Main/Public/Layout/Navbar/Navbar.vue';
+</script>
+
 <template>
     <div>
-
+        <Navbar />
         <main class="xs:px-0 mx-4">
             <div class="max-w-5xl mx-auto">
                 <slot />
