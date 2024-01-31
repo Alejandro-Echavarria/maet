@@ -24,6 +24,11 @@ class Job extends Model
         'body',
         'technologies',
         'alt_banner_image',
+        'status',
+    ];
+
+    protected $casts = [
+        'status' => 'boolean'
     ];
 
     // Relación uno a muchos

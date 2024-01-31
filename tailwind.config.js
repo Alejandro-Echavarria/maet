@@ -19,14 +19,14 @@ export default {
     safelist: [
         {
             pattern:
-                /bg-(gray|slate|red|orange|yellow|teal|purple|pink|indigo|green|blue)-(100|200|300|400|500|600|700|800|900)/,
+                /(bg|from|via|to)-(gray|slate|red|orange|yellow|teal|purple|pink|indigo|green|blue)-(100|200|300|400|500|600|700|800|900)/,
         },
     ],
 
     theme: {
         extend: {
             fontFamily: {
-                sans: ["Figtree", ...defaultTheme.fontFamily.sans],
+                sans: ["Inter var", ...defaultTheme.fontFamily.sans],
             },
         },
     },

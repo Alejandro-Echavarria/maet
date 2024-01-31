@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\ImageController;
+use App\Http\Controllers\Admin\ImageController;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Category;
@@ -58,6 +58,7 @@ class JobController extends Controller
                 'preview'          => "required|string",
                 'body'             => "required|string",
                 'alt_banner_image' => "string|max:255|nullable",
+                'status'           => "required|boolean",
             ],
             [
                 // Custom error messages
@@ -118,6 +119,7 @@ class JobController extends Controller
                 'preview'          => "required|string",
                 'body'             => "required|string",
                 'alt_banner_image' => "string|max:255|nullable",
+                'status'           => "required|boolean",
             ],
             [
                 // Custom error messages

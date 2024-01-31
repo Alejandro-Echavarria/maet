@@ -8,7 +8,7 @@
 
 @layer base {
     body {
-        @apply text-base font-normal text-gray-600;
+        @apply text-base font-normal text-gray-700;
     }
 
     div#content-ckeditor ul {
@@ -23,9 +23,49 @@
         @apply font-bold text-2xl text-gray-700 dark:text-gray-300 py-4;
     }
 
+    div#content-ckeditor figure {
+        @apply flex justify-center;
+    }
+
+    div#content-ckeditor figure img {
+        @apply rounded-xl;
+    }
+
+    div#content-ckeditor ul {
+        @apply ml-3;
+    }
+
+    div#content-ckeditor ul {
+        @apply ml-3;
+    }
+
+    div#content-ckeditor h3,h4,h5 {
+        @apply font-bold text-2xl text-gray-700 dark:text-gray-300 py-4;
+    }
+
+    div#content-ckeditor figure:has(table) {
+        @apply w-full table-auto text-sm text-left text-gray-500 dark:text-gray-400 border rounded-xl overflow-hidden;
+    }
+
+    div#content-ckeditor table {
+        @apply w-full table-auto text-sm text-left text-gray-500 dark:text-gray-400 border-none;
+    }
+
+    div#content-ckeditor thead {
+        @apply text-xs text-gray-700 uppercase dark:text-gray-400  border-none;
+    }
+
+    div#content-ckeditor th {
+        @apply text-left bg-gray-50 border-none px-4 py-3;
+    }
+
+    div#content-ckeditor td {
+        @apply border-none px-4 py-3;
+    }
+
     /* CkEditor */
-    div#preview figure {
-        @apply w-full;
+    div#preview figure img, div#body figure img {
+        @apply rounded-lg;
     }
 
     div#preview ul, div#body ul {
@@ -40,19 +80,23 @@
         @apply font-bold text-2xl text-gray-700 dark:text-gray-300 py-4;
     }
 
-    div#preview table, div#preview table {
-        @apply w-full table-auto text-sm text-left text-gray-500 dark:text-gray-400 rounded-xl border-none;
+    div#preview figure:has(table), div#body figure:has(table) {
+        @apply w-full table-auto text-sm text-left text-gray-500 dark:text-gray-400 border rounded-lg overflow-hidden;
     }
 
-    div#preview thead, div#preview thead {
-        @apply text-xs bg-gray-50 dark:bg-gray-700 text-gray-700 uppercase dark:text-gray-400  border-none;
+    div#preview table, div#body table {
+        @apply w-full table-auto text-sm text-left text-gray-500 dark:text-gray-400 border-none;
     }
 
-    div#preview th, div#preview th {
-        @apply text-left border-none px-4 py-3;
+    div#preview thead, div#body thead {
+        @apply text-xs text-gray-700 uppercase dark:text-gray-400  border-none;
     }
 
-    div#preview td, div#preview td {
+    div#preview th, div#body th {
+        @apply text-left bg-gray-50 border-none px-4 py-3;
+    }
+
+    div#preview td, div#body td {
         @apply border-none px-4 py-3;
     }
 }
