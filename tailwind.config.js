@@ -28,6 +28,30 @@ export default {
             fontFamily: {
                 sans: ["Inter", ...defaultTheme.fontFamily.sans],
             },
+            keyframes: {
+                'fade-in-down': {
+                    "from": {
+                        transform: "translateY(-0.75rem)",
+                        opacity: '0'
+                    },
+                    "to": {
+                        transform: "translateY(0rem)",
+                        opacity: '1'
+                    }
+                },
+                'fade-in': {
+                    "from": {
+                        opacity: '0'
+                    },
+                    "to": {
+                        opacity: '1'
+                    }
+                }
+            },
+            animation: {
+                'fade-in-down': "fade-in-down 0.2s ease-in-out both",
+                'fade-in': "fade-in 0.2s ease-in-out both",
+            }
         },
     },
 

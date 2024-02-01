@@ -9,18 +9,18 @@ const { user } = defineProps({
 </script>
 
 <template>
-    <div class="w-full h-[60vh] relative overflow-hidden">
+    <div class="w-full h-[60vh] relative overflow-hidden mt-8 sm:mt-0">
         <div class="backdrop-blur-2xl bg-gradient-to-b from-white/80 to-blue-50/10 h-full">
             <Container class="w-full h-full flex items-center">
                 <div class="space-y-2">
-                    <span class="text-xl font-bold bg-gradient-to-r from-zinc-700 via-indigo-700 to-blue-700 bg-clip-text text-transparent">
+                    <span class="text-base sm:text-xl font-bold bg-gradient-to-r from-zinc-700 via-indigo-700 to-blue-700 bg-clip-text text-transparent animate-fade-in" style="animation-delay: 0.1s;">
                         Hey, my name is
                     </span>
-                    <h1 class="text-4xl font-bold uppercase bg-gradient-to-r from-zinc-700 via-indigo-700 to-blue-700 bg-clip-text text-transparent">
+                    <h1 class="text-2xl sm:text-4xl font-bold uppercase bg-gradient-to-r from-zinc-700 via-indigo-700 to-blue-700 bg-clip-text text-transparent animate-fade-in" style="animation-delay: 0.2s;">
                         {{ user.name }}
                     </h1>
-                    <h2 class="text-2xl font-bold text-gray-700 dark:text-white">{{ user.position }}</h2>
-                    <h3 class="text-2xl font-extrabold bg-gradient-to-r from-zinc-700 via-indigo-700 to-gray-700 bg-clip-text text-transparent">{ Portfolio Under Construction: Work in Progress. Check back soon for updates! }</h3>
+                    <h2 class="text-base sm:text-xl font-bold text-gray-700 dark:text-white animate-fade-in" style="animation-delay: 0.3s;">{{ user.position }}</h2>
+                    <h3 class="text-base sm:text-xl font-extrabold bg-gradient-to-r from-zinc-700 via-indigo-700 to-gray-700 bg-clip-text text-transparent animate-fade-in" style="animation-delay: 0.4s;">{ Portfolio Under Construction: Work in Progress. Check back soon for updates! }</h3>
                 </div>
             </Container>
         </div>
@@ -40,5 +40,3 @@ const { user } = defineProps({
         </div>
     </div>
 </template>
-
-<style scoped></style>
