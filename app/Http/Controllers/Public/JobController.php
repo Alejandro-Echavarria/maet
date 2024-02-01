@@ -16,6 +16,7 @@ class JobController extends Controller
                 ->where('default', '=', '1')
                 ->orderBy('id', 'desc');
         }])
+            ->where('id', $job->id)
             ->first();
 
         return Inertia::render('Public/Jobs/Show', compact('job'));

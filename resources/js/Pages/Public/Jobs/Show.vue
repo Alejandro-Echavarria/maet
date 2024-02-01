@@ -1,5 +1,4 @@
 <script setup>
-import { ref } from 'vue';
 import { Head } from '@inertiajs/vue3';
 import PublicLayout from '@/Components/Main/Public/Layout/PublicLayout.vue';
 
@@ -23,18 +22,21 @@ const props = defineProps({
         </div> -->
 
         <div class="space-y-6">
-            <h1 :class="`text-3xl font-bold bg-gradient-to-r from-${job.color} via-indigo-700 to-blue-700 bg-clip-text text-transparent`">
+            <h1
+                :class="`text-3xl font-bold animate-fade-in-down bg-gradient-to-r from-${job.color} via-indigo-700 to-blue-700 bg-clip-text text-transparent`"
+                style="animation-delay: 0.1s;"
+            >
                 {{ job.title }}
             </h1>
 
-            <div class="content-ckeditor mb-4">
+            <div class="content-ckeditor mb-4 animate-fade-in" style="animation-delay: 0.2s;">
                 <p v-html="job.preview" />
             </div>
 
-            <img class="h-96 w-full overflow-auto object-cover rounded-xl" :src="`/storage/${job?.images[0]?.url}`"
-                :alt="job.alt_banner_image" />
+            <img class="h-96 w-full overflow-auto object-cover rounded-xl animate-fade-in" :src="`/storage/${job?.images[0]?.url}`"
+                :alt="job.alt_banner_image" style="animation-delay: 0.3s;" />
 
-            <div class="content-ckeditor mb-4">
+            <div class="content-ckeditor mb-4 animate-fade-in" style="animation-delay: 0.4s;">
                 <p v-html="job.body" />
             </div>
         </div>

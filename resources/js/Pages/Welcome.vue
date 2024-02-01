@@ -1,6 +1,5 @@
 <script setup>
-import { Head } from '@inertiajs/vue3';
-import { computed } from 'vue';
+import { Head, Link } from '@inertiajs/vue3';
 import MainBanner from '@/Components/Main/Banners/MainBanner.vue';
 import Navbar from '@/Components/Main/Public/Layout/Nav/Navbar.vue';
 
@@ -26,91 +25,60 @@ const projects = [
 ];
 
 const props = defineProps({
-    user: Object
+    user: Object,
+    jobs: Object
 });
 
 const user = props.user;
-
-const contactInfo = computed(() => {
-    return {
-        data: [
-            {
-                id: 1,
-                title: 'Teléfono',
-                value: user.phone,
-                icon: 'mobile',
-                color: 'text-gray-700',
-            },
-            {
-                id: 2,
-                title: 'Email',
-                value: user.email,
-                icon: 'envelope-circle-check',
-                color: 'text-gray-700',
-            },
-            {
-                id: 3,
-                title: 'Dirección',
-                value: user.address,
-                icon: 'street-view',
-                color: 'text-gray-700'
-            },
-            {
-                id: 4,
-                title: 'Año de nacimiento',
-                value: user.birthday,
-                icon: 'calendar',
-                color: 'text-gray-700',
-            }
-        ],
-    };
-});
 </script>
 
 <template>
     <Head>
         <title>Home</title>
         <meta name="description"
-            content="maet.dev - Explora mi portafolio de desarrollo web. Convierte tus ideas en realida e impulsa tu presencia en línea con diseños responsivos y optimizados.">
+            content="Descubre maet.dev, mi portafolio de desarrollo web. Transforma tus ideas en sitios web impactantes y funcionales. ¡Impulsa tu presencia en línea con diseños modernos, responsivos y optimizados para SEO! Explora servicios de diseño y desarrollo web de calidad.">
+        <meta name="keywords"
+            content="desarrollo web, diseño web, diseño responsivo, Laravel, Vue, SEO, desarrollo frontend, desarrollo backend, maet.dev">
     </Head>
 
     <div>
         <Navbar />
         <MainBanner :user=user />
 
-        <h3 class="text-3xl font-bold text-gray-700 dark:text-gray-200 mb-8 text-center">Some of my projects</h3>
+        <h3 class="text-2xl font-bold text-gray-700 dark:text-gray-200 mb-8 text-center animate-fade-in-down" style="animation-delay: 0.2s;">Projects</h3>
 
         <main class="xs:px-0 mx-4">
             <div class="max-w-5xl mx-auto">
                 <section>
                     <div class="pb-10">
                         <div class="grid grid-cols-1 gap-8 mt-8 xl:mt-10 xl:gap-16">
-                            <template v-for="project in projects">
-                                <div class="mt-8 lg:flex w-full justify-between">
-                                    <div class="mt-6">
-                                        <span class="text-indigo-700 font-semibold">
-                                            Personal project
-                                        </span>
-                                        <a :href="project.link" target="_blank" rel="noreferrer noopener nofollow" class="">
-                                            <h3
-                                                class="block mb-8 text-2xl font-bold text-gray-700 dark:text-gray-200 hover:text-indigo-700 transition duration-150">
-                                                {{ project.name }}
-                                            </h3>
-                                        </a>
+                            <div class="mt-8 lg:flex w-full justify-between animate-fade-in-down" v-for="(job, index) in jobs" :key="'job-' + job.id" :style="{ animationDelay: `${index * 0.1}s` }">
+                                <div class="mt-6">
+                                    <span class="text-indigo-700 font-semibold animate-fade-in" style="animation-delay: 0.2s;">
+                                        Personal project
+                                    </span>
+                                    <Link :href="route('jobs.show', job.id)" target="_blank"
+                                        rel="noreferrer noopener nofollow">
+                                    <h3
+                                        class="block mb-8 text-2xl font-bold animate-fade-in text-gray-700 dark:text-gray-200 hover:text-indigo-700" style="animation-delay: 0.2s;">
+                                        {{ job.title }}
+                                    </h3>
+                                    </Link>
 
-                                        <p class="mb-8 text-sm text-gray-500 dark:text-gray-300 md:text-lg">
-                                            {{ project.description }}
-                                        </p>
+                                    <p class="mb-8 text-sm text-gray-500 dark:text-gray-300 md:text-lg">
+                                        {{ job.projec_name }}
+                                    </p>
 
-                                        <a :href="project.link" target="_blank" rel="noreferrer noopener nofollow"
-                                            class="inline-block mt-2 text-blue-500 underline hover:text-blue-400">
-                                            Visit project
-                                        </a>
-                                    </div>
-                                    <img class="bg-auto sm:w-[20rem] md:w-[32rem] lg:w-[24rem] xl:w-[30rem] bg-no-repeat bg-center w-full border-2 rounded-lg"
-                                        :src="project.image" alt="">
+                                    <Link :href="route('jobs.show', job.id)" target="_blank"
+                                        rel="noreferrer noopener nofollow"
+                                        class="inline-block mt-2 text-blue-500 underline hover:text-blue-400">
+                                    Visit project
+                                    </Link>
                                 </div>
-                            </template>
+                                <img class="bg-auto sm:w-[20rem] md:w-[32rem] lg:w-[24rem] xl:w-[30rem] bg-no-repeat bg-center w-full rounded-xl animate-fade-in-down" style="animation-delay: 0.4s;"
+                                    :src="`/storage/${job?.images[0]?.url}`" :alt="alt_banner_image">
+                            </div>
+                            
                         </div>
                     </div>
                 </section>

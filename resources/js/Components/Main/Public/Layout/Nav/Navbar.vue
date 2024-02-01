@@ -1,9 +1,9 @@
 <script setup>
-
+import { Link } from '@inertiajs/vue3';
 </script>
 
 <template>
-    <div class="sticky top-1 z-50 w-full flex justify-center mb-8 px-2">
+    <div class="fixed top-1 z-50 w-full flex justify-center mb-8 px-2">
         <nav class="w-full z-50 mt-1 max-w-7xl">
             <div class="px-4 h-12 w-full backdrop-blur-md bg-white/60 dark:bg-[#333333]/60 bg-white border rounded-3xl border-gray-200 dark:bg-gray-800 dark:border-gray-700">
                 <div class="w-full h-full flex items-center justify-between">
@@ -18,11 +18,11 @@
                                 </div>
                             </div>
                         </button> -->
-                        <a href="/" class="flex md:mr-24">
+                        <Link href="/" class="flex md:mr-24">
                             <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
                                 MAET
                             </span>
-                        </a>
+                        </Link>
                     </div>
                     <div class="flex items-center">
                         <div class="flex items-center ml-3">
