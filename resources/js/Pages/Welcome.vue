@@ -2,7 +2,7 @@
 import { Head } from '@inertiajs/vue3';
 import { computed } from 'vue';
 import MainBanner from '@/Components/Main/Banners/MainBanner.vue';
-import Navbar from '@/components/Main/Public/Layout/Nav/Navbar.vue';
+import Navbar from '@/Components/Main/Public/Layout/Nav/Navbar.vue';
 
 const projects = [
     {
