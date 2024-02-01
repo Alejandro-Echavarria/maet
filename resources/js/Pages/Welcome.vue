@@ -2,7 +2,7 @@
 import { Head } from '@inertiajs/vue3';
 import { computed } from 'vue';
 import MainBanner from '@/Components/Main/Banners/MainBanner.vue';
-import Nav from '@/Components/Main/Public/Layout/Nav/Nav.vue';
+import Navbar from '@/Components/Main/Public/Layout/Nav/Navbar.vue';
 
 const projects = [
     {
@@ -75,7 +75,7 @@ const contactInfo = computed(() => {
     </Head>
 
     <div>
-        <Nav />
+        <Navbar />
         <MainBanner :user=user />
 
         <h3 class="text-3xl font-bold text-gray-700 dark:text-gray-200 mb-8 text-center">Some of my projects</h3>

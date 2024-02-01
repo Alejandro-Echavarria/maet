@@ -1,10 +1,10 @@
 <script setup>
-import Nav from "@/Components/Main/Public/Layout/Nav/Nav.vue";
+import Navbar from "@/Components/Main/Public/Layout/Nav/Navbar.vue";
 </script>
 
 <template>
     <div>
-        <Nav />
+        <Navbar />
         <main class="xs:px-0 mx-4">
             <div class="max-w-5xl mx-auto">
                 <slot />
