@@ -75,7 +75,7 @@ const contactInfo = computed(() => {
     </Head>
 
     <div>
-        <Navbar />
+        <Nav />
         <MainBanner :user=user />
 
         <h3 class="text-3xl font-bold text-gray-700 dark:text-gray-200 mb-8 text-center">Some of my projects</h3>
