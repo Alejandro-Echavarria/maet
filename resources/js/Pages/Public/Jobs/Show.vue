@@ -15,28 +15,28 @@ const props = defineProps({
 
 <template>
     <div>
-        <Head :title="job.title" />
-
-        <!-- <div
-            :class="`absolute top-0 left-0 z-[-2] h-[40vh] w-full bg-gradient-to-b from-${job.color} to-transparent rounded-b-[1.5rem]`">
-        </div> -->
+        <Head>
+            <title>{{ job.title }}</title>
+            <meta name="description"
+                :content="job.preview">
+        </Head>
 
         <div class="space-y-6">
-            <h1
-                :class="`text-3xl font-bold animate-fade-in-down bg-gradient-to-r from-${job.color} via-indigo-700 to-blue-700 bg-clip-text text-transparent`"
-                style="animation-delay: 0.1s;"
-            >
+            <h1 :class="`text-3xl font-bold animate-fade-in-right bg-gradient-to-r from-${job.color} via-indigo-700 to-blue-700 bg-clip-text text-transparent`"
+                style="animation-delay: 0.1s; animation-duration: 0.4s;">
                 {{ job.title }}
             </h1>
 
-            <div class="content-ckeditor mb-4 animate-fade-in" style="animation-delay: 0.2s;">
+            <div class="content-ckeditor mb-4 animate-fade-in-left"
+                style="animation-delay: 0.1s; animation-duration: 0.4s;">
                 <p v-html="job.preview" />
             </div>
 
-            <img class="h-96 w-full overflow-auto object-cover rounded-xl animate-fade-in" :src="`/storage/${job?.images[0]?.url}`"
-                :alt="job.alt_banner_image" style="animation-delay: 0.3s;" />
+            <img class="h-96 w-full overflow-auto object-cover rounded-xl animate-fade-in"
+                style="animation-delay: 0.66s; animation-duration: 0.6s;" :src="`/storage/${job?.images[0]?.url}`"
+                :alt="job.alt_banner_image" />
 
-            <div class="content-ckeditor mb-4 animate-fade-in" style="animation-delay: 0.4s;">
+            <div class="content-ckeditor mb-4 animate-fade-in-up" style="animation-delay: 1.1s;">
                 <p v-html="job.body" />
             </div>
         </div>
