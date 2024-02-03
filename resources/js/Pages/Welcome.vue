@@ -2,6 +2,7 @@
 import { Head, Link } from '@inertiajs/vue3';
 import MainBanner from '@/Components/Main/Banners/MainBanner.vue';
 import Navbar from '@/Components/Main/Public/Layout/Nav/Navbar.vue';
+import MainFooter from "@/Components/Main/Public/Footers/MainFooter.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 
 const projects = [
@@ -43,7 +44,7 @@ const user = props.user;
     </Head>
 
     <div>
-        <Navbar class="animate-fade-in-down" style="animation-delay: 1.1s;" />
+        <Navbar :class="'animate-fade-in-down'" style="animation-delay: 1.1s;" />
 
         <MainBanner :user=user />
 
@@ -88,5 +89,6 @@ const user = props.user;
                 </div>
             </div>
         </main>
+        <MainFooter />
     </div>
 </template>

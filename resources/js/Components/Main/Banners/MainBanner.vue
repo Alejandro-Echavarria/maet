@@ -9,27 +9,27 @@ const { user } = defineProps({
 </script>
 
 <template>
-    <div class="w-full h-[80dvh] relative overflow-hidden mt-8 sm:mt-0">
+    <div class="w-full h-[80vh] relative overflow-hidden mt-8 sm:mt-0">
         <div class="backdrop-blur-2xl bg-gradient-to-b from-white/80 to-blue-50/10 h-full">
             <Container class="h-full flex items-center">
                 <div class="space-y-8 w-full flex flex-col">
                     <div class="w-full">
-                        <h4 class="py-1 text-4xl md:text-7xl font-bold bg-gradient-to-r from-zinc-700 via-indigo-700 to-blue-700 bg-clip-text text-transparent animate-fade-in-right"
+                        <h4 class="py-1.5 text-5xl md:text-7xl font-bold bg-gradient-to-r from-zinc-700 via-indigo-700 to-blue-700 bg-clip-text text-transparent animate-fade-in-right"
                             style="animation-delay: 0.1s; animation-duration: 0.4s;">
                             Hey,
                         </h4>
-                        <h1 class="block animate-fade-in-left text-4xl md:text-7xl font-bold bg-gradient-to-r from-zinc-700 via-indigo-700 to-blue-700 bg-clip-text text-transparent"
+                        <h1 class="block animate-fade-in-left text-5xl md:text-7xl font-bold bg-gradient-to-r from-zinc-700 via-indigo-700 to-blue-700 bg-clip-text text-transparent"
                             style="animation-delay: 0.1s; animation-duration: 0.4s;">
                             I'm {{ user.name }}
                         </h1>
                     </div>
                     <div class="w-full grid justify-items-end">
                         <div class="w-3/4 md:w-1/2">
-                            <h2 class="text-base sm:text-xl md:text-2xl lg:text-3xl font-semibold text-gray-700 dark:text-white animate-fade-in-up"
+                            <h2 class="text-xl md:text-2xl lg:text-3xl font-semibold text-gray-700 dark:text-white animate-fade-in-up"
                                 style="animation-delay: 0.66s;">
                                 {{ user.position }}
                             </h2>
-                            <h3 class="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold bg-gradient-to-r from-zinc-700 via-indigo-700 to-gray-700 bg-clip-text text-transparent animate-fade-in-up"
+                            <h3 class="text-lg md:text-xl lg:text-2xl font-semibold bg-gradient-to-r from-zinc-700 via-indigo-700 to-gray-700 bg-clip-text text-transparent animate-fade-in-up"
                                 style="animation-delay: 0.66s;">
                                 { Portfolio Under Construction: Work in Progress. Check back soon for updates! }
                             </h3>
