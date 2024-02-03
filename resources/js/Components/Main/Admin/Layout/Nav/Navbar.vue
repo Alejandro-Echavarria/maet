@@ -70,7 +70,7 @@ defineExpose({ toggleSidebarVisibility });
                         </div>
                     </button>
                     <a href="/" class="flex md:mr-24">
-                        <span class="self-center font-semibold whitespace-nowrap dark:text-white">
+                        <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
                             MAET
                         </span>
                     </a>

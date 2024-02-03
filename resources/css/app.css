@@ -17,7 +17,7 @@
         @apply ml-3 list-decimal list-inside;
     }
 
-    div.content-ckeditor h3,h4,h5 {
+    div.content-ckeditor h2,h3,h4,h5 {
         @apply font-bold text-2xl text-gray-700 dark:text-gray-300 py-4;
     }
 
@@ -37,7 +37,7 @@
         @apply ml-3;
     }
 
-    div.content-ckeditor h3,h4,h5 {
+    div.content-ckeditor h2,h3,h4,h5 {
         @apply font-bold text-2xl text-gray-700 dark:text-gray-300 py-4;
     }
 
@@ -74,7 +74,7 @@
         @apply ml-3;
     }
 
-    div#preview h3,h4,h5, div#body h3,h4,h5 {
+    div#preview h2,h3,h4,h5, div#body h2,h3,h4,h5 {
         @apply font-bold text-2xl text-gray-700 dark:text-gray-300 py-4;
     }
 
