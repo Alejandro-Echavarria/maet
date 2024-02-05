@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { useForm } from "@inertiajs/vue3";
 import DialogModal from "@/Components/DialogModal.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
@@ -9,16 +9,21 @@ import TextInput from "@/Components/TextInput.vue";
 import InputError from "@/Components/InputError.vue";
 import SaveAlert from "@/Helpers/Alerts/SaveAlert";
 import SimpleForm from "@/Components/Main/Admin/Components/Forms/SimpleForm.vue";
-import Ckeditor from "@/Components/Main/Admin/Components/Forms/Inputs/ckeditor/Ckeditor.vue";
 import ColorPicker from "@/Components/Main/Admin/Components/Forms/Inputs/SelectsPicker/ColorsPicker/ColorPicker.vue";
 import VueSelect from "@/Components/Main/Admin/Components/Selects/VueSelect.vue";
 import Images from "@/Components/Main/Admin/Components/Forms/Inputs/Images/Images.vue";
 import ToggleSwitch from "@/Components/Main/Admin/Components/Forms/Inputs/ToggleSwitch/ToggleSwitch.vue";
+import Ckeditor from "@/Components/Main/Admin/Components/Forms/Inputs/ckeditor/Ckeditor.vue";
+import CKeditorHelper from "@/Helpers/CKeditor/Ckeditor";
 
 const props = defineProps({
     data: Object,
     filter: String,
     page: String
+});
+
+onMounted(() => {
+    CKeditorHelper();
 });
 
 const title = ref("");
@@ -220,18 +225,23 @@ defineExpose({ openModal });
 
                             <div class="sm:col-span-4">
                                 <InputLabel for="preview" value="Preview" class="mb-3" />
-                                <Ckeditor v-model="form.preview" :idData="job" :additionalPath="'/preview'"
-                                    :urlName="urlCkeditorStoreImage" :value="form.preview" id="preview" ref="previewInput"
-                                    key="preview" />
+                                <Ckeditor id="preview" idname="preview" v-model="form.preview" :idData="job"
+                                    :additionalPath="'/preview'" :urlName="urlCkeditorStoreImage" :value="form.preview"
+                                    key="preview" ref="previewInput">
+                                    <div id="ckeditorpreview"></div>
+                                </Ckeditor>
 
                                 <InputError :message="form.errors.preview" class="mt-2" />
                             </div>
 
                             <div class="sm:col-span-4">
                                 <InputLabel for="body" value="Body" class="mb-3" />
-                                <Ckeditor v-model="form.body" :idData="job" :additionalPath="'/body'"
-                                    :urlName="urlCkeditorStoreImage" :value="form.body" id="body" ref="bodyInput"
-                                    key="body" />
+                                <Ckeditor id="body" idname="body" v-model="form.body" :idData="job" :additionalPath="'/body'"
+                                    :urlName="urlCkeditorStoreImage" :value="form.body" key="body"
+                                    ref="bodyInput">
+                                    <div id="ckeditorbody"></div>
+                                </Ckeditor>
+
 
                                 <InputError :message="form.errors.body" class="mt-2" />
                             </div>

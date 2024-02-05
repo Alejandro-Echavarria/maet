@@ -4,7 +4,6 @@
         <meta charset="utf-8">
         <meta name="author" content="Manuel Echavarria">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
@@ -17,8 +16,20 @@
         @routes
         @vite(['resources/js/app.js', "resources/js/Pages/{$page['component']}.vue"])
         @inertiaHead
+
+        {{-- <script src="{{ asset('/vendor/ckeditor5-build-balloon/build/ckeditor.js') }}"></script> --}}
     </head>
     <body class="font-sans antialiased text-base font-normal text-gray-600 leading-relaxed">
         @inertia
     </body>
+
+    <script>
+        
+
+        // ClassicEditor
+        //     .create(document.querySelector('#body'))
+        //     .catch(error => {
+        //         console.error(error);
+        //     })
+    </script>
 </html>
