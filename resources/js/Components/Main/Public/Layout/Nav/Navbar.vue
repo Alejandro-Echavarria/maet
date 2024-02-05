@@ -4,7 +4,7 @@ import { Link } from '@inertiajs/vue3';
 
 <template>
     <div class="fixed top-1 z-50 w-full flex justify-center mb-8 px-2">
-        <nav class="w-full z-50 mt-1 max-w-7xl">
+        <nav class="w-full z-50 mt-1 max-w-[90rem] 2xl:max-w-[100rem]">
             <div class="px-4 h-12 w-full backdrop-blur-md bg-white/60 dark:bg-[#333333]/60 bg-white border rounded-3xl border-gray-200 dark:bg-gray-800 dark:border-gray-700">
                 <div class="w-full h-full flex items-center justify-between">
                     <div class="flex items-center justify-start h-full">
