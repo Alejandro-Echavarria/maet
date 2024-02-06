@@ -1,6 +1,8 @@
 <script setup>
+import { onMounted } from 'vue';
 import { Head } from '@inertiajs/vue3';
 import PublicLayout from '@/Components/Main/Public/Layout/PublicLayout.vue';
+import PrismjsHelper from "@/Helpers/Prismjs/Prismjs";
 
 defineOptions({
     layout: PublicLayout
@@ -10,6 +12,10 @@ const props = defineProps({
     job: {
         type: Object,
     }
+});
+
+onMounted(() => {
+    PrismjsHelper();
 });
 </script>
 

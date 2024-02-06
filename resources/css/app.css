@@ -61,17 +61,25 @@
         @apply border-none px-4 py-3;
     }
 
+    div.content-ckeditor pre {
+        @apply rounded-xl;
+    }
+
+    div.content-ckeditor p p code {
+        @apply bg-slate-200/80 px-2 font-semibold rounded-xl;
+    }
+
     /* CkEditor */
     div#preview figure img, div#body figure img {
         @apply rounded-lg;
     }
 
     div#preview ul, div#body ul {
-        @apply ml-3;
+        @apply ml-6 list-disc;
     }
 
-    div#preview ul, div#body ul {
-        @apply ml-3;
+    div#preview ol, div#body ol {
+        @apply ml-6 list-decimal;
     }
 
     div#preview h2,h3,h4,h5, div#body h2,h3,h4,h5 {
@@ -96,5 +104,9 @@
 
     div#preview td, div#body td {
         @apply border-none px-4 py-3;
+    }
+
+    div#preview pre, div#body pre {
+        @apply rounded-lg;
     }
 }
