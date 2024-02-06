@@ -31,6 +31,10 @@ const props = defineProps({
     jobs: Object
 });
 
+const useAnimation = (index) => {
+    return { 'animate-fade-in-up': index === 0 };
+};
+
 const user = props.user;
 </script>
 
@@ -44,7 +48,7 @@ const user = props.user;
     </Head>
 
     <div>
-        <Navbar :class="'animate-fade-in-down'" style="animation-delay: 1.1s;" />
+        <Navbar :animation="true" />
 
         <MainBanner :user=user />
 
@@ -52,16 +56,14 @@ const user = props.user;
         <main class="xs:px-0 mx-4">
             <div class="max-w-5xl mx-auto">
                 <div class="pb-10">
-                    <div v-for="(job, index) in jobs" :key="'job-' + job.id" :style="{ animationDelay: `${index * 0.15}s` }"
-                        class="grid grid-cols-1 sm:grid-cols-2 mb-20 gap-8 w-full justify-between animate-fade-in-up">
+                    <div v-for="(job, index) in jobs" :key="'job-' + job.id" :style="{ animationDelay: `1.1s` }"
+                        :class="['grid grid-cols-1 sm:grid-cols-2 mb-20 gap-8 w-full justify-between', useAnimation(index)]">
                         <div class="w-full order-2 sm:order-1">
-                            <span class="block text-indigo-700 font-semibold animate-fade-in-up"
-                                style="animation-delay: 1.1s;">
+                            <span class="block text-indigo-700 font-semibold">
                                 Personal project
                             </span>
                             <Link :href="route('jobs.show', job.id)" target="_blank" rel="noreferrer noopener nofollow">
-                            <h3 class="block mb-8 text-2xl font-bold animate-fade-in-up text-gray-700 dark:text-gray-200 hover:text-indigo-700"
-                                style="animation-delay: 1.1s;">
+                            <h3 :class="['block mb-8 text-2xl font-bold text-gray-700 dark:text-gray-200 hover:text-indigo-700']">
                                 {{ job.title }}
                             </h3>
                             </Link>
@@ -72,8 +74,7 @@ const user = props.user;
 
                             <div>
                                 <Link :href="route('jobs.show', job.id)" target="_blank" rel="noreferrer noopener nofollow"
-                                    class="sm:w-auto w-full inline-block mt-2 text-blue-500 underline hover:text-blue-400 animate-fade-in-up"
-                                    style="animation-delay: 1.1s;">
+                                    class="sm:w-auto w-full inline-block mt-2 text-blue-500 underline hover:text-blue-400">
                                     <PrimaryButton class="">
                                         Read more
                                     </PrimaryButton>
@@ -81,8 +82,8 @@ const user = props.user;
                             </div>
                         </div>
                         <div class="w-full flex justify-end order-1 sm:order-2">
-                            <img class="bg-auto sm:w-[20rem] md:w-[32rem] lg:w-[24rem] xl:w-[30rem] bg-no-repeat bg-center w-full rounded-2xl animate-fade-in-up"
-                                style="animation-delay: 1.1s;" :src="`/storage/${job?.images[0]?.url}`"
+                            <img class="bg-auto sm:w-[20rem] md:w-[32rem] lg:w-[24rem] xl:w-[30rem] bg-no-repeat bg-center w-full rounded-2xl"
+                                :src="`/storage/${job?.images[0]?.url}`"
                                 :alt="job.alt_banner_image">
                         </div>
                     </div>

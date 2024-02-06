@@ -16,20 +16,8 @@
         @routes
         @vite(['resources/js/app.js', "resources/js/Pages/{$page['component']}.vue"])
         @inertiaHead
-
-        {{-- <script src="{{ asset('/vendor/ckeditor5-build-balloon/build/ckeditor.js') }}"></script> --}}
     </head>
     <body class="font-sans antialiased text-base font-normal text-gray-600 leading-relaxed">
         @inertia
     </body>
-
-    <script>
-        
-
-        // ClassicEditor
-        //     .create(document.querySelector('#body'))
-        //     .catch(error => {
-        //         console.error(error);
-        //     })
-    </script>
 </html>

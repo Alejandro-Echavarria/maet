@@ -1,5 +1,4 @@
 const CkeditorHelper = () => {
-    console.log('me llamaron');
     const src = '/vendor/ckeditor5-build-balloon/build/ckeditor.js';
     const existScript = document.querySelector(`script[src="${src}"]`);
 

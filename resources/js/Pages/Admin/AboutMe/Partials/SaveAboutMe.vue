@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 import SimpleForm from '@/Components/Main/Admin/Components/Forms/SimpleForm.vue';
 import TextInput from '@/Components/TextInput.vue';
@@ -8,13 +8,30 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import Ckeditor from '@/Components/Main/Admin/Components/Forms/Inputs/ckeditor/Ckeditor.vue';
 import CKeditorHelper from "@/Helpers/CKeditor/Ckeditor";
+import Datepicker from 'flowbite-datepicker/Datepicker';
+import SaveAlert from '@/Helpers/Alerts/SaveAlert';
 
 const props = defineProps({
     data: Object
 });
 
+
 onMounted(() => {
+    const datedatepickerId2pickerEl = document.querySelector('#datepickerId');
+
+    new Datepicker(datedatepickerId2pickerEl, {
+        autohide: true,
+        format: 'dd/mm/yyyy',
+        todayHighlight: true
+    });
+
     CKeditorHelper();
+});
+
+onUnmounted(() => {
+    const datedatepickerId2pickerEl = document.querySelector('.datepicker');
+
+    datedatepickerId2pickerEl.remove();
 });
 
 const form = useForm({
@@ -24,6 +41,13 @@ const form = useForm({
     phone: props.data.user.phone,
     birthday: props.data.user.birthday
 });
+
+const urlCkeditorStoreImage = 'admin.ckeditor.images.aboutme.store';
+const showComponent = ref(false);
+
+const toggleComponent = () => {
+    showComponent.value = !showComponent.value;
+};
 
 const save = () => {
     const datedatepickerId2pickerEl = document.querySelector('#datepickerId');
@@ -42,15 +66,13 @@ const save = () => {
     });
 };
 
-const urlCkeditorStoreImage = 'admin.ckeditor.images.aboutme.store';
+const ok = (msj, type, timer) => {
+    SaveAlert(msj, type, timer);
+};
 </script>
 
-<<template>
+<template>
     <div>
-        <!-- <Ckeditor id="body" idname="body" v-model="form.bio" :value="form.bio" key="body"
-                             ref="bodyInput">
-                            <div id="ckeditorbody"></div>
-                        </Ckeditor> -->
         <SimpleForm :actions="true" @submitted="save">
             <template #form>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -96,10 +118,17 @@ const urlCkeditorStoreImage = 'admin.ckeditor.images.aboutme.store';
 
                     <div class="grid-cols-1 sm:col-span-2">
                         <InputLabel for="body" value="Bio" class="mb-3" />
-                        <!-- <Ckeditor id="body" idname="body" v-model="form.bio" :value="form.bio" key="body"
-                             ref="bodyInput">
+
+                        <div v-if="!showComponent" @click="toggleComponent"
+                            :class='["cursor-text border-2 rounded-lg py-2 px-2"]' title="Edit">
+                            <p v-html="form.bio" />
+                        </div>
+
+                        <Ckeditor v-else id="body" idname="body" key="body" v-model="form.bio" :value="form.bio" :focus="true"
+                            :idData="$page.props.auth.user.id" :additionalPath="'/about-me'" :urlName="urlCkeditorStoreImage"
+                            ref="bodyInput">
                             <div id="ckeditorbody"></div>
-                        </Ckeditor> -->
+                        </Ckeditor>
 
                         <InputError :message="form.errors.bio" class="mt-2" />
                     </div>

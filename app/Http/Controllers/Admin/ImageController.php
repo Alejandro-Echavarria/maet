@@ -25,7 +25,7 @@ class ImageController extends Controller
             ->resizeDown(1200, 800, function($constraint) {
                 $constraint->aspectRatio();
             })
-            ->save($path);
+            ->toWebp()->save($path);
 
         if ($data->images()->where('default', '=', '1')->count() == 0) {
             $data->images()->create([
@@ -57,7 +57,7 @@ class ImageController extends Controller
             ->resizeDown(1200, 800, function($constraint) {
                 $constraint->aspectRatio();
             })
-            ->save($path);
+            ->toWebp()->save($path);
 
         $data->images()->create([
             'url'     => $pathRelative
