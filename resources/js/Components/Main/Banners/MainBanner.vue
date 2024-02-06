@@ -14,8 +14,7 @@ const { user } = defineProps({
             <Container class="h-full flex items-center">
                 <div class="space-y-8 w-full flex flex-col">
                     <div class="w-full leading-relaxed">
-                        <h4 class="animate-fade-in-right text-5xl md:text-7xl font-bold bg-gradient-to-r from-zinc-700 via-indigo-700 to-blue-700 bg-clip-text text-transparent"
-                            style="animation-delay: 0.1s; animation-duration: 0.4s;">
+                        <h4 class="text-5xl md:text-7xl font-bold bg-gradient-to-r from-zinc-700 via-indigo-700 to-blue-700 bg-clip-text text-transparent">
                             Hey,
                         </h4>
                         <h1 class="animate-fade-in-left text-5xl md:text-7xl font-bold bg-gradient-to-r from-zinc-700 via-indigo-700 to-blue-700 bg-clip-text text-transparent"
