@@ -6,15 +6,24 @@ import TextInput from '@/Components/TextInput.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import Ckeditor from '@/Components/Main/Admin/Components/Forms/Inputs/ckeditor/Ckeditor.vue';
-import CKeditorHelper from "@/Helpers/CKeditor/Ckeditor";
 import Datepicker from 'flowbite-datepicker/Datepicker';
 import SaveAlert from '@/Helpers/Alerts/SaveAlert';
+import Ckeditor from '@/Components/Main/Admin/Components/Forms/Inputs/ckeditor/Ckeditor.vue';
+import CKeditorHelper from "@/Helpers/CKeditor/Ckeditor";
 
 const props = defineProps({
     data: Object
 });
 
+const form = useForm({
+    position: props.data.user.position,
+    bio: props.data.user.bio,
+    address: props.data.user.address,
+    phone: props.data.user.phone,
+    birthday: props.data.user.birthday
+});
+
+const urlCkeditorStoreImage = 'admin.ckeditor.images.aboutme.store';
 
 onMounted(() => {
     const datedatepickerId2pickerEl = document.querySelector('#datepickerId');
@@ -33,21 +42,6 @@ onUnmounted(() => {
 
     datedatepickerId2pickerEl.remove();
 });
-
-const form = useForm({
-    position: props.data.user.position,
-    bio: props.data.user.bio,
-    address: props.data.user.address,
-    phone: props.data.user.phone,
-    birthday: props.data.user.birthday
-});
-
-const urlCkeditorStoreImage = 'admin.ckeditor.images.aboutme.store';
-const showComponent = ref(false);
-
-const toggleComponent = () => {
-    showComponent.value = !showComponent.value;
-};
 
 const save = () => {
     const datedatepickerId2pickerEl = document.querySelector('#datepickerId');
@@ -119,12 +113,7 @@ const ok = (msj, type, timer) => {
                     <div class="grid-cols-1 sm:col-span-2">
                         <InputLabel for="body" value="Bio" class="mb-3" />
 
-                        <div v-if="!showComponent" @click="toggleComponent"
-                            :class='["cursor-text border-2 rounded-lg py-2 px-2"]' title="Edit">
-                            <p v-html="form.bio" />
-                        </div>
-
-                        <Ckeditor v-else id="body" idname="body" key="body" v-model="form.bio" :value="form.bio" :focus="true"
+                        <Ckeditor id="body" idname="body" key="body" v-model="form.bio" :value="form.bio" :needTimeToLoad="true"
                             :idData="$page.props.auth.user.id" :additionalPath="'/about-me'" :urlName="urlCkeditorStoreImage"
                             ref="bodyInput">
                             <div id="ckeditorbody"></div>
