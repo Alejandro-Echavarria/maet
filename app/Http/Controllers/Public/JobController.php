@@ -3,21 +3,22 @@
 namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
-use App\Models\Job;
-use Illuminate\Http\Request;
+use App\Models\Image;
+use App\Models\Public\Job;
 use Inertia\Inertia;
 
 class JobController extends Controller
 {
     public function show(Job $job)
     {
-        $job = $job->with(['technologies:id,name', 'images' => function ($query) {
-            $query->select('id', 'url', 'default', 'imageable_id')
-                ->where('default', '=', '1')
-                ->orderBy('id', 'desc');
-        }])
+        $job = $job->with(['technologies:id,name'])
             ->where('id', $job->id)
             ->first();
+
+        $job['images'] = Image::where('imageable_id', $job->id)
+            ->where('default', '=', '1')
+            ->take(1)
+            ->get();
 
         return Inertia::render('Public/Jobs/Show', compact('job'));
     }
