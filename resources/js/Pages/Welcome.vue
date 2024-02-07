@@ -73,7 +73,7 @@ const user = props.user;
                             </p>
 
                             <div>
-                                <Link :href="route('jobs.show', job.id)" target="_blank" rel="noreferrer noopener nofollow"
+                                <Link :href="route('jobs.show', job.slug)" target="_blank" rel="noreferrer noopener nofollow"
                                     class="sm:w-auto w-full inline-block mt-2 text-blue-500 underline hover:text-blue-400">
                                     <PrimaryButton class="">
                                         Read more
