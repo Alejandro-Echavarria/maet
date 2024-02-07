@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { useForm } from "@inertiajs/vue3";
 import DialogModal from "@/Components/DialogModal.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
@@ -10,8 +10,9 @@ import ColorPicker from "@/Components/Main/Admin/Components/Forms/Inputs/Selects
 import InputError from "@/Components/InputError.vue";
 import SaveAlert from "@/Helpers/Alerts/SaveAlert";
 import SimpleForm from "@/Components/Main/Admin/Components/Forms/SimpleForm.vue";
-import Ckeditor from "@/Components/Main/Admin/Components/Forms/Inputs/ckeditor/Ckeditor.vue";
 import DateRangePicker from "@/Components/Main/Admin/Components/Forms/Inputs/SelectsPicker/DateRangePicker.vue";
+import Ckeditor from "@/Components/Main/Admin/Components/Forms/Inputs/ckeditor/Ckeditor.vue";
+import CKeditorHelper from "@/Helpers/CKeditor/Ckeditor";
 
 const props = defineProps({
     data: Object,
@@ -28,6 +29,10 @@ const form = useForm({
     start_date: "",
     end_date: "",
     color: "gray-100",
+});
+
+onMounted(() => {
+    CKeditorHelper();
 });
 
 const save = () => {
@@ -144,8 +149,10 @@ defineExpose({ openModal });
 
                             <div class="sm:col-span-3">
                                 <InputLabel for="description" value="Description" class="mb-3" />
-                                <Ckeditor v-model="form.description" :value="form.description" id="description"
-                                    ref="descriptionInput" />
+                                <Ckeditor id="body" idname="body" key="body" v-model="form.description" :value="form.description"
+                                    ref="descriptionInput">
+                                    <div id="ckeditorbody"></div>
+                                </Ckeditor>
 
                                 <InputError :message="form.errors.description" class="mt-2" />
                             </div>
