@@ -9,7 +9,7 @@ const { user } = defineProps({
 </script>
 
 <template>
-    <div class="w-full h-[80vh] relative overflow-hidden mt-8 sm:mt-0">
+    <div class="w-full h-[35rem] sm:h-[80vh] relative overflow-hidden mt-8 sm:mt-0">
         <div class="backdrop-blur-2xl bg-gradient-to-b from-white/80 to-blue-50/10 h-full">
             <Container class="h-full flex items-center">
                 <div class="space-y-8 w-full flex flex-col">
