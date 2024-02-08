@@ -1,10 +1,16 @@
 <script setup>
-// import SecondNav from "@/Components/Main/Admin/Layout/Nav/SecondNav.vue";
+import { Head } from '@inertiajs/vue3';
 import Navbar from "@/Components/Main/Admin/Layout/Nav/Navbar.vue";
 </script>
 
 <template>
     <div>
+
+        <Head>
+            <title>Manuel Echavarria</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        </Head>
+
         <Navbar />
 
         <main class="xs:px-0 lg:p-6 mx-4 lg:ml-64">
