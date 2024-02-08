@@ -28,63 +28,63 @@ export default {
             fontFamily: {
                 sans: ["Inter", ...defaultTheme.fontFamily.sans],
             },
-            keyframes: {
-                'fade-in-up': {
-                    "from": {
-                        transform: "translateY(0.75rem)",
-                        opacity: '0'
-                    },
-                    "to": {
-                        transform: "translateY(0rem)",
-                        opacity: '1'
-                    }
-                },
-                'fade-in-down': {
-                    "from": {
-                        transform: "translateY(-0.75rem)",
-                        opacity: '0'
-                    },
-                    "to": {
-                        transform: "translateY(0rem)",
-                        opacity: '1'
-                    }
-                },
-                'fade-in': {
-                    "from": {
-                        opacity: '0'
-                    },
-                    "to": {
-                        opacity: '1'
-                    }
-                },
-                'fade-in-right': {
-                    "from": {
-                        transform: "translateX(-1.5rem)",
-                        opacity: '0'
-                    },
-                    "to": {
-                        transform: "translateX(0rem)",
-                        opacity: '1'
-                    },
-                },
-                'fade-in-left': {
-                    "from": {
-                        transform: "translateX(1.5rem)",
-                        opacity: '0'
-                    },
-                    "to": {
-                        transform: "translateX(0rem)",
-                        opacity: '1'
-                    }
-                },
-            },
-            animation: {
-                'fade-in-up': "fade-in-up 0.4s ease-in-out both",
-                'fade-in-down': "fade-in-down 0.4s ease-in-out both",
-                'fade-in': "fade-in 0.4s ease-in-out both",
-                'fade-in-right': "fade-in-right 0.4s ease-in-out both",
-                'fade-in-left': "fade-in-left 0.4s ease-in-out both",
-            }
+            // keyframes: {
+            //     'fade-in-up': {
+            //         "from": {
+            //             transform: "translateY(0.75rem)",
+            //             opacity: '0'
+            //         },
+            //         "to": {
+            //             transform: "translateY(0rem)",
+            //             opacity: '1'
+            //         }
+            //     },
+            //     'fade-in-down': {
+            //         "from": {
+            //             transform: "translateY(-0.75rem)",
+            //             opacity: '0'
+            //         },
+            //         "to": {
+            //             transform: "translateY(0rem)",
+            //             opacity: '1'
+            //         }
+            //     },
+            //     'fade-in': {
+            //         "from": {
+            //             opacity: '0'
+            //         },
+            //         "to": {
+            //             opacity: '1'
+            //         }
+            //     },
+            //     'fade-in-right': {
+            //         "from": {
+            //             transform: "translateX(-1.5rem)",
+            //             opacity: '0'
+            //         },
+            //         "to": {
+            //             transform: "translateX(0rem)",
+            //             opacity: '1'
+            //         },
+            //     },
+            //     'fade-in-left': {
+            //         "from": {
+            //             transform: "translateX(1.5rem)",
+            //             opacity: '0'
+            //         },
+            //         "to": {
+            //             transform: "translateX(0rem)",
+            //             opacity: '1'
+            //         }
+            //     },
+            // },
+            // animation: {
+            //     'fade-in-up': "fade-in-up 0.4s ease-in-out both",
+            //     'fade-in-down': "fade-in-down 0.4s ease-in-out both",
+            //     'fade-in': "fade-in 0.4s ease-in-out both",
+            //     'fade-in-right': "fade-in-right 0.4s ease-in-out both",
+            //     'fade-in-left': "fade-in-left 0.4s ease-in-out both",
+            // }
         },
     },
 
