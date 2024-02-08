@@ -84,7 +84,7 @@ const user = props.user;
                             </div>
                         </div>
                         <div class="w-full flex justify-end order-1 sm:order-2">
-                            <img class="bg-auto sm:w-[20rem] md:w-[32rem] lg:w-[24rem] xl:w-[30rem] bg-no-repeat bg-center w-full rounded-2xl"
+                            <img class="h-96 w-full overflow-auto object-cover rounded-xl"
                                 :src="`/storage/${job?.images[0]?.url}`" :alt="job.alt_banner_image">
                         </div>
                     </div>
