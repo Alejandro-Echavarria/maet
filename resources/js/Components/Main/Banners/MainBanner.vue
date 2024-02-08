@@ -25,11 +25,11 @@ const { user } = defineProps({
                     </div>
                     <div class="w-full grid justify-items-end">
                         <div class="w-3/4 md:w-1/2">
-                            <h2 class="text-xl md:text-2xl lg:text-3xl font-semibold text-gray-700 dark:text-white animate-fade-in-up"
+                            <h2 class="text-xl md:text-2xl lg:text-3xl font-semibold text-gray-700 dark:text-white sm:animate-fade-in-up"
                                 style="animation-delay: 0.66s;">
                                 {{ user.position }}
                             </h2>
-                            <h3 class="text-lg md:text-xl lg:text-2xl font-semibold bg-gradient-to-r from-zinc-700 via-indigo-700 to-gray-700 bg-clip-text text-transparent animate-fade-in-up"
+                            <h3 class="text-lg md:text-xl lg:text-2xl font-semibold bg-gradient-to-r from-zinc-700 via-indigo-700 to-gray-700 bg-clip-text text-transparent sm:animate-fade-in-up"
                                 style="animation-delay: 0.66s;">
                                 { Portfolio Under Construction: Work in Progress. Check back soon for updates! }
                             </h3>
