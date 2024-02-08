@@ -10,11 +10,11 @@
 
 @layer base {
     div.content-ckeditor ul {
-        @apply ml-3 list-disc list-inside;
+        @apply ml-6 list-disc list-inside;
     }
 
     div.content-ckeditor ol {
-        @apply ml-3 list-decimal list-inside;
+        @apply ml-6 list-decimal list-inside;
     }
 
     div.content-ckeditor h2,h3,h4,h5 {
@@ -27,14 +27,6 @@
 
     div.content-ckeditor figure img {
         @apply rounded-xl;
-    }
-
-    div.content-ckeditor ul {
-        @apply ml-3;
-    }
-
-    div.content-ckeditor ul {
-        @apply ml-3;
     }
 
     div.content-ckeditor h2,h3,h4,h5 {
@@ -67,6 +59,10 @@
 
     div.content-ckeditor p p code {
         @apply bg-slate-200/80 px-2 font-semibold rounded-xl;
+    }
+
+    div.content-ckeditor ul li label input {
+        @apply mx-2 mr-3 rounded-full;
     }
 
     /* CkEditor */
@@ -108,5 +104,13 @@
 
     div#preview pre, div#body pre {
         @apply rounded-lg;
+    }
+
+    div#preview div ul li span span input, div#body div ul li span span input {
+        @apply ml-7 rounded-xl;
+    }
+
+    div#preview div ul li span span input::before, div#body div ul li span span input::before {
+        @apply rounded-xl;
     }
 }

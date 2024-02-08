@@ -3,6 +3,7 @@ import { onMounted } from 'vue';
 import { Head } from '@inertiajs/vue3';
 import PublicLayout from '@/Components/Main/Public/Layout/PublicLayout.vue';
 import PrismjsHelper from "@/Helpers/Prismjs/Prismjs";
+import cleanString from "@/Helpers/HelperFunctions";
 
 defineOptions({
     layout: PublicLayout
@@ -24,7 +25,7 @@ onMounted(() => {
         <Head>
             <title>{{ job.title }}</title>
             <meta name="description"
-                :content="job.preview">
+                :content="cleanString(job.preview)">
         </Head>
 
         <div class="space-y-6">
