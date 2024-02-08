@@ -6,7 +6,7 @@ import Navbar from "@/Components/Main/Admin/Layout/Nav/Navbar.vue";
 <template>
     <div>
         <Head>
-            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+            <meta head-key="viewport" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
         </Head>
 
         <Navbar />
