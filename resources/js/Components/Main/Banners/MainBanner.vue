@@ -12,12 +12,14 @@ const { user } = defineProps({
     <div class="w-full h-[35rem] sm:h-[80vh] relative overflow-hidden mt-8 sm:mt-0">
         <div class="backdrop-blur-2xl bg-gradient-to-b from-white/80 to-blue-50/10 h-full">
             <Container class="h-full flex items-center">
-                <div class="space-y-8 w-full flex flex-col">
-                    <div class="w-auto space-y-2">
+                <div class="gap-6 w-full flex flex-col">
+                    <div>
                         <span
                             class="text-5xl md:text-7xl font-bold bg-gradient-to-r from-zinc-700 via-indigo-700 to-blue-700 bg-clip-text text-transparent">
                             Hey,
                         </span>
+                    </div>
+                    <div>
                         <h1 class="animate-fade-in-left text-5xl md:text-7xl font-bold bg-gradient-to-r from-zinc-700 via-indigo-700 to-blue-700 bg-clip-text text-transparent"
                             style="animation-delay: 0.1s; animation-duration: 0.4s;">
                             <span>I'm</span> <span>{{ user.name }}</span>
