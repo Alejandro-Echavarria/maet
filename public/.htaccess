@@ -24,19 +24,7 @@
     RewriteRule ^ index.php [L]
 </IfModule>
 
-# Expires cache
-<IfModule mod_expires.c>
-    ExpiresActive On
-    ExpiresDefault "access plus 30 days"
-    ExpiresByType image/jpg "access plus 30 days"
-    ExpiresByType image/png "access plus 30 days"
-    ExpiresByType image/gif "access plus 30 days"
-    ExpiresByType image/jpeg "access plus 30 days"
-    ExpiresByType text/css "access plus 1 days"
-    ExpiresByType image/svg+xml "access plus 30 days"
-    ExpiresByType image/x-icon "access plus 60 days"
-    ExpiresByType application/pdf "access plus 2 days"
-    ExpiresByType text/javascript "access plus 12 hours"
-    ExpiresByType application/x-javascript "access plus 12 hours"
-    ExpiresByType application/javascript "access plus 12 hours"
-</IfModule>
+<filesMatch ".(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf)$">
+    Header set Cache-Control "max-age=3600, public"
+</filesMatch>
+
