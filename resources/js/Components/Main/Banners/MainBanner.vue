@@ -18,7 +18,7 @@ const { user } = defineProps({
                             class="text-5xl md:text-7xl font-bold bg-gradient-to-r from-zinc-700 via-indigo-700 to-blue-700 bg-clip-text text-transparent">
                             Hey,
                         </span>
-                        <h1 class="animate-fade-in-left text-5xl md:text-7xl font-bold bg-gradient-to-r from-zinc-700 via-indigo-700 to-blue-700 bg-clip-text text-transparent"
+                        <h1 class="sm:animate-fade-in-left text-5xl md:text-7xl font-bold bg-gradient-to-r from-zinc-700 via-indigo-700 to-blue-700 bg-clip-text text-transparent"
                             style="animation-delay: 0.1s; animation-duration: 0.4s;">
                             <span>I'm</span> <span>{{ user.name }}</span>
                         </h1>
