@@ -22,7 +22,7 @@ class ImageController extends Controller
         $manager = new ImageManager(new Driver());
 
         $manager->read($request)
-            ->resizeDown(1200, 800, function($constraint) {
+            ->scale(1200, null, function($constraint) {
                 $constraint->aspectRatio();
             })
             ->toWebp()->save($path);
@@ -54,7 +54,7 @@ class ImageController extends Controller
         $manager = new ImageManager(new Driver());
 
         $manager->read($request)
-            ->resizeDown(1200, 800, function($constraint) {
+            ->scale(1200, null, function($constraint) {
                 $constraint->aspectRatio();
             })
             ->toWebp()->save($path);

@@ -13,6 +13,10 @@ const props = defineProps({
     url: {
         type: String,
         required: true
+    },
+    inlineStyle: {
+        type: Boolean,
+        default: false
     }
 });
 
@@ -54,15 +58,17 @@ const debounce = (func, wait) => {
 <template>
     <div class="relative w-full">
         <div class="absolute inset-y-0 left-0 flex items-center pointer-events-none">
-            <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewbox="0 0 20 20"
+            <svg aria-hidden="true" :class="`w-4 h-4 ${ !inlineStyle && 'ml-3' } text-gray-500 dark:text-gray-400`" fill="currentColor" viewbox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd"
                     d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
                     clip-rule="evenodd" />
             </svg>
         </div>
-        <input v-model="search" type="text" id="simple-search"
-            class="flex-1 w-full lock p-2 pl-7 py-2.5 px-0 text-sm text-gray-700 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:ring-indigo-700 focus:border-indigo-700 peer transition"
-            placeholder="Search">
+        <input v-model="search" type="text" id="simple-search" :class="[
+            inlineStyle
+                ? 'flex-1 w-full lock p-2 pl-7 py-2.5 px-0 text-sm text-gray-700 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:ring-indigo-700 focus:border-indigo-700 peer transition'
+                : 'block w-full rounded-lg border-0 py-1.5 pl-10 text-gray-700 ring-1 ring-inset ring-gray-300 dark:text-gray-400 dark:border-gray-700 focus:ring-2 focus:ring-inset focus:ring-indigo-700 sm:text-sm sm:leading-6 transition'
+        ]" placeholder="Search">
     </div>
 </template>

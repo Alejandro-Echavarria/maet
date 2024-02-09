@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+import { onMounted, onUnmounted } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 import SimpleForm from '@/Components/Main/Admin/Components/Forms/SimpleForm.vue';
 import TextInput from '@/Components/TextInput.vue';
@@ -88,7 +88,7 @@ const ok = (msj, type, timer) => {
 
                     <div>
                         <InputLabel for="phone" value="Phone" />
-                        <TextInput v-model="form.phone" id="phone" ref="phoneInput" type="phone" placeholder="Your phone" />
+                        <TextInput v-model="form.phone" id="phone" ref="phoneInput" type="text" placeholder="Your phone" />
 
                         <InputError :message="form.errors.phone" class="mt-2" />
                     </div>
@@ -96,7 +96,7 @@ const ok = (msj, type, timer) => {
                     <div>
                         <InputLabel for="birthday" value="Birthday" />
                         <div class="relative">
-                            <div class="absolute inset-y-0 left-0 flex items-center pointer-events-none">
+                            <div class="absolute inset-y-0 left-0 flex items-center pointer-events-none pl-3">
                                 <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                     <path
@@ -104,7 +104,7 @@ const ok = (msj, type, timer) => {
                                 </svg>
                             </div>
                             <TextInput v-model="form.birthday" datepicker id="datepickerId" ref="datepickerInput"
-                                class="pl-7" type="text" placeholder="Your birthday" />
+                                class="pl-9" type="text" placeholder="Your birthday" />
 
                         </div>
                         <InputError :message="form.errors.birthday" class="mt-2" />

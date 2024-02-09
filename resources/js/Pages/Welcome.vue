@@ -62,7 +62,7 @@ const user = props.user;
                             <span class="block text-indigo-700 font-semibold">
                                 Personal project
                             </span>
-                            <Link :href="route('jobs.show', job.id)" target="_blank" rel="noreferrer noopener nofollow">
+                            <Link :href="route('jobs.show', job.slug)" target="_blank" rel="noreferrer noopener nofollow">
                             <h3
                                 :class="['block mb-8 text-2xl font-bold text-gray-700 dark:text-gray-200 hover:text-indigo-700']">
                                 {{ job.title }}

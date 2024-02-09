@@ -33,7 +33,7 @@ onUnmounted(() => {
 <template>
     <div id="dateRangePickerId" date-rangepicker class="flex items-center w-full">
         <div class="relative w-full">
-            <div class="absolute inset-y-0 left-0 flex items-center pointer-events-none">
+            <div class="absolute inset-y-6 left-0 flex items-center pointer-events-none pl-3">
                 <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor" viewBox="0 0 20 20">
                     <path
@@ -41,12 +41,12 @@ onUnmounted(() => {
                 </svg>
             </div>
 
-            <TextInput id="start" name="start" type="text" class="pl-7" :value="value.start_date"
+            <TextInput id="start" name="start" type="text" class="pl-9" :value="value.start_date"
                 placeholder="Start date" />
         </div>
         <span class="mx-4 text-gray-500">to</span>
         <div class="relative w-full">
-            <div class="absolute inset-y-0 left-0 flex items-center pointer-events-none">
+            <div class="absolute inset-y-6 left-0 flex items-center pointer-events-none pl-3">
                 <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor" viewBox="0 0 20 20">
                     <path
@@ -54,7 +54,7 @@ onUnmounted(() => {
                 </svg>
             </div>
 
-            <TextInput id="end" name="end" type="text" class="pl-7" :value="value.end_date"
+            <TextInput id="end" name="end" type="text" class="pl-9" :value="value.end_date"
                 placeholder="End date" />
         </div>
     </div>

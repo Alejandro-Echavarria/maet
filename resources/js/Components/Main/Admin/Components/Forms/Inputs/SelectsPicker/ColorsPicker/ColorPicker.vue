@@ -3,6 +3,10 @@ import { ref, onMounted } from "vue";
 
 const props = defineProps({
     modelValue: String,
+    inlineStyle: {
+        type: Boolean,
+        default: false
+    }
 });
 
 const emit = defineEmits(['update:modelValue']);
@@ -78,16 +82,20 @@ const splitColor = (color) => {
         <!-- Full Screen Overlay -->
         <div v-show="open" class="fixed inset-0 z-40" @click="open = false" />
 
-        <div class="flex flex-row w-full justify-between">
+        <div class="flex flex-row w-full justify-between items-center">
             <div class="w-full mr-2">
                 <span
-                    class="cursor-pointer block py-2.5 px-0 w-full text-sm text-gray-700 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:ring-indigo-700 focus:border-indigo-700 peer transition"
+                    :class="[
+                        inlineStyle
+                        ? 'cursor-pointer block py-2.5 px-0 w-full text-sm text-gray-700 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:ring-indigo-700 focus:border-indigo-700 peer transition'
+                        : 'cursor-pointer block mt-2 pl-3 w-full rounded-lg border-0 py-1.5 text-gray-700 ring-1 ring-inset ring-gray-300 dark:text-gray-400 dark:border-gray-700 focus:ring-2 focus:ring-inset focus:ring-indigo-700 sm:text-sm sm:leading-6 transition'
+                    ]"
                     @click="open = true">
                     {{ currentColor }}
                 </span>
             </div>
             <div @click="open = !open"
-                :class="['cursor-pointer rounded-full my-auto h-8 w-8 flex shrink-0', `bg-${currentColor}`]">
+                :class="['cursor-pointer rounded-full my-auto h-8 w-8 flex shrink-0', `bg-${currentColor}`, !inlineStyle && 'mt-2']">
                 <svg xmlns="http://www.w3.org/2000/svg" :class="['h-5 w-5 mx-auto my-auto', iconColor]" fill="none"
                     viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
