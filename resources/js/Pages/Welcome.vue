@@ -74,13 +74,13 @@ const user = props.user;
                                     rel="noreferrer noopener nofollow">
                                 <h3
                                     class="block text-2xl font-bold text-gray-700 dark:text-gray-200 hover:text-indigo-700 pb-0">
-                                    {{ job.project_name }}
+                                    {{ job.title }}
                                 </h3>
                                 </Link>
 
-                                <h3 :class="['text-sm font-normal text-gray-500 dark:text-gray-300', 'p-0']">
-                                    {{ job.title }}
-                                </h3>
+                                <h4 :class="['text-sm font-normal text-gray-500 dark:text-gray-300', 'p-0']">
+                                    {{ job.project_name }}
+                                </h4>
                             </div>
 
                             <p class="text-gray-500 dark:text-gray-300 line-clamp-3" v-html="job.preview" />
