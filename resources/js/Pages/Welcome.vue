@@ -85,7 +85,7 @@ const user = props.user;
 
                             <p class="text-gray-500 dark:text-gray-300 line-clamp-3" v-html="job.preview" />
 
-                            <div>
+                            <div class="hidden sm:block">
                                 <Link :href="route('jobs.show', job.slug)" target="_blank"
                                     rel="noreferrer noopener nofollow"
                                     class="sm:w-auto w-full inline-block mt-2 text-blue-500 underline hover:text-blue-400">
@@ -96,9 +96,10 @@ const user = props.user;
                             </div>
                         </div>
                         <div :class="['w-full justify-end', order ? 'order-2' : 'order-1']">
+                            <Link :href="route('jobs.show', job.slug)" target="_blank" rel="noreferrer noopener nofollow">
                             <div class="rounded-xl overflow-hidden bg-gray-800 shadow-gray-500/30 shadow-md">
                                 <div>
-                                    <div class="flex h-6 w-full items-center gap-5  px-3">
+                                    <div class="flex h-6 w-full items-center gap-5 px-3">
                                         <div class="flex items-center gap-1">
                                             <div class="h-1.5 w-1.5 rounded-full bg-red-400"></div>
                                             <div class="h-1.5 w-1.5 rounded-full bg-yellow-400"></div>
@@ -114,6 +115,7 @@ const user = props.user;
                                         :src="`/storage/${job?.images[0]?.url}`" :alt="job.alt_banner_image">
                                 </div>
                             </div>
+                            </Link>
                         </div>
                     </div>
                 </div>
