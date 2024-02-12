@@ -12,7 +12,7 @@ import { Link } from '@inertiajs/vue3';
                         <div class="items-center">
                             <p class="font-bold dark:text-gray-200 text-gray-700">
                                 <span class="h-12 w-12">
-                                    MAET DEV Portfolio
+                                    MAET / Portfolio
                                 </span>
                             </p>
                         </div>

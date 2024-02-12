@@ -224,7 +224,7 @@ defineExpose({ openModal });
                             </div>
 
                             <div class="sm:col-span-4">
-                                <InputLabel for="preview" value="Preview" class="mb-3" />
+                                <InputLabel for="preview" value="Preview" class="mb-2" />
                                 <Ckeditor id="preview" idname="preview" v-model="form.preview" :idData="job"
                                     :additionalPath="'/preview'" :urlName="urlCkeditorStoreImage" :value="form.preview"
                                     key="preview" ref="previewInput">
@@ -235,7 +235,7 @@ defineExpose({ openModal });
                             </div>
 
                             <div class="sm:col-span-4">
-                                <InputLabel for="body" value="Body" class="mb-3" />
+                                <InputLabel for="body" value="Body" class="mb-2" />
                                 <Ckeditor id="body" idname="body" v-model="form.body" :idData="job" :additionalPath="'/body'"
                                     :urlName="urlCkeditorStoreImage" :value="form.body" key="body"
                                     ref="bodyInput">

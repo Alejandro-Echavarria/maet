@@ -1,9 +1,12 @@
 <script setup>
+import { ref } from 'vue';
 import { Head, Link } from '@inertiajs/vue3';
 import MainBanner from '@/Components/Main/Banners/MainBanner.vue';
 import Navbar from '@/Components/Main/Public/Layout/Nav/Navbar.vue';
 import MainFooter from "@/Components/Main/Public/Footers/MainFooter.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+
+let order = false;
 
 const projects = [
     {
@@ -35,6 +38,10 @@ const useAnimation = (index) => {
     return { 'animate-fade-in-up': index === 0 };
 };
 
+const changeOrder = () => {
+    return order = !order;
+}
+
 const user = props.user;
 </script>
 
@@ -57,34 +64,58 @@ const user = props.user;
             <div class="max-w-5xl mx-auto">
                 <div class="pb-10">
                     <div v-for="(job, index) in jobs" :key="'job-' + job.id" :style="{ animationDelay: `1.1s` }"
-                        :class="['grid grid-cols-1 sm:grid-cols-2 mb-20 gap-8 w-full justify-between', useAnimation(index)]">
-                        <div class="w-full order-2 sm:order-1">
-                            <span class="block text-indigo-700 font-semibold">
-                                Personal project
-                            </span>
-                            <Link :href="route('jobs.show', job.id)" target="_blank" rel="noreferrer noopener nofollow">
-                            <h3 :class="['block mb-8 text-2xl font-bold text-gray-700 dark:text-gray-200 hover:text-indigo-700']">
-                                {{ job.title }}
-                            </h3>
-                            </Link>
-
-                            <p class="mb-8 text-sm text-gray-500 dark:text-gray-300 md:text-lg">
-                                {{ job.projec_name }}
-                            </p>
-
+                        :class="['grid grid-cols-1 sm:grid-cols-2 mb-20 sm:mb-40 gap-8 w-full justify-between', useAnimation(index)]">
+                        <div :class="['w-full', changeOrder() ? 'order-1' : 'sm:order-2', 'space-y-4']">
                             <div>
-                                <Link :href="route('jobs.show', job.slug)" target="_blank" rel="noreferrer noopener nofollow"
+                                <span class="block text-indigo-700 font-semibold">
+                                    Personal project
+                                </span>
+                                <Link :href="route('jobs.show', job.slug)" target="_blank"
+                                    rel="noreferrer noopener nofollow">
+                                <h3
+                                    class="block text-2xl font-bold text-gray-700 dark:text-gray-200 hover:text-indigo-700 pb-0">
+                                    {{ job.title }}
+                                </h3>
+                                </Link>
+
+                                <h4 :class="['text-sm font-normal text-gray-500 dark:text-gray-300', 'p-0']">
+                                    {{ job.project_name }}
+                                </h4>
+                            </div>
+
+                            <p class="text-gray-500 dark:text-gray-300 line-clamp-3" v-html="job.preview" />
+
+                            <div class="hidden sm:block">
+                                <Link :href="route('jobs.show', job.slug)" target="_blank"
+                                    rel="noreferrer noopener nofollow"
                                     class="sm:w-auto w-full inline-block mt-2 text-blue-500 underline hover:text-blue-400">
-                                    <PrimaryButton class="">
-                                        Read more
-                                    </PrimaryButton>
+                                <PrimaryButton class="">
+                                    Read more
+                                </PrimaryButton>
                                 </Link>
                             </div>
                         </div>
-                        <div class="w-full flex justify-end order-1 sm:order-2">
-                            <img class="bg-auto sm:w-[20rem] md:w-[32rem] lg:w-[24rem] xl:w-[30rem] bg-no-repeat bg-center w-full rounded-2xl"
-                                :src="`/storage/${job?.images[0]?.url}`"
-                                :alt="job.alt_banner_image">
+                        <div :class="['w-full justify-end', order ? 'order-2' : 'order-1']">
+                            <Link :href="route('jobs.show', job.slug)" target="_blank" rel="noreferrer noopener nofollow">
+                            <div class="rounded-xl overflow-hidden bg-gray-800 shadow-gray-500/30 shadow-md">
+                                <div>
+                                    <div class="flex h-6 w-full items-center gap-5 px-3">
+                                        <div class="flex items-center gap-1">
+                                            <div class="h-1.5 w-1.5 rounded-full bg-red-400"></div>
+                                            <div class="h-1.5 w-1.5 rounded-full bg-yellow-400"></div>
+                                            <div class="h-1.5 w-1.5 rounded-full bg-emerald-400"></div>
+                                        </div>
+                                        <div class="flex-1 pr-10 text-center text-[0.7rem] text-white leading-loose">
+                                            <p>
+                                                demo.link.com
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <img fetchpriority="high" class="h-full w-full overflow-auto object-cover"
+                                        :src="`/storage/${job?.images[0]?.url}`" :alt="job.alt_banner_image">
+                                </div>
+                            </div>
+                            </Link>
                         </div>
                     </div>
                 </div>

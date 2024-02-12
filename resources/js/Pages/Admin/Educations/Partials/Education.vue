@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 import MainLayout from '@/Components/Main/Admin/Layout/MainLayout.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
@@ -14,6 +14,7 @@ import Ckeditor from '@/Components/Main/Admin/Components/Forms/Inputs/ckeditor/C
 import SaveAlert from '@/Helpers/Alerts/SaveAlert';
 import DeleteAlert from '@/Helpers/Alerts/DeleteAlert';
 import DateRangePicker from '@/Components/Main/Admin/Components/Forms/Inputs/SelectsPicker/DateRangePicker.vue';
+import CKeditorHelper from "@/Helpers/CKeditor/Ckeditor";
 
 defineOptions({
     layout: MainLayout
@@ -39,6 +40,10 @@ const form = useForm({
     start_date: '',
     end_date: '',
     color: '#000000'
+});
+
+onMounted(() => {
+    CKeditorHelper();
 });
 
 const save = () => {
@@ -145,8 +150,10 @@ const ok = (msj, type, timer) => {
                             {{ education.title }}
                         </h3>
                         <button class="mr-2">
-                            <font-awesome-icon @click="openModal(2, education.id, education.title, education.start_date, education.end_date, education.description, education.color)"
-                                class="w-4 h-4 text-gray-400 dark:text-white hover:text-indigo-500  transition duration-300 ease-linear" :icon="['far', 'pen-to-square']" />
+                            <font-awesome-icon
+                                @click="openModal(2, education.id, education.title, education.start_date, education.end_date, education.description, education.color)"
+                                class="w-4 h-4 text-gray-400 dark:text-white hover:text-indigo-500  transition duration-300 ease-linear"
+                                :icon="['far', 'pen-to-square']" />
                         </button>
                     </div>
                     <p class="mb-4 dark:text-gray-400" v-html="education.description">
@@ -173,7 +180,7 @@ const ok = (msj, type, timer) => {
 
                             <div>
                                 <InputLabel for="dates" value="Dates" />
-                                <DateRangePicker :data="{'start_date': form.start_date, 'end_date': form.end_date}" />
+                                <DateRangePicker :data="{ 'start_date': form.start_date, 'end_date': form.end_date }" />
 
                                 <div class="flex gap-2">
                                     <InputError :message="form.errors.start_date" class="mt-2" />
@@ -191,15 +198,18 @@ const ok = (msj, type, timer) => {
                             <div v-if="opration === 2">
                                 <InputLabel for="color" value="Delete this education" />
 
-                                <DangerButton @click="destroy" :class="{ 'opacity-25': form.processing }" class="mt-2" :disabled="form.processing">
+                                <DangerButton @click="destroy" :class="{ 'opacity-25': form.processing }" class="mt-2"
+                                    :disabled="form.processing">
                                     Delete
                                 </DangerButton>
                             </div>
 
                             <div class="grid-cols-1 sm:col-span-3">
                                 <!-- <InputLabel for="description" value="Description" class="mb-3" /> -->
-                                <Ckeditor v-model="form.description" :value="form.description" id="description"
-                                    ref="descriptionInput" />
+                                <Ckeditor id="body" idname="body" key="body" v-model="form.description" :value="form.description"
+                                    ref="descriptionInput">
+                                    <div id="ckeditorbody"></div>
+                                </Ckeditor>
 
                                 <InputError :message="form.errors.description" class="mt-2" />
                             </div>
@@ -219,5 +229,4 @@ const ok = (msj, type, timer) => {
                 </PrimaryButton>
             </template>
         </DialogModal>
-    </div>
-</template>
+</div></template>

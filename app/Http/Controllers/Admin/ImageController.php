@@ -22,10 +22,10 @@ class ImageController extends Controller
         $manager = new ImageManager(new Driver());
 
         $manager->read($request)
-            ->resizeDown(1200, 800, function($constraint) {
+            ->scaleDown(1280, null, function($constraint) {
                 $constraint->aspectRatio();
             })
-            ->toWebp()->save($path);
+            ->toWebp(100)->save($path);
 
         if ($data->images()->where('default', '=', '1')->count() == 0) {
             $data->images()->create([
@@ -54,10 +54,10 @@ class ImageController extends Controller
         $manager = new ImageManager(new Driver());
 
         $manager->read($request)
-            ->resizeDown(1200, 800, function($constraint) {
+            ->scaleDown(1280, null, function($constraint) {
                 $constraint->aspectRatio();
             })
-            ->toWebp()->save($path);
+            ->toWebp(100)->save($path);
 
         $data->images()->create([
             'url'     => $pathRelative

@@ -80,7 +80,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <div>
+    <div class="text-sm">
         <slot />
     </div>
 </template>
@@ -91,7 +91,7 @@ onMounted(() => {
 }
 
 .ck-toolbar-container {
-    border: 2px solid #e5e7eb !important;
+    border: 1.5px solid #d1d5db !important;
     border-radius: 8px !important;
     margin-bottom: 20px !important;
     box-shadow: none !important;
@@ -106,8 +106,9 @@ onMounted(() => {
 }
 
 .ck-content {
-    border: 2px solid #e5e7eb !important;
+    border: 1.5px solid #d1d5db !important;
     border-radius: 8px !important;
     box-shadow: none !important;
+    padding: 0px 0.75rem 0px 0.75rem !important;
 }
 </style>
