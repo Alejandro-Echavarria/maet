@@ -1,10 +1,10 @@
 <script setup>
-import { ref } from 'vue';
 import { Head, Link } from '@inertiajs/vue3';
 import MainBanner from '@/Components/Main/Banners/MainBanner.vue';
 import Navbar from '@/Components/Main/Public/Layout/Nav/Navbar.vue';
 import MainFooter from "@/Components/Main/Public/Footers/MainFooter.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import Stacks from "@/Components/Main/Public/Containers/Stacks/Stacks.vue";
 
 let order = false;
 
@@ -97,9 +97,9 @@ const user = props.user;
                         </div>
                         <div :class="['w-full justify-end', order ? 'order-2' : 'order-1']">
                             <Link :href="route('jobs.show', job.slug)" target="_blank" rel="noreferrer noopener nofollow">
-                            <div class="rounded-xl overflow-hidden bg-gray-800 shadow-gray-500/30 shadow-md">
+                            <div class="rounded-xl overflow-hidden shadow-gray-500/20 shadow-lg">
                                 <div>
-                                    <div class="flex h-6 w-full items-center gap-5 px-3">
+                                    <div class="flex h-6 w-full items-center gap-5 px-3 bg-gray-800">
                                         <div class="flex items-center gap-1">
                                             <div class="h-1.5 w-1.5 rounded-full bg-red-400"></div>
                                             <div class="h-1.5 w-1.5 rounded-full bg-yellow-400"></div>
@@ -113,9 +113,10 @@ const user = props.user;
                                     </div>
                                     <img fetchpriority="high" class="h-full w-full overflow-auto object-cover"
                                         :src="`/storage/${job?.images[0]?.url}`" :alt="job.alt_banner_image">
+                                    </div>
                                 </div>
-                            </div>
                             </Link>
+                            <Stacks :stacks="job.technologies" />
                         </div>
                     </div>
                 </div>

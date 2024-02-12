@@ -39,9 +39,9 @@ onMounted(() => {
                 <p v-html="job.preview" />
             </div>
 
-            <div class="rounded-xl overflow-hidden bg-gray-800 shadow-gray-500/30 shadow-md">
+            <div class="rounded-xl overflow-hidden shadow-gray-500/20 shadow-lg">
                 <div>
-                    <div class="flex h-6 w-full items-center gap-5  px-3">
+                    <div class="flex h-6 w-full items-center gap-5 bg-gray-800 px-3">
                         <div class="flex items-center gap-1">
                             <div class="h-1.5 w-1.5 rounded-full bg-red-400"></div>
                             <div class="h-1.5 w-1.5 rounded-full bg-yellow-400"></div>
