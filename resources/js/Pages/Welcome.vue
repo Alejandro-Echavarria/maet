@@ -62,9 +62,9 @@ const user = props.user;
         <!-- <h3 class="text-2xl font-bold text-gray-700 dark:text-gray-200 mb-8 text-center animate-fade-in-up" style="animation-delay: 1.5s;">Projects</h3> -->
         <main class="xs:px-0 mx-4">
             <div class="max-w-5xl mx-auto">
-                <div class="space-y-40">
+                <div class="space-y-10 sm:space-y-20">
                     <section id="about-me-brief">
-                        <h3 class="text-3xl mb-10 font-bold text-gray-700 dark:text-gray-200 text-center animate-fade-in-up"
+                        <h3 class="text-3xl mb-10 sm:mb-20 font-bold text-gray-700 dark:text-gray-200 text-center animate-fade-in-up"
                             style="animation-delay: 1.1s;">
                             About me
                         </h3>
@@ -75,19 +75,19 @@ const user = props.user;
                                 <p v-html="user.bio" />
                             </div>
                             <div class="flex justify-end">
-                                <img class="w-[350px] h-[350px] overflow-auto object-cover"
-                                    src="/img/others/body.png" alt="Manuel Echavarria">
+                                <img class="w-[350px] h-[350px] overflow-auto object-cover" src="/img/others/body.png"
+                                    alt="Manuel Echavarria">
                             </div>
                         </div>
                     </section>
 
                     <div>
-                        <h3 class="text-3xl mb-10 font-bold text-gray-700 dark:text-gray-200 text-center">
+                        <h3 class="text-3xl mb-10 sm:mb-20 font-bold text-gray-700 dark:text-gray-200 text-center">
                             Projects
                         </h3>
 
                         <div v-for="(job, index) in jobs" :key="'job-' + job.id" :style="{ animationDelay: `1.1s` }"
-                            :class="['grid grid-cols-1 sm:grid-cols-2 mb-20 sm:mb-40 gap-8 w-full justify-between', useAnimation(index)]">
+                            :class="['grid grid-cols-1 sm:grid-cols-2 mb-10 sm:mb-20 gap-8 w-full justify-between', useAnimation(index)]">
                             <div :class="['w-full', changeOrder() ? 'order-1' : 'sm:order-2', 'space-y-4']">
                                 <div>
                                     <span class="block text-indigo-700 font-semibold">
@@ -148,4 +148,5 @@ const user = props.user;
             </div>
         </main>
         <MainFooter />
-    </div></template>
+    </div>
+</template>
