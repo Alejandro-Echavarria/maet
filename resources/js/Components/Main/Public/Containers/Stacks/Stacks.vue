@@ -6,21 +6,27 @@ const props = defineProps({
         type: Object,
     }
 });
-
 </script>
 
 <template>
     <div class="relative mx-2">
-        <div class="absolute inset-x-0 bottom-2 bg-white/50 w-full rounded-xl shadow-gray-500/20 shadow-sm">
-            <div class="p-1 rounded-md border backdrop-blur-md border-[#000000]/[0.16]">
-                <Vue3Marquee>
-                    <div v-for="stack in stacks" :key="stack.id" class="flex gap-x-2 text-sm font-bold text-indigo-700">
-                        <div class="ml-2">
-                            <img v-if="stack.link_icon" class="w-5" :src="stack.link_icon" :alt="stack.name">
+        <div class="flex absolute justify-center inset-x-0 -bottom-4">
+            <div
+                class="p-1 w-3/4 flex text-xs items-center font-semibold rounded-xl border backdrop-blur-md bg-white/50 shadow-gray-500/20 shadow-sm border-[#000000]/[0.16]">
+                <div class="px-2">
+                    <span>
+                        Tech:
+                    </span>
+                </div>
+                <Vue3Marquee :pause="stacks.length <= 3" :pause-on-hover="true">
+                    <div v-for="stack in stacks" :key="stack.id"
+                        :class="['text-sm font-bold text-indigo-700', stacks.length <= 3 && 'w-full justify-between']">
+                        <div class="flex justify-center mx-1">
+                            <img v-if="stack.link_icon" class="w-5 h-full" :src="stack.link_icon" :alt="stack.name">
+                            <p class="mx-1">
+                                {{ stack.name }}
+                            </p>
                         </div>
-                        <p>
-                            {{ stack.name }}
-                        </p>
                     </div>
                 </Vue3Marquee>
             </div>
