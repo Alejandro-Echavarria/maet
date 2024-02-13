@@ -24,6 +24,7 @@ return new class extends Migration
             $table->text('preview');
             $table->text('body');
             $table->string('alt_banner_image')->nullable();
+            $table->string('link')->nullable();
             $table->boolean('status')->default(false);
             $table->timestamps();
         });
