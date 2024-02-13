@@ -113,4 +113,8 @@
     div#preview div ul li span span input::before, div#body div ul li span span input::before {
         @apply rounded-xl;
     }
+
+    #tech-container svg {
+        @apply w-5 h-5;
+    }
 }

@@ -16,9 +16,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug')->unique();
-            $table->string('icon', 25)->nullable();
-            $table->string('link_icon')->nullable();
+            $table->text('icon')->nullable();
             $table->string('color')->nullable();
+            $table->boolean('main')->default(false);
             $table->timestamps();
         });
     }

@@ -10,8 +10,8 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $user = User::select(['name', 'email', 'position'])->first();
-        $jobs = Job::with(['technologies:id,name,link_icon', 'images' => function ($query) {
+        $user = User::select(['name', 'email', 'position', 'bio'])->first();
+        $jobs = Job::with(['technologies:id,name,icon', 'images' => function ($query) {
             $query->select('id', 'url', 'default', 'imageable_id')
                 ->where('default', '=', '1')
                 ->orderBy('id', 'desc');

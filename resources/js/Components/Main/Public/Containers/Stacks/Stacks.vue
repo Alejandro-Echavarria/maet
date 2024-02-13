@@ -19,10 +19,12 @@ const props = defineProps({
                     </span>
                 </div>
                 <Vue3Marquee :pause="stacks.length <= 3" :pause-on-hover="true">
-                    <div v-for="stack in stacks" :key="stack.id"
-                        :class="['text-sm font-bold text-indigo-700', stacks.length <= 3 && 'w-full justify-between']">
+                    <div id="tech-container" v-for="stack in stacks" :key="stack.id"
+                        :class="['text-sm font-semibold text-indigo-700', stacks.length <= 3 && 'w-full justify-between']">
                         <div class="flex justify-center mx-1">
-                            <img v-if="stack.link_icon" class="w-5 h-full" :src="stack.link_icon" :alt="stack.name">
+                            <div class="overflow-hidden">
+                                <i v-html="stack.icon" :title="stack.name" />
+                            </div>
                             <p class="mx-1">
                                 {{ stack.name }}
                             </p>
