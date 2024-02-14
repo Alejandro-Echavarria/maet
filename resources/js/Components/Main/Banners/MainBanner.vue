@@ -14,10 +14,10 @@ const { user } = defineProps({
             <Container class="h-full flex items-center">
                 <div class="gap-6 w-full flex flex-col">
                     <div>
-                        <span
+                        <h3
                             class="text-5xl md:text-7xl font-bold bg-gradient-to-r from-zinc-700 via-indigo-700 to-blue-700 bg-clip-text text-transparent">
                             Hey,
-                        </span>
+                        </h3>
                     </div>
                     <div>
                         <h1 class="animate-fade-in-left text-5xl md:text-7xl font-bold bg-gradient-to-r from-zinc-700 via-indigo-700 to-blue-700 bg-clip-text text-transparent"
