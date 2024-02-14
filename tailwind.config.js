@@ -12,8 +12,8 @@ export default {
         "./storage/framework/views/*.php",
         "./resources/views/**/*.blade.php",
         "./resources/js/**/*.vue",
-        "node_modules/flowbite-vue/**/*.{js,jsx,ts,tsx}",
-        "node_modules/flowbite/**/*.{js,jsx,ts,tsx}",
+        // "node_modules/flowbite-vue/**/*.{js,jsx,ts,tsx}",
+        // "node_modules/flowbite/**/*.{js,jsx,ts,tsx}",
     ],
 
     safelist: [
@@ -88,5 +88,5 @@ export default {
         },
     },
 
-    plugins: [forms, typography, require("flowbite/plugin")],
+    plugins: [forms, typography],
 };
