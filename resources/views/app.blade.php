@@ -13,7 +13,7 @@
         <meta charset="utf-8">
         <meta name="author" content="Manuel Echavarria">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+        {{-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> --}}
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
@@ -24,9 +24,9 @@
 
         <!-- Scripts -->
         @routes
-        <script>
+        {{-- <script>
             Ziggy.url = '{{ env('APP_URL') }}'
-        </script>
+        </script> --}}
         @vite(['resources/js/app.js', "resources/js/Pages/{$page['component']}.vue"])
         @inertiaHead
     </head>
