@@ -74,7 +74,7 @@ const user = props.user;
                             <div>
                                 <p v-html="user.bio" />
                             </div>
-                            <div class="flex justify-end">
+                            <div class="flex justify-center sm:justify-end">
                                 <img class="w-[350px] h-[350px] overflow-auto object-cover" src="/img/others/body.png"
                                     alt="Manuel Echavarria">
                             </div>
@@ -86,8 +86,8 @@ const user = props.user;
                             Projects
                         </h3>
 
-                        <div v-for="(job, index) in jobs" :key="'job-' + job.id" :style="{ animationDelay: `1.1s` }"
-                            :class="['grid grid-cols-1 sm:grid-cols-2 mb-10 sm:mb-20 gap-8 w-full justify-between', useAnimation(index)]">
+                        <div v-for="(job) in jobs" :key="'job-' + job.id"
+                            :class="['grid grid-cols-1 sm:grid-cols-2 mb-20 gap-8 w-full justify-between']">
                             <div :class="['w-full', changeOrder() ? 'order-1' : 'sm:order-2', 'space-y-4']">
                                 <div>
                                     <span class="block text-indigo-700 font-semibold">
