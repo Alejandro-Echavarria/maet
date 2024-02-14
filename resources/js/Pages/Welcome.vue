@@ -64,13 +64,11 @@ const user = props.user;
             <div class="max-w-5xl mx-auto">
                 <div class="space-y-10 sm:space-y-20">
                     <section id="about-me-brief">
-                        <h3 class="text-3xl mb-10 sm:mb-20 font-bold text-gray-700 dark:text-gray-200 text-center animate-fade-in-up"
-                            style="animation-delay: 1.1s;">
+                        <h3 class="text-3xl mb-10 sm:mb-20 font-bold text-gray-700 dark:text-gray-200 text-center">
                             About me
                         </h3>
 
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 animate-fade-in-up"
-                            style="animation-delay: 1.1s;">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
                             <div>
                                 <p v-html="user.bio" />
                             </div>
