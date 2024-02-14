@@ -23,9 +23,9 @@
 
         <!-- Scripts -->
         @routes
-        {{-- <script>
-            Ziggy.url = '{{ env('APP_URL') }}'
-        </script> --}}
+        <script>
+            Ziggy.url = '{asas'
+        </script>
         @vite(['resources/js/app.js', "resources/js/Pages/{$page['component']}.vue"])
         @inertiaHead
     </head>
