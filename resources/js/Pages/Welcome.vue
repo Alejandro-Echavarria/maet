@@ -8,35 +8,14 @@ import Stacks from "@/Components/Main/Public/Containers/Stacks/Stacks.vue";
 
 let order = false;
 
-const projects = [
-    {
-        'name': 'Academic grade calculator - CI',
-        'description': 'Academic grade calculator',
-        'image': 'img/projects/ci.jpg',
-        'link': 'https://ci.maet.dev/',
-    },
-    {
-        'name': 'BLOG',
-        'description': 'My personal blog',
-        'image': 'img/projects/blog.jpg',
-        'link': 'https://blog.maet.dev/',
-    },
-    {
-        'name': 'PAYMENTS',
-        'description': 'Payment gateway with stripe (Cashier)',
-        'image': 'img/projects/payments.jpg',
-        'link': 'https://payments.maet.dev/',
-    },
-];
-
 const props = defineProps({
     user: Object,
     jobs: Object
 });
 
-const useAnimation = (index) => {
-    return { 'animate-fade-in-up': index === 0 };
-};
+// const useAnimation = (index) => {
+//     return { 'animate-fade-in-up': index === 0 };
+// };
 
 const changeOrder = () => {
     return order = !order;

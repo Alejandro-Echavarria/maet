@@ -9,10 +9,10 @@ const { user } = defineProps({
 </script>
 
 <template>
-    <div class="w-full h-[35rem] sm:h-[70vh] relative overflow-hidden mt-8 sm:mt-0">
+    <div class="w-full h-[35rem] sm:h-[70vh] relative overflow-hidden mt-8">
         <div class="backdrop-blur-2xl bg-gradient-to-b from-white/80 to-blue-50/10 h-full">
             <Container class="h-full flex items-center">
-                <div class="gap-6 w-full flex flex-col">
+                <div class="w-full flex flex-col space-y-4">
                     <div>
                         <h3
                             class="text-5xl md:text-7xl font-bold bg-gradient-to-r from-zinc-700 via-indigo-700 to-blue-700 bg-clip-text text-transparent">
@@ -30,10 +30,10 @@ const { user } = defineProps({
                             <h2 class="text-xl md:text-2xl lg:text-3xl font-semibold text-gray-700 dark:text-white">
                                 {{ user.position }}
                             </h2>
-                            <h3
+                            <h4
                                 class="text-lg md:text-xl lg:text-2xl font-semibold bg-gradient-to-r from-zinc-700 via-indigo-700 to-gray-700 bg-clip-text text-transparent">
                                 { Portfolio Under Construction: Work in Progress. Check back soon for updates! }
-                            </h3>
+                            </h4>
                         </div>
                     </div>
                 </div>

@@ -16,6 +16,8 @@ class ImageController extends Controller
         Storage::makeDirectory($directory);
 
         $name = Str::random(10) . $request->getClientOriginalName();
+        $name = pathinfo($name, PATHINFO_FILENAME) . '.webp';
+
         $path = storage_path("app/public/$directory/$name");
         $pathRelative = "$directory/$name";
 
@@ -48,6 +50,8 @@ class ImageController extends Controller
         Storage::makeDirectory($directory);
 
         $name = Str::random(10) . $request->getClientOriginalName();
+        $name = pathinfo($name, PATHINFO_FILENAME) . '.webp';
+
         $path = storage_path("app/public/$directory/$name");
         $pathRelative = "$directory/$name";
 
