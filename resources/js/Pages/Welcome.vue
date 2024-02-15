@@ -10,6 +10,7 @@ let order = false;
 
 const props = defineProps({
     user: Object,
+    technologies: Object,
     jobs: Object
 });
 
@@ -20,8 +21,6 @@ const props = defineProps({
 const changeOrder = () => {
     return order = !order;
 }
-
-const user = props.user;
 </script>
 
 <template>
@@ -36,10 +35,27 @@ const user = props.user;
     <div>
         <Navbar :animation="true" />
 
-        <MainBanner :user=user />
+        <MainBanner :user="user" :technologies="technologies" />
 
         <!-- <h3 class="text-2xl font-bold text-gray-700 dark:text-gray-200 mb-8 text-center animate-fade-in-up" style="animation-delay: 1.5s;">Projects</h3> -->
         <main class="xs:px-0 mx-4">
+
+            <div class="grid justify-center h-[10vh] mb-20 mt-2 gap-4 sm:gap-8">
+                <div>
+                    <PrimaryButton>
+                        Send me a message
+                    </PrimaryButton>
+                </div>
+
+                <div class="flex justify-center">
+                    <svg class="animate-bounce" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 20L12 4" stroke="#000000" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M17 15C17 15 13.3176 20 12 20C10.6824 20 7 15 7 15" stroke="#000000" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+            </div>
             <div class="max-w-5xl mx-auto">
                 <div class="space-y-10 sm:space-y-20">
                     <section id="about-me-brief">
