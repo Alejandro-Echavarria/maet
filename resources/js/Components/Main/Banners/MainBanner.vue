@@ -30,10 +30,10 @@ const { user } = defineProps({
                             <h2 class="text-xl md:text-2xl lg:text-3xl font-semibold text-gray-700 dark:text-white">
                                 {{ user.position }}
                             </h2>
-                            <h4
+                            <h3
                                 class="text-lg md:text-xl lg:text-2xl font-semibold bg-gradient-to-r from-zinc-700 via-indigo-700 to-gray-700 bg-clip-text text-transparent">
                                 { Portfolio Under Construction: Work in Progress. Check back soon for updates! }
-                            </h4>
+                            </h3>
                         </div>
                     </div>
                 </div>

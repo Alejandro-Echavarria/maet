@@ -52,7 +52,7 @@ const user = props.user;
                                 <p v-html="user.bio" />
                             </div>
                             <div class="flex justify-center sm:justify-end">
-                                <img class="w-[350px] h-[350px] overflow-auto object-cover" src="/img/others/body.png"
+                                <img class="w-[350px] h-[350px] overflow-auto object-cover" src="/img/others/body.webp"
                                     alt="Manuel Echavarria">
                             </div>
                         </div>
