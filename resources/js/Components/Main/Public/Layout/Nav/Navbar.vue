@@ -28,7 +28,7 @@ const props = defineProps({
                         </button> -->
                         <Link href="/" class="flex md:mr-24">
                         <span
-                            class="self-center text-xl font-bold sm:text-2xl whitespace-nowrap dark:text-gray-200 text-gray-700">
+                            class="self-center text-xl font-bold sm:text-2xl whitespace-nowrap dark:text-gray-200 text-gray-800">
                             MAET
                         </span>
                         </Link>

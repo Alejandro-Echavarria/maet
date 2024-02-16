@@ -23,6 +23,8 @@ class HomeController extends Controller
             ->where('status', 1)
             ->get();
 
-        return Inertia::render('Welcome', compact('user', 'technologies', 'jobs'));
+        $knowledges = $user->knowledges()->select(['id', 'title'])->get();
+
+        return Inertia::render('Welcome', compact('user', 'technologies', 'jobs', 'knowledges'));
     }
 }

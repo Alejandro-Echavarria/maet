@@ -5,6 +5,7 @@ import Navbar from '@/Components/Main/Public/Layout/Nav/Navbar.vue';
 import MainFooter from "@/Components/Main/Public/Footers/MainFooter.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import Stacks from "@/Components/Main/Public/Containers/Stacks/Stacks.vue";
+import SectionTitle from '@/Components/Main/Public/Components/Titles/SectionTitle.vue';
 
 let order = false;
 
@@ -52,28 +53,31 @@ const changeOrder = () => {
                     or take a look
                 </div>
 
-
                 <div class="flex justify-center">
                     <svg class="animate-bounce" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
                         viewBox="0 0 24 24" fill="none">
-                        <path d="M12 20L12 4" stroke="#6b56cb" stroke-width="1.5" stroke-linecap="round"
+                        <path d="M12 20L12 4" class="stroke-indigo-700" stroke-width="1.5" stroke-linecap="round"
                             stroke-linejoin="round" />
-                        <path d="M17 15C17 15 13.3176 20 12 20C10.6824 20 7 15 7 15" stroke="#6b56cb" stroke-width="1.5"
-                            stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M17 15C17 15 13.3176 20 12 20C10.6824 20 7 15 7 15" class="stroke-indigo-700"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </div>
             </div>
             <div class="max-w-5xl mx-auto">
                 <div class="space-y-10 sm:space-y-20">
                     <section id="about-me-brief">
-                        <h3 class="text-3xl mb-10 sm:mb-20 font-bold text-gray-700 dark:text-gray-200 text-center">
-                            About me
-                        </h3>
+                        <SectionTitle :place-bg="'left'">
+                            <h3 class="z-10 text-5xl lg:text-7xl font-bold text-gray-800 dark:text-gray-200 text-center">
+                                About me
+                            </h3>
+                        </SectionTitle>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
                             <div>
                                 <p v-html="user.bio" />
                             </div>
+
+                            
                             <div class="flex justify-center sm:justify-end">
                                 <img class="w-[350px] h-[350px] overflow-auto object-cover" src="/img/others/body.webp"
                                     alt="Manuel Echavarria">
@@ -82,70 +86,77 @@ const changeOrder = () => {
                     </section>
 
                     <div>
-                        <h3 class="text-3xl mb-10 sm:mb-20 font-bold text-gray-700 dark:text-gray-200 text-center">
-                            Projects
-                        </h3>
+                        <section id="projects">
+                            <SectionTitle :place-bg="'right'">
+                                <h3
+                                    class="z-10 text-5xl lg:text-7xl font-bold text-gray-800 dark:text-gray-200 text-center">
+                                    Projects
+                                </h3>
+                            </SectionTitle>
 
-                        <div v-for="(job) in jobs" :key="'job-' + job.id"
-                            :class="['grid grid-cols-1 sm:grid-cols-2 mb-20 gap-8 w-full justify-between']">
-                            <div :class="['w-full', changeOrder() ? 'order-1' : 'sm:order-2', 'space-y-4']">
-                                <div>
-                                    <span class="block text-indigo-700 font-semibold">
-                                        Personal project
-                                    </span>
-                                    <Link :href="route('jobs.show', job.slug)" target="_blank"
-                                        rel="noreferrer noopener nofollow">
-                                    <h3
-                                        class="block text-2xl font-bold text-gray-700 dark:text-gray-200 hover:text-indigo-700 pb-0">
-                                        {{ job.title }}
-                                    </h3>
-                                    </Link>
-
-                                    <h4 :class="['text-sm font-normal text-gray-500 dark:text-gray-300', 'p-0']">
-                                        {{ job.project_name }}
-                                    </h4>
-                                </div>
-
-                                <p class="text-gray-500 dark:text-gray-300 line-clamp-3" v-html="job.preview" />
-
-                                <div class="hidden sm:block">
-                                    <Link :href="route('jobs.show', job.slug)" target="_blank"
-                                        rel="noreferrer noopener nofollow"
-                                        class="sm:w-auto w-full inline-block mt-2 text-blue-500 underline hover:text-blue-400">
-                                    <PrimaryButton class="">
-                                        Read more
-                                    </PrimaryButton>
-                                    </Link>
-                                </div>
-                            </div>
-                            <div :class="['w-full justify-end', order ? 'order-2' : 'order-1']">
-                                <Link :href="route('jobs.show', job.slug)" target="_blank"
-                                    rel="noreferrer noopener nofollow">
-                                <div class="rounded-xl overflow-hidden shadow-gray-500/20 shadow-lg">
+                            <div v-for="(job) in jobs" :key="'job-' + job.id"
+                                :class="['grid grid-cols-1 sm:grid-cols-2 mb-20 gap-8 w-full justify-between']">
+                                <div :class="['w-full', changeOrder() ? 'order-1' : 'sm:order-2', 'space-y-4']">
                                     <div>
-                                        <div class="flex h-6 w-full items-center gap-5 px-3 bg-gray-800">
-                                            <div class="flex items-center gap-1">
-                                                <div class="h-1.5 w-1.5 rounded-full bg-red-400"></div>
-                                                <div class="h-1.5 w-1.5 rounded-full bg-yellow-400"></div>
-                                                <div class="h-1.5 w-1.5 rounded-full bg-emerald-400"></div>
-                                            </div>
-                                            <div class="flex-1 pr-10 text-center text-[0.7rem] text-white leading-loose">
-                                                <p>
-                                                    demo.link.com
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <img fetchpriority="high" class="h-full w-full overflow-auto object-cover"
-                                            :src="`/storage/${job?.images[0]?.url}`" :alt="job.alt_banner_image">
+                                        <span class="block text-indigo-700 font-semibold">
+                                            Personal project
+                                        </span>
+                                        <Link :href="route('jobs.show', job.slug)" target="_blank"
+                                            rel="noreferrer noopener nofollow">
+                                        <h3
+                                            class="block text-2xl font-bold text-gray-700 dark:text-gray-200 hover:text-indigo-700 pb-0">
+                                            {{ job.title }}
+                                        </h3>
+                                        </Link>
+
+                                        <h4 :class="['text-sm font-normal text-gray-500 dark:text-gray-300', 'p-0']">
+                                            {{ job.project_name }}
+                                        </h4>
+                                    </div>
+
+                                    <p class="text-gray-500 dark:text-gray-300 line-clamp-3" v-html="job.preview" />
+
+                                    <div class="hidden sm:block">
+                                        <Link :href="route('jobs.show', job.slug)" target="_blank"
+                                            rel="noreferrer noopener nofollow"
+                                            class="sm:w-auto w-full inline-block mt-2 text-blue-500 underline hover:text-blue-400">
+                                        <PrimaryButton class="">
+                                            Read more
+                                        </PrimaryButton>
+                                        </Link>
                                     </div>
                                 </div>
-                                </Link>
-                                <Stacks :stacks="job.technologies" />
+                                <div :class="['w-full justify-end', order ? 'order-2' : 'order-1']">
+                                    <Link :href="route('jobs.show', job.slug)" target="_blank"
+                                        rel="noreferrer noopener nofollow">
+                                    <div class="rounded-xl overflow-hidden shadow-gray-500/20 shadow-lg">
+                                        <div>
+                                            <div class="flex h-6 w-full items-center gap-5 px-3 bg-gray-800">
+                                                <div class="flex items-center gap-1">
+                                                    <div class="h-1.5 w-1.5 rounded-full bg-red-400"></div>
+                                                    <div class="h-1.5 w-1.5 rounded-full bg-yellow-400"></div>
+                                                    <div class="h-1.5 w-1.5 rounded-full bg-emerald-400"></div>
+                                                </div>
+                                                <div
+                                                    class="flex-1 pr-10 text-center text-[0.7rem] text-white leading-loose">
+                                                    <p>
+                                                        demo.link.com
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <img fetchpriority="high" class="h-full w-full overflow-auto object-cover"
+                                                :src="`/storage/${job?.images[0]?.url}`" :alt="job.alt_banner_image">
+                                        </div>
+                                    </div>
+                                    </Link>
+                                    <Stacks :stacks="job.technologies" />
+                                </div>
                             </div>
-                        </div>
+                        </section>
                     </div>
                 </div>
             </div>
         </main>
         <MainFooter />
-</div></template>
+    </div>
+</template>
