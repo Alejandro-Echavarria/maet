@@ -11,7 +11,8 @@ const props = defineProps({
 
 <template>
     <div class="fixed top-1 z-50 w-full flex justify-center mb-8 px-2 overflow-hidden">
-        <nav :class="['w-full z-50 mt-1 max-w-[90rem] 2xl:max-w-[100rem] backdrop-blur-md rounded-3xl border border-[#000000]/[0.16]']">
+        <nav :class="['w-full z-50 mt-1 max-w-[90rem] 2xl:max-w-[100rem] backdrop-blur-md rounded-3xl border border-[#000000]/[0.16]', { 'animate-fade-in-down': props.animation }]"
+            style="animation-delay: 1.1s;">
             <div :class="['px-4 h-12 w-full']">
                 <div :class="['w-full h-full flex items-center justify-between']">
                     <div class="flex items-center justify-start h-full">
@@ -26,9 +27,10 @@ const props = defineProps({
                             </div>
                         </button> -->
                         <Link href="/" class="flex md:mr-24">
-                            <span class="self-center text-xl font-bold sm:text-2xl whitespace-nowrap dark:text-gray-200 text-gray-700">
-                                MAET
-                            </span>
+                        <span
+                            class="self-center text-xl font-bold sm:text-2xl whitespace-nowrap dark:text-gray-200 text-gray-700">
+                            MAET
+                        </span>
                         </Link>
                     </div>
                 </div>

@@ -39,19 +39,26 @@ const changeOrder = () => {
 
         <!-- <h3 class="text-2xl font-bold text-gray-700 dark:text-gray-200 mb-8 text-center animate-fade-in-up" style="animation-delay: 1.5s;">Projects</h3> -->
         <main class="xs:px-0 mx-4">
-
-            <div class="grid justify-center h-[10vh] mb-20 mt-2 gap-4 sm:gap-8">
+            <div class="grid justify-center h-[10vh] mb-20 mt-2 gap-4 sm:gap-4m animate-fade-in-up"
+                style="animation-delay: 1.1s;">
                 <div>
                     <PrimaryButton>
                         Send me a message
                     </PrimaryButton>
                 </div>
 
+                <div
+                    class="text-sm flex items-center gap-4 before:h-px before:flex-1 before:bg-[#000000]/[0.16]  before:content-[''] after:h-px after:flex-1 after:bg-[#000000]/[0.16]  after:content-['']">
+                    or take a look
+                </div>
+
+
                 <div class="flex justify-center">
-                    <svg class="animate-bounce" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none">
-                        <path d="M12 20L12 4" stroke="#000000" stroke-width="1.5" stroke-linecap="round"
+                    <svg class="animate-bounce" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                        viewBox="0 0 24 24" fill="none">
+                        <path d="M12 20L12 4" stroke="#6b56cb" stroke-width="1.5" stroke-linecap="round"
                             stroke-linejoin="round" />
-                        <path d="M17 15C17 15 13.3176 20 12 20C10.6824 20 7 15 7 15" stroke="#000000" stroke-width="1.5"
+                        <path d="M17 15C17 15 13.3176 20 12 20C10.6824 20 7 15 7 15" stroke="#6b56cb" stroke-width="1.5"
                             stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </div>
@@ -141,5 +148,4 @@ const changeOrder = () => {
             </div>
         </main>
         <MainFooter />
-    </div>
-</template>
+</div></template>
