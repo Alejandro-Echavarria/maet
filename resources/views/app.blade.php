@@ -13,6 +13,7 @@
         <meta charset="utf-8">
         <meta name="author" content="Manuel Echavarria">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="ingeniero de software, desarrollo web, diseño web, diseño responsivo, SEO, desarrollo frontend, desarrollo backend, maet.dev, software engineer, web development, web design, responsive design, Laravel, Vue, SEO, frontend development, backend development">
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->

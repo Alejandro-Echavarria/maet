@@ -15,10 +15,6 @@ const props = defineProps({
     jobs: Object
 });
 
-// const useAnimation = (index) => {
-//     return { 'animate-fade-in-up': index === 0 };
-// };
-
 const changeOrder = () => {
     return order = !order;
 }
@@ -26,11 +22,9 @@ const changeOrder = () => {
 
 <template>
     <Head>
-        <title>Manuel Echavarria</title>
+        <title>Web Development and Innovative Solutions - MAET</title>
         <meta name="description"
             content="Descubre maet.dev, mi portafolio de desarrollo web. Transforma tus ideas en sitios web impactantes y funcionales. ¡Impulsa tu presencia en línea con diseños modernos, responsivos y optimizados para SEO! Explora servicios de diseño y desarrollo web de calidad.">
-        <meta name="keywords"
-            content="desarrollo web, diseño web, diseño responsivo, Laravel, Vue, SEO, desarrollo frontend, desarrollo backend, maet.dev">
     </Head>
 
     <div>
@@ -77,7 +71,7 @@ const changeOrder = () => {
                                 <p v-html="user.bio" />
                             </div>
 
-                            
+
                             <div class="flex justify-center sm:justify-end">
                                 <img class="w-[350px] h-[350px] overflow-auto object-cover" src="/img/others/body.webp"
                                     alt="Manuel Echavarria">

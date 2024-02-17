@@ -6,12 +6,6 @@ import MainFooter from "@/Components/Main/Public/Footers/MainFooter.vue";
 
 <template>
     <div>
-        <Head>
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-            <meta name="keywords"
-                content="desarrollo web, diseño web, diseño responsivo, Laravel, Vue, SEO, desarrollo frontend, desarrollo backend, maet.dev">
-        </Head>
-
         <Navbar />
 
         <main class="xs:mx-0 mx-4 mt-20">
