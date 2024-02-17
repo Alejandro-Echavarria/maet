@@ -24,7 +24,7 @@ const changeOrder = () => {
     <Head>
         <title>Web Development and Innovative Solutions - MAET</title>
         <meta name="description"
-            content="Descubre maet.dev, mi portafolio de desarrollo web. Transforma tus ideas en sitios web impactantes y funcionales. ¡Impulsa tu presencia en línea con diseños modernos, responsivos y optimizados para SEO! Explora servicios de diseño y desarrollo web de calidad.">
+            content="Transforming ideas into stunning and functional webapps. Boosting online presence with modern, responsive designs optimized for SEO! Discover high-quality web development and Software Engineering">
     </Head>
 
     <div>
