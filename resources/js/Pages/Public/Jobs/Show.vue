@@ -29,7 +29,8 @@ onMounted(() => {
         </Head>
 
         <div class="space-y-6">
-            <h1 :class="`text-5xl lg:text-7xl py-1.5 md:text-6xl font-bold bg-gradient-to-r from-${job.color} via-indigo-700 to-blue-700 bg-clip-text text-transparent`">
+            <h1
+                :class="`text-5xl lg:text-7xl py-1.5 md:text-6xl font-bold bg-gradient-to-r from-${job.color} via-indigo-700 to-blue-700 bg-clip-text text-transparent`">
                 {{ job.title }}
             </h1>
 
@@ -53,9 +54,9 @@ onMounted(() => {
                     </div>
                     <!-- <img fetchpriority="high" class="h-full w-full overflow-auto object-cover"
                                         :src="`/storage/${job?.images[0]?.url}`" :alt="job.alt_banner_image"> -->
-                    <img fetchpriority="high" class="h-full w-full overflow-auto object-cover "
-                         :src="`/storage/${job?.images[0]?.url}`"
-                        :alt="job.alt_banner_image" />
+                    <img fetchpriority="high" class="h-full w-full overflow-auto object-cover"
+                        :title="job.alt_banner_image"
+                        :src="`/storage/${job?.images[0]?.url}`" :alt="job.alt_banner_image" />
                 </div>
             </div>
 

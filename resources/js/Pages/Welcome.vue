@@ -22,9 +22,9 @@ const changeOrder = () => {
 
 <template>
     <Head>
-        <title>Web Development and Innovative Solutions - MAET</title>
+        <title>Web Development and Innovative Solutions</title>
         <meta type="description" name="description" head-key="description"
-            content="Transforming ideas into stunning and functional webapps. Boosting online presence with modern, responsive designs optimized for SEO! Discover high-quality web development and Software Engineering">
+            content="Transforming ideas into functional webapps. Boosting online presence with modern designs optimized for SEO! Discover high-quality web development and Software Engineering">
     </Head>
 
     <div>
@@ -113,8 +113,9 @@ const changeOrder = () => {
                                     <div class="hidden sm:block">
                                         <Link :href="route('jobs.show', job.slug)" target="_blank"
                                             rel="noreferrer noopener nofollow"
-                                            class="sm:w-auto w-full inline-block mt-2 text-blue-500 underline hover:text-blue-400">
-                                        <PrimaryButton class="">
+                                            class="sm:w-auto w-full inline-block mt-2 text-blue-500 underline hover:text-blue-400"
+                                            :title="job.title">
+                                        <PrimaryButton>
                                             Read more
                                         </PrimaryButton>
                                         </Link>
@@ -122,7 +123,7 @@ const changeOrder = () => {
                                 </div>
                                 <div :class="['w-full justify-end', order ? 'order-2' : 'order-1']">
                                     <Link :href="route('jobs.show', job.slug)" target="_blank"
-                                        rel="noreferrer noopener nofollow">
+                                        rel="noreferrer noopener nofollow" :title="job.title">
                                     <div class="rounded-xl overflow-hidden shadow-gray-500/20 shadow-lg">
                                         <div>
                                             <div class="flex h-6 w-full items-center gap-5 px-3 bg-gray-800">
@@ -139,7 +140,8 @@ const changeOrder = () => {
                                                 </div>
                                             </div>
                                             <img fetchpriority="high" class="h-full w-full overflow-auto object-cover"
-                                                :src="`/storage/${job?.images[0]?.url}`" :alt="job.alt_banner_image">
+                                                :title="job.alt_banner_image" :src="`/storage/${job?.images[0]?.url}`"
+                                                :alt="job.alt_banner_image">
                                         </div>
                                     </div>
                                     </Link>
