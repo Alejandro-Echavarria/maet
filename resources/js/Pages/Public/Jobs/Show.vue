@@ -25,7 +25,7 @@ onMounted(() => {
 
         <Head>
             <title>{{ job.title }}</title>
-            <meta head-key="description" name="description" :content="cleanString(job.preview)">
+            <meta head-key="description" type="description" name="description" :content="cleanString(job.preview)">
         </Head>
 
         <div class="space-y-6">
