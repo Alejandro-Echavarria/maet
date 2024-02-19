@@ -7,9 +7,8 @@ import MainFooter from "@/Components/Main/Public/Footers/MainFooter.vue";
 <template>
     <div>
         <Head>
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-            <meta name="keywords"
-                content="desarrollo web, diseño web, diseño responsivo, Laravel, Vue, SEO, desarrollo frontend, desarrollo backend, maet.dev">
+            <meta type="description" name="description" head-key="description"
+                content="Transforming ideas into stunning and functional webapps. Boosting online presence with modern, responsive designs optimized for SEO! Discover high-quality web development and Software Engineering">
         </Head>
 
         <Navbar />

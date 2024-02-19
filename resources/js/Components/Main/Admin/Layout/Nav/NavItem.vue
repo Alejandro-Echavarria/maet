@@ -29,8 +29,8 @@ const toggleSidebarVisibility = () => {
     <TransitionRoot class="space-y-2" appear :show="isShowing" enter="transition-opacity duration-75" enter-from="opacity-0"
         enter-to="opacity-100" leave="transition-opacity duration-300" leave-from="opacity-100" leave-to="opacity-0">
         <Link v-if="!item.children.length" :href="route(item.href)" @click="toggleSidebarVisibility" :class="[
-            'flex whitespace-nowrap items-center py-2 px-3 text-sm font-semibold text-gray-700 rounded-lg dark:text-gray-200 hover:bg-indigo-100 dark:hover:bg-indigo-700 group transition duration-200 ease-linear',
-            { 'bg-indigo-100 text-indigo-700': $page.url.startsWith(item.activeClass) },
+            'flex whitespace-nowrap items-center py-2 px-3 text-sm font-semibold text-gray-800 rounded-lg dark:text-gray-200 hover:bg-indigo-700/10 dark:hover:bg-indigo-700 group transition duration-200 ease-linear',
+            { 'bg-indigo-700/10': $page.url.startsWith(item.activeClass) },
         ]">
         <span class="flex-1">
             <template v-if="item.icon">
@@ -41,7 +41,7 @@ const toggleSidebarVisibility = () => {
         </Link>
         <Disclosure v-else v-slot="{ open }" :default-open="hasActiveChild">
             <DisclosureButton :class="[
-                'flex w-full whitespace-nowrap text-left items-center py-2 px-3 text-sm font-semibold text-gray-700 rounded-lg dark:text-gray-200 hover:bg-indigo-100 dark:hover:bg-indigo-700 group transition duration-200 ease-linear',
+                'flex w-full whitespace-nowrap text-left items-center py-2 px-3 text-sm font-semibold text-gray-800 rounded-lg dark:text-gray-200 hover:bg-indigo-700/10 dark:hover:bg-indigo-700 group transition duration-200 ease-linear',
                 open ? 'text-indigo-700' : '',
             ]">
                 <span :class="['flex-1',
