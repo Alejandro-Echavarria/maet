@@ -9,6 +9,19 @@ class Knowledge extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'user_id',
+        'title',
+        'icon',
+        'main',
+    ];
+
+    protected $casts = [
+        'status'     => 'boolean',
+        'created_at' => "date:d/m/Y",
+        'updated_at' => "date:d/m/Y",
+    ];
+
     // Relación uno a muchos inversa
     public function user()
     {

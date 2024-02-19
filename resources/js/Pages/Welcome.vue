@@ -22,7 +22,7 @@ const changeOrder = () => {
 
 <template>
     <Head>
-        <title>Web Development and Innovative Solutions</title>
+        <title>Web development ~ Manuel Echavarria</title>
         <meta type="description" name="description" head-key="description"
             content="Transforming ideas into functional webapps. Boosting online presence with modern designs optimized for SEO! Discover high-quality web development and Software Engineering">
     </Head>
