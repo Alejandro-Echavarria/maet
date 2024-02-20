@@ -22,7 +22,7 @@ const opration = ref(1);
 const knowledge = ref(null);
 
 const form = useForm({
-    title: "",
+    name: "",
     icon: "",
     main: false,
 });
@@ -51,7 +51,7 @@ const save = () => {
     }
 };
 
-const openModal = (op, id, titleData, icon, main) => {
+const openModal = (op, id, name, icon, main) => {
     modal.value = true;
     opration.value = op;
 
@@ -60,7 +60,7 @@ const openModal = (op, id, titleData, icon, main) => {
     } else {
         title.value = "Edit knowledge";
         knowledge.value = id;
-        form.title = titleData;
+        form.name = name;
         form.icon = icon;
         form.main = main;
     }
@@ -99,10 +99,10 @@ defineExpose({ openModal });
                     <template #form>
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
                             <div class="sm:col-span-3">
-                                <InputLabel for="title" value="Title" />
-                                <TextInput id="title" ref="titleInput" v-model="form.title" type="text" />
+                                <InputLabel for="name" value="Name" />
+                                <TextInput id="name" ref="nameInput" v-model="form.name" type="text" />
 
-                                <InputError :message="form.errors.title" class="mt-2" />
+                                <InputError :message="form.errors.name" class="mt-2" />
                             </div>
 
                             <div class="flex items-center sm:col-span-3 gap-6">
