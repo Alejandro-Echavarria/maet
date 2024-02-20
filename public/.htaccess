@@ -26,35 +26,50 @@
 
 
 <IfModule mod_expires.c>
-  ExpiresActive On
+    ExpiresActive On
 
- # Images
-  ExpiresByType image/jpeg "access plus 1 year"
-  ExpiresByType image/gif "access plus 1 year"
-  ExpiresByType image/png "access plus 1 year"
-  ExpiresByType image/webp "access plus 1 year"
-  ExpiresByType image/svg+xml "access plus 1 year"
-  ExpiresByType image/x-icon "access plus 1 year"
+    # Images
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
 
-  # Video
-  ExpiresByType video/webm "access plus 1 year"
-  ExpiresByType video/mp4 "access plus 1 year"
-  ExpiresByType video/mpeg "access plus 1 year"
+    # Video
+    ExpiresByType video/webm "access plus 1 year"
+    ExpiresByType video/mp4 "access plus 1 year"
+    ExpiresByType video/mpeg "access plus 1 year"
 
-  # Fonts
-  ExpiresByType font/ttf "access plus 1 year"
-  ExpiresByType font/otf "access plus 1 year"
-  ExpiresByType font/woff "access plus 1 year"
-  ExpiresByType font/woff2 "access plus 1 year"
-  ExpiresByType application/font-woff "access plus 1 year"
-  ExpiresByType application/font-woff2 "access plus 1 year"
+    # Fonts
+    ExpiresByType font/ttf "access plus 1 year"
+    ExpiresByType font/otf "access plus 1 year"
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType application/font-woff "access plus 1 year"
+    ExpiresByType application/font-woff2 "access plus 1 year"
 
-  # CSS, JavaScript
-  ExpiresByType text/css "access plus 1 year"
-  ExpiresByType text/javascript "access plus 1 year"
-  ExpiresByType application/javascript "access plus 1 year"
+    # CSS, JavaScript
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType text/javascript "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
 
-  # Others
-  ExpiresByType application/pdf "access plus 1 year"
-  ExpiresByType image/vnd.microsoft.icon "access plus 1 year"
+    # Others
+    ExpiresByType application/pdf "access plus 1 year"
+    ExpiresByType image/vnd.microsoft.icon "access plus 1 year"
+</IfModule>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Evitar indexación para URLs que contienen /admin/
+    RewriteCond %{REQUEST_URI} ^/admin/ [NC]
+    RewriteRule ^ - [E=NOINDEXFOLLOW:true]
+
+    # Evitar indexación para URLs específicas como /login y /register
+    RewriteCond %{REQUEST_URI} ^/(login|register) [NC]
+    RewriteRule ^ - [E=NOINDEXFOLLOW:true]
+
+    # Agregar la directiva noindex y nofollow para páginas que cumplan las condiciones anteriores
+    Header set X-Robots-Tag "noindex, nofollow" env=NOINDEXFOLLOW
 </IfModule>
