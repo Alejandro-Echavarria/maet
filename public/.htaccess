@@ -32,7 +32,7 @@
     RewriteRule ^ - [E=NOINDEXFOLLOW:true]
 
     # Agregar la directiva noindex y nofollow para páginas que cumplan las condiciones anteriores
-    Header set X-Robots-Tag "noindex, nofollow" env=NOINDEXFOLLOW
+    # Header set X-Robots-Tag "noindex, nofollow" env=NOINDEXFOLLOW
 </IfModule>
 
 
