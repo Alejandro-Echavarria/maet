@@ -30,7 +30,10 @@ const submit = () => {
 </script>
 
 <template>
-    <Head title="Log in" />
+    <Head>
+        <title>Log in</title>
+        <meta type="robots" name="robots" content="noindex, nofollow" />
+    </Head>
 
     <AuthenticationCard>
         <template #logo>

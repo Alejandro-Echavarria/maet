@@ -22,17 +22,6 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
-
-    # Evitar indexación para URLs que contienen /admin/
-    RewriteCond %{REQUEST_URI} ^/admin/ [NC]
-    RewriteRule ^ - [E=NOINDEXFOLLOW:true]
-
-    # Evitar indexación para URLs específicas como /login y /register
-    RewriteCond %{REQUEST_URI} ^/(login|register) [NC]
-    RewriteRule ^ - [E=NOINDEXFOLLOW:true]
-
-    # Agregar la directiva noindex y nofollow para páginas que cumplan las condiciones anteriores
-    # Header set X-Robots-Tag "noindex, nofollow" env=NOINDEXFOLLOW
 </IfModule>
 
 
