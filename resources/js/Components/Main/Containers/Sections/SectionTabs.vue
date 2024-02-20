@@ -11,7 +11,7 @@ const props = defineProps({
 const defaultTabs = ref([
     { id: "education", label: "Educations", route: 'admin.resume.educations.index' },
     { id: "experience", label: "Experiences", route: 'admin.resume.experiences.index' },
-    // { id: "job", label: "Jobs", route: 'admin.resume.experiences.index', selected: false },
+    { id: "knowledge", label: "Knowledge", route: 'admin.resume.knowledge.index' },
     // { id: "workingSkill", label: "Working Skills", route: 'admin.resume.experiences.index', selected: false },
     // { id: "know", label: "Knows", route: 'admin.resume.experiences.index', selected: false },
 ]);

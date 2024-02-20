@@ -113,7 +113,7 @@ defineExpose({ openModal });
             </template>
 
             <template #content>
-                <div class="mt-4">
+                <div>
                     <InputLabel for="icon" value="Icon" />
                     <TextInput v-model="form.icon" id="icon" ref="iconInput" type="text" placeholder="fas-user" />
 

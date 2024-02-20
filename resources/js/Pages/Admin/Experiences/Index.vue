@@ -4,7 +4,7 @@ import { Head } from "@inertiajs/vue3";
 import MainLayout from "@/Components/Main/Admin/Layout/MainLayout.vue";
 import MainTitle from "@/Components/Main/Admin/Components/Titles/MainTitle.vue";
 import SaveExperience from "@/Pages/Admin/Experiences/Partials/SaveExperience.vue";
-import DeleteExperience from './Partials/DeleteExperience.vue';
+import DeleteExperience from "@/Pages/Admin/Experiences/Partials/DeleteExperience.vue";
 import SectionTabs from "@/Components/Main/Containers/Sections/SectionTabs.vue";
 import Time from "@/Components/Main/Admin/Components/OtherComponents/Time.vue";
 
@@ -32,7 +32,7 @@ const openModal = (op, id, titleData, start_date, end_date, description, color) 
 
         <MainTitle> Experieces </MainTitle>
 
-        <SectionTabs :tabsOptions="tabs">
+        <SectionTabs>
             <template #tabexperience>
                 <SaveExperience ref="callOpenModal" :data="experiences" />
 
