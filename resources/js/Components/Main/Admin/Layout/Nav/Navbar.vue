@@ -13,14 +13,24 @@ const navItems = [
     { href: 'admin.jobs.index', active: route().current('admin.jobs.index'), activeClass: '/admin/jobs', label: 'Jobs', children: [], icon: ['fas', 'file-arrow-down'] },
     { href: 'admin.services.index', active: route().current('admin.services.index'), activeClass: '/admin/services', label: 'Services', children: [], icon: ['fas', 'store'] },
     {
-        href: '#', label: 'Personal info', active: route().current('admin.resume.*'), activeClass: (route().current('admin.resume.*') ? '/resume' : '' || route().current('admin.aboutme.index') ? '/about-me' : ''), children: [
+        href: '#', label: 'Personal info',
+        active: route().current('admin.resume.*'),
+        // activeClass: (
+        // route().current('admin.resume.*') ? '/resume' : '' ||
+        // route().current('admin.aboutme.index') ? '/about-me' : '' ||
+        // route().current('admin.knowledges.index') ? '/knowledges' : ''
+        // ),
+        children: [
             { href: 'admin.aboutme.index', active: route().current('admin.aboutme.index'), activeClass: '/admin/about-me', label: 'About me', children: [], icon: null },
             { href: 'admin.usersocialmedias.index', active: route().current('admin.usersocialmedias.index'), activeClass: '/admin/user-social-medias', label: 'User social medias', children: [], icon: null },
             { href: 'admin.resume.educations.index', active: route().current('admin.resume.*'), activeClass: '/admin/resume', label: 'Personal info', children: [], icon: null },
+            // { href: 'admin.resume.knowledges.index', active: route().current('admin.knowledges.*'), activeClass: '/admin/knowledges', label: 'Knowledges', children: [], icon: null },
         ], icon: ['far', 'file']
     },
     {
-        href: '#', label: 'Configuration', active: route().current('admin.socialmedias.*'), activeClass: '/admin/social-medias', children: [
+        href: '#', label: 'Configuration', active: route().current('admin.socialmedias.*'),
+        // activeClass: '/admin/social-medias',
+        children: [
             { href: 'admin.socialmedias.index', active: route().current('admin.socialmedias.index'), activeClass: '/admin/social-medias', label: 'Social medias', children: [], icon: null },
         ], icon: ['fas', 'gear']
     },
@@ -70,7 +80,8 @@ defineExpose({ toggleSidebarVisibility });
                         </div>
                     </button>
                     <a href="/" class="flex md:mr-24">
-                        <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap text-gray-800 dark:text-white">
+                        <span
+                            class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap text-gray-800 dark:text-white">
                             MAET
                         </span>
                     </a>

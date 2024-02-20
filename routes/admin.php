@@ -9,7 +9,7 @@ use App\Http\Controllers\Admin\AboutMeController;
 use App\Http\Controllers\Admin\ExperienceController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\EducationController;
-use App\Http\Controllers\ImageController;
+use App\Http\Controllers\Admin\KnowleedgeController;
 
 Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
@@ -36,3 +36,6 @@ Route::resource('resume/educations', EducationController::class)->only(['index',
 
 // Experiences
 Route::resource('resume/experiences', ExperienceController::class)->only(['index', 'store', 'update', 'destroy'])->names('admin.resume.experiences');
+
+// Knowledges
+Route::resource('resume/knowledge', KnowleedgeController::class)->only(['index', 'store', 'update', 'destroy'])->names('admin.resume.knowledge');
