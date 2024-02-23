@@ -58,18 +58,58 @@ const changeOrder = () => {
             </div>
             <div class="max-w-5xl mx-auto">
                 <div class="space-y-10 sm:space-y-20">
-                    <section id="about-me-brief">
+                    <section id="about-me-brief" class="">
                         <SectionTitle :place-bg="'left'">
                             <h3 class="z-10 text-5xl lg:text-7xl font-bold text-gray-800 dark:text-gray-200 text-center">
                                 About me
                             </h3>
                         </SectionTitle>
 
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                            <div>
-                                <p v-html="user.bio" />
-                            </div>
+                        <div class="relative grid grid-cols-1 sm:grid-cols-2 gap-8">
+                            <div class="space-y-8">
+                                <div>
+                                    <p v-html="user.bio" />
+                                </div>
+                                <div class="space-y-8">
+                                    <div>
+                                        <h3 class="p-0">Experiences</h3>
+                                    </div>
+                                    <div v-for="( experience ) in user.experiences" :key="'experience-' + experience.id"
+                                        class="p-4 space-y-2 border rounded-xl border-[#000000]/[0.16]">
+                                        <time class="text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
+                                            <span>{{ experience.start_date }} - {{ experience.end_date }}</span>
+                                        </time>
+                                        <h3 class="text-lg font-semibold text-gray-700 dark:text-white p-0">
+                                            {{ experience.title }}
+                                        </h3>
 
+                                        <p class="dark:text-gray-400 line-clamp-6" v-html="experience.description">
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <h3 class="p-0">Knowledge</h3>
+                                    </div>
+                                    <div class="space-y-4 p-4 border rounded-xl border-[#000000]/[0.16]">
+                                        <div v-for="( knowledge ) in user.knowledge"
+                                            :key="'knowledge-about-me-' + knowledge.id" class="flex">
+                                            <div id="tech-container" class="flex gap-2 items-center">
+                                                <p class="dark:text-gray-400" v-html="knowledge.name"></p>
+                                                <div class="overflow-hidden">
+                                                    <i v-html="knowledge.icon" :title="knowledge.name" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="bg-gradient-to-b from-white/40 via-white/80 to-white/100 h-1/4 absolute bottom-0 w-full grid place-content-center">
+                                <div class="py-4">
+                                    <PrimaryButton>
+                                        See more about me
+                                    </PrimaryButton>
+                                </div>
+                            </div>
 
                             <div class="flex justify-center sm:justify-end">
                                 <img class="w-[350px] h-[350px] overflow-auto object-cover" src="/img/others/body.webp"
@@ -102,9 +142,9 @@ const changeOrder = () => {
                                         </h3>
                                         </Link>
 
-                                        <h4 :class="['text-sm font-normal text-gray-500 dark:text-gray-300', 'p-0']">
+                                        <!-- <h4 :class="['text-sm font-normal text-gray-500 dark:text-gray-300', 'p-0']">
                                             {{ job.project_name }}
-                                        </h4>
+                                        </h4> -->
                                     </div>
 
                                     <p class="text-gray-500 dark:text-gray-300 line-clamp-3" v-html="job.preview" />

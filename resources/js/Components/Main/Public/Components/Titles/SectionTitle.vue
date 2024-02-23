@@ -8,8 +8,12 @@ const props = defineProps({
 
 <template>
     <div class="relative">
-        <div
+        <!-- <div
             class="mb-10 sm:mb-20 flex items-center before:flex-[1_1_0%] before:border-t before:border-[#000000]/[0.16] before:me-6 after:flex-[1_1_0%] after:border-t after:border-[#000000]/[0.16] after:ms-6 dark:text-white dark:before:border-gray-600 dark:after:border-gray-600">
+            <slot />
+        </div> -->
+
+        <div class="mb-10 sm:mb-20">
             <slot />
         </div>
 
