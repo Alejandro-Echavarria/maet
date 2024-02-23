@@ -11,7 +11,7 @@ class HomeController extends Controller
     public function index()
     {
         $user = User::select(['id', 'name', 'email', 'position', 'bio'])
-            ->with(['knowledge' => function ($query) {
+            ->with(['experiences', 'knowledge' => function ($query) {
                 $query->select('user_id', 'name', 'icon')
                     ->where('main', '=', '1');
             }])
