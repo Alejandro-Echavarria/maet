@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Job;
-use App\Models\Technology;
 use App\Models\User;
 use Inertia\Inertia;
 
@@ -11,9 +10,12 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $user = User::select(['name', 'email', 'position', 'bio'])->first();
-
-        $technologies = Technology::select(['id', 'name', 'icon'])->where('main', '=', '1')->get();
+        $user = User::select(['id', 'name', 'email', 'position', 'bio'])
+            ->with(['knowledge' => function ($query) {
+                $query->select('user_id', 'name', 'icon')
+                    ->where('main', '=', '1');
+            }])
+            ->first();
 
         $jobs = Job::with(['technologies:id,name,icon', 'images' => function ($query) {
             $query->select('id', 'url', 'default', 'imageable_id')
@@ -23,8 +25,6 @@ class HomeController extends Controller
             ->where('status', 1)
             ->get();
 
-        $knowledges = $user->knowledges()->select(['id', 'title'])->get();
-
-        return Inertia::render('Welcome', compact('user', 'technologies', 'jobs', 'knowledges'));
+        return Inertia::render('Welcome', compact('user', 'jobs'));
     }
 }

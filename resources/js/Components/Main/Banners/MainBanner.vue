@@ -6,7 +6,7 @@ const { user } = defineProps({
     user: {
         type: Object,
     },
-    technologies: {
+    knowledge: {
         type: Object,
     }
 });
@@ -31,7 +31,9 @@ const { user } = defineProps({
                     </div>
                     <div class="w-full grid grid-cols-1 md:grid-cols-2 mt-4 gap-4 animate-fade-in-up" style="animation-delay: 0.66s;">
                         <div class="grid items-center my-4">
-                            <Stacks :title="'Main Tech'" :stacks="technologies" />
+                            <div>
+                                <Stacks :title="'Main Tech'" :stacks="knowledge" />
+                            </div>
                         </div>
                         <div class="w-full">
                             <div>

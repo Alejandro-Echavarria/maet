@@ -21,8 +21,8 @@ const props = defineProps({
 
 const callOpenModal = ref(null);
 
-const openModal = (op, id, titleData, icon, main) => {
-    callOpenModal.value.openModal(op, id, titleData, icon, main);
+const openModal = (op, id, name, icon, main) => {
+    callOpenModal.value.openModal(op, id, name, icon, main);
 };
 </script>
 
@@ -34,7 +34,7 @@ const openModal = (op, id, titleData, icon, main) => {
         <MainTitle> Knowledge </MainTitle>
         <SectionTabs>
             <template #tabknowledge>
-                <SaveKnowledge ref="callOpenModal" :data="knowledges" />
+                <SaveKnowledge ref="callOpenModal" :data="knowledge" />
 
                 <TimeComponent>
                     <template #list>
@@ -49,7 +49,7 @@ const openModal = (op, id, titleData, icon, main) => {
                                 <div class="flex gap-3 items-center">
                                     <span  id="tech-container" v-html="knowledge.icon"></span>
                                     <h3 class="text-lg font-semibold text-gray-700 dark:text-white">
-                                        {{ knowledge.title }}
+                                        {{ knowledge.name }}
                                     </h3>
                                 </div>
 
@@ -59,7 +59,7 @@ const openModal = (op, id, titleData, icon, main) => {
                                             openModal(
                                                 2,
                                                 knowledge.id,
-                                                knowledge.title,
+                                                knowledge.name,
                                                 knowledge.icon,
                                                 knowledge.main
                                             )

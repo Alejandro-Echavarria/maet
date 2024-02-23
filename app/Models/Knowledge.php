@@ -11,7 +11,7 @@ class Knowledge extends Model
 
     protected $fillable = [
         'user_id',
-        'title',
+        'name',
         'icon',
         'main',
     ];

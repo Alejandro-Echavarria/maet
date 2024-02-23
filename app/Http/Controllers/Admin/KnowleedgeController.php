@@ -19,7 +19,7 @@ class KnowleedgeController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'title' => "required|max:255|string|unique:knowledge,title",
+            'name' => "required|max:255|string|unique:knowledge,name",
             'icon'  => 'required|string',
             'main'  => "boolean",
         ]);
@@ -34,7 +34,7 @@ class KnowleedgeController extends Controller
     public function update(Request $request, Knowledge $knowledge)
     {
         $data = $request->validate([
-            'title' => "required|max:255|string|unique:knowledge,title,$knowledge->id",
+            'name' => "required|max:255|string|unique:knowledge,name,$knowledge->id",
             'icon'  => 'required|string',
             'main'  => "required|boolean",
         ]);

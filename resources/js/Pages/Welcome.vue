@@ -11,7 +11,6 @@ let order = false;
 
 const props = defineProps({
     user: Object,
-    technologies: Object,
     jobs: Object
 });
 
@@ -30,7 +29,7 @@ const changeOrder = () => {
     <div>
         <Navbar :animation="true" />
 
-        <MainBanner :user="user" :technologies="technologies" />
+        <MainBanner :user="user" :knowledge="user.knowledge" />
 
         <!-- <h3 class="text-2xl font-bold text-gray-700 dark:text-gray-200 mb-8 text-center animate-fade-in-up" style="animation-delay: 1.5s;">Projects</h3> -->
         <main class="xs:px-0 mx-4">
