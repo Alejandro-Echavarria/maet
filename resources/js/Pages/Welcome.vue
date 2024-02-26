@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from 'vue';
 import { Head, Link } from '@inertiajs/vue3';
 import MainBanner from '@/Components/Main/Banners/MainBanner.vue';
 import Navbar from '@/Components/Main/Public/Layout/Nav/Navbar.vue';
@@ -6,6 +7,7 @@ import MainFooter from "@/Components/Main/Public/Footers/MainFooter.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import Stacks from "@/Components/Main/Public/Containers/Stacks/Stacks.vue";
 import SectionTitle from '@/Components/Main/Public/Components/Titles/SectionTitle.vue';
+import ContactModal from '@/Components/Main/Public/Components/Contacts/ContactModal.vue';
 
 let order = false;
 
@@ -31,14 +33,14 @@ const changeOrder = () => {
 
         <MainBanner :user="user" :knowledge="user.knowledge" />
 
-        <!-- <h3 class="text-2xl font-bold text-gray-700 dark:text-gray-200 mb-8 text-center animate-fade-in-up" style="animation-delay: 1.5s;">Projects</h3> -->
         <main class="xs:px-0 mx-4">
             <div class="grid justify-center h-[10vh] mb-20 mt-2 gap-4 sm:gap-4m animate-fade-in-up"
                 style="animation-delay: 1.1s;">
                 <div>
-                    <PrimaryButton>
+                    <!-- <PrimaryButton>
                         Send me a message
-                    </PrimaryButton>
+                    </PrimaryButton> -->
+                    <ContactModal :message="'Get in touch'" />
                 </div>
 
                 <div
