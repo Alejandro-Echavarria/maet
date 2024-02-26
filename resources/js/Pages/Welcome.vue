@@ -66,16 +66,16 @@ const changeOrder = () => {
                         </SectionTitle>
 
                         <div class="relative grid grid-cols-1 sm:grid-cols-2 gap-8">
-                            <div class="space-y-8">
-                                <div>
-                                    <p v-html="user.bio" />
-                                </div>
+                            <div class="order-1">
+                                <p v-html="user.bio" />
+                            </div>
+                            <div class="space-y-8 order-3">
                                 <div class="space-y-8">
                                     <div>
                                         <h3 class="p-0">Experiences</h3>
                                     </div>
                                     <div v-for="( experience ) in user.experiences" :key="'experience-' + experience.id"
-                                        class="p-4 space-y-2 border rounded-xl border-[#000000]/[0.16]">
+                                        class="p-4 space-y-2 border rounded-xl border-[#000000]/[0.16] order-3">
                                         <time class="text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
                                             <span>{{ experience.start_date }} - {{ experience.end_date }}</span>
                                         </time>
@@ -103,7 +103,7 @@ const changeOrder = () => {
                                 </div>
                             </div>
                             <div
-                                class="bg-gradient-to-b from-white/40 via-white/80 to-white/100 h-1/4 absolute bottom-0 w-full grid place-content-center">
+                                class="bg-gradient-to-b from-white/40 via-white/80 to-white/100 h-1/4 absolute bottom-0 w-full grid place-content-center content-end">
                                 <div class="py-4">
                                     <PrimaryButton>
                                         See more about me
@@ -111,8 +111,8 @@ const changeOrder = () => {
                                 </div>
                             </div>
 
-                            <div class="flex justify-center sm:justify-end">
-                                <img class="w-[350px] h-[350px] overflow-auto object-cover" src="/img/others/body.webp"
+                            <div class="flex justify-center sm:justify-end order-2">
+                                <img class="w-[350px] h-[350px] overflow-auto object-cover rounded-xl" src="/img/others/body.webp"
                                     title="Manuel Echavarria" alt="Manuel Echavarria">
                             </div>
                         </div>
