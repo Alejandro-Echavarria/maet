@@ -63,7 +63,7 @@ const ok = (msj, type, timer) => {
                             <div class="sm:col-span-3">
                                 <InputLabel for="name" value="Name" />
                                 <TextInput id="name" ref="altBannerImageInput" v-model="form.name"
-                                    type="text" />
+                                    type="text" placeholder="Working in this feature" />
 
                                 <InputError :message="form.errors.name" class="mt-2" />
                             </div>
