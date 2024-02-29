@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 import { useForm } from "@inertiajs/vue3";
 import DialogModal from "@/Components/DialogModal.vue";
 import SimpleForm from "@/Components/Main/Admin/Components/Forms/SimpleForm.vue";
@@ -28,11 +28,8 @@ const form = useForm({
     message: "",
 });
 
-onMounted(() => {
-    CKeditorHelper(true);
-});
-
 const openModal = () => {
+    CKeditorHelper(true);
     modal.value = true;
     title.value = "Get in touch";
 };
