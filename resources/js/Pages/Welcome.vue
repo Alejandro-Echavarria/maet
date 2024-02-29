@@ -37,14 +37,11 @@ const changeOrder = () => {
             <div class="grid justify-center h-[10vh] mb-20 mt-2 gap-4 sm:gap-4m animate-fade-in-up"
                 style="animation-delay: 1.1s;">
                 <div>
-                    <!-- <PrimaryButton>
-                        Send me a message
-                    </PrimaryButton> -->
                     <ContactModal :message="'Get in touch'" />
                 </div>
 
                 <div
-                    class="text-sm flex items-center gap-4 before:h-px before:flex-1 before:bg-[#000000]/[0.16]  before:content-[''] after:h-px after:flex-1 after:bg-[#000000]/[0.16]  after:content-['']">
+                    class="text-sm text-center">
                     or take a look
                 </div>
 

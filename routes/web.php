@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Public\ContactUsController;
 use App\Http\Controllers\Public\JobController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -19,4 +20,8 @@ use Inertia\Inertia;
 
 Route::get('/', [HomeController::class, 'index'])->name('welcome');
 
-Route::get('/jobs/{job}', [JobController::class, 'show'])->name('jobs.show');
+// Jobs
+Route::get('jobs/{job}', [JobController::class, 'show'])->name('jobs.show');
+
+// Mails
+Route::post('contact-us', [ContactUsController::class, 'store'])->name('contactus.store');
