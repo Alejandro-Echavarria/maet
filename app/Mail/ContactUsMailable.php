@@ -28,7 +28,7 @@ class ContactUsMailable extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Contact Us Mailable',
+            subject: 'Contact us form',
         );
     }
 
@@ -38,7 +38,7 @@ class ContactUsMailable extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.contact-us',
+            markdown: 'emails.contact-us',
         );
     }
 

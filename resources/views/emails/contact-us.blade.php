@@ -1,7 +1,12 @@
 @component('mail::message')
+<strong> {{ 'Sender:' }} </strong>
+{{ $data['name'] }}
 
-{{ '$data['']' }}
-{{ '$data[''] '}}
-{{ '$data['']' }}
+<strong> {{ 'Email:' }} </strong>
+{{ $data['email'] }}
 
+<div>
+    <strong> {{ 'Message:' }} </strong>
+    {!! $data['message'] !!}
+</div>
 @endcomponent
