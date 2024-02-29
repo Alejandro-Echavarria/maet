@@ -12,13 +12,6 @@ import SaveAlert from "@/Helpers/Alerts/SaveAlert";
 import Ckeditor from '@/Components/Main/Public/Components/Forms/Inputs/Ckeditor/Ckeditor.vue';
 import CKeditorHelper from "@/Helpers/CKeditor/Ckeditor";
 
-const props = defineProps({
-    message: {
-        type: String,
-        default: "put a text"
-    },
-});
-
 const title = ref("");
 const modal = ref(false);
 
@@ -63,9 +56,10 @@ defineExpose({ openModal });
 <template>
     <div>
         <div>
-            <PrimaryButton class="sm:w-auto w-full" @click="openModal">
+            <slot name="button" />
+            <!-- <PrimaryButton class="sm:w-auto w-full" @click="openModal">
                 {{ message }}
-            </PrimaryButton>
+            </PrimaryButton> -->
         </div>
 
         <DialogModal :show="modal" :maxWidth="'3xl'" @close="closeModal">

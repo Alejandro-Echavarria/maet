@@ -5,6 +5,7 @@ import MainBanner from '@/Components/Main/Banners/MainBanner.vue';
 import Navbar from '@/Components/Main/Public/Layout/Nav/Navbar.vue';
 import MainFooter from "@/Components/Main/Public/Footers/MainFooter.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import ContactButton from "@/Components/Main/Public/Components/Buttons/ContactButton.vue";
 import Stacks from "@/Components/Main/Public/Containers/Stacks/Stacks.vue";
 import SectionTitle from '@/Components/Main/Public/Components/Titles/SectionTitle.vue';
 
@@ -15,13 +16,13 @@ const props = defineProps({
     jobs: Object
 });
 
+const callOpenModal = ref(null);
+
 const changeOrder = () => {
     return order = !order;
 }
 
 const ContactModal = defineAsyncComponent(() => import('@/Components/Main/Public/Components/Contacts/ContactModal.vue'));
-
-const callOpenModal = ref(null);
 
 const openModal = () => {
     callOpenModal.value.openModal();
@@ -38,12 +39,12 @@ const openModal = () => {
     <div>
         <Navbar :animation="true">
             <template #button>
-                <PrimaryButton @click="openModal()" class="rounded-2xl relative shadow-md shadow-gray-500/20">
+                <ContactButton @click="openModal()" class="rounded-2xl relative shadow-md shadow-gray-500/20">
                     Contact
                     <span
                         class="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-indigo-200/0 via-indigo-200/90 to-indigo-200/0 transition-opacity duration-400 group-hover:opacity-40">
                     </span>
-                </PrimaryButton>
+                </ContactButton>
             </template>
         </Navbar>
 
@@ -53,7 +54,13 @@ const openModal = () => {
             <div class="grid justify-center h-[10vh] mb-20 mt-2 gap-4 sm:gap-4m animate-fade-in-up"
                 style="animation-delay: 1.1s;">
                 <div>
-                    <ContactModal ref="callOpenModal" :message="'Get in touch'" />
+                    <ContactModal ref="callOpenModal">
+                        <template #button>
+                            <PrimaryButton @click="openModal" class="sm:w-auto w-full">
+                                Get in touch
+                            </PrimaryButton>
+                        </template>
+                    </ContactModal>
                 </div>
 
                 <div class="text-sm text-center">
