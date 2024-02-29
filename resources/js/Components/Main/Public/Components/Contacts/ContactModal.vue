@@ -16,7 +16,7 @@ const props = defineProps({
     message: {
         type: String,
         default: "put a text"
-    }
+    },
 });
 
 const title = ref("");
@@ -56,12 +56,14 @@ const ok = (msj, type, timer) => {
     closeModal();
     SaveAlert(msj, type, timer);
 };
+
+defineExpose({ openModal });
 </script>
 
 <template>
     <div>
         <div>
-            <PrimaryButton class="sm:w-auto w-full" @click="openModal()">
+            <PrimaryButton class="sm:w-auto w-full" @click="openModal">
                 {{ message }}
             </PrimaryButton>
         </div>
@@ -90,7 +92,7 @@ const ok = (msj, type, timer) => {
                                 <InputError :message="form.errors.email" class="mt-2" />
                             </div>
 
-                            <div class="sm:col-span-3">
+                            <div class="sm:col-span-3 h-11">
                                 <InputLabel for="message" value="Message" class="mb-2" />
                                 <Ckeditor :needTimeToLoad="true" id="message" idname="message" v-model="form.message" :value="form.message"
                                     key="message" ref="messageInput">

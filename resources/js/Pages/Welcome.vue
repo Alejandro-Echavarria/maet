@@ -1,5 +1,5 @@
 <script setup>
-import { defineAsyncComponent } from 'vue';
+import { ref, defineAsyncComponent } from 'vue';
 import { Head, Link } from '@inertiajs/vue3';
 import MainBanner from '@/Components/Main/Banners/MainBanner.vue';
 import Navbar from '@/Components/Main/Public/Layout/Nav/Navbar.vue';
@@ -7,7 +7,6 @@ import MainFooter from "@/Components/Main/Public/Footers/MainFooter.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import Stacks from "@/Components/Main/Public/Containers/Stacks/Stacks.vue";
 import SectionTitle from '@/Components/Main/Public/Components/Titles/SectionTitle.vue';
-// import ContactModal from '@/Components/Main/Public/Components/Contacts/ContactModal.vue';
 
 let order = false;
 
@@ -21,6 +20,12 @@ const changeOrder = () => {
 }
 
 const ContactModal = defineAsyncComponent(() => import('@/Components/Main/Public/Components/Contacts/ContactModal.vue'));
+
+const callOpenModal = ref(null);
+
+const openModal = () => {
+    callOpenModal.value.openModal();
+};
 </script>
 
 <template>
@@ -31,7 +36,16 @@ const ContactModal = defineAsyncComponent(() => import('@/Components/Main/Public
     </Head>
 
     <div>
-        <Navbar :animation="true" />
+        <Navbar :animation="true">
+            <template #button>
+                <PrimaryButton @click="openModal()" class="rounded-2xl relative shadow-md shadow-gray-500/20">
+                    Contact
+                    <span
+                        class="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-indigo-200/0 via-indigo-200/90 to-indigo-200/0 transition-opacity duration-400 group-hover:opacity-40">
+                    </span>
+                </PrimaryButton>
+            </template>
+        </Navbar>
 
         <MainBanner :user="user" :knowledge="user.knowledge" />
 
@@ -39,11 +53,10 @@ const ContactModal = defineAsyncComponent(() => import('@/Components/Main/Public
             <div class="grid justify-center h-[10vh] mb-20 mt-2 gap-4 sm:gap-4m animate-fade-in-up"
                 style="animation-delay: 1.1s;">
                 <div>
-                    <ContactModal :message="'Get in touch'" />
+                    <ContactModal ref="callOpenModal" :message="'Get in touch'" />
                 </div>
 
-                <div
-                    class="text-sm text-center">
+                <div class="text-sm text-center">
                     or take a look
                 </div>
 
@@ -113,8 +126,8 @@ const ContactModal = defineAsyncComponent(() => import('@/Components/Main/Public
                             </div>
 
                             <div class="flex justify-center sm:justify-end order-2">
-                                <img class="w-[350px] h-[350px] overflow-auto object-cover rounded-xl" src="/img/others/body.webp"
-                                    title="Manuel Echavarria" alt="Manuel Echavarria">
+                                <img class="w-[350px] h-[350px] overflow-auto object-cover rounded-xl"
+                                    src="/img/others/body.webp" title="Manuel Echavarria" alt="Manuel Echavarria">
                             </div>
                         </div>
                     </section>

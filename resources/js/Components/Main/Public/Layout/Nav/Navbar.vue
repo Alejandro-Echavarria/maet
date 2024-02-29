@@ -1,6 +1,7 @@
 <script setup>
 import { Link } from '@inertiajs/vue3';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
+import PrimaryButton from "@/Components/PrimaryButton.vue";
 
 const props = defineProps({
     animation: {
@@ -17,16 +18,7 @@ const props = defineProps({
             <div :class="['px-2 h-12 w-full']">
                 <div :class="['w-full h-full flex items-center justify-between']">
                     <div class="flex items-center justify-start h-full">
-                        <!-- <button @click="toggleSidebarVisibility" class="mr-4 w-5 h-full text-gray-500 lg:hidden">
-                            <div class="space-y-[0.375rem] h-auto">
-                                <div
-                                    :class="['w-5 h-[2px] rounded-lg bg-gray-600', isSidebarVisible ? '-translate-y-[2.5px] origin-left rotate-[44deg] transition duration-150' : 'rotate-0 transition-all duration-150 ease-linear']">
-                                </div>
-                                <div
-                                    :class="['w-3 h-[2px] rounded-lg bg-gray-600', isSidebarVisible ? 'w-5 translate-y-[3.5px] translate-x-[1px] origin-left -rotate-[48deg] transition duration-150 ease-linear' : 'rotate-0 transition-all duration-150 ease-linear']">
-                                </div>
-                            </div>
-                        </button> -->
+
                         <Link href="/" class="flex md:mr-24 gap-2">
 
                         <ApplicationLogo />
@@ -36,6 +28,18 @@ const props = defineProps({
                             MAET
                         </span>
                         </Link>
+                    </div>
+
+                    <div class="flex items-center space-x-2 border-spacing-2">
+                        <div>
+                            <slot name="button" />
+                            <!-- <PrimaryButton class="rounded-2xl relative shadow-md shadow-gray-500/20">
+                                Contact
+                                <span
+                                    class="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-indigo-200/0 via-indigo-200/90 to-indigo-200/0 transition-opacity duration-400 group-hover:opacity-40">
+                                </span>
+                            </PrimaryButton> -->
+                        </div>
                     </div>
                 </div>
             </div>
