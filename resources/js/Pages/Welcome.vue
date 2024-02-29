@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { defineAsyncComponent } from 'vue';
 import { Head, Link } from '@inertiajs/vue3';
 import MainBanner from '@/Components/Main/Banners/MainBanner.vue';
 import Navbar from '@/Components/Main/Public/Layout/Nav/Navbar.vue';
@@ -7,7 +7,7 @@ import MainFooter from "@/Components/Main/Public/Footers/MainFooter.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import Stacks from "@/Components/Main/Public/Containers/Stacks/Stacks.vue";
 import SectionTitle from '@/Components/Main/Public/Components/Titles/SectionTitle.vue';
-import ContactModal from '@/Components/Main/Public/Components/Contacts/ContactModal.vue';
+// import ContactModal from '@/Components/Main/Public/Components/Contacts/ContactModal.vue';
 
 let order = false;
 
@@ -19,6 +19,8 @@ const props = defineProps({
 const changeOrder = () => {
     return order = !order;
 }
+
+const ContactModal = defineAsyncComponent(() => import('@/Components/Main/Public/Components/Contacts/ContactModal.vue'));
 </script>
 
 <template>
@@ -75,7 +77,7 @@ const changeOrder = () => {
                                     </div>
                                     <div v-for="( experience ) in user.experiences" :key="'experience-' + experience.id"
                                         class="p-4 space-y-2 border rounded-xl border-[#000000]/[0.16] order-3">
-                                        <time class="text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
+                                        <time class="text-sm font-medium text-gray-600">
                                             <span>{{ experience.start_date }} - {{ experience.end_date }}</span>
                                         </time>
                                         <h3 class="text-lg font-semibold text-gray-700 dark:text-white p-0">

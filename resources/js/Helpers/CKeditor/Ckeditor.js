@@ -1,11 +1,18 @@
-const CkeditorHelper = () => {
+const CkeditorHelper = (needTimeToLoad = false) => {
     const src = '/vendor/ckeditor5-build-balloon/build/ckeditor.js';
     const existScript = document.querySelector(`script[src="${src}"]`);
 
     if (!existScript) {
         const script = document.createElement('script');
         script.src = src;
-        document.head.appendChild(script);
+
+        if (needTimeToLoad) {
+            document.head.appendChild(script);
+        } else {
+            document.addEventListener('DOMContentLoaded', () => {
+                document.head.appendChild(script);
+            });
+        }
     }
 }
 

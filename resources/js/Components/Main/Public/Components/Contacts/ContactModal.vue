@@ -29,9 +29,8 @@ const form = useForm({
 });
 
 onMounted(() => {
-    CKeditorHelper();
+    CKeditorHelper(true);
 });
-
 
 const openModal = () => {
     modal.value = true;
@@ -95,8 +94,8 @@ const ok = (msj, type, timer) => {
                             </div>
 
                             <div class="sm:col-span-3">
-                                <InputLabel for="message" value="Message" class="mb-3" />
-                                <Ckeditor id="message" idname="message" v-model="form.message" :value="form.message"
+                                <InputLabel for="message" value="Message" class="mb-2" />
+                                <Ckeditor :needTimeToLoad="true" id="message" idname="message" v-model="form.message" :value="form.message"
                                     key="message" ref="messageInput">
                                     <div id="ckeditormessage"></div>
                                 </Ckeditor>
