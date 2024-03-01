@@ -8,17 +8,11 @@ const props = defineProps({
 
 <template>
     <div class="relative">
-        <!-- <div
-            class="mb-10 sm:mb-20 flex items-center before:flex-[1_1_0%] before:border-t before:border-[#000000]/[0.16] before:me-6 after:flex-[1_1_0%] after:border-t after:border-[#000000]/[0.16] after:ms-6 dark:text-white dark:before:border-gray-600 dark:after:border-gray-600">
-            <slot />
-        </div> -->
-
-        <div class="mb-10 sm:mb-20">
+        <div class="mb-10 sm:mb-20 flex justify-center">
             <slot />
         </div>
-
-        <div :class="['absolute w-1/2 bg-indigo-700/10 top-6 sm:top-11 rounded-full z-0 shadow-lg', `${placeBg}-20`]">
-            <div class="h-12"></div>
-        </div>
+        <span
+            class="absolute -bottom-0 left-[1.125rem] md:left-[20.125rem] h-[4px] w-[calc(100%-2.25rem)] md:w-[calc(100%-40.25rem)] bg-gradient-to-r from-indigo-700/0 via-indigo-700/90 to-indigo-700/0 transition-opacity duration-400 group-hover:opacity-40">
+        </span>
     </div>
 </template>
