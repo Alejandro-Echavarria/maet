@@ -22,7 +22,7 @@ const form = useForm({
 });
 
 const openModal = () => {
-    CKeditorHelper(true);
+    CKeditorHelper();
     modal.value = true;
     title.value = "Get in touch";
 };

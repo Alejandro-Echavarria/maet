@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, defineAsyncComponent } from 'vue';
 
 const props = defineProps({
     idname: {
@@ -15,33 +15,42 @@ const props = defineProps({
     }
 });
 
+const SimpleTextArea = defineAsyncComponent(() => import('@/Components/Main/Admin/Components/Forms/Inputs/TextArea/SimpleTextArea.vue'));
+
+const render = ref(false);
 const emit = defineEmits(['update:modelValue']);
 const value = ref(props.modelValue ? props.modelValue : '');
 
 onMounted(() => {
     setTimeout(() => {
-        BalloonEditor
-            .create(document.querySelector('#ckeditor' + props.idname), {
-                toolbar: ['undo', 'redo', '|', 'bold', 'italic', 'underline', 'strikethrough', 'link', 'bulletedList', 'numberedList', '|', 'alignment', 'indent', 'outdent', '|', 'insertTable'],
-                placeholder: 'Start typing and select for more features',
-                language: 'es, en',
-            })
-            .then(editor => {
-                editor['#ckeditor' + props.idname] = editor;
-                editor.model.document.on('change', () => {
-                    emit('update:modelValue', editor.getData());
+        try {
+            BalloonEditor
+                .create(document.querySelector('#ckeditor' + props.idname), {
+                    toolbar: ['undo', 'redo', '|', 'bold', 'italic', 'underline', 'strikethrough', 'link', 'bulletedList', 'numberedList', '|', 'alignment', 'indent', 'outdent', '|', 'insertTable'],
+                    placeholder: 'What\'s on your mind?. Select for more features',
+                    language: 'es',
+                })
+                .then(editor => {
+                    editor['#ckeditor' + props.idname] = editor;
+                    editor.model.document.on('change', () => {
+                        emit('update:modelValue', editor.getData());
+                    });
+                    editor.setData(value.value);
+                })
+                .catch(error => {
+                    console.error(error);
+                    render.value = true;
                 });
-                editor.setData(value.value);
-            })
-            .catch(error => {
-                console.error(error);
-            });
+        } catch (error) {
+            render.value = true;
+        }
     }, props.needTimeToLoad ? 500 : 0);
 });
 </script>
 
 <template>
-    <div class="text-sm">
+    <div id="ckeditorContainer">
+        <SimpleTextArea v-if="render" :value="value" @input="$emit('update:modelValue', $event.target.value)" placeholder="What's on your mind?" />
         <slot />
     </div>
 </template>
