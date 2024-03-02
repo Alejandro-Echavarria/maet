@@ -31,7 +31,7 @@ const openModal = () => {
 
 <template>
     <Head>
-        <title>Web development ~ Manuel Echavarria</title>
+        <title>Web developer ~ Manuel Echavarria</title>
         <meta type="description" name="description" head-key="description"
             content="Transforming ideas into functional webapps. Boosting online presence with modern designs optimized for SEO! Discover high-quality web development and Software Engineering">
     </Head>
