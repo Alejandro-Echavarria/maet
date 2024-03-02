@@ -62,7 +62,7 @@ onMounted(() => {
                         'accept': 'application/json'
                     }) : '',
                 },
-                placeholder: 'Start typing...',
+                placeholder: 'Start typing. Select for more features',
                 language: 'es',
             })
             .then(editor => {
