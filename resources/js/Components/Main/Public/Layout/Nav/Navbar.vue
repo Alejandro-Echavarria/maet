@@ -29,15 +29,20 @@ const props = defineProps({
                         </Link>
                     </div>
 
-                    <div class="flex items-center space-x-2 border-spacing-2">
-                        <div>
+                    <div class="flex items-center space-x-3 divide-x divide-[#000000]/[0.16]">
+                        <ul class="flex items-center space-x-6">
+                            <li>
+                                <Link href="/" class="font-semibold text-gray-800 hover:text-gray-500 dark:text-gray-200 transition duration-300">Home</Link>
+                            </li>
+                            <li>
+                                <Link :href="route('jobs.index')" class="font-semibold text-gray-800 hover:text-gray-500 dark:text-gray-200 transition duration-300">Jobs</Link>
+                            </li>
+                            <li>
+                                <Link href="/#about" class="font-semibold text-gray-800 hover:text-gray-500 dark:text-gray-200 transition duration-300">About me</Link>
+                            </li>
+                        </ul>
+                        <div class="pl-3">
                             <slot name="button" />
-                            <!-- <PrimaryButton class="rounded-2xl relative shadow-md shadow-gray-500/20">
-                                Contact
-                                <span
-                                    class="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-indigo-200/0 via-indigo-200/90 to-indigo-200/0 transition-opacity duration-400 group-hover:opacity-40">
-                                </span>
-                            </PrimaryButton> -->
                         </div>
                     </div>
                 </div>
