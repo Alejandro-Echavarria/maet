@@ -1,6 +1,9 @@
 <script setup>
+import { ref, onBeforeUnmount, onMounted } from 'vue';
 import { Link } from '@inertiajs/vue3';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
+import NavLink from '@/Components/NavLink.vue';
+import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 
 const props = defineProps({
     animation: {
@@ -8,6 +11,48 @@ const props = defineProps({
         default: false
     }
 });
+
+const isSidebarVisible = ref(false);
+
+const navLinks = ref([
+    {
+        name: 'Home',
+        routeName: 'welcome',
+        active: 'welcome'
+    },
+    {
+        name: 'Jobs',
+        routeName: 'jobs.index',
+        active: 'jobs.*'
+    }
+    // {
+    //     name: 'About',
+    //     routeName: ''
+    // },
+]);
+
+onMounted(() => {
+    window.addEventListener('resize', handleResize);
+    handleResize();
+});
+
+onBeforeUnmount(() => {
+    window.removeEventListener('resize', handleResize);
+});
+
+const toggleSidebarVisibility = () => {
+    if (window.innerWidth < 768) {
+        isSidebarVisible.value = !isSidebarVisible.value;
+    }
+};
+
+const handleResize = () => {
+    if (window.innerWidth > 768) {
+        isSidebarVisible.value = window.innerWidth <= 768; // Cambiar 1024 por el ancho de resolución deseado para ocultar el sidebar
+    }
+};
+
+defineExpose({ toggleSidebarVisibility });
 </script>
 
 <template>
@@ -19,9 +64,7 @@ const props = defineProps({
                     <div class="flex items-center justify-start h-full">
 
                         <Link href="/" class="flex md:mr-24 gap-2">
-
                         <ApplicationLogo />
-
                         <span
                             class="self-center text-xl font-bold sm:text-2xl whitespace-nowrap dark:text-gray-200 text-gray-800">
                             MAET
@@ -29,24 +72,64 @@ const props = defineProps({
                         </Link>
                     </div>
 
-                    <div class="flex items-center space-x-3 divide-x divide-[#000000]/[0.16]">
+                    <div class="hidden md:flex items-center space-x-3 divide-x divide-[#000000]/[0.16]">
                         <ul class="flex items-center space-x-6">
                             <li>
-                                <Link href="/" class="font-semibold text-gray-800 hover:text-gray-500 dark:text-gray-200 transition duration-300">Home</Link>
+                                <NavLink href="/" :active="route().current('welcome')">
+                                    Home
+                                </NavLink>
                             </li>
                             <li>
-                                <Link :href="route('jobs.index')" class="font-semibold text-gray-800 hover:text-gray-500 dark:text-gray-200 transition duration-300">Jobs</Link>
+                                <NavLink :href="route('jobs.index')" :active="route().current('jobs.index')">
+                                    Jobs
+                                </NavLink>
+                                <!-- <Link :href="route('jobs.index')" class="font-semibold text-gray-800 hover:text-gray-500 dark:text-gray-200 transition duration-300">Jobs</Link> -->
                             </li>
                             <li>
-                                <Link href="/#about" class="font-semibold text-gray-800 hover:text-gray-500 dark:text-gray-200 transition duration-300">About me</Link>
+                                <!-- <NavLink href="/" :active="route().current('welcome')">
+                                    About me
+                                </NavLink> -->
                             </li>
                         </ul>
                         <div class="pl-3">
                             <slot name="button" />
                         </div>
                     </div>
+
+                    <button @click="toggleSidebarVisibility" class="mr-2 w-5 h-full text-gray-500 md:hidden">
+                        <div class="space-y-[0.375rem] h-auto">
+                            <div
+                                :class="['w-5 h-[2px] rounded-lg bg-gray-600', isSidebarVisible ? '-translate-y-[2.5px] origin-left rotate-[44deg] transition duration-150' : 'rotate-0 transition-all duration-150 ease-linear']">
+                            </div>
+                            <div
+                                :class="['w-3 h-[2px] rounded-lg bg-gray-600', isSidebarVisible ? 'w-5 translate-y-[3.5px] translate-x-[1px] origin-left -rotate-[48deg] transition duration-150 ease-linear' : 'rotate-0 transition-all duration-150 ease-linear']">
+                            </div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <div :class="['collapsed-transition text-2xl', { 'collapsed': !isSidebarVisible }]">
+                <div :class="['px-4 my-5']">
+                    <ResponsiveNavLink v-for="(navLink, index) in navLinks" :key="'nav-link-' + index"
+                        :href="route(navLink.routeName)" :active="route().current(navLink.active)"
+                        :class="['animate-fade-in']" :style="{ animationDelay: `${index * 0.1}s` }">
+                        {{ navLink.name }}
+                    </ResponsiveNavLink>
                 </div>
             </div>
         </nav>
     </div>
 </template>
+
+<style>
+.collapsed-transition {
+    height: 90vh;
+    transition: height 0.5s ease;
+    overflow: hidden;
+}
+
+.collapsed-transition.collapsed {
+    height: 0;
+}
+</style>
