@@ -21,7 +21,7 @@ use Inertia\Inertia;
 Route::get('/', [HomeController::class, 'index'])->name('welcome');
 
 // Jobs
-Route::get('jobs/{job}', [JobController::class, 'show'])->name('jobs.show');
+Route::resource('jobs', JobController::class)->names('jobs');
 
 // Mails
 Route::post('contact-us', [ContactUsController::class, 'store'])->name('contactus.store');

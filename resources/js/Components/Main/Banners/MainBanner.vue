@@ -36,14 +36,14 @@ const { user } = defineProps({
                             </div>
                         </div>
                         <div class="w-full">
-                            <div>
+                            <div class="space-y-4">
                                 <h1 class="text-xl md:text-2xl lg:text-3xl font-semibold text-gray-800 dark:text-whit">
                                     {{ user.position }}
                                 </h1>
-                                <h3
+                                <p
                                     class="text-lg md:text-xl font-semibold bg-gradient-to-r from-gray-800 via-indigo-700 to-gray-800 bg-clip-text text-transparent">
                                     &#60;Each line of code is an opportunity to craft unique experiences, not just to achieve objectives, but also to leave a lasting impression /&#62;
-                                </h3>
+                                </p>
                             </div>
                         </div>
                     </div>

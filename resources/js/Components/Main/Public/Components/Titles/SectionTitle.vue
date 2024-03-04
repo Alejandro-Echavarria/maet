@@ -12,7 +12,7 @@ const props = defineProps({
             <slot />
         </div>
         <span
-            class="absolute -bottom-0 left-[1.125rem] md:left-[20.125rem] h-[4px] w-[calc(100%-2.25rem)] md:w-[calc(100%-40.25rem)] bg-gradient-to-r from-indigo-700/0 via-indigo-700/90 to-indigo-700/0 transition-opacity duration-400 group-hover:opacity-40">
+            class="absolute -bottom-0 left-[1.125rem] md:left-[20.125rem] h-[4px] w-[calc(100%-2.25rem)] md:w-[calc(100%-40.25rem)] bg-gradient-to-r from-indigo-700/0 via-indigo-700/10 to-indigo-700/0 transition-opacity duration-400 group-hover:opacity-40">
         </span>
     </div>
 </template>
