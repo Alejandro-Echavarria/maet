@@ -60,7 +60,7 @@ const handleResize = () => {
                 <div :class="['w-full h-full flex items-center justify-between']">
                     <div class="flex items-center justify-start h-full">
 
-                        <Link href="/" class="flex md:mr-24 gap-2">
+                        <Link href="/" @click="isVisible && toggleVisibility()" class="flex md:mr-24 gap-2">
                         <ApplicationLogo />
                         <span
                             class="self-center text-xl font-bold sm:text-2xl whitespace-nowrap dark:text-gray-200 text-gray-800">
@@ -93,7 +93,8 @@ const handleResize = () => {
                         </div>
                     </div>
 
-                    <button type="button" id="hamburgerButton" @click="toggleVisibility" class="mr-2 w-5 h-full text-gray-500 md:hidden">
+                    <button type="button" id="hamburgerButton" name="hamburgerButton" aria-label="hamburgerButton" @click="toggleVisibility"
+                        class="mr-2 w-5 h-full text-gray-500 md:hidden">
                         <div class="space-y-[0.375rem] h-auto">
                             <div
                                 :class="['w-5 h-[2px] rounded-lg bg-gray-800', isVisible ? '-translate-y-[3px] origin-left rotate-[47deg] translate-x-[7px] transition duration-150' : 'rotate-0 transition-all duration-150 ease-linear']">
@@ -110,7 +111,8 @@ const handleResize = () => {
                 <div :class="['px-4 my-5', { 'hidden': !isVisible }]">
                     <ResponsiveNavLink v-for="(navLink, index) in navLinks" :key="'nav-link-' + index"
                         :href="route(navLink.routeName)" :active="route().current(navLink.active)"
-                        :class="['animate-fade-in']" :style="{ animationDelay: `${index * 0.05}s` }">
+                        :class="['animate-fade-in']" :style="{ animationDelay: `${index * 0.05}s` }"
+                        @click="toggleVisibility">
                         {{ navLink.name }}
                     </ResponsiveNavLink>
                 </div>
