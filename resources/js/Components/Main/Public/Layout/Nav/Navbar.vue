@@ -24,7 +24,12 @@ const navLinks = ref([
     {
         name: 'Jobs',
         routeName: 'jobs.index',
-        active: 'jobs.*'
+        active: '/jobs'
+    },
+    {
+        name: 'About me',
+        routeName: 'aboutme.index',
+        active: '/about-me'
     },
 ]);
 
@@ -71,21 +76,10 @@ const handleResize = () => {
 
                     <div class="hidden md:flex items-center space-x-3 divide-x divide-[#000000]/[0.16]">
                         <ul class="flex items-center space-x-6">
-                            <li>
-                                <NavLink href="/" :active="route().current('welcome')">
-                                    Home
+                            <li v-for="(navLink, index) in navLinks">
+                                <NavLink :href="route(navLink.routeName)" :active="route().current(navLink.active) || $page.url.startsWith(navLink.active)" :key="'nav-link-' + index">
+                                    {{ navLink.name }}
                                 </NavLink>
-                            </li>
-                            <li>
-                                <NavLink :href="route('jobs.index')" :active="route().current('jobs.*')">
-                                    Jobs
-                                </NavLink>
-                                <!-- <Link :href="route('jobs.index')" class="font-semibold text-gray-800 hover:text-gray-500 dark:text-gray-200 transition duration-300">Jobs</Link> -->
-                            </li>
-                            <li>
-                                <!-- <NavLink href="/" :active="route().current('welcome')">
-                                    About me
-                                </NavLink> -->
                             </li>
                         </ul>
                         <div class="pl-3">
@@ -109,8 +103,8 @@ const handleResize = () => {
 
             <div :class="['h-[90dvh] overflow-y-auto collapse-transition', { 'collapse': !isVisible }]">
                 <div :class="['px-4 my-5', { 'hidden': !isVisible }]">
-                    <ResponsiveNavLink v-for="(navLink, index) in navLinks" :key="'nav-link-' + index"
-                        :href="route(navLink.routeName)" :active="route().current(navLink.active)"
+                    <ResponsiveNavLink v-for="(navLink, index) in navLinks" :key="'responsive-nav-link-' + index"
+                        :href="route(navLink.routeName)" :active="route().current(navLink.active) || $page.url.startsWith(navLink.active)"
                         :class="['animate-fade-in']" :style="{ animationDelay: `${index * 0.05}s` }"
                         @click="toggleVisibility">
                         {{ navLink.name }}
@@ -125,7 +119,6 @@ const handleResize = () => {
 
 <style>
 .collapse-transition {
-    /* height: 90vh; */
     transition: height 0.5s ease;
     overflow: hidden;
 }
