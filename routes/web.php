@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Public\AboutMeController;
 use App\Http\Controllers\Public\ContactUsController;
 use App\Http\Controllers\Public\JobController;
 use Illuminate\Foundation\Application;
@@ -19,6 +20,9 @@ use Inertia\Inertia;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('welcome');
+
+// About me
+Route::get('/about-me', [AboutMeController::class, 'index'])->name('aboutme.index');
 
 // Jobs
 Route::resource('jobs', JobController::class)->names('jobs');
