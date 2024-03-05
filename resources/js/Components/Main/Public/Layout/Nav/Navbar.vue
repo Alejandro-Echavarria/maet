@@ -12,7 +12,8 @@ const props = defineProps({
     }
 });
 
-const isSidebarVisible = ref(false);
+const isVisible = ref(false);
+const isBackDropVisible = ref(true);
 
 const navLinks = ref([
     {
@@ -24,11 +25,7 @@ const navLinks = ref([
         name: 'Jobs',
         routeName: 'jobs.index',
         active: 'jobs.*'
-    }
-    // {
-    //     name: 'About',
-    //     routeName: ''
-    // },
+    },
 ]);
 
 onMounted(() => {
@@ -40,19 +37,19 @@ onBeforeUnmount(() => {
     window.removeEventListener('resize', handleResize);
 });
 
-const toggleSidebarVisibility = () => {
+const toggleVisibility = () => {
     if (window.innerWidth < 768) {
-        isSidebarVisible.value = !isSidebarVisible.value;
+        isVisible.value = !isVisible.value;
+        document.body.classList.toggle('overflow-hidden', isVisible.value);
     }
 };
 
 const handleResize = () => {
     if (window.innerWidth > 768) {
-        isSidebarVisible.value = window.innerWidth <= 768; // Cambiar 1024 por el ancho de resolución deseado para ocultar el sidebar
+        isVisible.value = window.innerWidth <= 768; // Cambiar 1024 por el ancho de resolución deseado para ocultar el sidebar
+        isBackDropVisible.value = window.innerWidth <= 768;
     }
 };
-
-defineExpose({ toggleSidebarVisibility });
 </script>
 
 <template>
@@ -80,7 +77,7 @@ defineExpose({ toggleSidebarVisibility });
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink :href="route('jobs.index')" :active="route().current('jobs.index')">
+                                <NavLink :href="route('jobs.index')" :active="route().current('jobs.*')">
                                     Jobs
                                 </NavLink>
                                 <!-- <Link :href="route('jobs.index')" class="font-semibold text-gray-800 hover:text-gray-500 dark:text-gray-200 transition duration-300">Jobs</Link> -->
@@ -96,40 +93,42 @@ defineExpose({ toggleSidebarVisibility });
                         </div>
                     </div>
 
-                    <button @click="toggleSidebarVisibility" class="mr-2 w-5 h-full text-gray-500 md:hidden">
+                    <button type="button" id="hamburgerButton" @click="toggleVisibility" class="mr-2 w-5 h-full text-gray-500 md:hidden">
                         <div class="space-y-[0.375rem] h-auto">
                             <div
-                                :class="['w-5 h-[2px] rounded-lg bg-gray-600', isSidebarVisible ? '-translate-y-[2.5px] origin-left rotate-[44deg] transition duration-150' : 'rotate-0 transition-all duration-150 ease-linear']">
+                                :class="['w-5 h-[2px] rounded-lg bg-gray-800', isVisible ? '-translate-y-[3px] origin-left rotate-[47deg] translate-x-[7px] transition duration-150' : 'rotate-0 transition-all duration-150 ease-linear']">
                             </div>
                             <div
-                                :class="['w-3 h-[2px] rounded-lg bg-gray-600', isSidebarVisible ? 'w-5 translate-y-[3.5px] translate-x-[1px] origin-left -rotate-[48deg] transition duration-150 ease-linear' : 'rotate-0 transition-all duration-150 ease-linear']">
+                                :class="['ml-2 w-3 h-[2px] rounded-lg bg-gray-800', isVisible ? 'w-5 translate-y-[3.5px] origin-left -rotate-[51deg] transition duration-150 ease-linear' : 'rotate-0 transition-all duration-150 ease-linear']">
                             </div>
                         </div>
                     </button>
                 </div>
             </div>
 
-            <div :class="['collapsed-transition text-2xl', { 'collapsed': !isSidebarVisible }]">
-                <div :class="['px-4 my-5']">
+            <div :class="['h-[90dvh] overflow-y-auto collapse-transition', { 'collapse': !isVisible }]">
+                <div :class="['px-4 my-5', { 'hidden': !isVisible }]">
                     <ResponsiveNavLink v-for="(navLink, index) in navLinks" :key="'nav-link-' + index"
                         :href="route(navLink.routeName)" :active="route().current(navLink.active)"
-                        :class="['animate-fade-in']" :style="{ animationDelay: `${index * 0.1}s` }">
+                        :class="['animate-fade-in']" :style="{ animationDelay: `${index * 0.05}s` }">
                         {{ navLink.name }}
                     </ResponsiveNavLink>
                 </div>
             </div>
         </nav>
     </div>
+
+    <div v-if="isBackDropVisible && isVisible" @click="toggleVisibility" class="fixed inset-0 z-40" />
 </template>
 
 <style>
-.collapsed-transition {
-    height: 90vh;
+.collapse-transition {
+    /* height: 90vh; */
     transition: height 0.5s ease;
     overflow: hidden;
 }
 
-.collapsed-transition.collapsed {
+.collapse-transition.collapse {
     height: 0;
 }
 </style>
