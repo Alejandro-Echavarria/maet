@@ -22,7 +22,7 @@ const props = defineProps({
 
         <div class="space-y-6">
             <h1
-                :class="`text-5xl lg:text-7xl md:text-6xl font-bold`">
+                :class="`text-5xl lg:text-7xl md:text-6xl font-bold text-gray-800`">
                 About me
             </h1>
         </div>
