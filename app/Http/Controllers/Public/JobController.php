@@ -9,6 +9,16 @@ use Inertia\Inertia;
 
 class JobController extends Controller
 {
+
+    public function index()
+    {
+        $jobs = Job::with(['technologies:id,name'])
+            ->orderBy('id', 'desc')
+            ->paginate(10);
+
+        return Inertia::render('Public/Jobs/Index', compact('jobs'));
+    }
+
     public function show(Job $job)
     {
         $job = $job->with(['technologies:id,name'])
