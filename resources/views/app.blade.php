@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
-        <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-YZCE7NL6GW"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-
-            gtag('config', 'G-YZCE7NL6GW');
-        </script>
         <meta charset="utf-8">
         <meta name="author" content="Manuel Echavarria">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,6 +12,16 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" /> --}}
 
         <link rel="shortcut icon" href="{{ asset('img/icon/my-icon.ico') }}">
+
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-YZCE7NL6GW"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-YZCE7NL6GW');
+        </script>
 
         <!-- Scripts -->
         @routes
