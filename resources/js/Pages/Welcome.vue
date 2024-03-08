@@ -126,9 +126,11 @@ const openModal = () => {
                             <div
                                 class="bg-gradient-to-b from-white/40 via-white/80 to-white/100 h-1/4 absolute bottom-0 w-full grid place-content-center content-end">
                                 <div class="py-4">
-                                    <PrimaryButton>
-                                        See more about me
-                                    </PrimaryButton>
+                                    <Link :href="route('aboutme.index')">
+                                        <PrimaryButton>
+                                            See more about me
+                                        </PrimaryButton>
+                                    </Link>
                                 </div>
                             </div>
 
