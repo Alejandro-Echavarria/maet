@@ -12,9 +12,8 @@ class AboutMeController extends Controller
     public function index()
     {
         $user = User::select(['id', 'name', 'email', 'position', 'bio'])
-            ->with(['experiences', 'knowledge' => function ($query) {
-                $query->select('user_id', 'name', 'icon')
-                    ->where('main', '=', '1');
+            ->with(['experiences', 'education', 'knowledge' => function ($query) {
+                $query->select('user_id', 'name', 'icon');
             }])
             ->first();
 
