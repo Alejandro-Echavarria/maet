@@ -71,7 +71,7 @@ class User extends Authenticatable
     }
 
     // Relación uno a muchos
-    public function educations()
+    public function education()
     {
         return $this->hasMany(Education::class);
     }
