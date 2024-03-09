@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('description');
             $table->date('start_date');
             $table->date('end_date');
-            $table->boolean('present')->nullable()->default(false);
+            $table->boolean('is_current')->nullable()->default(false);
             $table->string('color');
             $table->timestamps();
         });
