@@ -69,7 +69,7 @@ const props = defineProps({
                     </div>
 
                     <div class="flex gap-3 justify-self-center sm:justify-self-end h-10 divide-x divide-[#000000]/[0.16]">
-                        <template v-if="user.user_social_media">
+                        <template v-if="user.user_social_media.length > 0">
                             <div class="flex gap-3">
                                 <div v-for="( social_media, index ) in user.user_social_media" :key="'social-media-' + index" class="py-2">
                                     <div id="tech-container">
