@@ -47,7 +47,7 @@ const openModal = (op, id, name, icon, main) => {
                             </time>
                             <div class="flex justify-between border-b border-dashed border-gray-200 mb-4">
                                 <div class="flex gap-3 items-center">
-                                    <span  id="tech-container" v-html="knowledge.icon"></span>
+                                    <span id="tech-container" v-html="knowledge.icon"></span>
                                     <h3 class="text-lg font-semibold text-gray-700 dark:text-white">
                                         {{ knowledge.name }}
                                     </h3>

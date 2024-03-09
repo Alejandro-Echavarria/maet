@@ -5,6 +5,7 @@ import DialogModal from '@/Components/DialogModal.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
+import IconTextInput from "@/Components/Main/Admin/Components/Forms/Inputs/TextInput/IconTextInput.vue";
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import SaveAlert from '@/Helpers/Alerts/SaveAlert';
@@ -115,7 +116,7 @@ defineExpose({ openModal });
             <template #content>
                 <div>
                     <InputLabel for="icon" value="Icon" />
-                    <TextInput v-model="form.icon" id="icon" ref="iconInput" type="text" placeholder="fas-user" />
+                    <IconTextInput id="icon" ref="iconInput" v-model="form.icon" />
 
                     <InputError :message="form.errors.icon" class="mt-2" />
                 </div>

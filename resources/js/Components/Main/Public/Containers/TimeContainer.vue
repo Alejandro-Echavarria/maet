@@ -17,20 +17,21 @@ const props = defineProps({
 
 <template>
     <div>
-        <div class="p-4 space-y-3 border border-[#000000]/[0.16] rounded-xl">
+        <div :class="['grid gap-10', grid]">
+            <div v-for="( record, index ) in data" :key="'data-container-' + index"
+                class="p-4 space-y-3 border border-[#000000]/[0.16] rounded-xl">
+                <time class="text-sm font-medium text-gray-600">
+                    <span>{{ record.start_date }} - {{ record.end_date }}</span>
+                </time>
 
-            <template v-if="$slots.title">
                 <h3 class="text-lg font-semibold text-gray-700 dark:text-white p-0">
-                    <slot name="title" />
+                    {{ record.title }}
                 </h3>
-            </template>
-
-            <template v-if="$slots.description">
                 <div class="content-ckeditor">
                     <p :class="['dark:text-gray-400', `line-clamp-${lineClamp}`]" v-html="record.description">
                     </p>
                 </div>
-            </template>
+            </div>
         </div>
     </div>
 </template>

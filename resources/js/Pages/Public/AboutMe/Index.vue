@@ -2,6 +2,7 @@
 import { Head } from '@inertiajs/vue3';
 import PublicLayout from '@/Components/Main/Public/Layout/PublicLayout.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
+import TimeContainer from '@/Components/Main/Public/Containers/TimeContainer.vue';
 import SimpleContainer from '@/Components/Main/Public/Containers/SimpleContainer.vue';
 
 defineOptions({
@@ -46,21 +47,52 @@ const props = defineProps({
                             {{ user.name }}
                         </p>
 
-                        <p class="text-gray-500">
+                        <p class="text-gray-600 font-medium">
                             {{ user.position }}
+                        </p>
+                        <p class="text-center sm:text-left text-indigo-700">
+                            <a :href="`mailto:${user.email}`">
+                                <span class="flex justify-center sm:justify-start items-center gap-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail"
+                                        width="20" height="20" viewBox="0 0 24 24" stroke-width="2"
+                                        stroke="currentColor" fill="none" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path
+                                            d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" />
+                                        <path d="M3 7l9 6l9 -6" />
+                                    </svg>
+                                    {{ user.email }}
+                                </span>
+                            </a>
                         </p>
                     </div>
 
-                    <div class="justify-self-center sm:justify-self-end">
-                        <SecondaryButton :hidden="false">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-send" width="20"
-                                height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path d="M10 14l11 -11" />
-                                <path d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5" />
-                            </svg>
-                        </SecondaryButton>
+                    <div class="flex gap-3 justify-self-center sm:justify-self-end h-10 divide-x divide-[#000000]/[0.16]">
+                        <template v-if="user.user_social_media">
+                            <div class="flex gap-3">
+                                <div v-for="( social_media, index ) in user.user_social_media" :key="'social-media-' + index" class="py-2">
+                                    <div id="tech-container">
+                                        <a :href="social_media.url" target="_blank">
+                                            <span v-html="social_media.social_media.icon"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+
+                        <a :href="`mailto:${user.email}`" class="pl-3">
+                            <SecondaryButton :hidden="false">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-send"
+                                    width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M10 14l11 -11" />
+                                    <path
+                                        d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5" />
+                                </svg>
+                            </SecondaryButton>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -105,7 +137,7 @@ const props = defineProps({
                         Experiences
                     </h2>
 
-                    <SimpleContainer :data="user.experiences" />
+                    <TimeContainer :data="user.experiences" />
                 </div>
 
                 <div>
@@ -113,7 +145,7 @@ const props = defineProps({
                         Education
                     </h2>
 
-                    <SimpleContainer :data="user.education" :grid="'grid-cols-1 sm:grid-cols-2'" />
+                    <TimeContainer :data="user.education" :grid="'grid-cols-1 sm:grid-cols-2'" />
                 </div>
             </div>
         </div>

@@ -20,7 +20,12 @@ class AboutMeController extends Controller
                     'education',
                     'knowledge' => function ($query) {
                         $query->select('user_id', 'name', 'icon');
-                    }
+                    },
+                    'userSocialMedia' => function ($query) {
+                        $query->select('user_id', 'social_media_id', 'url')
+                            ->with('socialMedia:id,name,icon');
+                    },
+
                 ]
             )
             ->first();

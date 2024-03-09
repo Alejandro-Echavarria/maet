@@ -57,7 +57,7 @@ const openModal = (op, id, socialMediaId, url) => {
                 <tr v-for="tb in userSocialMedias.data"
                     class="dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition ease-linear duration-300"
                     :key="tb.id + 'tb'">
-                    <td class="px-4 py-3">{{ tb.social_media.name }}</td>
+                    <td id="tech-container" class="px-4 py-3 flex"><span v-html="tb.social_media.icon"></span>&nbsp-&nbsp{{ tb.social_media.name }}</td>
                     <td class="px-4 py-3">{{ tb.url }}</td>
                     <td class="px-4 py-3">{{ tb.created_at }}</td>
                     <td class="px-4 py-3">{{ tb.updated_at }}</td>
