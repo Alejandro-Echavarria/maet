@@ -75,10 +75,10 @@ const infoAlert = () => {
                     </div>
 
                     <div
-                        class="grid grid-cols-1 gap-3 justify-self-center sm:justify-self-end h-10">
-                        <div class="flex justify-end gap-3 divide-x divide-[#000000]/[0.16]">
+                        class="grid grid-cols-1 gap-4 justify-self-center sm:justify-self-end h-10">
+                        <div class="flex justify-end gap-4 divide-x divide-[#000000]/[0.16]">
                             <template v-if="user.user_social_media.length > 0">
-                                <div class="flex gap-3">
+                                <div class="flex gap-4">
                                     <div v-for="( social_media, index ) in user.user_social_media"
                                         :key="'social-media-' + index" class="py-2">
                                         <div id="tech-container">
@@ -90,7 +90,7 @@ const infoAlert = () => {
                                 </div>
                             </template>
     
-                            <div class="pl-3">
+                            <div class="pl-4">
                                 <a :href="`mailto:${user.email}`">
                                     <SecondaryButton :hidden="false" title="Send me an email" aria-label="Send me an email">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-send"
