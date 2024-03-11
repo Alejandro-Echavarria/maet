@@ -57,9 +57,6 @@ defineExpose({ openModal });
     <div>
         <div>
             <slot name="button" />
-            <!-- <PrimaryButton class="sm:w-auto w-full" @click="openModal">
-                {{ message }}
-            </PrimaryButton> -->
         </div>
 
         <DialogModal :show="modal" :maxWidth="'3xl'" @close="closeModal">
