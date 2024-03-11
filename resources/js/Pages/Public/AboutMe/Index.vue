@@ -1,9 +1,11 @@
 <script setup>
 import { Head } from '@inertiajs/vue3';
 import PublicLayout from '@/Components/Main/Public/Layout/PublicLayout.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import TimeContainer from '@/Components/Main/Public/Containers/TimeContainer.vue';
-import SimpleContainer from '@/Components/Main/Public/Containers/SimpleContainer.vue';
+import cleanString from '@/Helpers/HelperFunctions';
+import SaveAlert from "@/Helpers/Alerts/SaveAlert";
 
 defineOptions({
     layout: PublicLayout
@@ -14,6 +16,10 @@ const props = defineProps({
         type: Object,
     }
 });
+
+const infoAlert = () => {
+    SaveAlert('Working in this feature!', 'info');
+};
 </script>
 
 <template>
@@ -21,7 +27,7 @@ const props = defineProps({
 
         <Head>
             <title>About me</title>
-            <!-- <meta head-key="description" type="description" name="description" :content="cleanString(job.preview)"> -->
+            <meta head-key="description" type="description" name="description" :content="cleanString(user.bio)">
         </Head>
 
         <div>
@@ -35,7 +41,7 @@ const props = defineProps({
                 </div>
             </div>
 
-            <div class="flex flex-col sm:flex-row my-10 sm:mt-10 sm:mb-0 w-full h-full sm:gap-10">
+            <div class="flex flex-col sm:flex-row mt-10 mb-20 sm:mb-10 w-full h-full sm:gap-10">
                 <div class="transform -translate-y-16 flex justify-center sm:-translate-y-16 sm:translate-x-4 shrink-0">
                     <img src="/img/others/retrato.jpg" alt=""
                         class="w-32 h-32 shrink-0 rounded-full object-cover ring-2 ring-offset-2 ring-indigo-700 shadow-xl">
@@ -53,7 +59,7 @@ const props = defineProps({
                         <p class="text-center sm:text-left text-indigo-700">
                             <a :href="`mailto:${user.email}`">
                                 <span class="flex justify-center sm:justify-start items-center gap-1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail"
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail shrink-0"
                                         width="20" height="20" viewBox="0 0 24 24" stroke-width="2"
                                         stroke="currentColor" fill="none" stroke-linecap="round"
                                         stroke-linejoin="round">
@@ -68,48 +74,56 @@ const props = defineProps({
                         </p>
                     </div>
 
-                    <div class="flex gap-3 justify-self-center sm:justify-self-end h-10 divide-x divide-[#000000]/[0.16]">
-                        <template v-if="user.user_social_media">
-                            <div class="flex gap-3">
-                                <div v-for="( social_media, index ) in user.user_social_media" :key="'social-media-' + index" class="py-2">
-                                    <div id="tech-container">
-                                        <a :href="social_media.url" target="_blank">
-                                            <span v-html="social_media.social_media.icon"></span>
-                                        </a>
+                    <div
+                        class="grid grid-cols-1 gap-3 justify-self-center sm:justify-self-end h-10">
+                        <div class="flex justify-end gap-3 divide-x divide-[#000000]/[0.16]">
+                            <template v-if="user.user_social_media.length > 0">
+                                <div class="flex gap-3">
+                                    <div v-for="( social_media, index ) in user.user_social_media"
+                                        :key="'social-media-' + index" class="py-2">
+                                        <div id="tech-container">
+                                            <a :href="social_media.url" target="_blank">
+                                                <span v-html="social_media.social_media.icon"></span>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
+                            </template>
+    
+                            <div class="pl-3">
+                                <a :href="`mailto:${user.email}`">
+                                    <SecondaryButton :hidden="false" title="Send me an email" aria-label="Send me an email">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-send"
+                                            width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                            fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <path d="M10 14l11 -11" />
+                                            <path
+                                                d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5" />
+                                        </svg>
+                                    </SecondaryButton>
+                                </a>
                             </div>
-                        </template>
+                        </div>
 
-                        <a :href="`mailto:${user.email}`" class="pl-3">
-                            <SecondaryButton :hidden="false">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-send"
-                                    width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <path d="M10 14l11 -11" />
-                                    <path
-                                        d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5" />
-                                </svg>
-                            </SecondaryButton>
-                        </a>
+                        <div class="flex justify-center sm:justify-end">
+                            <PrimaryButton @click="infoAlert">
+                                Dowmload my CV
+                            </PrimaryButton>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="space-y-10 divide-y divide-[#000000]/[0.16]">
+            <div class="space-y-10 sm:space-y-20">
                 <div>
-                    <h2 class="mb-10 text-3xl font-semibold text-gray-800">
-                        About
-                    </h2>
-
                     <div class="content-ckeditor">
                         <p v-html="user.bio" />
                     </div>
                 </div>
 
-                <div>
-                    <h2 class="my-10 text-3xl font-semibold text-gray-800">
+                <div class="space-y-10 sm:space-y-20">
+                    <h2 class="text-5xl lg:text-7xl font-bold text-gray-800 dark:text-gray-200">
                         Knowledge
                     </h2>
 
@@ -132,16 +146,16 @@ const props = defineProps({
                     </div>
                 </div>
 
-                <div>
-                    <h2 class="my-10 text-3xl font-semibold text-gray-800">
+                <div class="space-y-10 sm:space-y-20">
+                    <h2 class="text-5xl lg:text-7xl font-bold text-gray-800 dark:text-gray-200">
                         Experiences
                     </h2>
 
                     <TimeContainer :data="user.experiences" />
                 </div>
 
-                <div>
-                    <h2 class="my-10 text-3xl font-semibold text-gray-800">
+                <div class="space-y-10 sm:space-y-20">
+                    <h2 class="text-5xl lg:text-7xl font-bold text-gray-800 dark:text-gray-200">
                         Education
                     </h2>
 
