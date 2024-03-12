@@ -8,13 +8,17 @@ const props = defineProps({
     },
     stacks: {
         type: Object,
+    },
+    placement: {
+        type: String,
+        default: '-bottom-4'
     }
 });
 </script>
 
 <template>
     <div v-if="stacks.length" class="relative mx-2">
-        <div class="flex absolute justify-center inset-x-0 -bottom-4">
+        <div :class="['flex absolute justify-center inset-x-0', placement]">
             <div
                 class="p-1 w-3/4 flex text-xs items-center font-semibold rounded-xl border backdrop-blur-md bg-white/50 shadow-gray-500/20 shadow-sm border-[#000000]/[0.16]">
                 <div :class="[title !== 'Tech' ? 'w-28 sm:w-24' : 'w-14 lg:w-10', 'pl-1 overflow-hidden flex items-center']">

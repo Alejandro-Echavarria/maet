@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
 use App\Models\Image;
-use App\Models\Public\Job;
+use App\Models\Job;
 use Inertia\Inertia;
 
 class JobController extends Controller
@@ -12,9 +12,18 @@ class JobController extends Controller
 
     public function index()
     {
-        $jobs = Job::with(['technologies:id,name'])
-            ->orderBy('id', 'desc')
-            ->paginate(10);
+        $jobs = Job::with(
+            [
+                'technologies:id,name,icon',
+                'images' => function ($query) {
+                    $query->select('id', 'url', 'default', 'imageable_id')
+                        ->where('default', '=', '1')
+                        ->orderBy('id', 'desc');
+                },
+            ]
+        )
+            ->where('jobs.status', '=', '1')
+            ->paginate(11);
 
         return Inertia::render('Public/Jobs/Index', compact('jobs'));
     }
