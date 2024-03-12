@@ -55,6 +55,10 @@ const toggleSidebarVisibility = () => {
 const handleResize = () => {
     isSidebarVisible.value = window.innerWidth >= 1024; // Cambiar 1024 por el ancho de resolución deseado para ocultar el sidebar
     isBackDropVisible.value = window.innerWidth < 1024;
+
+    if (window.innerWidth > 1024) {
+        document.body.classList.toggle('overflow-hidden', false);
+    }
 };
 
 const logout = () => {

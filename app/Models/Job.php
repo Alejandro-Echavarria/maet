@@ -31,6 +31,11 @@ class Job extends Model
         'status' => 'boolean'
     ];
 
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     // Relación uno a muchos
     public function category()
     {

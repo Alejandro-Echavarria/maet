@@ -16,10 +16,6 @@ const props = defineProps({
         type: Object,
     }
 });
-
-const infoAlert = () => {
-    SaveAlert('Working in this feature!', 'info');
-};
 </script>
 
 <template>
@@ -107,9 +103,11 @@ const infoAlert = () => {
                         </div>
 
                         <div class="flex justify-center sm:justify-end">
-                            <PrimaryButton @click="infoAlert">
-                                Dowmload my CV
-                            </PrimaryButton>
+                            <a href="/files/cv/cv.pdf" target="_blank" download>
+                                <PrimaryButton>
+                                    Dowmload my CV
+                                </PrimaryButton>
+                            </a>
                         </div>
                     </div>
                 </div>
