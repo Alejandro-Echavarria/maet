@@ -2,7 +2,7 @@
 const props = defineProps({
     class: {
         type: String,
-        default: 'w-10 h-10'
+        default: 'w-9 h-9'
     }
 })
 </script>
