@@ -26,7 +26,7 @@ class SocialMediaController extends Controller
         SocialMedia::create(
             $request->validate([
                 'name' => "required|max:255|string|unique:social_medias,name,$request->id",
-                'icon' => 'required|max:25|string',
+                'icon'  => 'required|string',
             ])
         );
 
@@ -44,7 +44,7 @@ class SocialMediaController extends Controller
         $socialMedia->update(
             $request->validate([
                 'name' => "required|max:255|string|unique:social_medias,name,$socialMedia->id",
-                'icon' => 'required|max:25|string',
+                'icon'  => 'required|string',
             ])
         );
 

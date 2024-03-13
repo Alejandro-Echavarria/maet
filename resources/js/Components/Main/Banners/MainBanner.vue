@@ -19,15 +19,15 @@ const { user } = defineProps({
                 <div class="w-full flex flex-col text-center md:text-left">
                     <div>
                         <div>
-                            <h3
+                            <span
                                 class="text-5xl lg:text-7xl font-bold bg-gradient-to-r from-gray-800 via-indigo-700 to-blue-700 bg-clip-text text-transparent">
                                 Hey,
-                            </h3>
+                            </span>
                         </div>
-                        <h2
+                        <h1
                             class="text-5xl lg:text-7xl font-bold bg-gradient-to-r from-gray-800 via-indigo-700 to-blue-700 bg-clip-text text-transparent animate-fade-in-left" style="animation-delay: 0.1s; animation-duration: 0.4s;">
                             <span>I'm</span> <span>{{ user.name }}</span>
-                        </h2>
+                        </h1>
                     </div>
                     <div class="w-full grid grid-cols-1 md:grid-cols-2 mt-4 gap-4 animate-fade-in-up" style="animation-delay: 0.66s;">
                         <div class="grid items-center my-4">
@@ -37,9 +37,9 @@ const { user } = defineProps({
                         </div>
                         <div class="w-full">
                             <div class="space-y-4">
-                                <h1 class="text-xl md:text-2xl lg:text-3xl font-semibold text-gray-800 dark:text-whit">
+                                <h2 class="text-xl md:text-2xl lg:text-3xl font-semibold text-gray-800 dark:text-whit">
                                     {{ user.position }}
-                                </h1>
+                                </h2>
                                 <p
                                     class="text-lg md:text-xl font-semibold bg-gradient-to-r from-gray-800 via-indigo-700 to-gray-800 bg-clip-text text-transparent">
                                     &#60;Each line of code is an opportunity to craft unique experiences, not just to achieve objectives, but also to leave a lasting impression /&#62;

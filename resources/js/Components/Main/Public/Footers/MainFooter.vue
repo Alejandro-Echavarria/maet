@@ -21,7 +21,7 @@ import { Link } from '@inertiajs/vue3';
                 </div>
                 <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
                     <div>
-                        <h6 class="mb-6 text-sm font-bold text-gray-700 uppercase dark:text-white">Resources</h6>
+                        <h2 class="mb-6 text-sm font-bold text-gray-700 uppercase dark:text-white">Resources</h2>
                         <ul class="text-gray-600 dark:text-gray-400 list-inside list-none">
                             <li class="mb-4">
                                 <a href="https://blog.maet.dev/" class="hover:underline" target="_blank" title="Blog"
@@ -30,7 +30,7 @@ import { Link } from '@inertiajs/vue3';
                         </ul>
                     </div>
                     <div>
-                        <h6 class="mb-6 text-sm font-bold text-gray-700 uppercase dark:text-white">Follow me</h6>
+                        <h2 class="mb-6 text-sm font-bold text-gray-700 uppercase dark:text-white">Follow me</h2>
                         <ul class="text-gray-600 dark:text-gray-400 list-inside list-none">
                             <li class="mb-4">
                                 <a href="https://github.com/Alejandro-Echavarria" class="hover:underline" target="_blank" title="Github"
@@ -43,7 +43,7 @@ import { Link } from '@inertiajs/vue3';
                         </ul>
                     </div>
                     <div>
-                        <h6 class="mb-6 text-sm font-bold text-gray-700 uppercase dark:text-white">Legal</h6>
+                        <h2 class="mb-6 text-sm font-bold text-gray-700 uppercase dark:text-white">Legal</h2>
                         <ul class="text-gray-600 dark:text-gray-400 list-inside list-none">
                             <li class="mb-4">
                                 <a href="#" title="Privacy Policy" class="hover:underline">Privacy Policy</a>

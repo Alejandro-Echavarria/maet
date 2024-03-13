@@ -8,6 +8,7 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
 import ContactButton from "@/Components/Main/Public/Components/Buttons/ContactButton.vue";
 import Stacks from "@/Components/Main/Public/Containers/Stacks/Stacks.vue";
 import SectionTitle from '@/Components/Main/Public/Components/Titles/SectionTitle.vue';
+import Profile from '@/Components/Main/Public/Components/Images/Profile/Profile.vue';
 
 let order = false;
 
@@ -30,6 +31,7 @@ const openModal = () => {
 </script>
 
 <template>
+
     <Head>
         <title>Web developer ~ Manuel Echavarria</title>
         <meta type="description" name="description" head-key="description"
@@ -79,75 +81,77 @@ const openModal = () => {
             </div>
             <div class="max-w-5xl mx-auto">
                 <div class="space-y-10 sm:space-y-20">
-                    <section id="about-me-brief" class="">
-                        <SectionTitle :place-bg="'left'">
-                            <h3 class="z-10 text-5xl lg:text-7xl font-bold text-gray-800 dark:text-gray-200 text-center">
+                    <section id="about-me-brief">
+                        <SectionTitle>
+                            <h2 class="py-4 text-5xl lg:text-7xl font-bold text-gray-800 dark:text-gray-200">
                                 About me
-                            </h3>
+                            </h2>
                         </SectionTitle>
 
-                        <div class="relative grid grid-cols-1 sm:grid-cols-2 gap-8">
-                            <div class="order-1">
-                                <p v-html="user.bio" />
-                            </div>
-                            <div class="space-y-8 order-3">
-                                <div class="space-y-8">
-                                    <div>
-                                        <h3 class="p-0">Experiences</h3>
+                        <div class="relative grid grid-cols-1 lg:grid-cols-2 gap-8">
+                            <div>
+                                <div class="space-y-8 order-3">
+                                    <div class="order-1">
+                                        <p v-html="user.bio" />
                                     </div>
-                                    <div v-for="( experience ) in user.experiences" :key="'experience-' + experience.id"
-                                        class="p-4 space-y-2 border rounded-xl border-[#000000]/[0.16] order-3">
-                                        <time class="text-sm font-medium text-gray-600">
-                                            <span>{{ experience.start_date }} - {{ experience.end_date }}</span>
-                                        </time>
-                                        <h3 class="text-lg font-semibold text-gray-700 dark:text-white p-0">
-                                            {{ experience.title }}
-                                        </h3>
 
-                                        <p class="dark:text-gray-400 line-clamp-6" v-html="experience.description">
-                                        </p>
-                                    </div>
-                                    <div>
-                                        <h3 class="p-0">Knowledge</h3>
-                                    </div>
-                                    <div class="space-y-4 p-4 border rounded-xl border-[#000000]/[0.16]">
-                                        <div v-for="( knowledge ) in user.knowledge"
-                                            :key="'knowledge-about-me-' + knowledge.id" class="flex">
-                                            <div id="tech-container" class="flex gap-2 items-center">
-                                                <p class="dark:text-gray-400" v-html="knowledge.name"></p>
-                                                <div class="overflow-hidden">
-                                                    <i v-html="knowledge.icon" :title="knowledge.name" />
+                                    <Profile class="flex justify-center lg:justify-end lg:hidden" />
+
+                                    <div class="space-y-8">
+                                        <div>
+                                            <h3 class="p-0">Experiences</h3>
+                                        </div>
+                                        <div v-for="( experience ) in user.experiences"
+                                            :key="'experience-' + experience.id"
+                                            class="p-4 space-y-2 border rounded-xl border-[#000000]/[0.16] order-3">
+                                            <time class="text-sm font-medium text-gray-600">
+                                                <span>{{ experience.start_date }} - {{ experience.end_date }}</span>
+                                            </time>
+                                            <h3 class="text-lg font-semibold text-gray-700 dark:text-white p-0">
+                                                {{ experience.title }}
+                                            </h3>
+
+                                            <p class="dark:text-gray-400 line-clamp-6" v-html="experience.description">
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <h3 class="p-0">Knowledge</h3>
+                                        </div>
+                                        <div class="space-y-4 p-4 border rounded-xl border-[#000000]/[0.16]">
+                                            <div v-for="( knowledge ) in user.knowledge"
+                                                :key="'knowledge-about-me-' + knowledge.id" class="flex">
+                                                <div id="tech-container" class="flex gap-2 items-center">
+                                                    <p class="dark:text-gray-400" v-html="knowledge.name"></p>
+                                                    <div class="overflow-hidden">
+                                                        <i v-html="knowledge.icon" :title="knowledge.name" />
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div
-                                class="bg-gradient-to-b from-white/40 via-white/80 to-white/100 h-1/4 absolute bottom-0 w-full grid place-content-center content-end">
-                                <div class="py-4">
-                                    <Link :href="route('aboutme.index')">
+                                <div
+                                    class="bg-gradient-to-b from-white/40 via-white/80 to-white/100 h-1/4 absolute bottom-0 w-full grid place-content-center content-end">
+                                    <div class="py-4">
+                                        <Link :href="route('aboutme.index')">
                                         <PrimaryButton>
                                             See more about me
                                         </PrimaryButton>
-                                    </Link>
+                                        </Link>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="flex justify-center sm:justify-end order-2">
-                                <img class="w-[350px] h-[350px] overflow-auto object-cover rounded-xl"
-                                    src="/img/others/body.webp" title="Manuel Echavarria" alt="Manuel Echavarria">
-                            </div>
+                            <Profile class="lg:flex justify-center lg:justify-end hidden" />
                         </div>
                     </section>
 
                     <div>
                         <section id="projects">
-                            <SectionTitle :place-bg="'right'">
-                                <h3
-                                    class="z-10 text-5xl lg:text-7xl font-bold text-gray-800 dark:text-gray-200 text-center">
+                            <SectionTitle>
+                                <h2 class="py-4 text-5xl lg:text-7xl font-bold text-gray-800 dark:text-gray-200">
                                     Projects
-                                </h3>
+                                </h2>
                             </SectionTitle>
 
                             <div v-for="(job) in jobs" :key="'job-' + job.id"
@@ -164,10 +168,6 @@ const openModal = () => {
                                             {{ job.title }}
                                         </h3>
                                         </Link>
-
-                                        <!-- <h4 :class="['text-sm font-normal text-gray-500 dark:text-gray-300', 'p-0']">
-                                            {{ job.project_name }}
-                                        </h4> -->
                                     </div>
 
                                     <p class="text-gray-500 dark:text-gray-300 line-clamp-3" v-html="job.preview" />

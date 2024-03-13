@@ -94,7 +94,7 @@ const openModal = (op, id, category_id, client_id, titleData, slug, logo_url, co
         title.value = "Create a new job";
     } else {
         title.value = "Edit job";
-        job.value = id;
+        job.value = slug;
         form.category_id = category_id;
         form.client_id = client_id;
         form.title = titleData;
@@ -171,19 +171,21 @@ defineExpose({ openModal });
                                 <InputError :message="form.errors.file" class="mt-2" />
                             </div>
 
-                            <div class="sm:col-span-3">
-                                <InputLabel for="alt_banner_image" value="Alt banner image" />
-                                <TextInput id="alt_banner_image" ref="altBannerImageInput" v-model="form.alt_banner_image"
-                                    type="text" />
+                            <div class="flex items-center sm:col-span-4 gap-6">
+                                <div class="grow">
+                                    <InputLabel for="alt_banner_image" value="Alt banner image" />
+                                    <TextInput id="alt_banner_image" ref="altBannerImageInput"
+                                        v-model="form.alt_banner_image" type="text" />
 
-                                <InputError :message="form.errors.alt_banner_image" class="mt-2" />
-                            </div>
+                                    <InputError :message="form.errors.alt_banner_image" class="mt-2" />
+                                </div>
 
-                            <div class="sm:col-span-1">
-                                <InputLabel for="status" value="Publish" />
-                                <ToggleSwitch id="status" ref="statusInput" v-model="form.status" class="mt-2" />
+                                <div>
+                                    <InputLabel for="status" value="Publish" />
+                                    <ToggleSwitch id="status" ref="statusInput" v-model="form.status" class="mt-2" />
 
-                                <InputError :message="form.errors.status" class="mt-2" />
+                                    <InputError :message="form.errors.status" class="mt-2" />
+                                </div>
                             </div>
 
                             <div class="sm:col-span-2">
@@ -236,9 +238,9 @@ defineExpose({ openModal });
 
                             <div class="sm:col-span-4">
                                 <InputLabel for="body" value="Body" class="mb-2" />
-                                <Ckeditor id="body" idname="body" v-model="form.body" :idData="job" :additionalPath="'/body'"
-                                    :urlName="urlCkeditorStoreImage" :value="form.body" key="body"
-                                    ref="bodyInput">
+                                <Ckeditor id="body" idname="body" v-model="form.body" :idData="job"
+                                    :additionalPath="'/body'" :urlName="urlCkeditorStoreImage" :value="form.body"
+                                    key="body" ref="bodyInput">
                                     <div id="ckeditorbody"></div>
                                 </Ckeditor>
 
