@@ -53,7 +53,7 @@ onMounted(() => {
                         </div>
                     </div>
 
-                    <img fetchpriority="high" class="h-[40rem] w-full overflow-auto object-cover"
+                    <img fetchpriority="high" class="w-full aspect-video overflow-auto object-cover"
                         :title="job.alt_banner_image"
                         :src="`/storage/${job.images[0]?.url}`" :alt="job.alt_banner_image" />
                 </div>
