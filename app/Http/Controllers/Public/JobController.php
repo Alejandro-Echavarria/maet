@@ -30,14 +30,20 @@ class JobController extends Controller
 
     public function show(Job $job)
     {
-        $job = $job->with(['technologies:id,name'])
-            ->where('id', $job->id)
-            ->first();
+        $job = $job->with(
+            [
+                'technologies:id,name',
+                'images' => function ($query) {
+                    $query->select('id', 'url', 'default', 'imageable_id')
+                        ->where('default', '=', '1')
+                        ->orderBy('id', 'desc');
+                },
 
-        $job['images'] = Image::where('imageable_id', $job->id)
-            ->where('default', '=', '1')
-            ->take(1)
-            ->get();
+            ]
+        )
+            ->where('id', $job->id)
+            ->where('status', '=', '1')
+            ->first();
 
         return Inertia::render('Public/Jobs/Show', compact('job'));
     }

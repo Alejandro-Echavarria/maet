@@ -77,7 +77,7 @@ const changeOrder = () => {
                                 </template>
 
                                 <template #image>
-                                    <img class="h-full w-full overflow-auto object-cover"
+                                    <img class="h-[450px] w-full overflow-auto object-cover"
                                         :src="`/storage/${job?.images[0]?.url}`" :alt="job.alt_banner_image">
                                 </template>
 
