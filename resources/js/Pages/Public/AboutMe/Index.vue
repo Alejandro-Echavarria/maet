@@ -1,11 +1,10 @@
 <script setup>
-import { Head, Link } from '@inertiajs/vue3';
+import { Head } from '@inertiajs/vue3';
 import PublicLayout from '@/Components/Main/Public/Layout/PublicLayout.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import TimeContainer from '@/Components/Main/Public/Containers/TimeContainer.vue';
 import cleanString from '@/Helpers/HelperFunctions';
-import SaveAlert from "@/Helpers/Alerts/SaveAlert";
 
 defineOptions({
     layout: PublicLayout
@@ -27,10 +26,11 @@ const props = defineProps({
         </Head>
 
         <div>
-            <div class="bg-gradient-to-b from-indigo-700/10 to-indigo-700/5 w-full h-[15rem] rounded-xl shadow-sm">
-                <div class="flex w-full h-full items-center px-4">
-                    <div class="text-center sm:text-left w-full">
-                        <h1 :class="`text-5xl lg:text-7xl md:text-6xl font-bold text-gray-800`">
+            <div class="relative w-full h-[15rem] rounded-xl overflow-hidden">
+                <img class="absolute w-full h-[15rem] object-cover object-center" src="/img/projects/about-me-page.webp" alt="ilustration">
+                <div class="absolute flex w-full h-full items-center bg-gradient-to-l from-indigo-700/0 to-indigo-950">
+                    <div class="text-center sm:text-left w-full px-4">
+                        <h1 :class="` text-5xl lg:text-7xl md:text-6xl font-bold text-gray-50`">
                             About me
                         </h1>
                     </div>
@@ -39,7 +39,7 @@ const props = defineProps({
 
             <div class="flex flex-col sm:flex-row mt-10 mb-20 sm:mb-10 w-full h-full sm:gap-10">
                 <div class="transform -translate-y-16 flex justify-center sm:-translate-y-16 sm:translate-x-4 shrink-0">
-                    <img src="/img/others/retrato.jpg" alt=""
+                    <img src="/img/others/retrato.jpg" alt="personal photo"
                         class="w-32 h-32 shrink-0 rounded-full object-cover ring-2 ring-offset-2 ring-indigo-700 shadow-xl">
                 </div>
 
