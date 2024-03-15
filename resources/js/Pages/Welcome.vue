@@ -33,9 +33,9 @@ const openModal = () => {
 <template>
 
     <Head>
-        <title>Web developer ~ Manuel Echavarria</title>
+        <title>Manuel Echavarria ~ Portfolio</title>
         <meta type="description" name="description" head-key="description"
-            content="Transforming ideas into functional webapps. Boosting online presence with modern designs optimized for SEO! Discover high-quality web development and Software Engineering">
+            content="Transforming ideas into functional webapps. Boosting online presence with modern designs optimized for SEO! Software Engineering & Web Development">
     </Head>
 
     <div>
@@ -207,7 +207,7 @@ const openModal = () => {
                                         </div>
                                     </div>
                                     </Link>
-                                    <Stacks :stacks="job.technologies" />
+                                    <Stacks :stacks="job.technologies" placement="bottom-2" />
                                 </div>
                             </div>
                         </section>
