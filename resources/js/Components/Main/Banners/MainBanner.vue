@@ -26,7 +26,7 @@ const { user } = defineProps({
                         </div>
                         <h1
                             class="text-5xl lg:text-7xl font-bold bg-gradient-to-r from-gray-800 via-indigo-700 to-blue-700 bg-clip-text text-transparent animate-fade-in-left" style="animation-delay: 0.1s; animation-duration: 0.4s;">
-                            <span>I'm</span> <span>{{ user.name }}</span>
+                            <span>I'm</span> {{ user.name }}
                         </h1>
                     </div>
                     <div class="w-full grid grid-cols-1 md:grid-cols-2 mt-4 gap-4 animate-fade-in-up" style="animation-delay: 0.66s;">
