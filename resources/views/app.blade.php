@@ -13,6 +13,9 @@
 
         <link rel="shortcut icon" href="{{ asset('img/icon/my-icon.ico') }}">
 
+        {{-- My CSS --}}
+        <link rel="stylesheet" href="{{ asset('css/my-styles.css') }}">
+
         <!-- Google tag (gtag.js) -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-YZCE7NL6GW"></script>
         <script>

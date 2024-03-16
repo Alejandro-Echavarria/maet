@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onBeforeUnmount, onMounted } from 'vue';
-import { router } from "@inertiajs/vue3";
+import { router, Link } from "@inertiajs/vue3";
+import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import NavItem from '@/Components/Main/Admin/Layout/Nav/NavItem.vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
@@ -83,12 +84,13 @@ defineExpose({ toggleSidebarVisibility });
                             </div>
                         </div>
                     </button>
-                    <a href="/" class="flex md:mr-24">
+                    <Link href="/" class="flex md:mr-24 gap-2">
+                        <ApplicationLogo />
                         <span
-                            class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap text-gray-800 dark:text-white">
+                            class="self-center text-xl font-bold sm:text-2xl whitespace-nowrap dark:text-gray-200 text-gray-800">
                             MAET
                         </span>
-                    </a>
+                    </Link>
                 </div>
                 <div class="flex items-center">
                     <div class="flex items-center ml-3">
@@ -96,7 +98,7 @@ defineExpose({ toggleSidebarVisibility });
                             <template #trigger>
                                 <button
                                     class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
-                                    <img class="h-7 w-7 rounded-full object-cover"
+                                    <img class="h-8 w-8 rounded-full object-cover"
                                         :src="$page.props.auth.user.profile_photo_url" :alt="$page.props.auth.user.name">
                                 </button>
                             </template>

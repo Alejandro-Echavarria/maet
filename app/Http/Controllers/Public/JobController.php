@@ -30,7 +30,6 @@ class JobController extends Controller
 
     public function show(Job $job)
     {
-        // return response()->json($job->status);
         $this->authorize('published', $job);
 
         $job = $job->with(
