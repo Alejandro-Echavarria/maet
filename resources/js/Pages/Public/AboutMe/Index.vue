@@ -72,7 +72,7 @@ const props = defineProps({
 
                     <div
                         class="grid grid-cols-1 gap-4 justify-self-center sm:justify-self-end h-10">
-                        <div class="flex justify-end gap-4 divide-x divide-[#000000]/[0.16]">
+                        <div class="flex justify-center sm:justify-end gap-4 divide-x divide-[#000000]/[0.16]">
                             <template v-if="user.user_social_media.length > 0">
                                 <div class="flex gap-4">
                                     <div v-for="( social_media, index ) in user.user_social_media"
@@ -86,7 +86,7 @@ const props = defineProps({
                                 </div>
                             </template>
     
-                            <div class="pl-4">
+                            <div :class="[user.user_social_media.length > 0 && 'pl-4']">
                                 <a :href="`mailto:${user.email}`">
                                     <SecondaryButton :hidden="false" title="Send me an email" aria-label="Send me an email">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-send"
@@ -120,45 +120,52 @@ const props = defineProps({
                     </div>
                 </div>
 
-                <div class="space-y-10 sm:space-y-20">
-                    <h2 class="text-5xl lg:text-7xl font-bold text-gray-800 dark:text-gray-200">
-                        Knowledge
-                    </h2>
-
-                    <div class="overflow-x-auto">
-                        <div class="grid grid-rows-8 sm:grid-rows-4 grid-flow-col gap-4">
-                            <div v-for="( record, index ) in user.knowledge" :key="'data-container-' + index">
-                                <div id="tech-container" class="flex gap-4">
-                                    <div>
-                                        <span class="w-5 h-5" v-html="record.icon"></span>
-                                    </div>
-
-                                    <div>
-                                        <span>
-                                            {{ record.name }}
-                                        </span>
+                <template v-if="user.knowledge.length > 0">
+                    <div class="space-y-10 sm:space-y-20">
+                        <h2 class="text-5xl lg:text-7xl font-bold text-gray-800 dark:text-gray-200">
+                            Knowledge
+                        </h2>
+    
+                        <div class="overflow-x-auto">
+                            <div class="grid grid-rows-1 sm:grid-rows-4 sm:grid-flow-col gap-4">
+                                <div v-for="( record, index ) in user.knowledge" :key="'data-container-' + index">
+                                    <div id="tech-container" class="flex gap-4">
+                                        <div>
+                                            <span class="w-5 h-5" v-html="record.icon"></span>
+                                        </div>
+    
+                                        <div>
+                                            <span>
+                                                {{ record.name }}
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </template>
 
-                <div class="space-y-10 sm:space-y-20">
-                    <h2 class="text-5xl lg:text-7xl font-bold text-gray-800 dark:text-gray-200">
-                        Experiences
-                    </h2>
 
-                    <TimeContainer :data="user.experiences" />
-                </div>
+                <template v-if="user.experiences.length > 0">
+                    <div class="space-y-10 sm:space-y-20">
+                        <h2 class="text-5xl lg:text-7xl font-bold text-gray-800 dark:text-gray-200">
+                            Experiences
+                        </h2>
+    
+                        <TimeContainer :data="user.experiences" />
+                    </div>
+                </template>
 
-                <div class="space-y-10 sm:space-y-20">
-                    <h2 class="text-5xl lg:text-7xl font-bold text-gray-800 dark:text-gray-200">
-                        Education
-                    </h2>
-
-                    <TimeContainer :data="user.education" :grid="'grid-cols-1 sm:grid-cols-2'" />
-                </div>
+                <template v-if="user.education.length > 0">
+                    <div class="space-y-10 sm:space-y-20">
+                        <h2 class="text-5xl lg:text-7xl font-bold text-gray-800 dark:text-gray-200">
+                            Education
+                        </h2>
+    
+                        <TimeContainer :data="user.education" :grid="'grid-cols-1 sm:grid-cols-2'" />
+                    </div>
+                </template>
             </div>
         </div>
     </div>

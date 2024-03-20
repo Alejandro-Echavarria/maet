@@ -98,40 +98,45 @@ const openModal = () => {
                                     <Profile class="flex justify-center lg:justify-end lg:hidden" />
 
                                     <div class="space-y-8">
-                                        <div>
-                                            <h3 class="p-0">Experiences</h3>
-                                        </div>
-                                        <div v-for="( experience ) in user.experiences"
-                                            :key="'experience-' + experience.id"
-                                            class="p-4 space-y-2 border rounded-xl border-[#000000]/[0.16] order-3">
-                                            <time class="text-sm font-medium text-gray-600">
-                                                <span>{{ experience.start_date }} - {{ experience.end_date }}</span>
-                                            </time>
-                                            <h3 class="text-lg font-semibold text-gray-700 dark:text-white p-0">
-                                                {{ experience.title }}
-                                            </h3>
+                                        <template v-if="user.experiences.length > 0">
+                                            <div>
+                                                <h3 class="p-0">Experiences</h3>
+                                            </div>
+                                            <div v-for="( experience ) in user.experiences"
+                                                :key="'experience-' + experience.id"
+                                                class="p-4 space-y-2 border rounded-xl border-[#000000]/[0.16] order-3">
+                                                <time class="text-sm font-medium text-gray-600">
+                                                    <span>{{ experience.start_date }} - {{ experience.end_date }}</span>
+                                                </time>
+                                                <h3 class="text-lg font-semibold text-gray-700 dark:text-white p-0">
+                                                    {{ experience.title }}
+                                                </h3>
+    
+                                                <p class="dark:text-gray-400 line-clamp-6" v-html="experience.description">
+                                                </p>
+                                            </div>
+                                        </template>
 
-                                            <p class="dark:text-gray-400 line-clamp-6" v-html="experience.description">
-                                            </p>
-                                        </div>
-                                        <div>
-                                            <h3 class="p-0">Knowledge</h3>
-                                        </div>
-                                        <div class="space-y-4 p-4 border rounded-xl border-[#000000]/[0.16]">
-                                            <div v-for="( knowledge ) in user.knowledge"
-                                                :key="'knowledge-about-me-' + knowledge.id" class="flex">
-                                                <div id="tech-container" class="flex gap-2 items-center">
-                                                    <p class="dark:text-gray-400" v-html="knowledge.name"></p>
-                                                    <div class="overflow-hidden">
-                                                        <i v-html="knowledge.icon" :title="knowledge.name" />
+                                        <template v-if="user.knowledge.length > 0">
+                                            <div>
+                                                <h3 class="p-0">Knowledge</h3>
+                                            </div>
+                                            <div class="space-y-4 p-4 border rounded-xl border-[#000000]/[0.16]">
+                                                <div v-for="( knowledge ) in user.knowledge"
+                                                    :key="'knowledge-about-me-' + knowledge.id" class="flex">
+                                                    <div id="tech-container" class="flex gap-2 items-center">
+                                                        <p class="dark:text-gray-400" v-html="knowledge.name"></p>
+                                                        <div class="overflow-hidden">
+                                                            <i v-html="knowledge.icon" :title="knowledge.name" />
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </template>
                                     </div>
                                 </div>
                                 <div
-                                    class="bg-gradient-to-b from-white/40 via-white/80 to-white/100 h-1/4 absolute bottom-0 w-full grid place-content-center content-end">
+                                    class="bg-gradient-to-b from-white/0 via-white/50 to-white/100 h-1/4 absolute bottom-0 w-full grid place-content-center content-end">
                                     <div class="py-4">
                                         <Link :href="route('aboutme.index')">
                                         <PrimaryButton>
