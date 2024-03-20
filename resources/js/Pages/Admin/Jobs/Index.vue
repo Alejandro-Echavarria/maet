@@ -81,7 +81,7 @@ const openModal = (op, id, titleData, slug, start_date, end_date, description, c
                         :src="`/storage/${job?.images[0]?.url}`" alt="" />
                 </template>
                 <template #deleteButton>
-                    <DeleteJob :id="job.id" :filter="filter" :page="page" :key="'delete-' + job.id" />
+                    <DeleteJob :id="job.slug" :filter="filter" :page="page" :key="'delete-' + job.id" />
                 </template>
                 <template #title>
                     {{ job.title }}

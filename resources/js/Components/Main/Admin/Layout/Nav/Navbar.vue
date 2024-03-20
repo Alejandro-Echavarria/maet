@@ -16,22 +16,17 @@ const navItems = [
     {
         href: '#', label: 'Personal info',
         active: route().current('admin.resume.*'),
-        // activeClass: (
-        // route().current('admin.resume.*') ? '/resume' : '' ||
-        // route().current('admin.aboutme.index') ? '/about-me' : '' ||
-        // route().current('admin.knowledges.index') ? '/knowledges' : ''
-        // ),
         children: [
             { href: 'admin.aboutme.index', active: route().current('admin.aboutme.index'), activeClass: '/admin/about-me', label: 'About me', children: [], icon: null },
             { href: 'admin.usersocialmedias.index', active: route().current('admin.usersocialmedias.index'), activeClass: '/admin/user-social-medias', label: 'User social medias', children: [], icon: null },
             { href: 'admin.resume.educations.index', active: route().current('admin.resume.*'), activeClass: '/admin/resume', label: 'Personal info', children: [], icon: null },
-            // { href: 'admin.resume.knowledges.index', active: route().current('admin.knowledges.*'), activeClass: '/admin/knowledges', label: 'Knowledges', children: [], icon: null },
         ], icon: ['far', 'file']
     },
     {
         href: '#', label: 'Configuration', active: route().current('admin.socialmedias.*'),
-        // activeClass: '/admin/social-medias',
         children: [
+            { href: 'admin.categories.index', active: route().current('admin.categories.index'), activeClass: '/admin/categories', label: 'Categories', children: [], icon: null },
+            { href: 'admin.technologies.index', active: route().current('admin.technologies.index'), activeClass: '/admin/technologies', label: 'Technologies', children: [], icon: null },
             { href: 'admin.socialmedias.index', active: route().current('admin.socialmedias.index'), activeClass: '/admin/social-medias', label: 'Social medias', children: [], icon: null },
         ], icon: ['fas', 'gear']
     },

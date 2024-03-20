@@ -1,11 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\TechnologyController;
 use App\Http\Controllers\Admin\JobController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\SocialMediaController;
 use App\Http\Controllers\Admin\UserSocialMediaController;
 use App\Http\Controllers\Admin\AboutMeController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ExperienceController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\EducationController;
@@ -30,6 +32,12 @@ Route::post('ckeditor/images/about-me//store', [AboutMeController::class, 'ckedi
 
 // Social medias
 Route::resource('social-medias', SocialMediaController::class)->only(['index', 'store', 'update', 'destroy'])->names('admin.socialmedias');
+
+// Categories
+Route::resource('categories', CategoryController::class)->only(['index', 'store', 'update', 'destroy'])->names('admin.categories');
+
+// Technologies
+Route::resource('technologies', TechnologyController::class)->only(['index', 'store', 'update', 'destroy'])->names('admin.technologies');
 
 // Educations
 Route::resource('resume/educations', EducationController::class)->only(['index', 'store', 'update', 'destroy'])->names('admin.resume.educations');

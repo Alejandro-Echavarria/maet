@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
-use App\Models\Image;
 use App\Models\Job;
 use Inertia\Inertia;
 
