@@ -15,6 +15,9 @@ class Technology extends Model
     protected $fillable = [
         'slug',
         'name',
+        'icon',
+        'main',
+        'color'
     ];
 
     // Relacion muchos a muchos inversa

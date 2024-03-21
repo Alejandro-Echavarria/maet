@@ -2,7 +2,10 @@
 import { ref, onMounted } from "vue";
 
 const props = defineProps({
-    modelValue: String,
+    modelValue: {
+        String,
+        default: 'gray-100',
+    },
     inlineStyle: {
         type: Boolean,
         default: false
@@ -67,7 +70,7 @@ const setIconBlack = () => {
 };
 
 const splitColor = (color) => {
-    const matches = color.match(regex);
+    const matches = color?.match(regex);
 
     if (matches && matches.length === 3) {
         const [, base, shadeValue] = matches;

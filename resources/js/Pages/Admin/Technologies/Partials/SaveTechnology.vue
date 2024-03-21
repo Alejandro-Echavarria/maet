@@ -4,13 +4,13 @@ import { useForm } from '@inertiajs/vue3';
 import DialogModal from '@/Components/DialogModal.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
-import SimpleForm from '@/Components/Main/Admin/Components/Forms/SimpleForm.vue';
 import TextInput from '@/Components/TextInput.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import IconTextInput from "@/Components/Main/Admin/Components/Forms/Inputs/TextInput/IconTextInput.vue";
 import ToggleSwitch from "@/Components/Main/Admin/Components/Forms/Inputs/ToggleSwitch/ToggleSwitch.vue";
 import ColorPicker from "@/Components/Main/Admin/Components/Forms/Inputs/SelectsPicker/ColorsPicker/ColorPicker.vue";
+import SimpleForm from '@/Components/Main/Admin/Components/Forms/SimpleForm.vue';
 import SaveAlert from '@/Helpers/Alerts/SaveAlert';
 
 const props = defineProps({
@@ -68,7 +68,7 @@ const save = () => {
     }
 };
 
-const openModal = (op, slug, name) => {
+const openModal = (op, slug, name, icon, main, color) => {
     modal.value = true;
     opration.value = op;
 
@@ -78,6 +78,9 @@ const openModal = (op, slug, name) => {
         title.value = 'Edit technologies';
         technology.value = slug;
         form.name = name;
+        form.icon = icon;
+        form.main = main;
+        form.color = color
     }
 
     setTimeout(() => nameInput.value.focus(), 250);
@@ -103,7 +106,8 @@ defineExpose({ openModal });
             <font-awesome-icon class="mr-2" :icon="['fas', 'plus']" />
             Add technology
         </PrimaryButton>
-        <DialogModal :show="modal" :maxWidth="'2xl'" @close="closeModal">
+
+        <DialogModal :show="modal" :maxWidth="'3xl'" @close="closeModal">
             <template #title>
                 {{ title }}
             </template>
@@ -122,7 +126,6 @@ defineExpose({ openModal });
 
                             <div>
                                 <InputLabel for="color" value="Color" />
-
                                 <ColorPicker v-model="form.color" />
 
                                 <InputError :message="form.errors.color" class="mt-2" />
