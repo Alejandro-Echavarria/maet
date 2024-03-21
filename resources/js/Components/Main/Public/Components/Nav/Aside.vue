@@ -19,7 +19,7 @@ const filter = (value) => {
 </script>
 
 <template>
-    <aside class="col-span-1 border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+    <aside class="col-span-1 border-r border-[#000000]/[0.16] dark:bg-gray-800 dark:border-gray-700">
         <div class="h-full overflow-y-auto">
             <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-200">Categories</h2>
             <ul class="my-4 space-y-2">

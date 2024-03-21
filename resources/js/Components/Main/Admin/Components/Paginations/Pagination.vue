@@ -49,7 +49,7 @@ const changePage = (url) => {
 
 <template>
     <div
-        class="flex flex-col md:flex-row items-start md:items-center justify-between space-y-3 md:space-y-0 p-4 border-t">
+        class="flex flex-col md:flex-row items-start md:items-center justify-between space-y-3 md:space-y-0 p-4 border-t border-[#000000]/[0.16]">
         <div class="w-full sm:hidden">
             <div class="flex justify-between mb-4">
                 <a @click="changePage(pagination.prev_page_url)" :key="'mobile-link'"
@@ -100,7 +100,7 @@ const changePage = (url) => {
                         <a v-else :key="'links-' + index" @click="changePage(link.url)"
                             class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 focus:z-20 cursor-pointer"
                             :class="link.active
-                    ? 'z-10 border-b-2 border-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 focus:outline-none focus:border-indigo-500 transition duration-150 ease-in-out'
+                    ? 'z-10 border-b-2 border-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 focus:outline-none focus:border-indigo-500 transition duration-150 ease-in-out'
                     : ''" v-html="link.label">
                         </a>
                     </template>
