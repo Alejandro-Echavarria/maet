@@ -36,6 +36,7 @@ class JobController extends Controller
             ->filter($filter)
             ->orderBy('created_at', 'desc')
             ->paginate(11);
+
         $clients = Client::all();
         $categories = Category::all();
         $technologies = Technology::all();

@@ -3,14 +3,21 @@
 namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Job;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class JobController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
+        $page = $request?->page;
+        $filter = $request?->filter_value;
+        $filterModel = $request?->filter;
+
         $jobs = Job::with(
             [
                 'technologies:id,name,icon',
@@ -21,10 +28,15 @@ class JobController extends Controller
                 },
             ]
         )
+            ->filter($filter, $filterModel)
             ->where('jobs.status', '=', '1')
-            ->paginate(11);
+            ->paginate(4);
 
-        return Inertia::render('Public/Jobs/Index', compact('jobs'));
+        $categories = Category::select('categories.*')->join(
+            'jobs', 'jobs.category_id', '=','categories.id'
+        )->distinct()->get();
+
+        return Inertia::render('Public/Jobs/Index', compact('page', 'filterModel', 'filter', 'jobs', 'categories'));
     }
 
     public function show(Job $job)

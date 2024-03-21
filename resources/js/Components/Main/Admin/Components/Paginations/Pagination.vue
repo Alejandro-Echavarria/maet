@@ -20,10 +20,16 @@ onBeforeMount(() => {
 watch(() => props.pagination?.data?.length, (newLength, oldLength) => {
     // Verificar si la longitud es cero y realizar la redirección
     if (newLength === 0) {
-        const prevPageUrl = props.pagination.prev_page_url;
+        const prevPageUrl = props.pagination?.prev_page_url?.split("?page=")[1];
 
         if (prevPageUrl) {
-            router.visit(prevPageUrl);
+            router.visit(router.page.url, {
+                preserveScroll: false,
+                preserveState: true,
+                data: {
+                    page: prevPageUrl
+                }
+            });
         }
     }
 });
@@ -42,19 +48,20 @@ const changePage = (url) => {
 </script>
 
 <template>
-    <div class="flex flex-col md:flex-row items-start md:items-center justify-between space-y-3 md:space-y-0 p-4 border-t">
+    <div
+        class="flex flex-col md:flex-row items-start md:items-center justify-between space-y-3 md:space-y-0 p-4 border-t">
         <div class="w-full sm:hidden">
             <div class="flex justify-between mb-4">
                 <a @click="changePage(pagination.prev_page_url)" :key="'mobile-link'"
                     :class="pagination.prev_page_url == null
-                        ? 'relative inline-flex items-center py-2 text-sm font-semibold text-gray-400 focus:z-20 cursor-not-allowed'
-                        : 'relative inline-flex items-center py-2 text-sm font-semibold text-gray-900 focus:z-20 cursor-pointer'">
+                    ? 'relative inline-flex items-center py-2 text-sm font-semibold text-gray-400 focus:z-20 cursor-not-allowed'
+                    : 'relative inline-flex items-center py-2 text-sm font-semibold text-gray-900 focus:z-20 cursor-pointer'">
                     Previous
                 </a>
                 <a @click="changePage(pagination.next_page_url)" :key="'mobile-link'"
                     :class="pagination.next_page_url == null
-                        ? 'relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-400 focus:z-20 cursor-not-allowed'
-                        : 'relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 focus:z-20 cursor-pointer'">
+                    ? 'relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-400 focus:z-20 cursor-not-allowed'
+                    : 'relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 focus:z-20 cursor-pointer'">
                     Next
                 </a>
             </div>
@@ -93,8 +100,8 @@ const changePage = (url) => {
                         <a v-else :key="'links-' + index" @click="changePage(link.url)"
                             class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 focus:z-20 cursor-pointer"
                             :class="link.active
-                                ? 'z-10 border-b-2 border-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 focus:outline-none focus:border-indigo-500 transition duration-150 ease-in-out'
-                                : ''" v-html="link.label">
+                    ? 'z-10 border-b-2 border-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 focus:outline-none focus:border-indigo-500 transition duration-150 ease-in-out'
+                    : ''" v-html="link.label">
                         </a>
                     </template>
                 </nav>

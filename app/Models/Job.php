@@ -58,14 +58,31 @@ class Job extends Model
         return $this->morphMany(Image::class, 'imageable');
     }
 
-    public function scopeFilter($query, $filter)
+    public function scopeFilter($query, $filter, $filterModel = null)
+    {
+        if ($filterModel === null) {
+            $query->when($filter ?? null, function ($query, $search) {
+                $query
+                    ->select('jobs.*')
+                    // ->join('social_medias', 'social_medias.id', '=', 'jobs.social_media_id')
+                    ->orWhere('jobs.title', 'like', '%' . "$search" . '%')
+                    ->orWhere('jobs.created_at', 'like', '%' . $search . '%');
+            });
+        } else {
+            if ($filterModel === 'category') {
+                $this->scopeFilterByCategory($query, $filter);
+            }
+        }
+        
+    }
+
+    public function scopeFilterByCategory($query, $filter)
     {
         $query->when($filter ?? null, function ($query, $search) {
             $query
                 ->select('jobs.*')
-                // ->join('social_medias', 'social_medias.id', '=', 'jobs.social_media_id')
-                ->orWhere('jobs.title', 'like', '%' . "$search" . '%')
-                ->orWhere('jobs.created_at', 'like', '%' . $search . '%');
+                ->join('categories', 'categories.id', '=', 'jobs.category_id')
+                ->orWhere('categories.slug', 'like', '%' . "$search" . '%');
         });
     }
 }

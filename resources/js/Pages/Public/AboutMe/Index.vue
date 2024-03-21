@@ -25,7 +25,7 @@ const props = defineProps({
             <meta head-key="description" type="description" name="description" :content="cleanString(user.bio)">
         </Head>
 
-        <div>
+        <div class="max-w-5xl mx-auto">
             <div class="relative w-full h-[15rem] rounded-xl overflow-hidden">
                 <img class="absolute w-full h-[15rem] object-cover object-center" src="/img/projects/about-me-page.webp" alt="ilustration">
                 <div class="absolute flex w-full h-full items-center bg-gradient-to-l from-indigo-700/0 to-indigo-950">

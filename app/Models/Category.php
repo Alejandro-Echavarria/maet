@@ -18,7 +18,7 @@ class Category extends Model
     // Relación uno a muchos inversa
     public function jobs()
     {
-        return $this->hasMany(User::class);
+        return $this->hasMany(Job::class);
     }
 
     public function getRouteKeyName()
