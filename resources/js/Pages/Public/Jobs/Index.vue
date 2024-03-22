@@ -41,10 +41,10 @@ const changeOrder = () => {
                 Jobs
             </h1>
 
-            <div class="grid grid-cols-5 mt-10 space-x-8">
-                <Aside :items="categories" :page="page" />
+            <div class="grid grid-cols-12 mt-10 space-x-8">
+                <Aside class="col-span-2" :items="categories" :page="page" />
 
-                <div class="col-span-4">
+                <div class="col-span-8">
                     <div v-for="( job, index ) in jobs.data" :class="[ index < 2 && 'animate-fade-in-down']"
                         :style="{ animationDelay: `${index * 0.2}s` }" :key="'jobs-' + job.id"
                         class="grid grid-cols-1 md:grid-cols-2 mb-10 sm:mb-20 w-full gap-10">

@@ -33,7 +33,7 @@ const openModal = () => {
         </Navbar>
 
         <main class="xs:mx-0 mx-4 mt-20">
-            <div class="max-w-7xl mx-auto">
+            <div class="max-w-[90rem] 2xl:max-w-[100rem] mx-auto">
                 <slot />
             </div>
         </main>

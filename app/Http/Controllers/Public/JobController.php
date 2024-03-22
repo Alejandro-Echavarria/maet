@@ -15,8 +15,8 @@ class JobController extends Controller
     public function index(Request $request)
     {
         $page = $request?->page;
-        $filter = $request?->filter_value;
-        $filterModel = $request?->filter;
+        $filter = $request?->filter;
+        $model = $request?->model;
 
         $jobs = Job::with(
             [
@@ -28,15 +28,17 @@ class JobController extends Controller
                 },
             ]
         )
-            ->filter($filter, $filterModel)
+            ->filter($filter, $model)
             ->where('jobs.status', '=', '1')
             ->paginate(4);
 
-        $categories = Category::select('categories.*')->join(
-            'jobs', 'jobs.category_id', '=','categories.id'
-        )->distinct()->get();
+        $categories = Category::select('categories.*')
+            ->join('jobs', 'jobs.category_id', '=', 'categories.id')
+            ->where('jobs.status', '=', '1')
+            ->groupBy('categories.id')
+            ->get();
 
-        return Inertia::render('Public/Jobs/Index', compact('page', 'filterModel', 'filter', 'jobs', 'categories'));
+        return Inertia::render('Public/Jobs/Index', compact('page', 'model', 'filter', 'jobs', 'categories'));
     }
 
     public function show(Job $job)

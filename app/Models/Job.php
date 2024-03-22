@@ -58,9 +58,9 @@ class Job extends Model
         return $this->morphMany(Image::class, 'imageable');
     }
 
-    public function scopeFilter($query, $filter, $filterModel = null)
+    public function scopeFilter($query, $filter, $model = null)
     {
-        if ($filterModel === null) {
+        if ($model === null) {
             $query->when($filter ?? null, function ($query, $search) {
                 $query
                     ->select('jobs.*')
@@ -69,7 +69,7 @@ class Job extends Model
                     ->orWhere('jobs.created_at', 'like', '%' . $search . '%');
             });
         } else {
-            if ($filterModel === 'category') {
+            if ($model === 'category') {
                 $this->scopeFilterByCategory($query, $filter);
             }
         }
