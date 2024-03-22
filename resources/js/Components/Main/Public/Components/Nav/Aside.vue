@@ -54,8 +54,8 @@ defineExpose({ toggleSidebarVisibility });
             <template v-for="(item, index) in items">
                 <h2 class="text-xl font-bold">{{ index }}</h2>
                 <ul class="my-4 space-y-2">
-                    <li @click="filter(item.model, data.slug)" v-for="data in item.items" :key="'category-' + data.id"
-                        class="hover:text-indigo-700 cursor-pointer">
+                    <li @click="filter(item.model, data.slug)" v-for="(data, index) in item.items" :key="'category-' + data.id"
+                        class="font-medium hover:text-indigo-700 cursor-pointer animate-fade-in" :style="{ animationDelay: `${index * 0.05}s` }">
                         {{ data.name }}
                     </li>
                 </ul>

@@ -20,6 +20,7 @@ class JobController extends Controller
 
         $jobs = Job::with(
             [
+                'category:id,name',
                 'technologies:id,name,icon',
                 'images' => function ($query) {
                     $query->select('id', 'url', 'default', 'imageable_id')

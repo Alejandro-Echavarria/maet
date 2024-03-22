@@ -78,7 +78,7 @@ const toggleSidebarVisibility = () => {
                             <div :class="['w-full order-1', changeOrder() ? 'order-1' : 'sm:order-2', 'space-y-4']">
                                 <div>
                                     <span class="block text-indigo-700 font-semibold">
-                                        Personal project
+                                        {{ job.category.name }}
                                     </span>
                                     <Link :href="route('jobs.show', job.slug)" target="_blank"
                                         rel="noreferrer noopener nofollow">
