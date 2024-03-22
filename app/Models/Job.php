@@ -64,16 +64,16 @@ class Job extends Model
             $query->when($filter ?? null, function ($query, $search) {
                 $query
                     ->select('jobs.*')
-                    // ->join('social_medias', 'social_medias.id', '=', 'jobs.social_media_id')
                     ->orWhere('jobs.title', 'like', '%' . "$search" . '%')
                     ->orWhere('jobs.created_at', 'like', '%' . $search . '%');
             });
         } else {
             if ($model === 'category') {
                 $this->scopeFilterByCategory($query, $filter);
+            } else if ($model === 'technology') {
+                $this->scopeFilterByTechnology($query, $filter);
             }
         }
-        
     }
 
     public function scopeFilterByCategory($query, $filter)
@@ -82,7 +82,20 @@ class Job extends Model
             $query
                 ->select('jobs.*')
                 ->join('categories', 'categories.id', '=', 'jobs.category_id')
-                ->orWhere('categories.slug', 'like', '%' . "$search" . '%');
+                ->orWhere('categories.slug', 'like', '%' . "$search" . '%')
+                ->groupBy('jobs.id');
+        });
+    }
+
+    public function scopeFilterByTechnology($query, $filter)
+    {
+        $query->when($filter ?? null, function ($query, $search) {
+            $query
+                ->select('jobs.*')
+                ->join('job_technology', 'job_technology.job_id', '=', 'jobs.id')
+                ->join('technologies', 'technologies.id', '=', 'job_technology.technology_id')
+                ->orWhere('technologies.slug', 'like', '%' . "$search" . '%')
+                ->groupBy('jobs.id');
         });
     }
 }
