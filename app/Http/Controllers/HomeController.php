@@ -23,6 +23,7 @@ class HomeController extends Controller
                 ->orderBy('id', 'desc');
         }])
             ->where('status', 1)
+            ->limit(4)
             ->get();
 
         return Inertia::render('Welcome', compact('user', 'jobs'));

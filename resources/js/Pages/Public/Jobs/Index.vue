@@ -128,7 +128,9 @@ const toggleSidebarVisibility = () => {
                 </div>
             </div>
 
-            <Pagination :pagination="jobs" />
+            <div class="max-w-5xl mx-auto">
+                <Pagination :pagination="jobs" />
+            </div>
         </div>
     </div>
 </template>
