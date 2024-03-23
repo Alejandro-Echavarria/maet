@@ -50,8 +50,8 @@ defineExpose({ toggleSidebarVisibility });
 
 <template>
     <aside
-        :class="['sidebar max-[1490px]:w-[100%] max-[1490px]:h-[100%] h-auto w-[11rem] flex max-[1490px]:justify-center max-[1490px]:text-center', { 'collapsed': !isSidebarVisible }, { 'border-r border-[#000000]/[0.16]': isSidebarVisible }]"
-        class="z-30 bg-white text-gray-800 absolute dark:text-gray-200 dark:bg-gray-800 dark:border-gray-700 shrink-0">
+        :class="['sidebar max-[1490px]:w-[100%] max-[1490px]:h-[100%] h-auto w-[11rem] max-[1490px]:justify-center max-[1490px]:text-center', { 'collapsed': !isSidebarVisible }, { 'border-r border-[#000000]/[0.16]': isSidebarVisible }]"
+        class="z-30 bg-white text-gray-800 absolute max-[1490px]:left-0 dark:text-gray-200 dark:bg-gray-800 dark:border-gray-700 shrink-0">
         <div :class="{ 'hidden': !isSidebarVisible }">
             <template v-for="(item, index) in items">
                 <h2 class="text-xl font-bold">{{ index }}</h2>
@@ -67,6 +67,9 @@ defineExpose({ toggleSidebarVisibility });
 </template>
 
 <style scoped>
+/* * {
+    border: 1px solid red;
+} */
 .sidebar {
     transition: height 0.3s ease;
     overflow: hidden;
