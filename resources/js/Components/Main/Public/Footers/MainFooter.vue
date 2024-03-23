@@ -3,8 +3,8 @@ import { Link } from '@inertiajs/vue3';
 </script>
 
 <template>
-    <footer class="mt-16 py-4 backdrop-blur-md bg-white/80 dark:bg-transparent border-t dark:border-gray-600">
-        <div class="max-w-5xl mx-auto h-auto xs:px-0 px-4">
+    <footer class="mt-16 py-4 backdrop-blur-md bg-white/80 dark:bg-transparent border-t dark:border-gray-600 px-4">
+        <div class="max-w-5xl mx-auto h-auto">
             <div class="md:flex md:justify-between">
                 <div class="mb-6 md:mb-0">
                     <Link href="/" title="MAET" class="flex-shrink-0">

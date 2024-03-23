@@ -34,6 +34,8 @@ const handleResize = () => {
 };
 
 const filter = (model, value) => {
+    toggleSidebarVisibility();
+
     router.visit(router.page.url, {
         preserveScroll: false,
         preserveState: true,
@@ -48,9 +50,9 @@ defineExpose({ toggleSidebarVisibility });
 
 <template>
     <aside
-        :class="['sidebar', { 'collapsed': !isSidebarVisible }, { 'border-r border-[#000000]/[0.16]': isSidebarVisible }]"
+        :class="['sidebar max-[1490px]:w-[100%] max-[1490px]:h-[100%] h-auto w-[11rem] flex max-[1490px]:justify-center max-[1490px]:text-center', { 'collapsed': !isSidebarVisible }, { 'border-r border-[#000000]/[0.16]': isSidebarVisible }]"
         class="z-30 bg-white text-gray-800 absolute dark:text-gray-200 dark:bg-gray-800 dark:border-gray-700 shrink-0">
-        <div>
+        <div :class="{ 'hidden': !isSidebarVisible }">
             <template v-for="(item, index) in items">
                 <h2 class="text-xl font-bold">{{ index }}</h2>
                 <ul class="my-4 space-y-2">
@@ -66,23 +68,22 @@ defineExpose({ toggleSidebarVisibility });
 
 <style scoped>
 .sidebar {
-    width: 11rem;
-    transition: width 0.3s ease;
+    transition: height 0.3s ease;
     overflow: hidden;
 }
 
 .sidebar.collapsed {
-    width: 0;
+    height: 0;
 }
 
 .sidebar-transition-enter-active,
 .sidebar-transition-leave-active {
-    transition: width 0.3s ease;
+    transition: height 0.3s ease;
 }
 
 .sidebar-transition-enter,
 .sidebar-transition-leave-to {
-    width: 0;
+    height: 0;
 }
 
 .sidebar-menu {
