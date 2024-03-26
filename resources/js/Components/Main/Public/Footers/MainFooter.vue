@@ -3,8 +3,8 @@ import { Link } from '@inertiajs/vue3';
 </script>
 
 <template>
-    <footer class="mt-16 py-4 backdrop-blur-md bg-white/80 dark:bg-transparent border-t dark:border-gray-600 px-4">
-        <div class="max-w-5xl mx-auto h-auto">
+    <footer class="mt-16 mx-4">
+        <div class="max-w-5xl mx-auto h-auto py-4 border-t border-[#000000]/[0.16]">
             <div class="md:flex md:justify-between">
                 <div class="mb-6 md:mb-0">
                     <Link href="/" title="MAET" class="flex-shrink-0">
@@ -55,8 +55,8 @@ import { Link } from '@inertiajs/vue3';
                     </div>
                 </div>
             </div>
-            <hr class="my-6 border-t sm:mx-auto dark:border-gray-600 lg:my-8" />
-            <div class="sm:flex sm:items-center sm:justify-between">
+            <!-- <hr class="my-6 border-t sm:mx-auto border-[#000000]/[0.16] lg:my-8" /> -->
+            <div class="my-6 lg:my-8 sm:flex sm:items-center sm:justify-between">
                 <span class="text-sm font-semibold text-gray-500 sm:text-center dark:text-gray-400">©
                     {{ new Date().getFullYear() }}
                     <a href="/" class="hover:underline" title="MAET">

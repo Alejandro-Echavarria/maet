@@ -3,7 +3,6 @@ import { onMounted } from 'vue';
 import { Head } from '@inertiajs/vue3';
 import PublicLayout from '@/Components/Main/Public/Layout/PublicLayout.vue';
 import PrismjsHelper from "@/Helpers/Prismjs/Prismjs";
-import cleanString from "@/Helpers/HelperFunctions";
 
 defineOptions({
     layout: PublicLayout
@@ -25,7 +24,7 @@ onMounted(() => {
 
         <Head>
             <title>{{ job.title }}</title>
-            <meta head-key="description" type="description" name="description" :content="cleanString(job.preview)">
+            <meta head-key="description" type="description" name="description" :content="job.project_name">
         </Head>
 
         <div class="space-y-6 max-w-5xl mx-auto">
@@ -47,15 +46,15 @@ onMounted(() => {
                             <div class="h-1.5 w-1.5 rounded-full bg-emerald-400"></div>
                         </div>
                         <div class="flex-1 pr-10 text-center text-[0.7rem] text-white leading-loose">
-                            <p>
-                                demo.link.com
-                            </p>
+                            <a :href="job.link" target="_blank" rel="noreferrer noopener nofollow" :title="job.title">
+                                {{ job.link }}
+                            </a>
                         </div>
                     </div>
 
                     <img fetchpriority="high" class="w-full aspect-video overflow-auto object-cover"
-                        :title="job.alt_banner_image"
-                        :src="`/storage/${job.images[0]?.url}`" :alt="job.alt_banner_image" />
+                        :title="job.alt_banner_image" :src="`/storage/${job.images[0]?.url}`"
+                        :alt="job.alt_banner_image" />
                 </div>
             </div>
 

@@ -20,6 +20,7 @@ class Job extends Model
         'logo_url',
         'color',
         'project_name',
+        'link',
         'preview',
         'body',
         'technologies',

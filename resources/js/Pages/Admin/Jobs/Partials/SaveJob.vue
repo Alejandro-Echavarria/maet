@@ -44,6 +44,7 @@ const form = useForm({
     color: "gray-100",
     file: null,
     project_name: "",
+    link: "",
     technologies: [],
     preview: "",
     body: "",
@@ -86,7 +87,7 @@ const save = () => {
     }
 };
 
-const openModal = (op, id, category_id, client_id, titleData, slug, logo_url, color, file, project_name, technologies, preview, body, alt_banner_image, status) => {
+const openModal = (op, id, category_id, client_id, titleData, slug, logo_url, color, file, project_name, link, technologies, preview, body, alt_banner_image, status) => {
     modal.value = true;
     opration.value = op;
 
@@ -103,6 +104,7 @@ const openModal = (op, id, category_id, client_id, titleData, slug, logo_url, co
         form.color = color;
         form.file = file;
         form.project_name = project_name;
+        form.link = link;
         form.technologies = technologies.map(tech => tech.id);
         form.preview = preview;
         form.body = body;
@@ -165,6 +167,22 @@ defineExpose({ openModal });
                                 <InputError :message="form.errors.color" class="mt-2" />
                             </div>
 
+                            <div class="sm:col-span-3">
+                                <InputLabel for="project_name" value="Project description SEO" />
+                                <TextInput id="project_name" ref="projectNameInput" v-model="form.project_name"
+                                    type="text" />
+
+                                <InputError :message="form.errors.project_name" class="mt-2" />
+                            </div>
+
+                            <div class="sm:col-span-1">
+                                <InputLabel for="link" value="Link" />
+                                <TextInput id="link" ref="linkInput" v-model="form.link" type="url"
+                                    placeholder="https://example.com" />
+
+                                <InputError :message="form.errors.link" class="mt-2" />
+                            </div>
+
                             <div class="sm:col-span-4">
                                 <Images v-model="form.file" :file="form.file" />
 
@@ -208,15 +226,7 @@ defineExpose({ openModal });
                                 <InputError :message="form.errors.technologies" class="mt-2" />
                             </div>
 
-                            <div class="sm:col-span-2">
-                                <InputLabel for="project_name" value="Proyect name" />
-                                <TextInput id="project_name" ref="proyectNameInput" v-model="form.project_name"
-                                    type="text" />
-
-                                <InputError :message="form.errors.project_name" class="mt-2" />
-                            </div>
-
-                            <div class="sm:col-span-2">
+                            <div class="sm:col-span-4">
                                 <InputLabel for="client_id" value="Client" />
                                 <VueSelect id="client_id" label="name" v-model="form.client_id" :append="true"
                                     :options="clientOptions" :reduce="clientOptions => clientOptions.id"

@@ -48,8 +48,8 @@ const truncateData = (data, index) => {
 
 const callOpenModal = ref(null);
 
-const openModal = (op, id, titleData, slug, start_date, end_date, description, color, file, project_name, technologies, preview, body, alt_banner_image, status) => {
-    callOpenModal.value.openModal(op, id, titleData, slug, start_date, end_date, description, color, file, project_name, technologies, preview, body, alt_banner_image, status);
+const openModal = (op, id, titleData, slug, start_date, end_date, description, color, file, project_name, link, technologies, preview, body, alt_banner_image, status) => {
+    callOpenModal.value.openModal(op, id, titleData, slug, start_date, end_date, description, color, file, project_name, link, technologies, preview, body, alt_banner_image, status);
 };
 </script>
 
@@ -94,7 +94,7 @@ const openModal = (op, id, titleData, slug, start_date, end_date, description, c
                 <template #actions>
                     <div class="flex my-3 justify-end">
                         <PrimaryButton class="sm:w-auto w-full"
-                            @click="openModal(2, job.id, job.category_id, job.client_id, job.title, job.slug, job.logo_url, job.color, job?.images[0]?.url, job.project_name, job.technologies, job.preview, job.body, job.alt_banner_image, job.status)">
+                            @click="openModal(2, job.id, job.category_id, job.client_id, job.title, job.slug, job.logo_url, job.color, job?.images[0]?.url, job.project_name, job.link, job.technologies, job.preview, job.body, job.alt_banner_image, job.status)">
                             <font-awesome-icon class="mr-2" :icon="['far', 'pen-to-square']" />
                             edit job
                         </PrimaryButton>

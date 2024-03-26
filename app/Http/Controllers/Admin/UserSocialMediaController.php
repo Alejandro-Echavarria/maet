@@ -29,7 +29,7 @@ class UserSocialMediaController extends Controller
     {
         $data = $request->validate([
             'social_media_id' => "required|exists:social_medias,id|unique:social_media_user,social_media_id,$request->id",
-            'url' => 'required|max:255|string|url',
+            'url' => 'required|max:255|string|url:https',
         ]);
 
         $data['user_id'] = auth()->user()->id;
@@ -50,7 +50,7 @@ class UserSocialMediaController extends Controller
         $userSocialMedia->update(
             $request->validate([
                 'social_media_id' => "required|exists:social_medias,id|unique:social_media_user,social_media_id,$userSocialMedia->id",
-                'url' => 'required|max:255|string|url',
+                'url' => 'required|max:255|string|url:https',
             ])
         );
 
