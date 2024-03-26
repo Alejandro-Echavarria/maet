@@ -74,7 +74,7 @@ const toggleSidebarVisibility = () => {
                     <div class="max-w-5xl mx-auto">
                         <div v-for="( job, index ) in jobs.data" :class="[index < 2 && 'animate-fade-in-down']"
                             :style="{ animationDelay: `${index * 0.2}s` }" :key="'jobs-' + job.id"
-                            class="grid grid-cols-1 md:grid-cols-2 mb-10 sm:mb-20 w-full gap-10">
+                            class="grid grid-cols-1 md:grid-cols-2 mb-10 sm:mb-20 w-full gap-8">
                             <div :class="['w-full order-1', changeOrder() ? 'order-1' : 'sm:order-2', 'space-y-4']">
                                 <div>
                                     <span class="block text-indigo-700 font-semibold">
@@ -83,7 +83,7 @@ const toggleSidebarVisibility = () => {
                                     <Link :href="route('jobs.show', job.slug)" target="_blank"
                                         rel="noreferrer noopener nofollow">
                                     <h2
-                                        class="block text-2xl font-bold text-gray-800 dark:text-gray-200 hover:text-indigo-700 pb-0">
+                                        class="text-2xl font-bold text-gray-800 dark:text-gray-200 hover:text-indigo-700 mt-4">
                                         {{ job.title }}
                                     </h2>
                                     </Link>

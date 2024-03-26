@@ -164,7 +164,7 @@ const openModal = () => {
                                 <div :class="['w-full', changeOrder() ? 'order-1' : 'sm:order-2', 'space-y-4']">
                                     <div>
                                         <span class="block text-indigo-700 font-semibold">
-                                            Personal project
+                                            {{ job.category.name }}
                                         </span>
                                         <Link :href="route('jobs.show', job.slug)" target="_blank"
                                             rel="noreferrer noopener nofollow">
@@ -202,7 +202,7 @@ const openModal = () => {
                                                 <div
                                                     class="flex-1 pr-10 text-center text-[0.7rem] text-white leading-loose">
                                                     <p>
-                                                        demo.link.com
+                                                        {{ job.link }}
                                                     </p>
                                                 </div>
                                             </div>

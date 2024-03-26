@@ -28,11 +28,15 @@ class JobController extends Controller
         $page = $request?->page;
         $filter = $request?->search;
 
-        $jobs = Job::with(['technologies:id,name', 'images' => function ($query) {
-            $query->select('id', 'url', 'default', 'imageable_id')
-                ->where('default', '=', '1')
-                ->orderBy('id', 'desc');
-        }])
+        $jobs = Job::with(
+            [
+                'technologies:id,name', 'images' => function ($query) {
+                    $query->select('id', 'url', 'default', 'imageable_id')
+                        ->where('default', '=', '1')
+                        ->orderBy('id', 'desc');
+                }
+            ]
+        )
             ->filter($filter)
             ->orderBy('created_at', 'desc')
             ->paginate(11);
