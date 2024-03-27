@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted } from 'vue';
-import { Head } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3';
 import PublicLayout from '@/Components/Main/Public/Layout/PublicLayout.vue';
 import PrismjsHelper from "@/Helpers/Prismjs/Prismjs";
 
@@ -28,10 +28,30 @@ onMounted(() => {
         </Head>
 
         <div class="space-y-6 max-w-5xl mx-auto">
+            <Link :href="route('jobs.index', { 'category': job.category.slug })">
+            <span class="py-1 px-2 text-sm text-indigo-700 font-semibold bg-indigo-700/10 rounded-full">
+                {{ job.category.name }}
+            </span>
+            </Link>
+
             <h1
-                :class="`text-5xl lg:text-7xl py-1.5 md:text-6xl font-bold bg-gradient-to-r from-${job.color} via-indigo-700 to-blue-700 bg-clip-text text-transparent`">
+                :class="`text-5xl lg:text-7xl py-1.5 md:text-6xl font-bold bg-gradient-to-r from-${job.color} via-gray-800/90 to-gray-800 bg-clip-text text-transparent`">
                 {{ job.title }}
             </h1>
+
+            <div class="flex flex-wrap gap-4">
+                <div v-for="technology in job.technologies" :key="'technology-' + technology.id">
+                    <Link :href="route('jobs.index', { 'technology': technology.slug })">
+                        <div id="tech-container"
+                            class="flex gap-1 text-sm font-semibold rounded-full">
+                            <span v-html="technology.icon"></span>
+                            <p>
+                                {{ technology.name }}
+                            </p>
+                        </div>
+                    </Link>
+                </div>
+            </div>
 
             <div class="content-ckeditor mb-4">
                 <p v-html="job.preview" />

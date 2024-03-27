@@ -56,7 +56,8 @@ class JobController extends Controller
 
         $job = $job->with(
             [
-                'technologies:id,name',
+                'category:id,name,slug',
+                'technologies:id,name,slug,icon',
                 'images' => function ($query) {
                     $query->select('id', 'url', 'default', 'imageable_id')
                         ->where('default', '=', '1')

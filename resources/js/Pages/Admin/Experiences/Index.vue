@@ -30,7 +30,7 @@ const openModal = (op, id, titleData, start_date, end_date, description, color) 
     <div>
         <Head title="Experieces" />
 
-        <MainTitle> Experieces </MainTitle>
+        <MainTitle> Experiences </MainTitle>
 
         <SectionTabs>
             <template #tabexperience>
@@ -51,8 +51,7 @@ const openModal = (op, id, titleData, start_date, end_date, description, color) 
 
                                 <div class="flex gap-3">
                                     <button>
-                                        <font-awesome-icon @click="
-                                            openModal(
+                                        <font-awesome-icon @click="openModal(
                                                 2,
                                                 experience.id,
                                                 experience.title,
@@ -60,8 +59,7 @@ const openModal = (op, id, titleData, start_date, end_date, description, color) 
                                                 experience.end_date,
                                                 experience.description,
                                                 experience.color
-                                            )
-                                            "
+                                            )"
                                             class="w-4 h-4 text-indigo-500"
                                             :icon="['far', 'pen-to-square']" />
                                     </button>
