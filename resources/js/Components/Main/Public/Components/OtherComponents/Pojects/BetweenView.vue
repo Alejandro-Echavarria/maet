@@ -19,7 +19,7 @@ const changeOrder = () => {
     <div v-for="( project, index ) in projects" :class="[index < 2 && 'animate-fade-in-down']"
         :style="{ animationDelay: `${index * 0.2}s` }" :key="'project-' + project.id"
         class="grid grid-cols-1 md:grid-cols-2 mb-10 sm:mb-20 w-full gap-10">
-        <div :class="['w-full order-1', changeOrder() ? 'order-1' : 'sm:order-2', 'space-y-4']">
+        <div :class="['w-full order-1', changeOrder() ? 'order-1' : 'md:order-2', 'space-y-4']">
             <div>
                 <span class="block text-indigo-700 font-semibold">
                     {{ project.category.name }}
@@ -33,7 +33,7 @@ const changeOrder = () => {
 
             <p class="text-gray-500 dark:text-gray-300 line-clamp-3" v-html="project.preview" />
 
-            <div class="hidden sm:block">
+            <div class="hidden md:block">
                 <Link :href="route('jobs.show', project.slug)" target="_blank" rel="noreferrer noopener nofollow"
                     class="sm:w-auto w-full inline-block mt-2 text-blue-500 underline hover:text-blue-400"
                     :title="project.title">

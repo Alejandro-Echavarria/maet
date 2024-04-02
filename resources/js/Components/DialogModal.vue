@@ -24,20 +24,15 @@ const close = () => {
 </script>
 
 <template>
-    <Modal
-        :show="show"
-        :max-width="maxWidth"
-        :closeable="closeable"
-        @close="close"
-    >
+    <Modal :show="show" :max-width="maxWidth" :closeable="closeable" @close="close">
         <div>
             <div class="text-lg py-4 px-4 sm:px-6 font-medium text-gray-700 border-b">
                 <div class="flex justify-between">
                     <slot name="title" />
-                <button @click="close" class="text-gray-700 bg-gray-200/60 rounded-full w-8 h-8 shrink-0">
-                    <font-awesome-icon :class="['w-4 h-4']" :icon="['fas', 'xmark']" />
-                </button>
-            </div>
+                    <button @click="close" class="text-gray-700 bg-gray-200/60 rounded-full w-8 h-8 shrink-0">
+                        <font-awesome-icon :class="['w-4 h-4']" :icon="['fas', 'xmark']" />
+                    </button>
+                </div>
             </div>
 
             <div class="max-h-[65vh] py-4 px-4 sm:px-6 text-sm text-gray-600 overflow-y-auto">

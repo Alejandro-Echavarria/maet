@@ -34,16 +34,26 @@ onMounted(() => {
             </span>
             </Link>
 
+            <time>
+                <span class="ml-2 font-medium text-sm text-gray-600">
+                    {{ job.created_at }}
+                </span>
+            </time>
+
             <h1
                 :class="`text-5xl lg:text-7xl py-1.5 md:text-6xl font-bold bg-gradient-to-r from-${job.color} via-gray-800/90 to-gray-800 bg-clip-text text-transparent`">
                 {{ job.title }}
             </h1>
 
-            <div class="flex flex-wrap gap-4">
+            <div class="flex flex-wrap gap-4 items-center text-gray-600">
+                <h2 class="font-medium">
+                    Tech:
+                </h2>
+
                 <div v-for="technology in job.technologies" :key="'technology-' + technology.id">
                     <Link :href="route('jobs.index', { 'technology': technology.slug })">
                         <div id="tech-container"
-                            class="flex gap-1 text-sm font-semibold rounded-full">
+                            class="flex gap-1 text-sm">
                             <span v-html="technology.icon"></span>
                             <p>
                                 {{ technology.name }}
