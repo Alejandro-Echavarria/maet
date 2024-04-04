@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\SocialMediaController;
 use App\Http\Controllers\Admin\UserSocialMediaController;
 use App\Http\Controllers\Admin\AboutMeController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\ExperienceController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\EducationController;
@@ -24,6 +25,9 @@ Route::resource('user-social-medias', UserSocialMediaController::class)->only(['
 
 // Services
 Route::resource('services', ServiceController::class)->only(['index', 'store', 'update', 'destroy'])->names('admin.services');
+
+// Clients
+Route::resource('clients', ClientController::class)->only(['index', 'store', 'update', 'destroy'])->names('admin.clients');
 
 // About Me
 Route::get('about-me', [AboutMeController::class, 'index'])->name('admin.aboutme.index');

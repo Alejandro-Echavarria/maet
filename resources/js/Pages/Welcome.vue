@@ -147,7 +147,7 @@ const openModal = () => {
                         </div>
                     </section>
 
-                    <div class="relative">
+                    <div class="relative" v-if="jobs.length > 0">
                         <section id="projects">
                             <SectionTitle>
                                 <h2 class="py-4 text-5xl lg:text-7xl font-bold text-gray-800 dark:text-gray-200">

@@ -14,9 +14,13 @@ return new class extends Migration
         Schema::create('clients', function (Blueprint $table) {
 
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('logo_url')->nullable();
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('email')->nullable();
+            $table->string('phone', 45)->nullable();
+            $table->string('country')->nullable();
+            $table->text('description')->nullable();
+            $table->string('profile_photo_path', 2048)->nullable();
             $table->timestamps();
         });
     }
