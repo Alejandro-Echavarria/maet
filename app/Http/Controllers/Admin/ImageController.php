@@ -11,14 +11,16 @@ use Illuminate\Support\Str;
 
 class ImageController extends Controller
 {
-    public static function store($request, $data, $directory)
+    public static function store($request, $data, $directory, $access = 'public')
     {
-        Storage::makeDirectory($directory);
+        if ($access === 'public') {
+            Storage::makeDirectory($directory);
+        }
 
         $name = Str::random(10) . $request->getClientOriginalName();
         $name = pathinfo($name, PATHINFO_FILENAME) . '.webp';
 
-        $path = storage_path("app/public/$directory/$name");
+        $path = storage_path("app/$access/$directory/$name");
         $pathRelative = "$directory/$name";
 
         $manager = new ImageManager(new Driver());
@@ -44,7 +46,7 @@ class ImageController extends Controller
         }
     }
 
-    public static function ckeditorStore($request, $data, $directory)
+    public static function ckeditorStore($request, $data, $directory, $access = 'public')
     {
         /* Creating a directory called posts in the storage folder. */
         Storage::makeDirectory($directory);
@@ -52,7 +54,7 @@ class ImageController extends Controller
         $name = Str::random(10) . $request->getClientOriginalName();
         $name = pathinfo($name, PATHINFO_FILENAME) . '.webp';
 
-        $path = storage_path("app/public/$directory/$name");
+        $path = storage_path("app/$access/$directory/$name");
         $pathRelative = "$directory/$name";
 
         $manager = new ImageManager(new Driver());
@@ -73,6 +75,13 @@ class ImageController extends Controller
             "fileName" => $name,
             "uploaded" => 1
         ];
+    }
+
+    public function show($image)
+    {
+        $path = storage_path("app/admin/images/clients/{$image}");
+
+        return response()->file($path);
     }
 
     public static function destroy($data)

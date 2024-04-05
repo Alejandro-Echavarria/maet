@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\ExperienceController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\EducationController;
+use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\KnowleedgeController;
 
 Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
@@ -32,7 +33,7 @@ Route::resource('clients', ClientController::class)->only(['index', 'store', 'up
 // About Me
 Route::get('about-me', [AboutMeController::class, 'index'])->name('admin.aboutme.index');
 Route::put('about-me/{user}', [AboutMeController::class, 'update'])->name('admin.aboutme.update');
-Route::post('ckeditor/images/about-me//store', [AboutMeController::class, 'ckeditorStore'])->name('admin.ckeditor.images.aboutme.store');
+Route::post('ckeditor/images/about-me/store', [AboutMeController::class, 'ckeditorStore'])->name('admin.ckeditor.images.aboutme.store');
 
 // Social medias
 Route::resource('social-medias', SocialMediaController::class)->only(['index', 'store', 'update', 'destroy'])->names('admin.socialmedias');
@@ -51,3 +52,6 @@ Route::resource('resume/experiences', ExperienceController::class)->only(['index
 
 // Knowledges
 Route::resource('resume/knowledge', KnowleedgeController::class)->only(['index', 'store', 'update', 'destroy'])->names('admin.resume.knowledge');
+
+// Show private images for clients
+Route::get('images/clients/{image}', [ImageController::class, 'show'])->name('admin.clients.showImage');

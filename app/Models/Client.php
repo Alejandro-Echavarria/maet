@@ -25,6 +25,11 @@ class Client extends Model
         return $this->hasMany(Job::class);
     }
 
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'imageable');
+    }
+
     public function getCreatedAtAttribute($value)
     {
         $carbon = Carbon::parse($value)->timezone(config('app.timezone'));

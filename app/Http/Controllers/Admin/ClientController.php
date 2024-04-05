@@ -9,12 +9,30 @@ use Inertia\Inertia;
 
 class ClientController extends Controller
 {
+    protected $directory;
+
+    public function __construct()
+    {
+        $this->directory = 'images/clients';
+    }
+
     public function index(Request $request)
     {
         $page = $request?->page;
         $filter = $request?->search;
 
-        $clients = Client::filter($filter)->paginate(10);
+        $clients = Client::with(
+            [
+                'images' => function ($query) {
+                    $query->select('id', 'url', 'default', 'imageable_id')
+                        ->where('default', '=', '1')
+                        ->orderBy('id', 'desc');
+                }
+            ]
+        )
+            ->filter($filter)
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
 
         return Inertia::render('Admin/Clients/Index', compact('page', 'filter', 'clients'));
     }
@@ -27,7 +45,7 @@ class ClientController extends Controller
                 'first_name'  => "required|max:255|string",
                 'last_name'   => "required|max:255|string",
                 'email'       => "nullable|email|max:255",
-                'phone'       => "nullable|max:45|string",
+                'phone'       => "nullable|numeric",
                 'country'     => "nullable|max:255|string",
                 'description' => "nullable|string",
                 'file'        => "nullable|image",
@@ -41,7 +59,11 @@ class ClientController extends Controller
             ]
         );
 
-        Client::create($data);
+        $client = Client::create($data);
+
+        if ($request->file('file')) {
+            ImageController::store($request->file('file'), $client, $this->directory, 'admin');
+        }
 
         $page = $request?->page;
         $search = $request?->search;
