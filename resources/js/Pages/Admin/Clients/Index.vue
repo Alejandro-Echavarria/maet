@@ -7,6 +7,7 @@ import Search from '@/Components/Main/Admin/Components/Searchs/Search.vue';
 import MainTable from '@/Components/Main/Admin/Components/Tables/MainTable.vue';
 import TableButton from '@/Components/Main/Admin/Components/Buttons/TableButton.vue';
 import SaveClient from '@/Pages/Admin/Clients/Partials/SaveClient.vue';
+import DeleteClient from '@/Pages/Admin/Clients/Partials/DeleteClient.vue';
 
 defineOptions({
     layout: MainLayout,
@@ -59,7 +60,7 @@ const openModal = (op, id, first_name, last_name, email, phone, country, descrip
                     <td class="px-4 py-3">
                         <img
                         :class="['h-11 w-11 rounded-full']"
-                        class="overflow-auto object-cover" :src="`/admin/${tb?.images[0]?.url}`" alt="">
+                        class="overflow-hidden object-cover" :src="`/admin/${tb?.images[0]?.url}`" alt="">
                     </td>
                     <td class="px-4 py-3">
                         <div class="text-gray-800 font-medium">
@@ -77,7 +78,7 @@ const openModal = (op, id, first_name, last_name, email, phone, country, descrip
                             <font-awesome-icon @click="openModal(2, tb.id, tb.first_name, tb.last_name, tb.email, tb.phone, tb.country, tb.description, tb?.images[0]?.url)"
                                 class="w-4 h-4 text-indigo-500" :icon="['far', 'pen-to-square']" />
                         </TableButton>
-                        <DeleteService :id="tb.id" :filter="filter" :page="page" :key="tb.id + 'deleteBtn'" />
+                        <DeleteClient :id="tb.id" :filter="filter" :page="page" :key="tb.id + 'deleteBtn'" />
                     </td>
                 </tr>
             </template>

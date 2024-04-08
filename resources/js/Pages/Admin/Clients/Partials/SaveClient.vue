@@ -41,25 +41,28 @@ const save = () => {
             page: props.page
         })).post(route('admin.clients.store'), {
             preserveScroll: true,
+            preserveState: true,
             onSuccess: () => {
                 ok('Client created successfully');
             },
             onError: () => {
-
+                console.log("error");
             }
         });
     } else {
         form.transform((data) => ({
             ...data,
+            _method: 'put',
             search: props.filter,
             page: props.page
-        })).put(route('admin.clients.update', service.value), {
+        })).post(route('admin.clients.update', client.value), {
             preserveScroll: true,
+            preserveState: true,
             onSuccess: () => {
                 ok('Client updated successfully');
             },
             onError: () => {
-
+                console.log("error");
             }
         });
     }
