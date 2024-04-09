@@ -1,7 +1,8 @@
 <template>
     <div>
         <div :class="['w-full justify-end']">
-            <div class="rounded-xl overflow-hidden shadow-gray-500/20 shadow-lg">
+            <div
+                class="rounded-xl overflow-hidden shadow-gray-500/20 shadow-lg w-full h-auto aspect-video hover:scale-105 transition-all ease-in-out duration-300">
                 <div>
                     <div class="flex h-6 w-full items-center gap-5 px-3 bg-gray-800">
                         <div class="flex items-center gap-1">

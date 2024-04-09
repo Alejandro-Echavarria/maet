@@ -11,8 +11,9 @@ const isBackDropVisible = ref(false);
 
 const navItems = [
     { href: 'admin.dashboard', active: route().current('admin.dashboard'), activeClass: '/admin/dashboard', label: 'Dashboard', children: [], icon: ['fas', 'chart-line'] },
-    { href: 'admin.jobs.index', active: route().current('admin.jobs.index'), activeClass: '/admin/jobs', label: 'Jobs', children: [], icon: ['fas', 'file-arrow-down'] },
+    { href: 'admin.jobs.index', active: route().current('admin.jobs.index'), activeClass: '/admin/jobs', label: 'Jobs (projects)', children: [], icon: ['fas', 'file-arrow-down'] },
     { href: 'admin.services.index', active: route().current('admin.services.index'), activeClass: '/admin/services', label: 'Services', children: [], icon: ['fas', 'store'] },
+    { href: 'admin.clients.index', active: route().current('admin.clients.index'), activeClass: '/admin/clients', label: 'Clients', children: [], icon: ['fas', 'users'] },
     {
         href: '#', label: 'Personal info',
         active: route().current('admin.resume.*'),

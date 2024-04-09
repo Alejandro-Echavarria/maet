@@ -23,6 +23,7 @@ import { faGear } from "@fortawesome/free-solid-svg-icons";
 import { faUserPen } from "@fortawesome/free-solid-svg-icons";
 import { faStore } from "@fortawesome/free-solid-svg-icons";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faUsers } from "@fortawesome/free-solid-svg-icons";
 
 // Regular icons
 import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
@@ -41,6 +42,7 @@ library.add(
     faUserPen,
     faStore,
     faXmark,
+    faUsers,
 );
 
 const appName =

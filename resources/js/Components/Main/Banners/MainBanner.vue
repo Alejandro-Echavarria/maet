@@ -41,7 +41,7 @@ const { user } = defineProps({
                                     {{ user.position }}
                                 </h2>
                                 <p
-                                    class="text-lg md:text-xl font-semibold bg-gradient-to-r from-gray-800 via-indigo-700 to-gray-800 bg-clip-text text-transparent">
+                                    class="text-lg md:text-xl font-medium bg-gradient-to-r from-gray-800 via-indigo-700 to-gray-800 bg-clip-text text-transparent">
                                     &#60;Each line of code is an opportunity to craft unique experiences, not just to achieve objectives, but also to leave a lasting impression /&#62;
                                 </p>
                             </div>

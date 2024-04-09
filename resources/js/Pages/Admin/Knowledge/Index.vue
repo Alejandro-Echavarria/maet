@@ -56,14 +56,14 @@ const openModal = (op, id, name, icon, main) => {
                                 <div class="flex gap-3">
                                     <button>
                                         <font-awesome-icon @click="
-                                            openModal(
-                                                2,
-                                                knowledge.id,
-                                                knowledge.name,
-                                                knowledge.icon,
-                                                knowledge.main
-                                            )
-                                            " class="w-4 h-4 text-indigo-500" :icon="['far', 'pen-to-square']" />
+                    openModal(
+                        2,
+                        knowledge.id,
+                        knowledge.name,
+                        knowledge.icon,
+                        knowledge.main
+                    )
+                    " class="w-4 h-4 text-indigo-500" :icon="['far', 'pen-to-square']" />
                                     </button>
                                     <DeleteKnowledge :id="knowledge.id" :knowledge="knowledge"
                                         :key="knowledge.id + '-deleteBtn'" />
@@ -75,4 +75,5 @@ const openModal = (op, id, name, icon, main) => {
                 </TimeComponent>
             </template>
         </SectionTabs>
-</div></template>
+    </div>
+</template>

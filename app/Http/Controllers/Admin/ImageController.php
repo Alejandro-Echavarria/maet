@@ -11,20 +11,20 @@ use Illuminate\Support\Str;
 
 class ImageController extends Controller
 {
-    public static function store($request, $data, $directory)
+    public static function store($request, $data, $directory, $access = 'public')
     {
-        Storage::makeDirectory($directory);
+        Storage::disk('local')->makeDirectory("$access/$directory");
 
         $name = Str::random(10) . $request->getClientOriginalName();
         $name = pathinfo($name, PATHINFO_FILENAME) . '.webp';
 
-        $path = storage_path("app/public/$directory/$name");
+        $path = storage_path("app/$access/$directory/$name");
         $pathRelative = "$directory/$name";
 
         $manager = new ImageManager(new Driver());
 
         $manager->read($request)
-            ->scaleDown(1280, null, function($constraint) {
+            ->scaleDown(1280, null, function ($constraint) {
                 $constraint->aspectRatio();
             })
             ->toWebp(100)->save($path);
@@ -35,7 +35,7 @@ class ImageController extends Controller
                 'default' => '1'
             ]);
         } else {
-            Storage::delete($data->images()->select('url')->where('default', '=', '1')->first()->url);
+            Storage::disk('local')->delete("$access/" . $data->images()->select('url')->where('default', '=', '1')->first()->url);
 
             $data->images()->update([
                 'url'     => $pathRelative,
@@ -44,21 +44,20 @@ class ImageController extends Controller
         }
     }
 
-    public static function ckeditorStore($request, $data, $directory)
+    public static function ckeditorStore($request, $data, $directory, $access = 'public')
     {
-        /* Creating a directory called posts in the storage folder. */
-        Storage::makeDirectory($directory);
+        Storage::disk('local')->makeDirectory("$access/$directory");
 
         $name = Str::random(10) . $request->getClientOriginalName();
         $name = pathinfo($name, PATHINFO_FILENAME) . '.webp';
 
-        $path = storage_path("app/public/$directory/$name");
+        $path = storage_path("app/$access/$directory/$name");
         $pathRelative = "$directory/$name";
 
         $manager = new ImageManager(new Driver());
 
         $manager->read($request)
-            ->scaleDown(1280, null, function($constraint) {
+            ->scaleDown(1280, null, function ($constraint) {
                 $constraint->aspectRatio();
             })
             ->toWebp(100)->save($path);
@@ -75,13 +74,20 @@ class ImageController extends Controller
         ];
     }
 
-    public static function destroy($data)
+    public function show($image)
+    {
+        $path = storage_path("app/admin/images/clients/{$image}");
+
+        return response()->file($path);
+    }
+
+    public static function destroy($data, $access = 'public')
     {
         $images = $data->images()->select('id', 'url')->get();
 
         foreach ($images as $image) {
             Image::destroy($image->id);
-            Storage::delete($image->url);
+            Storage::disk('local')->delete("$access/" . $image->url);
         }
     }
 }
