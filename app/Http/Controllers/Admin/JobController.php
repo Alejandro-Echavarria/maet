@@ -41,7 +41,7 @@ class JobController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(11);
 
-        $clients = Client::all();
+        $clients = Client::selectRaw("id, CONCAT(first_name, ' ', last_name) as name")->get();
         $categories = Category::all();
         $technologies = Technology::all();
 
