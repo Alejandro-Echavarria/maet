@@ -63,7 +63,7 @@ class ImageController extends Controller
             ->toWebp(100)->save($path);
 
         $data->images()->create([
-            'url'     => $pathRelative
+            'url' => $pathRelative
         ]);
 
         return [

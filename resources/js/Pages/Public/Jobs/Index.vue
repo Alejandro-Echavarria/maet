@@ -35,7 +35,7 @@ const toggleSidebarVisibility = () => {
     <div>
 
         <Head>
-            <title>Jobs</title>
+            <title>Projects</title>
             <meta head-key="description" type="description" name="description"
                 content="Explore my web development portfolio showcasing standout projects. Discover my expertise and skills in web software development">
         </Head>
@@ -43,7 +43,7 @@ const toggleSidebarVisibility = () => {
         <div>
             <div class="max-w-5xl mx-auto flex items-center justify-between">
                 <h1 :class="`text-5xl lg:text-7xl md:text-6xl font-bold text-gray-800`">
-                    Jobs
+                    Projects
                 </h1>
                 
                 <div class="bg-gray-100  rounded-full w-auto h-auto text-gray-800 min-[1490px]:hidden">
