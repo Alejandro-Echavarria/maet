@@ -10,6 +10,8 @@ use App\Models\Category;
 use App\Models\Client;
 use App\Models\Job;
 use App\Models\Technology;
+use App\Models\Image;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class JobController extends Controller
@@ -25,6 +27,39 @@ class JobController extends Controller
 
     public function index(Request $request)
     {
+        $adminImageClients = Storage::disk('local')->files('admin/images/clients');
+
+        $publicImageJobs = Storage::disk('local')->files('public/images/jobs');
+        $publicImageCkeditor = Storage::disk('local')->files('public/images/ckeditor');
+        $publicImageCkeditorAboutMe = Storage::disk('local')->files('public/images/ckeditor/aboutme');
+        $publicImageCkeditorJobsBody = Storage::disk('local')->files('public/images/ckeditor/jobs/body');
+        $publicImageCkeditorJobsPreview = Storage::disk('local')->files('public/images/ckeditor/jobs/preview');
+
+        $imageFiles = array_merge($adminImageClients, $publicImageJobs, $publicImageCkeditor, $publicImageCkeditorAboutMe, $publicImageCkeditorJobsBody, $publicImageCkeditorJobsPreview);
+
+        $imagesDataBase = Image::pluck('url')->toArray();
+
+        $disk = [
+            'public',
+            'admin',
+        ];
+
+        // foreach($imagesDataBase as $image) {
+
+        // }
+
+        $delete = array_diff($imageFiles, $imagesDataBase);
+
+        // Storage::delete($delete);
+
+        return response()->json(
+            [
+                'images' => $adminImageClients,
+                'database' => $imagesDataBase,
+                'delete' => $delete
+            ]
+        );
+
         $page = $request?->page;
         $filter = $request?->search;
 
