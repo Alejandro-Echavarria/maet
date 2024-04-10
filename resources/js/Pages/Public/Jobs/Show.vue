@@ -64,7 +64,7 @@ onMounted(() => {
                     </div>
                 </div>
     
-                <div class="flex flex-wrap gap-4 items-center text-gray-600">
+                <div v-if="job.link" class="flex flex-wrap gap-4 items-center text-gray-600">
                     <h2 class="font-medium">
                         Link:
                     </h2>
