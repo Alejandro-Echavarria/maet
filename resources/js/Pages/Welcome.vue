@@ -147,7 +147,7 @@ const openModal = () => {
                         </div>
                     </section>
 
-                    <div class="relative" v-if="jobs.length > 0">
+                    <div class="relative pb-1" v-if="jobs.length > 0">
                         <section id="projects">
                             <SectionTitle>
                                 <h2 class="py-4 text-5xl lg:text-7xl font-bold text-gray-800 dark:text-gray-200">
@@ -159,7 +159,7 @@ const openModal = () => {
                         </section>
 
                         <div
-                            class="bg-gradient-to-b from-white/0 via-white/50 to-white/100 h-1/4 absolute -bottom-4 w-full grid place-content-center content-end">
+                            class="bg-gradient-to-b from-white/0 via-white/70 to-white/100 h-1/4 absolute bottom-0 w-full grid place-content-center content-end">
                             <div class="py-4">
                                 <Link :href="route('jobs.index')">
                                 <PrimaryButton>

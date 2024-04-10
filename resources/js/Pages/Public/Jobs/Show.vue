@@ -45,21 +45,33 @@ onMounted(() => {
                 {{ job.title }}
             </h1>
 
-            <div class="flex flex-wrap gap-4 items-center text-gray-600">
-                <h2 class="font-medium">
-                    Tech:
-                </h2>
+            <div class="space-y-4">
+                <div class="flex flex-wrap gap-4 items-center text-gray-600">
+                    <h2 class="font-medium">
+                        Tech:
+                    </h2>
+    
+                    <div v-for="technology in job.technologies" :key="'technology-' + technology.id">
+                        <Link :href="route('jobs.index', { 'technology': technology.slug })">
+                            <div id="tech-container"
+                                class="flex gap-1 text-sm">
+                                <span v-html="technology.icon"></span>
+                                <p>
+                                    {{ technology.name }}
+                                </p>
+                            </div>
+                        </Link>
+                    </div>
+                </div>
+    
+                <div class="flex flex-wrap gap-4 items-center text-gray-600">
+                    <h2 class="font-medium">
+                        Link:
+                    </h2>
 
-                <div v-for="technology in job.technologies" :key="'technology-' + technology.id">
-                    <Link :href="route('jobs.index', { 'technology': technology.slug })">
-                        <div id="tech-container"
-                            class="flex gap-1 text-sm">
-                            <span v-html="technology.icon"></span>
-                            <p>
-                                {{ technology.name }}
-                            </p>
-                        </div>
-                    </Link>
+                    <a :href="job.link" target="_blank" rel="noreferrer noopener nofollow" class="text-sm text-indigo-700" :title="job.title">
+                        {{ job.link }}
+                    </a>
                 </div>
             </div>
 
