@@ -134,7 +134,7 @@ const openModal = () => {
                                 </div>
 
                                 <div
-                                    class="bg-gradient-to-b from-white/0 via-white/50 to-white/100 h-1/4 absolute bottom-0 w-full grid place-content-center content-end">
+                                    class="bg-gradient-to-b from-white/0 via-white/50 to-white/100 h-1/4 absolute -bottom-4 w-full grid place-content-center content-end">
                                     <div class="py-4">
                                         <Link :href="route('aboutme.index')">
                                         <PrimaryButton>
@@ -159,7 +159,7 @@ const openModal = () => {
                         </section>
 
                         <div
-                            class="bg-gradient-to-b from-white/0 via-white/50 to-white/100 h-1/4 absolute bottom-0 w-full grid place-content-center content-end">
+                            class="bg-gradient-to-b from-white/0 via-white/50 to-white/100 h-1/4 absolute -bottom-4 w-full grid place-content-center content-end">
                             <div class="py-4">
                                 <Link :href="route('jobs.index')">
                                 <PrimaryButton>
