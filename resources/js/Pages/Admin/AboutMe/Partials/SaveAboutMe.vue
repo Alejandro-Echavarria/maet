@@ -23,7 +23,7 @@ const form = useForm({
     birthday: props.data.user.birthday
 });
 
-const urlCkeditorStoreImage = 'admin.ckeditor.images.aboutme.store';
+const urlCkeditorStoreImage = 'admin.ckeditor.images.aboutme.movetostorage';
 
 onMounted(() => {
     const datedatepickerId2pickerEl = document.querySelector('#datepickerId');
@@ -55,7 +55,7 @@ const save = () => {
             ok('Your ifnormation was updated successfully');
         },
         onError: () => {
-
+            console.log('error');
         }
     });
 };
@@ -88,7 +88,8 @@ const ok = (msj, type, timer) => {
 
                     <div>
                         <InputLabel for="phone" value="Phone" />
-                        <TextInput v-model="form.phone" id="phone" ref="phoneInput" type="text" placeholder="Your phone" />
+                        <TextInput v-model="form.phone" id="phone" ref="phoneInput" type="text"
+                            placeholder="Your phone" />
 
                         <InputError :message="form.errors.phone" class="mt-2" />
                     </div>
@@ -113,9 +114,9 @@ const ok = (msj, type, timer) => {
                     <div class="grid-cols-1 sm:col-span-2">
                         <InputLabel for="body" value="Bio" class="mb-3" />
 
-                        <Ckeditor id="body" idname="body" key="body" v-model="form.bio" :value="form.bio" :needTimeToLoad="true"
-                            :idData="$page.props.auth.user.id" :additionalPath="'/about-me'" :urlName="urlCkeditorStoreImage"
-                            ref="bodyInput">
+                        <Ckeditor id="body" idname="body" key="body" v-model="form.bio" :value="form.bio"
+                            :needTimeToLoad="true" :idData="$page.props.auth.user.id" :additionalPath="'/about-me'"
+                            :urlName="urlCkeditorStoreImage" ref="bodyInput">
                             <div id="ckeditorbody"></div>
                         </Ckeditor>
 

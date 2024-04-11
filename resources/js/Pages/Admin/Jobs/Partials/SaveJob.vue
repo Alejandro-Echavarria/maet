@@ -33,7 +33,7 @@ const job = ref(null);
 const categoriesOptions = ref(props.data.categories);
 const clientOptions = ref(props.data.clients);
 const technologyOptions = ref(props.data.technologies);
-const urlCkeditorStoreImage = 'admin.ckeditor.images.job.store';
+const urlCkeditorStoreImage = 'admin.ckeditor.images.job.movetostorage';
 
 const form = useForm({
     category_id: "",
@@ -253,7 +253,6 @@ defineExpose({ openModal });
                                     key="body" ref="bodyInput">
                                     <div id="ckeditorbody"></div>
                                 </Ckeditor>
-
 
                                 <InputError :message="form.errors.body" class="mt-2" />
                             </div>

@@ -27,21 +27,6 @@ class JobController extends Controller
 
     public function index(Request $request)
     {
-        $imageFiles = array_merge(
-            Storage::files('images/ckeditor/aboutme'),
-            Storage::files('images/ckeditor/jobs/body'),
-            Storage::files('images/ckeditor/jobs/preview')
-        );
-
-        $imagesDataBase = Image::pluck('url')->toArray();
-        $delete = array_diff($imageFiles, $imagesDataBase);
-        $data = $delete;
-
-        foreach ($imagesDataBase as $image) {
-            Image::destroy($image);
-        }
-
-        return response()->json($data);
         $page = $request?->page;
         $filter = $request?->search;
 
@@ -105,6 +90,10 @@ class JobController extends Controller
             ImageController::store($request->file('file'), $job, $this->directory);
         }
 
+        // Store images from ckeditor
+        ImageController::ckeditorStore($job, $job['preview'], $this->directoryCkeditor, "/preview");
+        ImageController::ckeditorStore($job, $job['body'], $this->directoryCkeditor, "/body");
+
         $page = $request?->page;
         $search = $request?->search;
 
@@ -114,15 +103,13 @@ class JobController extends Controller
         ])->with('flash', 'Job Created');
     }
 
-    public function ckeditorStore(Request $request)
+    public function ckeditorMoveToStorage(Request $request)
     {
         $request->validate([
             'upload' => "required|image"
         ]);
 
-        $data = Job::where('slug', $request->id)->first();
-
-        $url = ImageController::ckeditorStore($request->file('upload'), $data, $this->directoryCkeditor . $request['addPath']);
+        $url = ImageController::ckeditorMoveToStorage($request->file('upload'), $this->directoryCkeditor . $request['addPath']);
 
         return $url;
     }
@@ -166,6 +153,10 @@ class JobController extends Controller
         if ($request->file('file')) {
             ImageController::store($request->file('file'), $job, $this->directory);
         }
+
+        // Store images from ckeditor
+        ImageController::ckeditorUpdate($job, $job['preview'], $this->directoryCkeditor, "/preview");
+        ImageController::ckeditorUpdate($job, $job['body'], $this->directoryCkeditor, "/body");
 
         $page = $request?->page;
         $search = $request?->search;
