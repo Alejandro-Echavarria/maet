@@ -8,8 +8,10 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Category;
 use App\Models\Client;
+use App\Models\Image;
 use App\Models\Job;
 use App\Models\Technology;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class JobController extends Controller
@@ -88,6 +90,10 @@ class JobController extends Controller
             ImageController::store($request->file('file'), $job, $this->directory);
         }
 
+        // Store images from ckeditor
+        ImageController::ckeditorStore($job, $job['preview'], $this->directoryCkeditor, "/preview");
+        ImageController::ckeditorStore($job, $job['body'], $this->directoryCkeditor, "/body");
+
         $page = $request?->page;
         $search = $request?->search;
 
@@ -97,15 +103,13 @@ class JobController extends Controller
         ])->with('flash', 'Job Created');
     }
 
-    public function ckeditorStore(Request $request)
+    public function ckeditorMoveToStorage(Request $request)
     {
         $request->validate([
             'upload' => "required|image"
         ]);
 
-        $data = Job::find($request['id'])->first();
-
-        $url = ImageController::ckeditorStore($request->file('upload'), $data, $this->directoryCkeditor . $request['addPath']);
+        $url = ImageController::ckeditorMoveToStorage($request->file('upload'), $this->directoryCkeditor . $request['addPath']);
 
         return $url;
     }
@@ -149,6 +153,10 @@ class JobController extends Controller
         if ($request->file('file')) {
             ImageController::store($request->file('file'), $job, $this->directory);
         }
+
+        // Store images from ckeditor
+        ImageController::ckeditorUpdate($job, $job['preview'], $this->directoryCkeditor, "/preview");
+        ImageController::ckeditorUpdate($job, $job['body'], $this->directoryCkeditor, "/body");
 
         $page = $request?->page;
         $search = $request?->search;

@@ -22,7 +22,7 @@ const navLinks = ref([
         active: 'welcome'
     },
     {
-        name: 'Jobs',
+        name: 'Projects',
         routeName: 'jobs.index',
         active: '/jobs'
     },

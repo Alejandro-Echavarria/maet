@@ -23,15 +23,13 @@ class AboutMeController extends Controller
         return Inertia::render('Admin/AboutMe/Index');
     }
 
-    public function ckeditorStore(Request $request)
+    public function ckeditorMoveToStorage(Request $request)
     {
         $request->validate([
             'upload' => "required|image"
         ]);
 
-        $data = User::find($request['id'])->first();
-
-        $url = ImageController::ckeditorStore($request->file('upload'), $data, $this->directoryCkeditor);
+        $url = ImageController::ckeditorMoveToStorage($request->file('upload'), $this->directoryCkeditor);
 
         return $url;
     }
@@ -49,6 +47,8 @@ class AboutMeController extends Controller
         $data['birthday'] = Carbon::createFromFormat('d/m/Y', $data['birthday'])->format('Y-m-d');
 
         $user->update($data);
+
+        ImageController::ckeditorUpdate($user, $user['bio'], $this->directoryCkeditor);
 
         return to_route('admin.aboutme.index');
     }
