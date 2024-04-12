@@ -37,10 +37,9 @@ class Kernel extends ConsoleKernel
             }
         )
             ->timezone(config('app.timezone'))
-            ->everyMinute()
-            // ->monthlyOn(4, '22:00')
-            ->emailOutputTo($email)
-            ->emailOutputOnFailure($email);
+            ->monthlyOn(1, '22:00')
+            ->name("[Schedule] - Delete image CKEditor")
+            ->emailOutputTo($email);
     }
 
     /**
