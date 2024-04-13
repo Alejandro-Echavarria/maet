@@ -19,7 +19,7 @@ class SocialMedia extends Model
 
     public function socialMediaUsers()
     {
-        return $this->hasMany(SocialMediaUser::class);
+        return $this->hasMany(UserSocialMedia::class);
     }
 
     public function getCreatedAtAttribute($value)
@@ -37,9 +37,11 @@ class SocialMedia extends Model
     public function scopeFilter($query, $filter)
     {
         $query->when($filter ?? null, function ($query, $search) {
-            $query->where('name', 'like', '%' . $search . '%')
-                ->orWhere('icon', 'like', '%' . $search . '%')
-                ->orWhere('created_at', 'like', '%' . $search . '%');
+            $query->whereAny([
+                'name',
+                'icon',
+                'created_at',
+            ], 'LIKE', "%$search%");
         });
     }
 }

@@ -21,7 +21,8 @@ class Technology extends Model
     ];
 
     // Relacion muchos a muchos inversa
-    public function jobs(){
+    public function jobs()
+    {
 
         return $this->belongsToMany(Job::class);
     }
@@ -46,12 +47,12 @@ class Technology extends Model
     public function scopeFilter($query, $filter)
     {
         $query->when($filter ?? null, function ($query, $search) {
-            $query
-                ->select('*')
-                ->orWhere('slug', 'like', '%' . "$search" . '%')
-                ->orWhere('name', 'like', '%' . "$search" . '%')
-                ->orWhere('main', 'like', '%' . "$search" . '%')
-                ->orWhere('created_at', 'like', '%' . $search . '%');
+            $query->whereAny([
+                'slug',
+                'name',
+                'main',
+                'created_at'
+            ], 'LIKE', "%$search%");
         });
     }
 }

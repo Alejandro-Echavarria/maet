@@ -43,12 +43,13 @@ class UserSocialMedia extends Model
     public function scopeFilter($query, $filter)
     {
         $query->when($filter ?? null, function ($query, $search) {
-            $query
-                ->select('social_media_user.*', 'social_medias.name as social_media_name')
+            $query->select('social_media_user.*', 'social_medias.name as social_media_name')
                 ->join('social_medias', 'social_medias.id', '=', 'social_media_user.social_media_id')
-                ->orWhere('social_medias.name', 'like', '%' . "$search" . '%')
-                ->orWhere('social_media_user.url', 'like', '%' . $search . '%')
-                ->orWhere('social_media_user.created_at', 'like', '%' . $search . '%');
+                ->whereAny([
+                    'social_medias.name',
+                    'social_media_user.url',
+                    'social_media_user.created_at'
+                ], 'LIKE', "%$search%");
         });
     }
 }
