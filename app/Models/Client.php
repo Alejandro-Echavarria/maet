@@ -45,14 +45,14 @@ class Client extends Model
     public function scopeFilter($query, $filter)
     {
         $query->when($filter ?? null, function ($query, $search) {
-            $query
-                ->select('*')
-                ->orWhere('first_name', 'like', '%' . "$search" . '%')
-                ->orWhere('last_name', 'like', '%' . "$search" . '%')
-                ->orWhere('email', 'like', '%' . "$search" . '%')
-                ->orWhere('phone', 'like', '%' . "$search" . '%')
-                ->orWhere('country', 'like', '%' . "$search" . '%')
-                ->orWhere('created_at', 'like', '%' . $search . '%');
+            $query->whereAny([
+                'first_name',
+                'last_name',
+                'email',
+                'phone',
+                'country',
+                'created_at'
+            ], 'LIKE', "%$search%");
         });
     }
 }

@@ -41,11 +41,11 @@ class Category extends Model
     public function scopeFilter($query, $filter)
     {
         $query->when($filter ?? null, function ($query, $search) {
-            $query
-                ->select('*')
-                ->orWhere('slug', 'like', '%' . "$search" . '%')
-                ->orWhere('name', 'like', '%' . "$search" . '%')
-                ->orWhere('created_at', 'like', '%' . $search . '%');
+            $query->whereAny([
+                'slug',
+                'name',
+                'created_at'
+            ], 'LIKE', "%$search%");
         });
     }
 }

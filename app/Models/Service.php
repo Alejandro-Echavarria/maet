@@ -39,11 +39,13 @@ class Service extends Model
     public function scopeFilter($query, $filter)
     {
         $query->when($filter ?? null, function ($query, $search) {
-            $query->where('title', 'like', '%' . $search . '%')
-                ->orWhere('icon', 'like', '%' . $search . '%')
-                ->orWhere('description', 'like', '%' . $search . '%')
-                ->orWhere('color', 'like', '%' . $search . '%')
-                ->orWhere('created_at', 'like', '%' . $search . '%');
+            $query->whereAny([
+                'title',
+                'icon',
+                'description',
+                'color',
+                'created_at'
+            ], 'LIKE', "%$search%");
         });
     }
 }
