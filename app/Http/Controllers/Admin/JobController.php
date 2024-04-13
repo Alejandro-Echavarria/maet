@@ -8,10 +8,8 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Category;
 use App\Models\Client;
-use App\Models\Image;
 use App\Models\Job;
 use App\Models\Technology;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class JobController extends Controller
