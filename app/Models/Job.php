@@ -78,8 +78,10 @@ class Job extends Model
             $query->when($filter ?? null, function ($query, $search) {
                 $query
                     ->select('jobs.*')
-                    ->orWhere('jobs.title', 'like', '%' . "$search" . '%')
-                    ->orWhere('jobs.created_at', 'like', '%' . $search . '%');
+                    ->whereAny([
+                        'jobs.title',
+                        'jobs.created_at',
+                    ], 'LIKE', "%$search%");
             });
         } else {
             if ($model === 'category') {
