@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import { useForm } from "@inertiajs/vue3";
+import { useForm, usePage } from "@inertiajs/vue3";
 import DialogModal from "@/Components/DialogModal.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
@@ -29,6 +29,7 @@ onMounted(() => {
 
 const title = ref("");
 const modal = ref(false);
+const closeOpenModal = ref(true);
 const opration = ref(1);
 const job = ref(null);
 const categoriesOptions = ref(props.data.categories);
@@ -79,7 +80,13 @@ const save = () => {
             preserveScroll: true,
             preserveState: true,
             onSuccess: () => {
-                ok("Job updated successfully");
+                if (usePage().props.jetstream.flash.error) {
+                    closeOpenModal.value = false;
+                    ok(usePage().props.jetstream.flash.error, 'error', null, false, 'Error');
+                } else {
+                    closeOpenModal.value = true;
+                    ok("Job updated successfully");
+                }
             },
             onError: () => {
                 console.log("error");
@@ -120,9 +127,9 @@ const closeModal = () => {
     form.reset();
 };
 
-const ok = (msj, type, timer) => {
-    closeModal();
-    SaveAlert(msj, type, timer);
+const ok = (msj, type, timer, toast, title) => {
+    closeOpenModal.value && closeModal();
+    SaveAlert(msj, type, timer, toast, title);
 };
 
 defineExpose({ openModal });

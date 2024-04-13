@@ -10,6 +10,7 @@ use App\Models\Category;
 use App\Models\Client;
 use App\Models\Job;
 use App\Models\Technology;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class JobController extends Controller
@@ -80,17 +81,25 @@ class JobController extends Controller
             'technologies.*' => 'exists:technologies,id',
         ]);
 
-        $job = Job::create($data);
+        DB::beginTransaction();
+        try {
+            $job = Job::create($data);
 
-        $job->technologies()->attach($technologies['technologies']);
+            $job->technologies()->attach($technologies['technologies']);
 
-        if ($request->file('file')) {
-            ImageController::store($request->file('file'), $job, $this->directory);
+            if ($request->file('file')) {
+                ImageController::store($request->file('file'), $job, $this->directory);
+            }
+
+            // Store images from ckeditor
+            ImageController::ckeditorStore($job, $job['preview'], $this->directoryCkeditor, "/preview");
+            ImageController::ckeditorStore($job, $job['body'], $this->directoryCkeditor, "/body");
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            return to_route('admin.jobs.index')->with('flash', ['error' => $e->getMessage()]);
         }
-
-        // Store images from ckeditor
-        ImageController::ckeditorStore($job, $job['preview'], $this->directoryCkeditor, "/preview");
-        ImageController::ckeditorStore($job, $job['body'], $this->directoryCkeditor, "/body");
+        DB::commit();
 
         $page = $request?->page;
         $search = $request?->search;
@@ -144,17 +153,25 @@ class JobController extends Controller
             'technologies.*' => 'exists:technologies,id',
         ]);
 
-        $job->update($data);
+        DB::beginTransaction();
+        try {
+            $job->update($data);
 
-        $job->technologies()->sync($technologies['technologies']);
+            $job->technologies()->sync($technologies['technologies']);
 
-        if ($request->file('file')) {
-            ImageController::store($request->file('file'), $job, $this->directory);
+            if ($request->file('file')) {
+                ImageController::store($request->file('file'), $job, $this->directory);
+            }
+
+            // Store images from ckeditor
+            ImageController::ckeditorUpdate($job, $job['preview'], $this->directoryCkeditor, "/preview");
+            ImageController::ckeditorUpdate($job, $job['body'], $this->directoryCkeditor, "/body");
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            return to_route('admin.jobs.index')->with('flash', ['error' => $e->getMessage()]);
         }
-
-        // Store images from ckeditor
-        ImageController::ckeditorUpdate($job, $job['preview'], $this->directoryCkeditor, "/preview");
-        ImageController::ckeditorUpdate($job, $job['body'], $this->directoryCkeditor, "/body");
+        DB::commit();
 
         $page = $request?->page;
         $search = $request?->search;
