@@ -11,12 +11,12 @@
             </div>
             <div class="p-5">
                 <a href="#">
-                    <h3 class="mb-2 font-bold tracking-tight text-gray-900 dark:text-white">
+                    <h3 class="font-bold tracking-tight text-gray-900 dark:text-white">
                         <slot name="title" />
                     </h3>
                 </a>
                 <div class="mb-3 h-auto text-gray-700 dark:text-gray-400 overflow-hidden">
-                    <div class="h-[4.5rem]">
+                    <div class="space-y-2">
                         <slot name="preview" />
                     </div>
                 </div>

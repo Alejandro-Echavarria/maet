@@ -77,8 +77,6 @@ class ClientController extends Controller
 
     public function update(Request $request, Client $client)
     {
-        // return response()->json("app/admin/" . $client->images()->select('url')->where('default', '=', '1')->first()->url);
-
         $data = $request->validate(
             [
                 'first_name'  => "required|max:255|string",
