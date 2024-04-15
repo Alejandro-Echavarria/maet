@@ -10,6 +10,7 @@ import CreateContainer from '@/Components/Main/Containers/CreateContainer.vue';
 import SectionJobs from '@/Components/Main/Containers/Sections/SectionJobs.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import Pagination from '@/Components/Main/Admin/Components/Paginations/Pagination.vue';
+import Avatar from '@/Components/Main/Admin/Components/Images/Avatar.vue';
 
 defineOptions({
     layout: MainLayout
@@ -68,7 +69,8 @@ const openModal = (op, id, titleData, slug, start_date, end_date, description, c
             </template>
 
             <template #createButton>
-                <SaveJob ref="callOpenModal" :data="{ categories, clients, technologies }" :filter="filter" :page="page" />
+                <SaveJob ref="callOpenModal" :data="{ categories, clients, technologies }" :filter="filter"
+                    :page="page" />
             </template>
         </CreateContainer>
 
@@ -80,15 +82,25 @@ const openModal = (op, id, titleData, slug, start_date, end_date, description, c
                     <img class="rounded-t-xl h-64 w-full overflow-auto object-cover"
                         :src="`/storage/${job?.images[0]?.url}`" alt="" />
                 </template>
+
                 <template #deleteButton>
                     <DeleteJob :id="job.slug" :filter="filter" :page="page" :key="'delete-' + job.id" />
                 </template>
+
                 <template #title>
                     {{ job.title }}
                 </template>
+
                 <template #preview>
                     <div id="content-ckeditor">
                         <span v-html="truncateData(job.preview, index)" />
+                    </div>
+
+                    <div class="flex items-center space-x-2">
+                        <Avatar :name="job.client.first_name + ' ' + job.client.last_name" :image="job.client.url" />
+                        <div class="text-sm text-gray-600">
+                            <span>{{ job.client.first_name + ' ' + job.client.last_name }}</span>
+                        </div>
                     </div>
                 </template>
                 <template #actions>

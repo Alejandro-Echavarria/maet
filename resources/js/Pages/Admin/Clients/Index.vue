@@ -8,6 +8,7 @@ import MainTable from '@/Components/Main/Admin/Components/Tables/MainTable.vue';
 import TableButton from '@/Components/Main/Admin/Components/Buttons/TableButton.vue';
 import SaveClient from '@/Pages/Admin/Clients/Partials/SaveClient.vue';
 import DeleteClient from '@/Pages/Admin/Clients/Partials/DeleteClient.vue';
+import Avatar from '@/Components/Main/Admin/Components/Images/Avatar.vue';
 
 defineOptions({
     layout: MainLayout,
@@ -58,9 +59,7 @@ const openModal = (op, id, first_name, last_name, email, phone, country, descrip
                     class="dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition-all ease-linear duration-300 animate-fade-in-down"
                     :key="tb.id + 'tb'" :style="{ animationDelay: `${index * 0.05}s` }">
                     <td class="px-4 py-3">
-                        <img
-                        :class="['h-11 w-11 rounded-full']"
-                        class="overflow-hidden object-cover" :src="`/admin/${tb?.images[0]?.url}`" alt="">
+                        <Avatar :name="tb.first_name + ' ' + tb.last_name" :image="tb.images[0]?.url" />
                     </td>
                     <td class="px-4 py-3">
                         <div class="text-gray-800 font-medium">

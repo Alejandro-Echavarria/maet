@@ -10,6 +10,7 @@ use App\Models\Category;
 use App\Models\Client;
 use App\Models\Job;
 use App\Models\Technology;
+use Illuminate\Database\Query\JoinClause;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -31,7 +32,17 @@ class JobController extends Controller
 
         $jobs = Job::with(
             [
-                'technologies:id,name', 'images' => function ($query) {
+                'technologies:id,name',
+                'client' => function ($query) {
+                    $query->select('clients.id', 'clients.first_name', 'clients.last_name', 'images.url')
+                        ->from('clients')
+                        ->leftJoin('images', function (JoinClause $join) {
+                            $join->on('images.imageable_id', '=', 'clients.id')
+                                ->where('images.imageable_type', '=', 'App\Models\Client')
+                                ->where('images.default', '=', '1');
+                        });
+                },
+                'images' => function ($query) {
                     $query->select('id', 'url', 'default', 'imageable_id')
                         ->where('default', '=', '1')
                         ->orderBy('id', 'desc');
