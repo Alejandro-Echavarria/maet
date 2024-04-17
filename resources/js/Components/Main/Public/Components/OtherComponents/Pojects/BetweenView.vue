@@ -21,9 +21,11 @@ const changeOrder = () => {
         class="grid grid-cols-1 md:grid-cols-2 mb-10 sm:mb-20 w-full gap-10">
         <div :class="['w-full order-1', changeOrder() ? 'order-1' : 'md:order-2', 'space-y-4']">
             <div>
-                <span class="block text-indigo-700 font-semibold">
+                <Link :href="route('jobs.index', { 'category': project.category.slug })">
+                <span class="py-1 px-2 text-sm text-indigo-700 font-semibold bg-indigo-700/10 rounded-full">
                     {{ project.category.name }}
                 </span>
+                </Link>
                 <Link :href="route('jobs.show', project.slug)" target="_blank" rel="noreferrer noopener nofollow">
                 <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-200 hover:text-indigo-700 mt-4">
                     {{ project.title }}

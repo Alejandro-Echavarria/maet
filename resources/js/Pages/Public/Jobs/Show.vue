@@ -34,41 +34,41 @@ onMounted(() => {
             </h1>
 
             <div class="space-y-4">
-                <div>
+                <div class="flex flex-wrap items-center gap-2">
                     <Link :href="route('jobs.index', { 'category': job.category.slug })">
                     <span class="py-1 px-2 text-sm text-indigo-700 font-semibold bg-indigo-700/10 rounded-full">
                         {{ job.category.name }}
                     </span>
                     </Link>
-    
+
+                    <div v-if="job.link" class="flex flex-wrap items-center text-gray-600">
+                        <a :href="job.link" target="_blank" rel="noreferrer noopener nofollow" :title="job.title">
+                            <span class="py-1 px-2 text-sm text-indigo-700 font-semibold  rounded-full">
+                                Visit de project
+                            </span>
+                        </a>
+                    </div>
+
                     <time>
-                        <span class="ml-2 font-medium text-sm text-gray-600">
+                        <span class="font-medium text-sm text-gray-600">
                             {{ job.created_at }}
                         </span>
                     </time>
                 </div>
-
-                <div v-if="job.link" class="flex flex-wrap gap-4 items-center text-gray-600">
-                    <a :href="job.link" target="_blank" rel="noreferrer noopener nofollow" :title="job.title">
-                        <span class="py-1 px-2 text-sm text-indigo-700 font-semibold bg-indigo-700/10 rounded-full">
-                            Visit de project
-                        </span>
-                    </a>
-                </div>
             </div>
 
             <div class="flex flex-wrap gap-4 items-center text-gray-600">
-                    <div v-for="technology in job.technologies" :key="'technology-' + technology.id">
-                        <Link :href="route('jobs.index', { 'technology': technology.slug })">
-                        <div id="tech-container" class="flex gap-1 text-sm">
-                            <span v-html="technology.icon"></span>
-                            <p>
-                                {{ technology.name }}
-                            </p>
-                        </div>
-                        </Link>
+                <div v-for="technology in job.technologies" :key="'technology-' + technology.id">
+                    <Link :href="route('jobs.index', { 'technology': technology.slug })">
+                    <div id="tech-container" class="flex gap-1 text-sm">
+                        <span v-html="technology.icon"></span>
+                        <p>
+                            {{ technology.name }}
+                        </p>
                     </div>
+                    </Link>
                 </div>
+            </div>
 
             <div class="content-ckeditor mb-4">
                 <p v-html="job.preview" />

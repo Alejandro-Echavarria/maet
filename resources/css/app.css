@@ -21,10 +21,6 @@
         @apply font-bold text-2xl text-gray-800 dark:text-gray-300 py-4;
     }
 
-    div.content-ckeditor figure {
-        @apply flex justify-center;
-    }
-
     div.content-ckeditor figure img {
         @apply rounded-xl;
     }
@@ -63,6 +59,18 @@
 
     div.content-ckeditor ul li label input {
         @apply mx-2 mr-3 rounded-full;
+    }
+
+    div.content-ckeditor p p:has(img) {
+        @apply flex justify-start;
+    }
+
+    div.content-ckeditor p figure:not(.image-style-side) {
+        @apply m-auto justify-self-center;
+    }
+
+    div.content-ckeditor p figure.image-style-side {
+        @apply float-right;
     }
 
     /* CkEditor */
