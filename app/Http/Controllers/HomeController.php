@@ -23,7 +23,7 @@ class HomeController extends Controller
 
         $jobs = Job::with(
             [
-                'category:id,name',
+                'category:id,name,slug',
                 'technologies:id,name,icon', 'images' => function ($query) {
                     $query->select('id', 'url', 'default', 'imageable_id')
                         ->where('default', '=', '1')
