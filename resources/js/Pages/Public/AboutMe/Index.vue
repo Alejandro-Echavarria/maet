@@ -78,7 +78,7 @@ const props = defineProps({
                                     <div v-for="( social_media, index ) in user.user_social_media"
                                         :key="'social-media-' + index" class="py-2">
                                         <div id="tech-container">
-                                            <a :href="social_media.url" target="_blank">
+                                            <a :href="social_media.url" target="_blank" :title="social_media.social_media.name" :aria-label="social_media.social_media.name">
                                                 <span v-html="social_media.social_media.icon"></span>
                                             </a>
                                         </div>
