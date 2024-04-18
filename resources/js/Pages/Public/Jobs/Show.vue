@@ -42,9 +42,15 @@ onMounted(() => {
                     </Link>
 
                     <div v-if="job.link" class="flex flex-wrap items-center text-gray-600">
-                        <a :href="job.link" target="_blank" rel="noreferrer noopener nofollow" :title="job.title">
-                            <span class="py-1 px-2 text-sm text-indigo-700 font-semibold  rounded-full">
+                        <a :href="job.link" target="_blank" rel="noreferrer noopener nofollow" class="flex px-2 gap-1" :title="job.title">
+                            <span class="text-sm text-indigo-700 font-semibold  rounded-full">
                                 Visit de project
+                            </span>
+                            <span class="text-indigo-700">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24">
+                                    <path fill="currentColor"
+                                        d="m16 8.4l-8.9 8.9q-.275.275-.7.275t-.7-.275q-.275-.275-.275-.7t.275-.7L14.6 7H7q-.425 0-.712-.288T6 6q0-.425.288-.712T7 5h10q.425 0 .713.288T18 6v10q0 .425-.288.713T17 17q-.425 0-.712-.288T16 16z" />
+                                </svg>
                             </span>
                         </a>
                     </div>

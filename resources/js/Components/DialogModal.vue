@@ -25,7 +25,7 @@ const close = () => {
 
 <template>
     <Modal :show="show" :max-width="maxWidth" :closeable="closeable" @close="close">
-        <div>
+        <div class="overflow-hidden">
             <div class="text-lg py-4 px-4 sm:px-6 font-medium text-gray-700 border-b">
                 <div class="flex justify-between">
                     <slot name="title" />
