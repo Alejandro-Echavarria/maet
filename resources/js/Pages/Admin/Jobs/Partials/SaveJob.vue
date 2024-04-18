@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, onBeforeMount, onBeforeUnmount } from "vue";
 import { useForm, usePage } from "@inertiajs/vue3";
 import DialogModal from "@/Components/DialogModal.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
@@ -27,9 +27,16 @@ onMounted(() => {
     CKeditorHelper();
 });
 
+onBeforeMount(() => {
+    window.addEventListener('beforeunload', beforeWindowUnload)
+});
+
+onBeforeUnmount(() => {
+    window.removeEventListener('beforeunload', beforeWindowUnload)
+});
+
 const title = ref("");
 const modal = ref(false);
-const closeOpenModal = ref(false);
 const opration = ref(1);
 const job = ref(null);
 const categoriesOptions = ref(props.data.categories);
@@ -64,7 +71,7 @@ const save = () => {
             preserveScroll: true,
             preserveState: true,
             onSuccess: () => {
-                closeOpenModal.value = true;
+                modal.value = false;
                 ok("Job created successfully");
             },
             onError: () => {
@@ -82,10 +89,10 @@ const save = () => {
             preserveState: true,
             onSuccess: () => {
                 if (usePage().props.jetstream.flash.error) {
-                    closeOpenModal.value = false;
+                    modal.value = true;
                     ok(usePage().props.jetstream.flash.error, 'error', null, false, 'Error');
                 } else {
-                    closeOpenModal.value = true;
+                    modal.value = false;
                     ok("Job updated successfully");
                 }
             },
@@ -98,7 +105,6 @@ const save = () => {
 
 const openModal = (op, id, category_id, client_id, titleData, slug, logo_url, color, file, project_name, link, technologies, preview, body, alt_banner_image, status) => {
     modal.value = true;
-    closeOpenModal.value = false;
     opration.value = op;
 
     if (op === 1) {
@@ -140,9 +146,10 @@ const openModal = (op, id, category_id, client_id, titleData, slug, logo_url, co
 };
 
 const closeModal = () => {
-    if (closeOpenModal.value === false) {
+    if (modal.value) {
         if (form.isDirty) {
             let answer = window.confirm('Do you really want to leave? you have unsaved changes!');
+
             if (answer) {
                 modal.value = false;
                 form.clearErrors();
@@ -158,8 +165,25 @@ const closeModal = () => {
     form.reset();
 };
 
+const confirmLeave = () => {
+    return window.confirm('Do you really want to leave? you have unsaved changes!')
+};
+
+const confirmStayInDirtyForm = () => {
+    return form.isDirty && !confirmLeave()
+};
+
+const beforeWindowUnload = (e) => {
+    if (confirmStayInDirtyForm()) {
+        // Cancel the event
+        e.preventDefault()
+        // Chrome requires returnValue to be set
+        e.returnValue = ''
+    }
+}
+
 const ok = (msj, type, timer, toast, title) => {
-    closeOpenModal.value && closeModal();
+    closeModal();
     SaveAlert(msj, type, timer, toast, title);
 };
 
