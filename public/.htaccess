@@ -40,7 +40,7 @@
     ExpiresByType image/gif                     "access plus 4 months"
     ExpiresByType image/png                     "access plus 4 months"
     ExpiresByType image/jpeg                    "access plus 4 months"
-    ExpiresByType image/webp                    "access plus 1 months"
+    ExpiresByType image/webp                    "access plus 4 months"
     ExpiresByType video/ogg                     "access plus 4 months"
     ExpiresByType audio/ogg                     "access plus 4 months"
     ExpiresByType video/mp4                     "access plus 4 months"

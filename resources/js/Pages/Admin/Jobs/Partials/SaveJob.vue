@@ -29,7 +29,7 @@ onMounted(() => {
 
 const title = ref("");
 const modal = ref(false);
-const closeOpenModal = ref(true);
+const closeOpenModal = ref(false);
 const opration = ref(1);
 const job = ref(null);
 const categoriesOptions = ref(props.data.categories);
@@ -64,6 +64,7 @@ const save = () => {
             preserveScroll: true,
             preserveState: true,
             onSuccess: () => {
+                closeOpenModal.value = true;
                 ok("Job created successfully");
             },
             onError: () => {
@@ -97,10 +98,26 @@ const save = () => {
 
 const openModal = (op, id, category_id, client_id, titleData, slug, logo_url, color, file, project_name, link, technologies, preview, body, alt_banner_image, status) => {
     modal.value = true;
+    closeOpenModal.value = false;
     opration.value = op;
 
     if (op === 1) {
         title.value = "Create a new job";
+        form.category_id = "";
+        form.client_id = "";
+        form.title = "";
+        form.slug = "";
+        form.logo_url = "";
+        form.color = "gray-100";
+        form.file = null;
+        form.project_name = "";
+        form.link = "";
+        form.technologies = [];
+        form.preview = "";
+        form.body = "";
+        form.alt_banner_image = "";
+        form.status = false;
+        form.defaults();
     } else {
         title.value = "Edit job";
         job.value = slug;
@@ -118,10 +135,24 @@ const openModal = (op, id, category_id, client_id, titleData, slug, logo_url, co
         form.body = body;
         form.alt_banner_image = alt_banner_image;
         form.status = status;
+        form.defaults();
     }
 };
 
 const closeModal = () => {
+    if (closeOpenModal.value === false) {
+        if (form.isDirty) {
+            let answer = window.confirm('Do you really want to leave? you have unsaved changes!');
+            if (answer) {
+                modal.value = false;
+                form.clearErrors();
+                form.reset();
+            } else {
+                return false;
+            }
+        }
+    }
+
     modal.value = false;
     form.clearErrors();
     form.reset();

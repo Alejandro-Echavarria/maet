@@ -13,7 +13,11 @@ class HomeController extends Controller
         $user = User::select(['id', 'name', 'email', 'position', 'bio'])
             ->with(
                 [
-                    'experiences', 'knowledge' => function ($query) {
+                    'experiences' => function ($query) {
+                        $query->select('user_id', 'title', 'description', 'start_date', 'end_date', 'is_current')
+                            ->orderBy('start_date', 'desc');
+                    },
+                    'knowledge' => function ($query) {
                         $query->select('user_id', 'name', 'icon')
                             ->where('main', '=', '1');
                     }
