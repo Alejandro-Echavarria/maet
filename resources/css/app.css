@@ -21,7 +21,7 @@
         @apply font-bold text-2xl text-gray-800 dark:text-gray-300 py-4;
     }
 
-    div.content-ckeditor figure img {
+    div.content-ckeditor img {
         @apply rounded-xl;
     }
 
@@ -66,7 +66,7 @@
     }
 
     div.content-ckeditor p figure:not(.image-style-side) {
-        @apply m-auto justify-self-center;
+        @apply m-auto flex justify-center;
     }
 
     div.content-ckeditor p figure.image-style-side {
@@ -74,7 +74,7 @@
     }
 
     /* CkEditor */
-    div#preview figure img, div#body figure img {
+    div#preview img, div#body img {
         @apply rounded-lg;
     }
 
