@@ -36,6 +36,7 @@ class HomeController extends Controller
             ]
         )
             ->where('status', 1)
+            ->orderBy('created_at', 'desc')
             ->limit(4)
             ->get();
 

@@ -32,6 +32,7 @@ class JobController extends Controller
             ->filter($filter, $model = 'category')
             ->filter($filterTechnology, $model = 'technology')
             ->where('jobs.status', '=', '1')
+            ->orderBy('created_at', 'desc')
             ->paginate(4);
 
         $categories = Category::select('categories.name', 'categories.slug')
