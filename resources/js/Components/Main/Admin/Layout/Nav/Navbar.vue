@@ -27,7 +27,7 @@ const navItems = [
         href: '#', label: 'Configuration', active: route().current('admin.socialmedias.*'),
         children: [
             { href: 'admin.categories.index', active: route().current('admin.categories.index'), activeClass: '/admin/categories', label: 'Categories', children: [], icon: null },
-            { href: 'admin.technologies.index', active: route().current('admin.technologies.index'), activeClass: '/admin/technologies', label: 'Technologies', children: [], icon: null },
+            { href: 'admin.technologies.index', active: route().current('admin.technologies.index'), activeClass: '/admin/technologies', label: 'Technologies for jobs', children: [], icon: null },
             { href: 'admin.socialmedias.index', active: route().current('admin.socialmedias.index'), activeClass: '/admin/social-medias', label: 'Social medias', children: [], icon: null },
         ], icon: ['fas', 'gear']
     },
@@ -81,11 +81,11 @@ defineExpose({ toggleSidebarVisibility });
                         </div>
                     </button>
                     <Link href="/" class="flex md:mr-24 gap-2">
-                        <ApplicationLogo />
-                        <span
-                            class="self-center text-xl font-bold sm:text-2xl whitespace-nowrap dark:text-gray-200 text-gray-800">
-                            MAET
-                        </span>
+                    <ApplicationLogo />
+                    <span
+                        class="self-center text-xl font-bold sm:text-2xl whitespace-nowrap dark:text-gray-200 text-gray-800">
+                        MAET
+                    </span>
                     </Link>
                 </div>
                 <div class="flex items-center">
@@ -95,7 +95,8 @@ defineExpose({ toggleSidebarVisibility });
                                 <button
                                     class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
                                     <img class="h-8 w-8 rounded-full object-cover"
-                                        :src="$page.props.auth.user.profile_photo_url" :alt="$page.props.auth.user.name">
+                                        :src="$page.props.auth.user.profile_photo_url"
+                                        :alt="$page.props.auth.user.name">
                                 </button>
                             </template>
 
@@ -109,7 +110,8 @@ defineExpose({ toggleSidebarVisibility });
                                     Profile
                                 </DropdownLink>
 
-                                <DropdownLink v-if="$page.props.jetstream.hasApiFeatures" :href="route('api-tokens.index')">
+                                <DropdownLink v-if="$page.props.jetstream.hasApiFeatures"
+                                    :href="route('api-tokens.index')">
                                     API Tokens
                                 </DropdownLink>
 

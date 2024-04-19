@@ -25,6 +25,11 @@ class Client extends Model
         return $this->hasMany(Job::class);
     }
 
+    public function clientType()
+    {
+        return $this->belongsTo(ClientType::class);
+    }
+
     public function images()
     {
         return $this->morphMany(Image::class, 'imageable');

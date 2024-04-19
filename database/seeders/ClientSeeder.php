@@ -14,9 +14,10 @@ class ClientSeeder extends Seeder
     public function run(): void
     {
         Client::create([
-            'first_name' => 'Manuel Alejandro',
-            'last_name' => 'Echavarria Taveras',
-            'email' => 'echavarria_007@hotmail.com',
+            'client_type_id' => 1,
+            'first_name'     => 'Manuel Alejandro',
+            'last_name'      => 'Echavarria Taveras',
+            'email'          => 'echavarria_007@hotmail.com',
         ]);
     }
 }

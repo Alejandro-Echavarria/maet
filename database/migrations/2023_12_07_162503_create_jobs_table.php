@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('project_name');
             $table->text('preview');
             $table->text('body');
+            $table->integer('price')->unsigned()->default(0);
             $table->string('alt_banner_image')->nullable();
             $table->string('link')->nullable();
             $table->boolean('status')->default(false);
