@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Client;
+use App\Models\ClientType;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -24,6 +25,7 @@ class ClientController extends Controller
 
         $clients = Client::with(
             [
+                'clientType:id,name,slug,color',
                 'images' => function ($query) {
                     $query->select('id', 'url', 'default', 'imageable_id')
                         ->where('default', '=', '1')
@@ -35,7 +37,9 @@ class ClientController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
-        return Inertia::render('Admin/Clients/Index', compact('page', 'filter', 'clients'));
+        $clientTypes = ClientType::select('id', 'name')->get();
+
+        return Inertia::render('Admin/Clients/Index', compact('page', 'filter', 'clients', 'clientTypes'));
     }
 
 
@@ -43,13 +47,14 @@ class ClientController extends Controller
     {
         $data = $request->validate(
             [
-                'first_name'  => "required|max:255|string",
-                'last_name'   => "required|max:255|string",
-                'email'       => "nullable|email|max:255",
-                'phone'       => "nullable|numeric",
-                'country'     => "nullable|max:255|string",
-                'description' => "nullable|string",
-                'file'        => "nullable|image",
+                'client_type_id' => 'required|exists:client_types,id',
+                'first_name'     => "required|max:255|string",
+                'last_name'      => "required|max:255|string",
+                'email'          => "nullable|email|max:255",
+                'phone'          => "nullable|numeric",
+                'country'        => "nullable|max:255|string",
+                'description'    => "nullable|string",
+                'file'           => "nullable|image",
             ],
             [
                 // Custom error messages
@@ -79,13 +84,14 @@ class ClientController extends Controller
     {
         $data = $request->validate(
             [
-                'first_name'  => "required|max:255|string",
-                'last_name'   => "required|max:255|string",
-                'email'       => "nullable|email|max:255",
-                'phone'       => "nullable|numeric",
-                'country'     => "nullable|max:255|string",
-                'description' => "nullable|string",
-                'file'        => $request->file('file') ? "nullable|image" : "nullable|string",
+                'client_type_id' => 'required|exists:client_types,id',
+                'first_name'     => "required|max:255|string",
+                'last_name'      => "required|max:255|string",
+                'email'          => "nullable|email|max:255",
+                'phone'          => "nullable|numeric",
+                'country'        => "nullable|max:255|string",
+                'description'    => "nullable|string",
+                'file'           => $request->file('file') ? "nullable|image" : "nullable|string",
             ],
             [
                 // Custom error messages

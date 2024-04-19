@@ -48,7 +48,7 @@ const typeImageClass = computed(() => {
             <label for="file"
                 :class="[typeImageClass]"
                 class="overflow-hidden flex items-center justify-center border-2 border-gray-300 border-dashed cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                <template v-if="file === null">
+                <template v-if="file === null || !file">
                     <div class="flex flex-col items-center text-center justify-center space-y-4">
                         <svg class="w-6 h-6 text-gray-500 dark:text-gray-400" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">

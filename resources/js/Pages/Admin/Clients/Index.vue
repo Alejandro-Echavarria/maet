@@ -19,16 +19,19 @@ const props = defineProps({
         type: Object,
         required: true,
     },
+    clientTypes: {
+        type: Object,
+    },
     filter: String,
     page: String
 });
 
-const thead = ['photo', 'First name', 'last name', 'phone', 'country'];
+const thead = ['photo', 'First name', 'last name', 'client type', 'phone', 'country'];
 const url = 'admin.clients.index';
 const callOpenModal = ref(null);
 
-const openModal = (op, id, first_name, last_name, email, phone, country, description, file) => {
-    callOpenModal.value.openModal(op, id, first_name, last_name, email, phone, country, description, file);
+const openModal = (op, id, client_type_id, first_name, last_name, email, phone, country, description, file) => {
+    callOpenModal.value.openModal(op, id, client_type_id, first_name, last_name, email, phone, country, description, file);
 };
 </script>
 
@@ -45,7 +48,7 @@ const openModal = (op, id, first_name, last_name, email, phone, country, descrip
                 </template>
 
             <template #createButton>
-                <SaveClient ref="callOpenModal" :data="clients" :filter="filter" :page="page" />
+                <SaveClient ref="callOpenModal" :data="{ clients, clientTypes }" :filter="filter" :page="page" />
             </template>
 
             <template #thead>
@@ -70,14 +73,21 @@ const openModal = (op, id, first_name, last_name, email, phone, country, descrip
                         </div>
                     </td>
                     <td class="px-4 py-3">{{ tb.last_name }}</td>
+                    <td class="px-4 py-3 text-xs">
+                        <span class="px-2 py-1 font-semibold rounded-full" :class="`bg-${tb.client_type.color}/20 text-${tb.client_type.color}`">
+                            {{ tb.client_type.name }}
+                        </span>
+                    </td>
                     <td class="px-4 py-3">{{ tb.phone }}</td>
                     <td class="px-4 py-3">{{ tb.country }}</td>
-                    <td class="px-4 py-3 flex items-center justify-end">
-                        <TableButton>
-                            <font-awesome-icon @click="openModal(2, tb.id, tb.first_name, tb.last_name, tb.email, tb.phone, tb.country, tb.description, tb?.images[0]?.url)"
-                                class="w-4 h-4 text-indigo-500" :icon="['far', 'pen-to-square']" />
-                        </TableButton>
-                        <DeleteClient :id="tb.id" :filter="filter" :page="page" :key="tb.id + 'deleteBtn'" />
+                    <td class="px-4 py-3">
+                        <div class="flex items-center justify-end">
+                            <TableButton>
+                                <font-awesome-icon @click="openModal(2, tb.id, tb.client_type_id, tb.first_name, tb.last_name, tb.email, tb.phone, tb.country, tb.description, tb?.images[0]?.url)"
+                                    class="w-4 h-4 text-indigo-500" :icon="['far', 'pen-to-square']" />
+                            </TableButton>
+                            <DeleteClient :id="tb.id" :filter="filter" :page="page" :key="tb.id + 'deleteBtn'" />
+                        </div>
                     </td>
                 </tr>
             </template>

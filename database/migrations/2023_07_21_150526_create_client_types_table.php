@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->string('name', 50);
             $table->string('slug', 70);
+            $table->string('color');
             $table->boolean('status')->default(true);
             $table->timestamps();
         });

@@ -11,6 +11,8 @@ import InputLabel from '@/Components/InputLabel.vue';
 import SaveAlert from '@/Helpers/Alerts/SaveAlert';
 import SimpleForm from '@/Components/Main/Admin/Components/Forms/SimpleForm.vue';
 import SimpleTextArea from '@/Components/Main/Admin/Components/Forms/Inputs/TextArea/SimpleTextArea.vue';
+import VueSelect from "@/Components/Main/Admin/Components/Selects/VueSelect.vue";
+import ToggleSwitch from "@/Components/Main/Admin/Components/Forms/Inputs/ToggleSwitch/ToggleSwitch.vue";
 
 const props = defineProps({
     data: Object,
@@ -22,8 +24,10 @@ const title = ref('');
 const modal = ref(false);
 const opration = ref(1);
 const client = ref(null);
+const clientTypesOptions = ref(props.data.clientTypes);
 
 const form = useForm({
+    client_type_id: null,
     first_name: '',
     last_name: '',
     email: '',
@@ -68,7 +72,7 @@ const save = () => {
     }
 };
 
-const openModal = (op, id, first_name, last_name, email, phone, country, description, file) => {
+const openModal = (op, id, client_type_id, first_name, last_name, email, phone, country, description, file) => {
     modal.value = true;
     opration.value = op;
 
@@ -77,6 +81,7 @@ const openModal = (op, id, first_name, last_name, email, phone, country, descrip
     } else {
         title.value = 'Edit client';
         client.value = id;
+        form.client_type_id = client_type_id;
         form.first_name = first_name;
         form.last_name = last_name;
         form.email = email;
@@ -138,6 +143,15 @@ defineExpose({ openModal });
                             </div>
 
                             <div class="md:col-span-2">
+                                <InputLabel for="client_type_id" value="Client type" />
+                                <VueSelect id="client_type_id" label="name" v-model="form.client_type_id" :append="true"
+                                    :options="clientTypesOptions" :reduce="clientTypesOptions => clientTypesOptions.id"
+                                    :select-on-tab="true" />
+
+                                <InputError :message="form.errors.client_type_id" class="mt-2" />
+                            </div>
+
+                            <div class="md:col-span-2">
                                 <InputLabel for="email" value="Email" />
                                 <TextInput id="email" ref="emailInput" v-model="form.email" type="email" />
 
@@ -151,7 +165,7 @@ defineExpose({ openModal });
                                 <InputError :message="form.errors.phone" class="mt-2" />
                             </div>
 
-                            <div class="md:col-span-4">
+                            <div class="md:col-span-2">
                                 <InputLabel for="country" value="Country" />
                                 <TextInput id="country" ref="countryInput" v-model="form.country" type="text" />
 

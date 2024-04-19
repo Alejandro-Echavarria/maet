@@ -16,16 +16,19 @@ class ClientTypeSeeder extends Seeder
         ClientType::create([
             'name' => 'Lead',
             'slug' => 'lead',
+            'color' => 'yellow-600',
         ]);
 
         ClientType::create([
             'name' => 'Client',
             'slug' => 'client',
+            'color' => 'green-600',
         ]);
 
         ClientType::create([
             'name' => 'Company',
             'slug' => 'company',
+            'color' => 'blue-600',
         ]);
     }
 }

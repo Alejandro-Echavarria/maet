@@ -49,8 +49,8 @@ const truncateData = (data, index) => {
 
 const callOpenModal = ref(null);
 
-const openModal = (op, id, titleData, slug, start_date, end_date, description, color, file, project_name, link, technologies, preview, body, alt_banner_image, status) => {
-    callOpenModal.value.openModal(op, id, titleData, slug, start_date, end_date, description, color, file, project_name, link, technologies, preview, body, alt_banner_image, status);
+const openModal = (op, id, category_id, client_id, titleData, slug, logo_url, color, file, project_name, link, technologies, preview, body, alt_banner_image, status) => {
+    callOpenModal.value.openModal(op, id, category_id, client_id, titleData, slug, logo_url, color, file, project_name, link, technologies, preview, body, alt_banner_image, status);
 };
 </script>
 
