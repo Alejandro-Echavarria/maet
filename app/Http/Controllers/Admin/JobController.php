@@ -38,7 +38,7 @@ class JobController extends Controller
                         ->from('clients')
                         ->leftJoin('images', function (JoinClause $join) {
                             $join->on('images.imageable_id', '=', 'clients.id')
-                                ->where('images.imageable_type', '=', 'App\Models\Client')
+                                ->where('images.imageable_type', '=', Client::class)
                                 ->where('images.default', '=', '1');
                         });
                 },
