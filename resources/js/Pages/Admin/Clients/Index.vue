@@ -30,8 +30,8 @@ const thead = ['photo', 'First name', 'last name', 'client type', 'phone', 'coun
 const url = 'admin.clients.index';
 const callOpenModal = ref(null);
 
-const openModal = (op, id, client_type_id, first_name, last_name, email, phone, country, description, file) => {
-    callOpenModal.value.openModal(op, id, client_type_id, first_name, last_name, email, phone, country, description, file);
+const openModal = (op, id, client_type_id, first_name, last_name, email, phone, country, description, status, file) => {
+    callOpenModal.value.openModal(op, id, client_type_id, first_name, last_name, email, phone, country, description, status, file);
 };
 </script>
 
@@ -83,7 +83,7 @@ const openModal = (op, id, client_type_id, first_name, last_name, email, phone, 
                     <td class="px-4 py-3">
                         <div class="flex items-center justify-end">
                             <TableButton>
-                                <font-awesome-icon @click="openModal(2, tb.id, tb.client_type_id, tb.first_name, tb.last_name, tb.email, tb.phone, tb.country, tb.description, tb?.images[0]?.url)"
+                                <font-awesome-icon @click="openModal(2, tb.id, tb.client_type_id, tb.first_name, tb.last_name, tb.email, tb.phone, tb.country, tb.description, tb.status, tb?.images[0]?.url)"
                                     class="w-4 h-4 text-indigo-500" :icon="['far', 'pen-to-square']" />
                             </TableButton>
                             <DeleteClient :id="tb.id" :filter="filter" :page="page" :key="tb.id + 'deleteBtn'" />

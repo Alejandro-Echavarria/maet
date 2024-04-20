@@ -34,6 +34,7 @@ const form = useForm({
     phone: '',
     country: '',
     description: '',
+    status: false,
     file: null,
 });
 
@@ -72,7 +73,7 @@ const save = () => {
     }
 };
 
-const openModal = (op, id, client_type_id, first_name, last_name, email, phone, country, description, file) => {
+const openModal = (op, id, client_type_id, first_name, last_name, email, phone, country, description, status, file) => {
     modal.value = true;
     opration.value = op;
 
@@ -88,6 +89,7 @@ const openModal = (op, id, client_type_id, first_name, last_name, email, phone, 
         form.phone = phone;
         form.country = country;
         form.description = description;
+        form.status = status;
         form.file = file;
     }
 };
@@ -165,11 +167,20 @@ defineExpose({ openModal });
                                 <InputError :message="form.errors.phone" class="mt-2" />
                             </div>
 
-                            <div class="md:col-span-2">
-                                <InputLabel for="country" value="Country" />
-                                <TextInput id="country" ref="countryInput" v-model="form.country" type="text" />
+                            <div class="flex items-center md:col-span-2 gap-6">
+                                <div class="grow">
+                                    <InputLabel for="country" value="Country" />
+                                    <TextInput id="country" ref="countryInput" v-model="form.country" type="text" />
+    
+                                    <InputError :message="form.errors.country" class="mt-2" />
+                                </div>
 
-                                <InputError :message="form.errors.country" class="mt-2" />
+                                <div>
+                                    <InputLabel for="status" value="Status" />
+                                    <ToggleSwitch id="status" ref="statusInput" v-model="form.status" class="mt-2" />
+
+                                    <InputError :message="form.errors.status" class="mt-2" />
+                                </div>
                             </div>
 
                             <div class="md:col-span-4">

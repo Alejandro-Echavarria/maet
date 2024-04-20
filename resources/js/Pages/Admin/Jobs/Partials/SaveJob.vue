@@ -12,6 +12,7 @@ import SimpleForm from "@/Components/Main/Admin/Components/Forms/SimpleForm.vue"
 import ColorPicker from "@/Components/Main/Admin/Components/Forms/Inputs/SelectsPicker/ColorsPicker/ColorPicker.vue";
 import VueSelect from "@/Components/Main/Admin/Components/Selects/VueSelect.vue";
 import Images from "@/Components/Main/Admin/Components/Forms/Inputs/Images/Images.vue";
+import CurrencyInput from "@/Components/Main/Admin/Components/Forms/Inputs/TextInput/CurrencyInput.vue";
 import ToggleSwitch from "@/Components/Main/Admin/Components/Forms/Inputs/ToggleSwitch/ToggleSwitch.vue";
 import Ckeditor from "@/Components/Main/Admin/Components/Forms/Inputs/ckeditor/Ckeditor.vue";
 import CKeditorHelper from "@/Helpers/CKeditor/Ckeditor";
@@ -57,6 +58,7 @@ const form = useForm({
     technologies: [],
     preview: "",
     body: "",
+    price: "",
     alt_banner_image: "",
     status: false,
 });
@@ -103,7 +105,7 @@ const save = () => {
     }
 };
 
-const openModal = (op, id, category_id, client_id, titleData, slug, logo_url, color, file, project_name, link, technologies, preview, body, alt_banner_image, status) => {
+const openModal = (op, id, category_id, client_id, titleData, slug, logo_url, color, file, project_name, link, technologies, preview, body, price, alt_banner_image, status) => {
     modal.value = true;
     opration.value = op;
 
@@ -121,6 +123,7 @@ const openModal = (op, id, category_id, client_id, titleData, slug, logo_url, co
         form.technologies = [];
         form.preview = "";
         form.body = "";
+        form.price = "";
         form.alt_banner_image = "";
         form.status = false;
         form.defaults();
@@ -139,6 +142,7 @@ const openModal = (op, id, category_id, client_id, titleData, slug, logo_url, co
         form.technologies = technologies.map(tech => tech.id);
         form.preview = preview;
         form.body = body;
+        form.price = price;
         form.alt_banner_image = alt_banner_image;
         form.status = status;
         form.defaults();
@@ -259,6 +263,13 @@ defineExpose({ openModal });
                                         v-model="form.alt_banner_image" type="text" />
 
                                     <InputError :message="form.errors.alt_banner_image" class="mt-2" />
+                                </div>
+
+                                <div>
+                                    <InputLabel for="price" value="Price" />
+                                    <CurrencyInput id="price" ref="PriceInput" v-model="form.price" />
+
+                                    <InputError :message="form.errors.price" class="mt-2" />
                                 </div>
 
                                 <div>

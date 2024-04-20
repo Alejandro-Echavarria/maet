@@ -18,7 +18,11 @@ class Client extends Model
         'phone',
         'country',
         'description',
-        'profile_photo_path',
+        'status',
+    ];
+
+    protected $casts = [
+        'status' => 'boolean'
     ];
 
     public function jobs()

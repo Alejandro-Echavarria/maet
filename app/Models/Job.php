@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Image;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,6 +25,7 @@ class Job extends Model
         'link',
         'preview',
         'body',
+        'price',
         'technologies',
         'alt_banner_image',
         'status',
@@ -32,6 +34,10 @@ class Job extends Model
     protected $casts = [
         'status' => 'boolean'
     ];
+
+    /*----------------------------------------------------------------------------*/
+    // Relations
+    /*----------------------------------------------------------------------------*/
 
     public function getRouteKeyName()
     {
@@ -60,17 +66,33 @@ class Job extends Model
         return $this->morphMany(Image::class, 'imageable');
     }
 
+    /*----------------------------------------------------------------------------*/
+    // Accessors & Mutators
+    /*----------------------------------------------------------------------------*/
+
     public function getCreatedAtAttribute($value)
     {
         $carbon = Carbon::parse($value)->timezone(config('app.timezone'));
         return $carbon->format('d/m/Y h:i:s A');
     }
 
-    public function getUpdatedAtAttribute($value)
+    public function setCreatedAtAttribute($value)
     {
         $carbon = Carbon::parse($value)->timezone(config('app.timezone'));
         return $carbon->format('d/m/Y h:i:s A');
     }
+
+    protected function price(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $value / 100,
+            set: fn ($value) => $value * 100
+        );
+    }
+
+    /*----------------------------------------------------------------------------*/
+    // Scopes (local)
+    /*----------------------------------------------------------------------------*/
 
     public function scopeFilter($query, $filter, $model = null)
     {

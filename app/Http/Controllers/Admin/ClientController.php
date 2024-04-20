@@ -54,6 +54,7 @@ class ClientController extends Controller
                 'phone'          => "nullable|numeric",
                 'country'        => "nullable|max:255|string",
                 'description'    => "nullable|string",
+                'status'         => "required|boolean",
                 'file'           => "nullable|image",
             ],
             [
@@ -62,6 +63,7 @@ class ClientController extends Controller
             [
                 // Custom attribute names
                 'file' => 'image',
+                'client_type_id' => 'client type',
             ]
         );
 
@@ -91,6 +93,7 @@ class ClientController extends Controller
                 'phone'          => "nullable|numeric",
                 'country'        => "nullable|max:255|string",
                 'description'    => "nullable|string",
+                'status'         => "required|boolean",
                 'file'           => $request->file('file') ? "nullable|image" : "nullable|string",
             ],
             [
@@ -99,6 +102,7 @@ class ClientController extends Controller
             [
                 // Custom attribute names
                 'file' => 'image',
+                'client_type_id' => 'client type',
             ]
         );
 
