@@ -40,6 +40,7 @@ const title = ref("");
 const modal = ref(false);
 const opration = ref(1);
 const job = ref(null);
+const closeOpenModal = ref(true);
 const categoriesOptions = ref(props.data.categories);
 const clientOptions = ref(props.data.clients);
 const technologyOptions = ref(props.data.technologies);
@@ -73,11 +74,14 @@ const save = () => {
             preserveScroll: true,
             preserveState: true,
             onSuccess: () => {
-                modal.value = false;
+                closeOpenModal.value = true;
                 ok("Job created successfully");
             },
-            onError: () => {
-                console.log("error");
+            onError: (errors) => {
+                if (errors.create) {
+                    closeOpenModal.value = false;
+                    ok(errors.create, 'error', null, false, 'Error');
+                }
             },
         });
     } else {
@@ -90,16 +94,14 @@ const save = () => {
             preserveScroll: true,
             preserveState: true,
             onSuccess: () => {
-                if (usePage().props.jetstream.flash.error) {
-                    modal.value = true;
-                    ok(usePage().props.jetstream.flash.error, 'error', null, false, 'Error');
-                } else {
-                    modal.value = false;
-                    ok("Job updated successfully");
-                }
+                closeOpenModal.value = true;
+                ok("Job updated successfully");
             },
-            onError: () => {
-                console.log("error");
+            onError: (errors) => {
+                if (errors.update) {
+                    closeOpenModal.value = false;
+                    ok(errors.update, 'error', null, false, 'Error');
+                }
             },
         });
     }
@@ -107,6 +109,7 @@ const save = () => {
 
 const openModal = (op, id, category_id, client_id, titleData, slug, logo_url, color, file, project_name, link, technologies, preview, body, price, alt_banner_image, status) => {
     modal.value = true;
+    closeOpenModal.value = true;
     opration.value = op;
 
     if (op === 1) {
@@ -150,17 +153,15 @@ const openModal = (op, id, category_id, client_id, titleData, slug, logo_url, co
 };
 
 const closeModal = () => {
-    if (modal.value) {
-        if (form.isDirty) {
-            let answer = window.confirm('Do you really want to leave? you have unsaved changes!');
+    if (form.isDirty && !form.recentlySuccessful) {
+        let answer = window.confirm('Do you really want to leave? you have unsaved changes!');
 
-            if (answer) {
-                modal.value = false;
-                form.clearErrors();
-                form.reset();
-            } else {
-                return false;
-            }
+        if (answer) {
+            modal.value = false;
+            form.clearErrors();
+            form.reset();
+        } else {
+            return false;
         }
     }
 
@@ -187,7 +188,7 @@ const beforeWindowUnload = (e) => {
 }
 
 const ok = (msj, type, timer, toast, title) => {
-    closeModal();
+    closeOpenModal.value && closeModal();
     SaveAlert(msj, type, timer, toast, title);
 };
 

@@ -115,7 +115,7 @@ class JobController extends Controller
         } catch (\Exception $e) {
             DB::rollback();
 
-            return to_route('admin.jobs.index')->with('flash', ['error' => $e->getMessage()]);
+            return to_route('admin.jobs.index')->withErrors(['create' => $e->getMessage()]);
         }
         DB::commit();
 
@@ -204,7 +204,7 @@ class JobController extends Controller
         } catch (\Exception $e) {
             DB::rollback();
 
-            return to_route('admin.jobs.index')->with('flash', ['error' => $e->getMessage()]);
+            return to_route('admin.jobs.index')->withErrors(['update' => $e->getMessage()]);
         }
         DB::commit();
 
