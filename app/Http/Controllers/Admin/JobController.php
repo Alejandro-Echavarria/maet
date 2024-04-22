@@ -143,15 +143,16 @@ class JobController extends Controller
     {
         $validClientStatus = Job::selectRaw(
             "
-                clients.id as client_id,
+                jobs.client_id AS job_client_id,
+                clients.id AS client_id,
                 clients.status,
                 (
-                    CASE WHEN $job->client_id = clients.id THEN 1 ELSE 0 END
+                    CASE WHEN $request->client_id = clients.id THEN 1 ELSE 0 END
                 ) AS client_valid
             "
         )
-            ->join('clients', 'jobs.client_id', '=', 'clients.id')
-            ->where('jobs.id', $request->client_id)
+            ->join('clients', 'clients.id', '=', 'jobs.client_id')
+            ->where('jobs.id', $job->id)
             ->first();
 
         $request['slug'] = Str::slug($request->title);
