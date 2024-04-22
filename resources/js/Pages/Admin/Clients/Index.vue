@@ -79,12 +79,18 @@ const openModal = (op, id, client_type_id, first_name, last_name, email, phone, 
                         </span>
                     </td>
                     <td class="px-4 py-3">{{ tb.phone }}</td>
-                    <td class="px-4 py-3">
+                    <td class="px-4 py-3 text-xs">
                         <span class="px-2 py-1 font-semibold rounded-full" :class="tb.status ? 'bg-green-500/20 text-green-500' : 'bg-red-500/20 text-red-500'">
-                            {{ tb.status }}
+                            <template v-if="tb.status">
+                                Activo
+                            </template>
+
+                            <template v-else>
+                                Inactivo
+                            </template>
                         </span>
                     </td>
-                    <td class="px-4 py-3 text-xs">
+                    <td class="px-4 py-3">
                         <div class="flex items-center justify-end">
                             <TableButton>
                                 <font-awesome-icon @click="openModal(2, tb.id, tb.client_type_id, tb.first_name, tb.last_name, tb.email, tb.phone, tb.country, tb.description, tb.status, tb?.images[0]?.url)"
