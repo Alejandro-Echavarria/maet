@@ -26,7 +26,7 @@ const props = defineProps({
     page: String
 });
 
-const thead = ['photo', 'First name', 'last name', 'client type', 'phone', 'satatus'];
+const thead = ['photo', 'first name', 'last name', 'client type', 'phone', 'status'];
 const url = 'admin.clients.index';
 const callOpenModal = ref(null);
 
