@@ -19,12 +19,12 @@ const props = defineProps({
     page: String
 });
 
-const thead = ['title', 'icon', 'description', 'color', 'created', 'updated'];
+const thead = ['title', 'icon', 'color', 'created', 'updated'];
 const url = 'admin.services.index';
 const callOpenModal = ref(null);
 
-const openModal = (op, id, title, icon, description, color) => {
-    callOpenModal.value.openModal(op, id, title, icon, description, color);
+const openModal = (op, id, name, icon, description, color) => {
+    callOpenModal.value.openModal(op, id, name, icon, description, color);
 };
 </script>
 
@@ -57,15 +57,14 @@ const openModal = (op, id, title, icon, description, color) => {
                     <tr v-for="tb in services.data"
                         class="dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition ease-linear duration-300 animate-fade-in-down"
                         :key="tb.id + 'tb'" :style="{ animationDelay: `${index * 0.05}s` }">
-                        <td class="px-4 py-3">{{ tb.title }}</td>
+                        <td class="px-4 py-3">{{ tb.name }}</td>
                         <td class="px-4 py-3">{{ tb.icon }}</td>
-                        <td class="px-4 py-3" v-html="tb.description"></td>
                         <td class="px-4 py-3">{{ tb.color }}</td>
                         <td class="px-4 py-3">{{ tb.created_at }}</td>
                         <td class="px-4 py-3">{{ tb.updated_at }}</td>
                         <td class="px-4 py-3 flex items-center justify-end">
                             <TableButton>
-                                <font-awesome-icon @click="openModal(2, tb.id, tb.title, tb.icon, tb.description, tb.color)"
+                                <font-awesome-icon @click="openModal(2, tb.id, tb.name, tb.icon, tb.description, tb.color)"
                                     class="w-4 h-4 text-indigo-500" :icon="['far', 'pen-to-square']" />
                             </TableButton>
                             <DeleteService :id="tb.id" :filter="filter" :page="page" :key="tb.id + 'deleteBtn'"/>

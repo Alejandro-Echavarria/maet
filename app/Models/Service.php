@@ -11,8 +11,7 @@ class Service extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
-        'title',
+        'name',
         'icon',
         'description',
         'color'
@@ -40,11 +39,12 @@ class Service extends Model
     {
         $query->when($filter ?? null, function ($query, $search) {
             $query->whereAny([
-                'title',
+                'name',
                 'icon',
                 'description',
                 'color',
-                'created_at'
+                'created_at',
+                'updated_at'
             ], 'LIKE', "%$search%");
         });
     }

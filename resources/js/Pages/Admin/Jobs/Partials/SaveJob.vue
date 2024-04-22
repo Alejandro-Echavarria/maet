@@ -229,7 +229,6 @@ defineExpose({ openModal });
 
                             <div>
                                 <InputLabel for="color" value="Color" />
-
                                 <ColorPicker v-model="form.color" />
 
                                 <InputError :message="form.errors.color" class="mt-2" />
