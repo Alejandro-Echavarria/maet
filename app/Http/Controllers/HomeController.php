@@ -25,7 +25,7 @@ class HomeController extends Controller
             )
             ->first();
 
-        $jobs = Job::with(
+        $jobs = Job::select('id', 'category_id', 'title', 'slug', 'project_name', 'alt_banner_image', 'link', 'status', 'created_at', 'updated_at')->with(
             [
                 'category:id,name,slug',
                 'technologies:id,name,icon', 'images' => function ($query) {

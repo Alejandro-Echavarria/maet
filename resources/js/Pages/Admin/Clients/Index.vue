@@ -26,7 +26,7 @@ const props = defineProps({
     page: String
 });
 
-const thead = ['photo', 'First name', 'last name', 'client type', 'phone', 'country'];
+const thead = ['photo', 'First name', 'last name', 'client type', 'phone', 'satatus'];
 const url = 'admin.clients.index';
 const callOpenModal = ref(null);
 
@@ -79,8 +79,12 @@ const openModal = (op, id, client_type_id, first_name, last_name, email, phone, 
                         </span>
                     </td>
                     <td class="px-4 py-3">{{ tb.phone }}</td>
-                    <td class="px-4 py-3">{{ tb.country }}</td>
                     <td class="px-4 py-3">
+                        <span class="px-2 py-1 font-semibold rounded-full" :class="tb.status ? 'bg-green-500/20 text-green-500' : 'bg-red-500/20 text-red-500'">
+                            {{ tb.status }}
+                        </span>
+                    </td>
+                    <td class="px-4 py-3 text-xs">
                         <div class="flex items-center justify-end">
                             <TableButton>
                                 <font-awesome-icon @click="openModal(2, tb.id, tb.client_type_id, tb.first_name, tb.last_name, tb.email, tb.phone, tb.country, tb.description, tb.status, tb?.images[0]?.url)"

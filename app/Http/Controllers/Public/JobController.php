@@ -18,7 +18,7 @@ class JobController extends Controller
         $filter = $request?->category;
         $filterTechnology = $request?->technology;
 
-        $jobs = Job::with(
+        $jobs = Job::select('id', 'category_id', 'title', 'slug', 'project_name', 'alt_banner_image', 'link', 'status', 'created_at', 'updated_at')->with(
             [
                 'category:id,name',
                 'technologies:id,name,icon',
@@ -55,7 +55,7 @@ class JobController extends Controller
     {
         $this->authorize('published', $job);
 
-        $job = $job->with(
+        $job = $job->select('id', 'category_id', 'title', 'slug', 'color', 'project_name', 'alt_banner_image', 'preview', 'body', 'link', 'status', 'created_at', 'updated_at')->with(
             [
                 'category:id,name,slug',
                 'technologies:id,name,slug,icon',
