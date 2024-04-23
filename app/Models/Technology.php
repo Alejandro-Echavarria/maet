@@ -3,8 +3,10 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Technology extends Model
 {
@@ -53,9 +55,20 @@ class Technology extends Model
             $query->whereAny([
                 'slug',
                 'name',
-                'is_main',
                 'created_at'
-            ], 'LIKE', "%$search%");
+            ], 'LIKE', "%$search%")
+                ->orWhereRaw("
+                    is_main =
+                        (
+                            CASE WHEN LOWER('$search') = 'true' THEN
+                                1
+                            ELSE
+                                CASE WHEN LOWER('$search') = 'false' THEN
+                                    0
+                                END
+                            END
+                        )
+                ");
         });
     }
 }

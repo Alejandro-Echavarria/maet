@@ -109,14 +109,14 @@ defineExpose({ openModal });
                                 <div class="grow">
                                     <InputLabel for="icon" value="Icon" />
                                     <IconTextInput id="icon" ref="iconInput" v-model="form.icon" />
-    
+
                                     <InputError :message="form.errors.icon" class="mt-2" />
                                 </div>
 
                                 <div>
                                     <InputLabel for="is_main" value="Main" />
                                     <ToggleSwitch id="is_main" ref="is_mainInput" v-model="form.is_main" class="mt-2" />
-    
+
                                     <InputError :message="form.errors.is_main" class="mt-2" />
                                 </div>
                             </div>
