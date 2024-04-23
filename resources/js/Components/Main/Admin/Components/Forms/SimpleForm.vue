@@ -9,11 +9,11 @@ defineEmits(['submitted']);
 </script>
 
 <template>
-    <form id="simpleForm" @submit.prevent="$emit('submitted')" classs="space-y-6">
+    <form id="simpleForm" @submit.prevent="$emit('submitted')">
         <div>
             <slot name="form" />
         </div>
-        <div v-if="actions" class="w-full flex justify-end">
+        <div v-if="actions" class="w-full flex justify-end mt-6">
             <slot name="actions" />
         </div>
     </form>

@@ -194,7 +194,7 @@ defineExpose({ openModal });
                     </template>
                 </SimpleForm>
 
-                <div v-if="opration !== 1" class="md:col-span-4 mt-6">
+                <div v-if="opration !== 1" class="md:col-span-4">
                     <div class="w-full space-y-6">
                         <div>
                             <p class="text-lg font-medium">Jobs (projects)</p>
