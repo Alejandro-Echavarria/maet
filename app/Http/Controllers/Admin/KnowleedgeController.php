@@ -19,9 +19,9 @@ class KnowleedgeController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => "required|max:255|string|unique:knowledge,name",
-            'icon'  => 'required|string',
-            'main'  => "boolean",
+            'name'     => "required|max:255|string|unique:knowledge,name",
+            'icon'     => 'required|string',
+            'is_main'  => "boolean",
         ]);
 
         $data['user_id'] = auth()->user()->id;
@@ -34,9 +34,9 @@ class KnowleedgeController extends Controller
     public function update(Request $request, Knowledge $knowledge)
     {
         $data = $request->validate([
-            'name' => "required|max:255|string|unique:knowledge,name,$knowledge->id",
-            'icon'  => 'required|string',
-            'main'  => "required|boolean",
+            'name'     => "required|max:255|string|unique:knowledge,name,$knowledge->id",
+            'icon'     => 'required|string',
+            'is_main'  => "required|boolean",
         ]);
 
         $data['user_id'] = auth()->user()->id;

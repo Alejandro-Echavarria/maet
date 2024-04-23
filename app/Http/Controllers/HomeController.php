@@ -19,7 +19,7 @@ class HomeController extends Controller
                     },
                     'knowledge' => function ($query) {
                         $query->select('user_id', 'name', 'icon')
-                            ->where('main', '=', '1');
+                            ->where('is_main', '=', '1');
                     }
                 ]
             )
