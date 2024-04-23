@@ -26,9 +26,6 @@ class ClientController extends Controller
         $clients = Client::with(
             [
                 'clientType:id,name,slug,color',
-                'jobs' => function ($query) {
-                    $query->select('id', 'client_id', 'slug', 'title', 'price', 'status', 'created_at')->orderBy('created_at', 'desc');
-                },
                 'images' => function ($query) {
                     $query->select('id', 'url', 'default', 'imageable_id')
                         ->where('default', '=', '1')
