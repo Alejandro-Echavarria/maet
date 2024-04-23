@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('icon')->nullable();
             $table->string('color')->nullable();
-            $table->boolean('main')->default(false);
+            $table->boolean('is_main')->default(false);
             $table->timestamps();
         });
     }

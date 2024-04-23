@@ -25,7 +25,7 @@ class HomeController extends Controller
             )
             ->first();
 
-        $jobs = Job::select('id', 'category_id', 'title', 'slug', 'preview', 'project_name', 'alt_banner_image', 'link', 'status', 'created_at', 'updated_at')->with(
+        $jobs = Job::select('id', 'category_id', 'title', 'slug', 'preview', 'project_name', 'alt_banner_image', 'link', 'is_published', 'created_at', 'updated_at')->with(
             [
                 'category:id,name,slug',
                 'technologies:id,name,icon', 'images' => function ($query) {
@@ -35,7 +35,7 @@ class HomeController extends Controller
                 }
             ]
         )
-            ->where('status', 1)
+            ->where('is_published', 1)
             ->orderBy('created_at', 'desc')
             ->limit(4)
             ->get();
