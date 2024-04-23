@@ -192,6 +192,17 @@ defineExpose({ openModal });
                         </div>
                     </template>
                 </SimpleForm>
+
+                <div class="md:col-span-4">
+                    <div class="flex justify-center w-full">
+                        <p class="text-lg font-medium">Jobs (projects)</p>
+                            <pre>{{ data }}</pre>
+<!-- <pre>{{data.clients.data}}</pre>
+                        <div v-for="job in data.clients">
+                            <pre>{{ data }}</pre>
+                        </div> -->
+                    </div>
+                </div>
             </template>
 
             <template #footer>
