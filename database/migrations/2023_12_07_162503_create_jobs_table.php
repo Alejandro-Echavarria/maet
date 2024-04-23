@@ -26,7 +26,7 @@ return new class extends Migration
             $table->integer('price')->unsigned()->default(0);
             $table->string('alt_banner_image')->nullable();
             $table->string('link')->nullable();
-            $table->boolean('status')->default(false);
+            $table->boolean('is_published')->default(false);
             $table->timestamps();
         });
     }

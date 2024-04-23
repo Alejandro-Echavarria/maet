@@ -81,7 +81,7 @@ class JobController extends Controller
                 'preview'          => "required|string",
                 'body'             => "required|string",
                 'alt_banner_image' => "string|max:255|nullable",
-                'status'           => "required|boolean",
+                'is_published'           => "required|boolean",
             ],
             [
                 // Custom error messages
@@ -170,7 +170,7 @@ class JobController extends Controller
                 'body'             => "required|string",
                 'price'            => "required|numeric|min:0",
                 'alt_banner_image' => "string|max:255|nullable",
-                'status'           => "required|boolean",
+                'is_published'     => "required|boolean",
             ],
             [
                 // Custom error messages

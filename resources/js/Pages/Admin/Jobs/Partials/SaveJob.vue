@@ -61,7 +61,7 @@ const form = useForm({
     body: "",
     price: "",
     alt_banner_image: "",
-    status: false,
+    is_published: false,
 });
 
 const save = () => {
@@ -107,7 +107,7 @@ const save = () => {
     }
 };
 
-const openModal = (op, id, category_id, client_id, titleData, slug, logo_url, color, file, project_name, link, technologies, preview, body, price, alt_banner_image, status) => {
+const openModal = (op, id, category_id, client_id, titleData, slug, logo_url, color, file, project_name, link, technologies, preview, body, price, alt_banner_image, is_published) => {
     modal.value = true;
     closeOpenModal.value = true;
     opration.value = op;
@@ -128,7 +128,7 @@ const openModal = (op, id, category_id, client_id, titleData, slug, logo_url, co
         form.body = "";
         form.price = "";
         form.alt_banner_image = "";
-        form.status = false;
+        form.is_published = false;
         form.defaults();
     } else {
         title.value = "Edit job";
@@ -147,7 +147,7 @@ const openModal = (op, id, category_id, client_id, titleData, slug, logo_url, co
         form.body = body;
         form.price = price;
         form.alt_banner_image = alt_banner_image;
-        form.status = status;
+        form.is_published = is_published;
         form.defaults();
     }
 };
@@ -273,10 +273,10 @@ defineExpose({ openModal });
                                 </div>
 
                                 <div>
-                                    <InputLabel for="status" value="Publish" />
-                                    <ToggleSwitch id="status" ref="statusInput" v-model="form.status" class="mt-2" />
+                                    <InputLabel for="is_published" value="Publish" />
+                                    <ToggleSwitch id="is_published" ref="is_publishedInput" v-model="form.is_published" class="mt-2" />
 
-                                    <InputError :message="form.errors.status" class="mt-2" />
+                                    <InputError :message="form.errors.is_published" class="mt-2" />
                                 </div>
                             </div>
 

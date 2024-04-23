@@ -28,11 +28,11 @@ class Job extends Model
         'price',
         'technologies',
         'alt_banner_image',
-        'status',
+        'is_published',
     ];
 
     protected $casts = [
-        'status' => 'boolean'
+        'is_published' => 'boolean'
     ];
 
     /*----------------------------------------------------------------------------*/
