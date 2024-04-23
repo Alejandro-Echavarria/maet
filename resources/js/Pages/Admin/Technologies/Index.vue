@@ -27,8 +27,8 @@ const url = 'admin.technologies.index';
 
 const callOpenModal = ref(null);
 
-const openModal = (op, slug, name, icon, main, color) => {
-    callOpenModal.value.openModal(op, slug, name, icon, main, color);
+const openModal = (op, slug, name, icon, is_main, color) => {
+    callOpenModal.value.openModal(op, slug, name, icon, is_main, color);
 };
 </script>
 
@@ -65,7 +65,7 @@ const openModal = (op, slug, name, icon, main, color) => {
                     <td class="px-4 py-3">{{ tb.updated_at }}</td>
                     <td class="px-4 py-3 flex items-center justify-end">
                         <TableButton>
-                            <font-awesome-icon @click="openModal(2, tb.slug, tb.name, tb.icon, tb.main, tb.color)" class="w-4 h-4 text-indigo-500"
+                            <font-awesome-icon @click="openModal(2, tb.slug, tb.name, tb.icon, tb.is_main, tb.color)" class="w-4 h-4 text-indigo-500"
                                 :icon="['far', 'pen-to-square']" />
                         </TableButton>
                         <DeleteTechnology :id="tb.slug" :filter="filter" :page="page" :key="tb.id + 'deleteBtn'" />

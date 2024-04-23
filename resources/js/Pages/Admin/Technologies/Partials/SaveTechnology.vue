@@ -29,7 +29,7 @@ const form = useForm({
     slug: '',
     icon: '',
     color: 'gray-100',
-    main: false
+    is_main: false
 });
 
 const save = () => {
@@ -68,7 +68,7 @@ const save = () => {
     }
 };
 
-const openModal = (op, slug, name, icon, main, color) => {
+const openModal = (op, slug, name, icon, is_main, color) => {
     modal.value = true;
     opration.value = op;
 
@@ -79,7 +79,7 @@ const openModal = (op, slug, name, icon, main, color) => {
         technology.value = slug;
         form.name = name;
         form.icon = icon;
-        form.main = main;
+        form.is_main = is_main;
         form.color = color
     }
 
@@ -140,10 +140,10 @@ defineExpose({ openModal });
                                 </div>
 
                                 <div>
-                                    <InputLabel for="main" value="Main" />
-                                    <ToggleSwitch id="main" ref="mainInput" v-model="form.main" class="mt-2" />
+                                    <InputLabel for="is_main" value="Main" />
+                                    <ToggleSwitch id="is_main" ref="is_mainInput" v-model="form.is_main" class="mt-2" />
     
-                                    <InputError :message="form.errors.main" class="mt-2" />
+                                    <InputError :message="form.errors.is_main" class="mt-2" />
                                 </div>
                             </div>
                         </div>
