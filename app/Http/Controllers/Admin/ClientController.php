@@ -136,4 +136,9 @@ class ClientController extends Controller
             'page' => $page
         ])->with('flash', 'Client updated');
     }
+
+    public function clientJobs(Client $client)
+    {
+        return response()->json($client->jobs->select('id', 'client_id', 'slug', 'title', 'price'));
+    }
 }

@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onBeforeUnmount } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 import DialogModal from '@/Components/DialogModal.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
@@ -13,6 +13,7 @@ import SimpleForm from '@/Components/Main/Admin/Components/Forms/SimpleForm.vue'
 import SimpleTextArea from '@/Components/Main/Admin/Components/Forms/Inputs/TextArea/SimpleTextArea.vue';
 import VueSelect from "@/Components/Main/Admin/Components/Selects/VueSelect.vue";
 import ToggleSwitch from "@/Components/Main/Admin/Components/Forms/Inputs/ToggleSwitch/ToggleSwitch.vue";
+import ShowClientJobs from '@/Pages/Admin/Clients/Partials/ShowClientJobs.vue';
 
 const props = defineProps({
     data: Object,
@@ -193,14 +194,13 @@ defineExpose({ openModal });
                     </template>
                 </SimpleForm>
 
-                <div class="md:col-span-4">
-                    <div class="flex justify-center w-full">
-                        <p class="text-lg font-medium">Jobs (projects)</p>
-                            <pre>{{ data }}</pre>
-<!-- <pre>{{data.clients.data}}</pre>
-                        <div v-for="job in data.clients">
-                            <pre>{{ data }}</pre>
-                        </div> -->
+                <div v-if="opration !== 1" class="md:col-span-4 mt-6">
+                    <div class="w-full space-y-6">
+                        <div>
+                            <p class="text-lg font-medium">Jobs (projects)</p>
+                        </div>
+
+                        <ShowClientJobs :url="'admin.clients.clientjobs'" :modelBinding="client" />
                     </div>
                 </div>
             </template>
