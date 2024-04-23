@@ -59,15 +59,15 @@ class Technology extends Model
             ], 'LIKE', "%$search%")
                 ->orWhereRaw("
                     is_main =
-                        (
-                            CASE WHEN LOWER('$search') = 'true' THEN
-                                1
-                            ELSE
-                                CASE WHEN LOWER('$search') = 'false' THEN
-                                    0
-                                END
+                    (
+                        CASE WHEN LOWER('$search') = 'true' THEN
+                            1
+                        ELSE
+                            CASE WHEN LOWER('$search') = 'false' THEN
+                                0
                             END
-                        )
+                        END
+                    )
                 ");
         });
     }
