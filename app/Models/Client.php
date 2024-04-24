@@ -11,13 +11,18 @@ class Client extends Model
     use HasFactory;
 
     protected $fillable = [
+        'client_type_id',
         'first_name',
         'last_name',
         'email',
         'phone',
         'country',
         'description',
-        'profile_photo_path',
+        'status',
+    ];
+
+    protected $casts = [
+        'status' => 'boolean'
     ];
 
     public function jobs()

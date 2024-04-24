@@ -13,11 +13,11 @@ class Knowledge extends Model
         'user_id',
         'name',
         'icon',
-        'main',
+        'is_main',
     ];
 
     protected $casts = [
-        'status'     => 'boolean',
+        'is_main'    => 'boolean',
         'created_at' => "date:d/m/Y",
         'updated_at' => "date:d/m/Y",
     ];

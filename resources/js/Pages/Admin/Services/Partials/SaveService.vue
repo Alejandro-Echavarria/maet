@@ -5,6 +5,7 @@ import DialogModal from '@/Components/DialogModal.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
+import ColorPicker from "@/Components/Main/Admin/Components/Forms/Inputs/SelectsPicker/ColorsPicker/ColorPicker.vue";
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import SaveAlert from '@/Helpers/Alerts/SaveAlert';
@@ -28,7 +29,7 @@ const opration = ref(1);
 const service = ref(null);
 
 const form = useForm({
-    title: '',
+    name: '',
     icon: '',
     description: '',
     color: ''
@@ -66,7 +67,7 @@ const save = () => {
     }
 };
 
-const openModal = (op, id, titleData, icon, description, color) => {
+const openModal = (op, id, name, icon, description, color) => {
     modal.value = true;
     opration.value = op;
 
@@ -75,7 +76,7 @@ const openModal = (op, id, titleData, icon, description, color) => {
     } else {
         title.value = 'Edit service';
         service.value = id;
-        form.title = titleData;
+        form.name = name;
         form.icon = icon;
         form.description = description;
         form.color = color;
@@ -113,10 +114,10 @@ defineExpose({ openModal });
                     <template #form>
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
                             <div>
-                                <InputLabel for="title" value="Title" />
-                                <TextInput id="title" ref="titleInput" v-model="form.title" type="text" />
+                                <InputLabel for="name" value="Name" />
+                                <TextInput id="name" ref="nameInput" v-model="form.name" type="text" />
 
-                                <InputError :message="form.errors.title" class="mt-2" />
+                                <InputError :message="form.errors.name" class="mt-2" />
                             </div>
 
                             <div>
@@ -128,7 +129,7 @@ defineExpose({ openModal });
 
                             <div>
                                 <InputLabel for="color" value="Color" />
-                                <TextInput id="color" ref="colorInput" v-model="form.color" type="text" />
+                                <ColorPicker v-model="form.color" />
 
                                 <InputError :message="form.errors.color" class="mt-2" />
                             </div>

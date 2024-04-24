@@ -4,7 +4,7 @@ import SaveAlert from '@/Helpers/Alerts/SaveAlert';
 import DeleteAlert from '@/Helpers/Alerts/DeleteAlert';
 
 const props = defineProps({
-    id: Number,
+    id: String,
     filter: String,
     page: String
 });

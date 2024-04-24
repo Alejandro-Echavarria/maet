@@ -24,10 +24,10 @@ class ServiceController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'title' => "required|max:45|string|unique:services,title,$request->title",
-            'icon' => 'required|max:25|string',
-            'description' => 'required|max:255|string',
-            'color' => 'required|max:255|string'
+            'name'        => "required|max:55|string|unique:services,name,$request->name",
+            'icon'        => 'nullable|string',
+            'description' => 'required|string',
+            'color'       => 'required|max:255|string'
         ]);
 
         $data['user_id'] = auth()->user()->id;
@@ -39,7 +39,7 @@ class ServiceController extends Controller
 
         return to_route('admin.services.index', [
             'search' => $search,
-            'page' => $page
+            'page'   => $page
         ]);
     }
 
@@ -47,10 +47,10 @@ class ServiceController extends Controller
     {
         $service->update(
             $request->validate([
-                'title' => "required|max:45|string|unique:services,title,$service->id",
-                'icon' => 'required|max:25|string',
-                'description' => 'required|max:255|string',
-                'color' => 'required|max:255|string'
+                'name'        => "required|max:55|string|unique:services,name,$service->id",
+                'icon'        => 'nullable|string',
+                'description' => 'required|string',
+                'color'       => 'required|max:255|string'
             ])
         );
 
@@ -59,7 +59,7 @@ class ServiceController extends Controller
 
         return to_route('admin.services.index', [
             'search' => $search,
-            'page' => $page
+            'page'   => $page
         ]);
     }
 
@@ -72,7 +72,7 @@ class ServiceController extends Controller
 
         return to_route('admin.services.index', [
             'search' => $search,
-            'page' => $page
+            'page'   => $page
         ]);
     }
 }

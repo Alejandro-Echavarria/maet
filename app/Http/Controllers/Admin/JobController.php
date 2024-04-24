@@ -38,7 +38,7 @@ class JobController extends Controller
                         ->from('clients')
                         ->leftJoin('images', function (JoinClause $join) {
                             $join->on('images.imageable_id', '=', 'clients.id')
-                                ->where('images.imageable_type', '=', 'App\Models\Client')
+                                ->where('images.imageable_type', '=', Client::class)
                                 ->where('images.default', '=', '1');
                         });
                 },
@@ -53,7 +53,12 @@ class JobController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(11);
 
-        $clients = Client::selectRaw("id, CONCAT(first_name, ' ', last_name) as name")->get();
+        $clients = Client::selectRaw("
+            clients.id,
+            CONCAT(clients.first_name, ' ', clients.last_name, ' - [', (CASE WHEN clients.status = 1 THEN 'Active' ELSE 'Inactive' END), ']') as name
+        ")
+            ->get();
+
         $categories = Category::all();
         $technologies = Technology::all();
 
@@ -66,7 +71,7 @@ class JobController extends Controller
         $data = $request->validate(
             [
                 'category_id'      => "required|exists:categories,id",
-                'client_id'        => "required|exists:clients,id",
+                'client_id'        => "required|exists:clients,id,status,1",
                 'title'            => "required|max:255|unique:jobs,title",
                 'slug'             => "required|unique:jobs",
                 'color'            => "required|max:255|string",
@@ -76,7 +81,7 @@ class JobController extends Controller
                 'preview'          => "required|string",
                 'body'             => "required|string",
                 'alt_banner_image' => "string|max:255|nullable",
-                'status'           => "required|boolean",
+                'is_published'           => "required|boolean",
             ],
             [
                 // Custom error messages
@@ -84,6 +89,8 @@ class JobController extends Controller
             [
                 // Custom attribute names
                 'file' => 'image',
+                'client_id'   => 'client',
+                'category_id' => 'category',
             ]
         );
 
@@ -108,7 +115,7 @@ class JobController extends Controller
         } catch (\Exception $e) {
             DB::rollback();
 
-            return to_route('admin.jobs.index')->with('flash', ['error' => $e->getMessage()]);
+            return to_route('admin.jobs.index')->withErrors(['create' => $e->getMessage()]);
         }
         DB::commit();
 
@@ -134,11 +141,25 @@ class JobController extends Controller
 
     public function update(Request $request, Job $job)
     {
+        $validClientStatus = Job::selectRaw(
+            "
+                jobs.client_id AS job_client_id,
+                clients.id AS client_id,
+                clients.status,
+                (
+                    CASE WHEN $request->client_id = clients.id THEN 1 ELSE 0 END
+                ) AS client_valid
+            "
+        )
+            ->join('clients', 'clients.id', '=', 'jobs.client_id')
+            ->where('jobs.id', $job->id)
+            ->first();
+
         $request['slug'] = Str::slug($request->title);
         $data = $request->validate(
             [
                 'category_id'      => "required|exists:categories,id",
-                'client_id'        => "required|exists:clients,id",
+                'client_id'        => "required|exists:clients,id" . ($validClientStatus->client_valid ? '' : ',status,1'),
                 'title'            => "required|max:255|unique:jobs,title,$job->id",
                 'slug'             => "required|unique:jobs,slug,$job->id",
                 'color'            => "required|max:255|string",
@@ -147,15 +168,18 @@ class JobController extends Controller
                 'link'             => "string|max:255|url:https",
                 'preview'          => "required|string",
                 'body'             => "required|string",
+                'price'            => "required|numeric|min:0",
                 'alt_banner_image' => "string|max:255|nullable",
-                'status'           => "required|boolean",
+                'is_published'     => "required|boolean",
             ],
             [
                 // Custom error messages
             ],
             [
                 // Custom attribute names
-                'file' => 'image',
+                'file'        => 'image',
+                'client_id'   => 'client',
+                'category_id' => 'category',
             ]
         );
 
@@ -180,7 +204,7 @@ class JobController extends Controller
         } catch (\Exception $e) {
             DB::rollback();
 
-            return to_route('admin.jobs.index')->with('flash', ['error' => $e->getMessage()]);
+            return to_route('admin.jobs.index')->withErrors(['update' => $e->getMessage()]);
         }
         DB::commit();
 

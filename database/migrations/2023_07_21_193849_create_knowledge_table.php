@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->string('name');
             $table->text('icon')->nullable();
-            $table->boolean('main')->default(false);
+            $table->boolean('is_main')->default(false);
             $table->timestamps();
         });
     }

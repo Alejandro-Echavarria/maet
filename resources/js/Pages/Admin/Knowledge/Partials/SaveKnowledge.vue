@@ -24,7 +24,7 @@ const knowledge = ref(null);
 const form = useForm({
     name: "",
     icon: "",
-    main: false,
+    is_main: false,
 });
 
 const save = () => {
@@ -51,7 +51,7 @@ const save = () => {
     }
 };
 
-const openModal = (op, id, name, icon, main) => {
+const openModal = (op, id, name, icon, is_main) => {
     modal.value = true;
     opration.value = op;
 
@@ -62,7 +62,7 @@ const openModal = (op, id, name, icon, main) => {
         knowledge.value = id;
         form.name = name;
         form.icon = icon;
-        form.main = main;
+        form.is_main = is_main;
     }
 };
 
@@ -109,15 +109,15 @@ defineExpose({ openModal });
                                 <div class="grow">
                                     <InputLabel for="icon" value="Icon" />
                                     <IconTextInput id="icon" ref="iconInput" v-model="form.icon" />
-    
+
                                     <InputError :message="form.errors.icon" class="mt-2" />
                                 </div>
 
                                 <div>
-                                    <InputLabel for="main" value="Main" />
-                                    <ToggleSwitch id="main" ref="mainInput" v-model="form.main" class="mt-2" />
-    
-                                    <InputError :message="form.errors.main" class="mt-2" />
+                                    <InputLabel for="is_main" value="Main" />
+                                    <ToggleSwitch id="is_main" ref="is_mainInput" v-model="form.is_main" class="mt-2" />
+
+                                    <InputError :message="form.errors.is_main" class="mt-2" />
                                 </div>
                             </div>
                         </div>

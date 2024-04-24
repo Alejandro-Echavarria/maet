@@ -29,6 +29,7 @@ Route::resource('services', ServiceController::class)->only(['index', 'store', '
 
 // Clients
 Route::resource('clients', ClientController::class)->only(['index', 'store', 'update', 'destroy'])->names('admin.clients');
+Route::get('client-jobs/{client}', [ClientController::class, 'clientJobs'])->name('admin.clients.clientjobs');
 
 // About Me
 Route::get('about-me', [AboutMeController::class, 'index'])->name('admin.aboutme.index');

@@ -12,6 +12,7 @@ import SimpleForm from "@/Components/Main/Admin/Components/Forms/SimpleForm.vue"
 import ColorPicker from "@/Components/Main/Admin/Components/Forms/Inputs/SelectsPicker/ColorsPicker/ColorPicker.vue";
 import VueSelect from "@/Components/Main/Admin/Components/Selects/VueSelect.vue";
 import Images from "@/Components/Main/Admin/Components/Forms/Inputs/Images/Images.vue";
+import CurrencyInput from "@/Components/Main/Admin/Components/Forms/Inputs/TextInput/CurrencyInput.vue";
 import ToggleSwitch from "@/Components/Main/Admin/Components/Forms/Inputs/ToggleSwitch/ToggleSwitch.vue";
 import Ckeditor from "@/Components/Main/Admin/Components/Forms/Inputs/ckeditor/Ckeditor.vue";
 import CKeditorHelper from "@/Helpers/CKeditor/Ckeditor";
@@ -39,6 +40,7 @@ const title = ref("");
 const modal = ref(false);
 const opration = ref(1);
 const job = ref(null);
+const closeOpenModal = ref(true);
 const categoriesOptions = ref(props.data.categories);
 const clientOptions = ref(props.data.clients);
 const technologyOptions = ref(props.data.technologies);
@@ -57,8 +59,9 @@ const form = useForm({
     technologies: [],
     preview: "",
     body: "",
+    price: "",
     alt_banner_image: "",
-    status: false,
+    is_published: false,
 });
 
 const save = () => {
@@ -71,11 +74,14 @@ const save = () => {
             preserveScroll: true,
             preserveState: true,
             onSuccess: () => {
-                modal.value = false;
+                closeOpenModal.value = true;
                 ok("Job created successfully");
             },
-            onError: () => {
-                console.log("error");
+            onError: (errors) => {
+                if (errors.create) {
+                    closeOpenModal.value = false;
+                    ok(errors.create, 'error', null, false, 'Error');
+                }
             },
         });
     } else {
@@ -88,23 +94,22 @@ const save = () => {
             preserveScroll: true,
             preserveState: true,
             onSuccess: () => {
-                if (usePage().props.jetstream.flash.error) {
-                    modal.value = true;
-                    ok(usePage().props.jetstream.flash.error, 'error', null, false, 'Error');
-                } else {
-                    modal.value = false;
-                    ok("Job updated successfully");
-                }
+                closeOpenModal.value = true;
+                ok("Job updated successfully");
             },
-            onError: () => {
-                console.log("error");
+            onError: (errors) => {
+                if (errors.update) {
+                    closeOpenModal.value = false;
+                    ok(errors.update, 'error', null, false, 'Error');
+                }
             },
         });
     }
 };
 
-const openModal = (op, id, category_id, client_id, titleData, slug, logo_url, color, file, project_name, link, technologies, preview, body, alt_banner_image, status) => {
+const openModal = (op, id, category_id, client_id, titleData, slug, logo_url, color, file, project_name, link, technologies, preview, body, price, alt_banner_image, is_published) => {
     modal.value = true;
+    closeOpenModal.value = true;
     opration.value = op;
 
     if (op === 1) {
@@ -121,8 +126,9 @@ const openModal = (op, id, category_id, client_id, titleData, slug, logo_url, co
         form.technologies = [];
         form.preview = "";
         form.body = "";
+        form.price = "";
         form.alt_banner_image = "";
-        form.status = false;
+        form.is_published = false;
         form.defaults();
     } else {
         title.value = "Edit job";
@@ -139,24 +145,23 @@ const openModal = (op, id, category_id, client_id, titleData, slug, logo_url, co
         form.technologies = technologies.map(tech => tech.id);
         form.preview = preview;
         form.body = body;
+        form.price = price;
         form.alt_banner_image = alt_banner_image;
-        form.status = status;
+        form.is_published = is_published;
         form.defaults();
     }
 };
 
 const closeModal = () => {
-    if (modal.value) {
-        if (form.isDirty) {
-            let answer = window.confirm('Do you really want to leave? you have unsaved changes!');
+    if (form.isDirty && !form.recentlySuccessful) {
+        let answer = window.confirm('Do you really want to leave? you have unsaved changes!');
 
-            if (answer) {
-                modal.value = false;
-                form.clearErrors();
-                form.reset();
-            } else {
-                return false;
-            }
+        if (answer) {
+            modal.value = false;
+            form.clearErrors();
+            form.reset();
+        } else {
+            return false;
         }
     }
 
@@ -183,7 +188,7 @@ const beforeWindowUnload = (e) => {
 }
 
 const ok = (msj, type, timer, toast, title) => {
-    closeModal();
+    closeOpenModal.value && closeModal();
     SaveAlert(msj, type, timer, toast, title);
 };
 
@@ -224,7 +229,6 @@ defineExpose({ openModal });
 
                             <div>
                                 <InputLabel for="color" value="Color" />
-
                                 <ColorPicker v-model="form.color" />
 
                                 <InputError :message="form.errors.color" class="mt-2" />
@@ -262,10 +266,17 @@ defineExpose({ openModal });
                                 </div>
 
                                 <div>
-                                    <InputLabel for="status" value="Publish" />
-                                    <ToggleSwitch id="status" ref="statusInput" v-model="form.status" class="mt-2" />
+                                    <InputLabel for="price" value="Price" />
+                                    <CurrencyInput id="price" ref="PriceInput" v-model="form.price" />
 
-                                    <InputError :message="form.errors.status" class="mt-2" />
+                                    <InputError :message="form.errors.price" class="mt-2" />
+                                </div>
+
+                                <div>
+                                    <InputLabel for="is_published" value="Publish" />
+                                    <ToggleSwitch id="is_published" ref="is_publishedInput" v-model="form.is_published" class="mt-2" />
+
+                                    <InputError :message="form.errors.is_published" class="mt-2" />
                                 </div>
                             </div>
 

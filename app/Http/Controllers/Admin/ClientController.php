@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Client;
+use App\Models\ClientType;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -24,6 +25,7 @@ class ClientController extends Controller
 
         $clients = Client::with(
             [
+                'clientType:id,name,slug,color',
                 'images' => function ($query) {
                     $query->select('id', 'url', 'default', 'imageable_id')
                         ->where('default', '=', '1')
@@ -35,21 +37,24 @@ class ClientController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
-        return Inertia::render('Admin/Clients/Index', compact('page', 'filter', 'clients'));
-    }
+        $clientTypes = ClientType::select('id', 'name')->get();
 
+        return Inertia::render('Admin/Clients/Index', compact('page', 'filter', 'clients', 'clientTypes'));
+    }
 
     public function store(Request $request)
     {
         $data = $request->validate(
             [
-                'first_name'  => "required|max:255|string",
-                'last_name'   => "required|max:255|string",
-                'email'       => "nullable|email|max:255",
-                'phone'       => "nullable|numeric",
-                'country'     => "nullable|max:255|string",
-                'description' => "nullable|string",
-                'file'        => "nullable|image",
+                'client_type_id' => 'required|exists:client_types,id',
+                'first_name'     => "required|max:255|string",
+                'last_name'      => "required|max:255|string",
+                'email'          => "nullable|email|max:255",
+                'phone'          => "nullable|numeric",
+                'country'        => "nullable|max:255|string",
+                'description'    => "nullable|string",
+                'status'         => "required|boolean",
+                'file'           => "nullable|image",
             ],
             [
                 // Custom error messages
@@ -57,6 +62,7 @@ class ClientController extends Controller
             [
                 // Custom attribute names
                 'file' => 'image',
+                'client_type_id' => 'client type',
             ]
         );
 
@@ -79,13 +85,15 @@ class ClientController extends Controller
     {
         $data = $request->validate(
             [
-                'first_name'  => "required|max:255|string",
-                'last_name'   => "required|max:255|string",
-                'email'       => "nullable|email|max:255",
-                'phone'       => "nullable|numeric",
-                'country'     => "nullable|max:255|string",
-                'description' => "nullable|string",
-                'file'        => $request->file('file') ? "nullable|image" : "nullable|string",
+                'client_type_id' => 'required|exists:client_types,id',
+                'first_name'     => "required|max:255|string",
+                'last_name'      => "required|max:255|string",
+                'email'          => "nullable|email|max:255",
+                'phone'          => "nullable|numeric",
+                'country'        => "nullable|max:255|string",
+                'description'    => "nullable|string",
+                'status'         => "required|boolean",
+                'file'           => $request->file('file') ? "nullable|image" : "nullable|string",
             ],
             [
                 // Custom error messages
@@ -93,6 +101,7 @@ class ClientController extends Controller
             [
                 // Custom attribute names
                 'file' => 'image',
+                'client_type_id' => 'client type',
             ]
         );
 
@@ -123,5 +132,10 @@ class ClientController extends Controller
             'search' => $search,
             'page' => $page
         ])->with('flash', 'Client updated');
+    }
+
+    public function clientJobs(Client $client)
+    {
+        return response()->json($client->jobs->select('id', 'client_id', 'slug', 'title', 'price'));
     }
 }
