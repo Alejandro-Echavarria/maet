@@ -32,8 +32,8 @@ const props = defineProps({
                 <div class="p-4 col-span-2 text-gray-800 font-semibold flex items-center grow">
                     {{ element.label }}
 
-                    <Link :href="element.route && route(element.route)" :title="'See more about ' + element.label">
-                    <div class="ml-2 text-indigo-700 hover:translate-x-2 transition-all duration-300">
+                    <Link v-if="element.route" :href="element.route && route(element.route)" :title="'See more about ' + element.label">
+                    <div class="ml-2 text-indigo-700 hover:scale-125 transition-all duration-150">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24">
                             <path fill="currentColor"
                                 d="m12 16l4-4l-4-4l-1.4 1.4l1.6 1.6H8v2h4.2l-1.6 1.6zm0 6q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22" />

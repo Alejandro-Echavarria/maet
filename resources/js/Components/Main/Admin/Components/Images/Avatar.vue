@@ -2,7 +2,7 @@
 const props = defineProps({
     name: String,
     image: {
-        type: Object
+        type: [Object, String],
     },
     color: {
         type: String,
