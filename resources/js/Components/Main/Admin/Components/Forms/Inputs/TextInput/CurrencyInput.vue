@@ -2,7 +2,7 @@
 import { onMounted, ref } from 'vue';
 
 defineProps({
-    modelValue: String,
+    modelValue: Number,
     inlineStyle: {
         type: Boolean,
         default: false
