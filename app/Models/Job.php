@@ -76,12 +76,6 @@ class Job extends Model
         return $carbon->format('d/m/Y h:i:s A');
     }
 
-    public function setCreatedAtAttribute($value)
-    {
-        $carbon = Carbon::parse($value)->timezone(config('app.timezone'));
-        return $carbon->format('d/m/Y h:i:s A');
-    }
-
     protected function price(): Attribute
     {
         return Attribute::make(
