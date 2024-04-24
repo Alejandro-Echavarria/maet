@@ -72,7 +72,7 @@ const close = () => {
             </div>
 
             <div class="overflow-hidden">
-                <div :class="fullScreen ? 'h-[calc(100vh-100px)]' : 'max-h-[65vh]'"
+                <div :class="fullScreen ? 'h-[calc(100dvh-100px)]' : 'max-h-[65vh]'"
                     class="py-4 px-4 sm:px-6 text-sm text-gray-600 overflow-y-auto">
                     <slot name="content" />
                 </div>
