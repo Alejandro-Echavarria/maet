@@ -41,7 +41,7 @@ class JobController extends Controller
             ->groupBy('categories.id')
             ->get();
 
-        $technologies = Technology::select('technologies.name', 'technologies.slug')
+        $technologies = Technology::select('technologies.name', 'technologies.slug', 'technologies.icon')
             ->join('job_technology', 'job_technology.technology_id', '=', 'technologies.id')
             ->join('jobs', 'jobs.id', '=', 'job_technology.job_id')
             ->where('jobs.is_published', '=', '1')

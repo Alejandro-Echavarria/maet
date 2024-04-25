@@ -60,7 +60,7 @@ const openModal = (op, id, category_id, client_id, titleData, slug, logo_url, co
         <Head title="Jobs" />
 
         <MainTitle>
-            Jobs
+            Jobs (projects)
         </MainTitle>
 
         <CreateContainer>
@@ -108,7 +108,7 @@ const openModal = (op, id, category_id, client_id, titleData, slug, logo_url, co
                         <SecondaryButton class="sm:w-auto w-full" :hidden="false"
                             @click="openModal(2, job.id, job.category_id, job.client_id, job.title, job.slug, job.logo_url, job.color, job?.images[0]?.url, job.project_name, job.link, job.technologies, job.preview, job.body, job.price, job.alt_banner_image, job.is_published)">
                             <font-awesome-icon class="mr-2" :icon="['far', 'pen-to-square']" />
-                            edit job
+                            edit
                         </SecondaryButton>
                     </div>
                 </template>

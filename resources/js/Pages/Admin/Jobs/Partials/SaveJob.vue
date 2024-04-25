@@ -200,7 +200,7 @@ defineExpose({ openModal });
         <div class="flex justify-end">
             <PrimaryButton class="sm:w-auto w-full" @click="openModal(1)">
                 <font-awesome-icon class="mr-2" :icon="['fas', 'plus']" />
-                Add job
+                Add
             </PrimaryButton>
         </div>
 

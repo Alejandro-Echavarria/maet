@@ -26,11 +26,11 @@ const props = defineProps({
         </Head>
 
         <div class="max-w-5xl mx-auto">
-            <div class="relative w-full h-[15rem] rounded-xl overflow-hidden">
-                <img class="absolute w-full h-[15rem] object-cover object-center" src="/img/projects/about-me-page.webp" alt="ilustration">
+            <div class="relative w-full h-[9.5rem] rounded-xl overflow-hidden animate-fade-in" style="animation-delay: 0.1s; animation-duration: 0.4s;">
+                <img class="absolute w-full h-full object-cover object-center" src="/img/projects/about-me-page.webp" alt="ilustration">
                 <div class="absolute flex w-full h-full items-center bg-gradient-to-l from-indigo-700/0 to-indigo-950">
                     <div class="text-center sm:text-left w-full px-4">
-                        <h1 :class="`text-5xl lg:text-7xl md:text-6xl font-bold text-gray-50`">
+                        <h1 :class="`text-5xl lg:text-7xl md:text-6xl font-bold text-gray-50 animate-fade-in-left`" style="animation-delay: 0.33s; animation-duration: 0.4s;">
                             About me
                         </h1>
                     </div>
@@ -38,23 +38,23 @@ const props = defineProps({
             </div>
 
             <div class="flex flex-col sm:flex-row mt-10 mb-20 sm:mb-10 w-full h-full sm:gap-10">
-                <div class="transform -translate-y-16 flex justify-center sm:-translate-y-16 sm:translate-x-4 shrink-0">
+                <div class="transform -translate-y-16 flex justify-center sm:-translate-y-16 sm:translate-x-4 shrink-0 animate-fade-in" style="animation-delay: 0.56s;">
                     <img src="/img/others/retrato.jpg" alt="personal photo"
                         class="w-32 h-32 shrink-0 rounded-full object-cover ring-2 ring-offset-2 ring-indigo-700 shadow-xl">
                 </div>
 
                 <div class="w-full grid grid-cols-1 sm:grid-cols-2 justify-between space-y-5">
                     <div class="text-center sm:text-left">
-                        <p class="text-xl font-semibold text-gray-800">
+                        <p class="text-xl font-semibold text-gray-800 animate-fade-in-up" style="animation-delay: 0.66s;">
                             {{ user.name }}
                         </p>
 
-                        <p class="text-gray-600 font-medium">
+                        <p class="text-gray-600 font-medium animate-fade-in-up" style="animation-delay: 0.76s;">
                             {{ user.position }}
                         </p>
-                        <p class="text-center sm:text-left text-indigo-700">
+                        <p class="flex justify-center sm:justify-start items-center gap-1 text-center sm:text-left text-indigo-700 animate-fade-in-up" style="animation-delay: 0.86s;">
                             <a :href="`mailto:${user.email}`">
-                                <span class="flex justify-center sm:justify-start items-center gap-1">
+                                <span class="">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail shrink-0"
                                         width="20" height="20" viewBox="0 0 24 24" stroke-width="2"
                                         stroke="currentColor" fill="none" stroke-linecap="round"
@@ -64,9 +64,9 @@ const props = defineProps({
                                             d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" />
                                         <path d="M3 7l9 6l9 -6" />
                                     </svg>
-                                    {{ user.email }}
                                 </span>
                             </a>
+                            {{ user.email }}
                         </p>
                     </div>
 
@@ -76,7 +76,7 @@ const props = defineProps({
                             <template v-if="user.user_social_media.length > 0">
                                 <div class="flex gap-4">
                                     <div v-for="( social_media, index ) in user.user_social_media"
-                                        :key="'social-media-' + index" class="py-2">
+                                        :key="'social-media-' + index" class="py-2 animate-fade-in-left" :style="{ animationDelay: `${index * 0.11}s`}">
                                         <div id="tech-container">
                                             <a :href="social_media.url" target="_blank" :title="social_media.social_media.name" :aria-label="social_media.social_media.name">
                                                 <span v-html="social_media.social_media.icon"></span>
@@ -86,7 +86,7 @@ const props = defineProps({
                                 </div>
                             </template>
     
-                            <div :class="[user.user_social_media.length > 0 && 'pl-4']">
+                            <div :class="[user.user_social_media.length > 0 && 'pl-4']" class="animate-fade-in-left" style="animation-delay: 0.50s;">
                                 <a :href="`mailto:${user.email}`">
                                     <SecondaryButton :hidden="false" title="Send me an email" aria-label="Send me an email">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-send"
@@ -102,8 +102,8 @@ const props = defineProps({
                             </div>
                         </div>
 
-                        <div class="flex justify-center sm:justify-end">
-                            <a href="/files/cv/cv.pdf" target="_blank" download>
+                        <div class="flex justify-center sm:justify-end animate-fade-in-left" style="animation-delay: 0.66s;">
+                            <a href="/files/cv/cv.pdf" target="_blank">
                                 <PrimaryButton>
                                     Dowmload my CV
                                 </PrimaryButton>
@@ -115,19 +115,19 @@ const props = defineProps({
 
             <div class="space-y-10 sm:space-y-20">
                 <div>
-                    <div class="content-ckeditor">
+                    <div class="content-ckeditor animate-fade-in" style="animation-delay: 0.96s;">
                         <p v-html="user.bio" />
                     </div>
                 </div>
 
                 <template v-if="user.knowledge.length > 0">
                     <div class="space-y-10 sm:space-y-20">
-                        <h2 class="text-5xl lg:text-7xl font-bold text-gray-800 dark:text-gray-200">
+                        <h2 class="text-5xl lg:text-7xl font-bold text-gray-800 dark:text-gray-200 animate-fade-in-up" style="animation-delay: 1.1s;">
                             Knowledge
                         </h2>
     
-                        <div class="overflow-x-auto">
-                            <div class="grid grid-rows-1 sm:grid-rows-4 sm:grid-flow-col gap-4">
+                        <div class="">
+                            <div class="grid grid-rows-1 sm:grid-rows-4 sm:grid-flow-col gap-4 animate-fade-in-up" style="animation-delay: 1.16s;">
                                 <div v-for="( record, index ) in user.knowledge" :key="'data-container-' + index">
                                     <div id="tech-container" class="flex gap-4">
                                         <div>
