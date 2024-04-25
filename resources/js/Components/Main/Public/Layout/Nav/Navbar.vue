@@ -59,10 +59,10 @@ const handleResize = () => {
 </script>
 
 <template>
-    <div class="fixed top-1 z-50 w-full flex justify-center mb-8 px-2 overflow-hidden">
-        <nav :class="['w-full z-50 mt-1 max-w-[90rem] 2xl:max-w-[100rem] backdrop-blur-md rounded-3xl border border-[#000000]/[0.16] transition-all duration-700', { 'animate-fade-in-down': props.animation }, { 'bg-white': isVisible }]"
+    <div class="fixed top-1 z-50 w-full flex justify-center mb-8 px-2">
+        <nav :class="['shadow-gray-500/10 shadow-md w-full z-50 mt-1 max-w-[90rem] 2xl:max-w-[100rem] backdrop-blur-md rounded-3xl border border-[#000000]/[0.16] transition-all duration-700', { 'animate-fade-in-down': props.animation }, { 'bg-white': isVisible }]"
             style="animation-delay: 1.1s;">
-            <div :class="['px-2 h-12 w-full']">
+            <div :class="[' px-2 h-12 w-full']">
                 <div :class="['w-full h-full flex items-center justify-between']">
                     <div class="flex items-center justify-start h-full">
                         <Link href="/" @click="isVisible && toggleVisibility()" class="flex md:mr-24 gap-2">

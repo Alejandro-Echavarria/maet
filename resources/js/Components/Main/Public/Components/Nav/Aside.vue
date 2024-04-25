@@ -83,7 +83,13 @@ defineExpose({ toggleSidebarVisibility });
                         :key="'category-' + data.id" :class="activeFilter(item.model, data.slug) && 'text-indigo-700'"
                         class="font-medium hover:text-indigo-700 cursor-pointer animate-fade-in"
                         :style="{ animationDelay: `${index * 0.05}s` }">
-                        {{ data.name }}
+
+                        <span class="flex gap-2 items-center max-[1490px]:justify-center">
+                            <span id="tech-container" v-if="data?.icon" class="justify-self-center">
+                                <i v-html="data.icon" :title="data.name" />
+                            </span>
+                            {{ data.name }}
+                        </span>
                     </li>
                     <li @click="clearFilter(item.model)"
                         class=" font-medium hover:text-indigo-700 cursor-pointer animate-fade-in">

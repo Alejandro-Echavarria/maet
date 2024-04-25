@@ -49,7 +49,7 @@ const openModal = () => {
         <main class="xs:px-0 mx-4">
             <div class="grid justify-center h-[10vh] mb-20 mt-2 gap-4 sm:gap-4m animate-fade-in-up"
                 style="animation-delay: 1.1s;">
-                <div>
+                <div class="flex justify-center">
                     <ContactModal ref="callOpenModal">
                         <template #button>
                             <PrimaryButton @click="openModal" class="sm:w-auto w-full">
@@ -59,8 +59,19 @@ const openModal = () => {
                     </ContactModal>
                 </div>
 
-                <div class="text-sm text-center">
-                    or take a look
+                <div class="text-xs text-center border border-[#000000]/[0.16] rounded-xl px-2 py-1 shadow-gray-500/20 shadow-sm">
+                    <span class="flex justify-center sm:justify-start items-center gap-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail shrink-0"
+                            width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                            fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" />
+                            <path d="M3 7l9 6l9 -6" />
+                        </svg>
+                        <span class="animate-pulse">
+                            {{ user.email }}
+                        </span>
+                    </span>
                 </div>
 
                 <div class="flex justify-center">
@@ -155,7 +166,7 @@ const openModal = () => {
                                 </h2>
                             </SectionTitle>
 
-                            <BetweenView :projects="jobs"/>
+                            <BetweenView :projects="jobs" />
                         </section>
 
                         <div
