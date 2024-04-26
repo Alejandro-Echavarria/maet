@@ -29,7 +29,7 @@ const props = defineProps({
                 <template v-if="stacks.length">
                     <Vue3Marquee :pause="stacks.length <= 3" :pause-on-hover="true">
                         <div id="tech-container" v-for="stack in stacks" :key="stack.id"
-                            :class="['text-sm font-semibold text-gray-700', stacks.length <= 3 && 'w-full justify-between']">
+                            :class="['text-sm font-semibold text-gray-800', stacks.length <= 3 && 'w-full justify-between']">
                             <div class="flex justify-center mx-1">
                                 <div class="overflow-hidden">
                                     <i v-html="stack.icon" :title="stack.name" />

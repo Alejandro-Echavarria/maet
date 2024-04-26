@@ -44,8 +44,8 @@ const { user } = defineProps({
                                     {{ user.position }}
                                 </h2>
 
-                                <div class="bg-gray-800 border border-[#000000]/[0.16] rounded-xl overflow-hidden shadow-gray-500/80 shadow-lg">
-                                    <div class="border-b bg-gray-900 border-[#000000]/[0.16]">
+                                <div class="bg-gray-800 border border-gray-600 rounded-xl overflow-hidden shadow-gray-500/50 shadow-lg">
+                                    <div class="border-b bg-gray-900 border-gray-600">
                                         <div class="flex h-6 items-center gap-5 px-3">
                                             <div class="flex items-center gap-1">
                                                 <div class="h-1.5 w-1.5 rounded-full bg-red-400"></div>
