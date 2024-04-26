@@ -78,9 +78,8 @@ const { user } = defineProps({
                                     </div>
 
                                     <div class="p-4 text-left">
-                                        <code class="text-sm md:text-lg font-medium text-gray-200">
-                                            &#60;Each line of code is an opportunity to craft unique experiences, not
-                                            just to achieve objectives, but also to leave a lasting impression /&#62;
+                                        <code class="text-sm md:text-md font-medium text-gray-200">
+                                            $ Passionate About Helping Others Succeed With Web Apps
                                         </code>
                                     </div>
                                 </div>
