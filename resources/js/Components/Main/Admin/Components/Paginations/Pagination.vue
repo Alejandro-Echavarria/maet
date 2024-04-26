@@ -52,21 +52,32 @@ const changePage = (url) => {
         class="flex flex-col md:flex-row items-start md:items-center justify-between space-y-3 md:space-y-0 p-4 border-t border-[#000000]/[0.16]">
         <div class="w-full sm:hidden">
             <div class="flex justify-between mb-4">
-                <a @click="changePage(pagination.prev_page_url)" :key="'mobile-link'"
+                <span v-if="pagination.prev_page_url === null"
+                    class="relative inline-flex items-center py-2 text-sm font-semibold text-gray-600 focus:z-20 cursor-not-allowed">
+                    Previous
+                </span>
+
+                <a v-else @click="changePage(pagination.prev_page_url)" :key="'mobile-link'"
                     :class="pagination.prev_page_url == null
-                    ? 'relative inline-flex items-center py-2 text-sm font-semibold text-gray-400 focus:z-20 cursor-not-allowed'
+                    ? 'relative inline-flex items-center py-2 text-sm font-semibold text-gray-600 focus:z-20 cursor-not-allowed'
                     : 'relative inline-flex items-center py-2 text-sm font-semibold text-gray-900 focus:z-20 cursor-pointer'">
                     Previous
                 </a>
-                <a @click="changePage(pagination.next_page_url)" :key="'mobile-link'"
+
+                <span v-if="pagination.next_page_url === null"
+                    class="relative inline-flex items-center py-2 text-sm font-semibold text-gray-600 focus:z-20 cursor-not-allowed">
+                    Next
+                </span>
+
+                <a v-else @click="changePage(pagination.next_page_url)" :key="'mobile-link'"
                     :class="pagination.next_page_url == null
-                    ? 'relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-400 focus:z-20 cursor-not-allowed'
+                    ? 'relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-600 focus:z-20 cursor-not-allowed'
                     : 'relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 focus:z-20 cursor-pointer'">
                     Next
                 </a>
             </div>
             <div class="flex justify-center">
-                <p class="text-sm text-gray-600">
+                <p class="text-sm text-gray-700">
                     Showing
                     <span class="font-small">{{ pagination.from }}</span>
                     to
@@ -93,7 +104,7 @@ const changePage = (url) => {
                 <nav class="isolate inline-flex -space-x-px rounded-md" aria-label="Pagination">
                     <template v-for="(link, index) in pagination.links">
                         <div v-if="link.url == null" :key="'botons-' + index"
-                            class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-400 focus:z-20 cursor-not-allowed"
+                            class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-600 focus:z-20 cursor-not-allowed"
                             v-html="link.label">
                         </div>
 

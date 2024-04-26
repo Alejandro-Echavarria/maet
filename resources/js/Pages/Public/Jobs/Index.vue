@@ -47,7 +47,7 @@ const toggleSidebarVisibility = () => {
                 </h1>
                 
                 <div class="bg-gray-100  rounded-full w-auto h-auto text-gray-800 min-[1490px]:hidden">
-                    <button @click="toggleSidebarVisibility" class="h-8 w-8 flex justify-center items-center">
+                    <button @click="toggleSidebarVisibility" class="h-8 w-8 flex justify-center items-center" title="Filter" label="Filter">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                             class="icon icon-tabler icons-tabler-outline icon-tabler-filter">
