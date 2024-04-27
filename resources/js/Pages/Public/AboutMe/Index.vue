@@ -62,24 +62,15 @@ const props = defineProps({
                     </div>
 
                     <div class="p-4 text-left">
-                        <code class="text-sm md:text-md font-medium text-gray-200">
-                            <h1 :class="`text-4xl lg:text-5xl md:text-6xl font-bold animate-fade-in-left`"
+                        <code class="flex text-gray-200 text-4xl lg:text-5xl md:text-6xl font-bold animate-fade-in-left">
+                            <span class="text-gray-300">$&nbsp;</span>
+                            <h1 :class="``"
                             style="animation-delay: 0.33s; animation-duration: 0.4s;">
-                                $ About me
+                                About me
                             </h1>
                         </code>
                     </div>
                 </div>
-
-                <!-- <img class="absolute w-full h-full object-cover object-center" src="/img/projects/about-me-page.webp" alt="ilustration"> -->
-                <!-- <div class="absolute flex w-full h-full items-center bg-gradient-to-l from-indigo-700/0 to-indigo-950">
-                    <div class="text-center sm:text-left w-full px-4">
-                        <h1 :class="`text-5xl lg:text-7xl md:text-6xl font-bold text-gray-50 animate-fade-in-left`"
-                            style="animation-delay: 0.33s; animation-duration: 0.4s;">
-                            About me
-                        </h1>
-                    </div>
-                </div> -->
             </div>
 
             <div class="flex flex-col sm:flex-row mt-10 mb-20 sm:mb-10 w-full h-full sm:gap-10">
