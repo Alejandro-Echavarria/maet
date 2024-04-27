@@ -30,7 +30,7 @@ const toggleSidebarVisibility = () => {
         enter-to="opacity-100" leave="transition-opacity duration-300" leave-from="opacity-100" leave-to="opacity-0">
         <Link v-if="!item.children.length" :href="route(item.href)" @click="toggleSidebarVisibility" :class="[
             'flex whitespace-nowrap items-center py-2 px-3 text-sm font-semibold text-gray-800 rounded-lg dark:text-gray-200 hover:bg-indigo-700/10 dark:hover:bg-indigo-700 group transition duration-200 ease-linear',
-            { 'bg-indigo-700/10': $page.url.startsWith(item.activeClass) },
+            { 'bg-indigo-700/10 text-indigo-700': $page.url.startsWith(item.activeClass) },
         ]">
         <span class="flex-1">
             <template v-if="item.icon">
