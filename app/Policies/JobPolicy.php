@@ -9,7 +9,7 @@ class JobPolicy
 {
     public function published(?User $user, Job $job)
     {
-        if ($job->status == true) {
+        if ($job->is_published == true) {
             return true;
         } else {
             return false;

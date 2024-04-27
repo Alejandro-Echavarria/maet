@@ -42,7 +42,6 @@ class ClientController extends Controller
         return Inertia::render('Admin/Clients/Index', compact('page', 'filter', 'clients', 'clientTypes'));
     }
 
-
     public function store(Request $request)
     {
         $data = $request->validate(
@@ -133,5 +132,10 @@ class ClientController extends Controller
             'search' => $search,
             'page' => $page
         ])->with('flash', 'Client updated');
+    }
+
+    public function clientJobs(Client $client)
+    {
+        return response()->json($client->jobs->select('id', 'client_id', 'slug', 'title', 'price'));
     }
 }

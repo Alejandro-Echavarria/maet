@@ -22,16 +22,10 @@ const props = defineProps({
 
         <MainTitle> Educations </MainTitle>
 
-        <SectionTabs :tabsOptions="tabs">
+        <SectionTabs>
             <template #tabeducation>
                 <Education :educations="educations" />
             </template>
-
-            <template #tabexperience>
-                <Experience :experiences="experiences" />
-            </template>
-
-            <template #tabjob> hola </template>
         </SectionTabs>
     </div>
 </template>

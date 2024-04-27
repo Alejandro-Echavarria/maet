@@ -28,11 +28,11 @@ class Job extends Model
         'price',
         'technologies',
         'alt_banner_image',
-        'status',
+        'is_published',
     ];
 
     protected $casts = [
-        'status' => 'boolean'
+        'is_published' => 'boolean'
     ];
 
     /*----------------------------------------------------------------------------*/
@@ -71,12 +71,6 @@ class Job extends Model
     /*----------------------------------------------------------------------------*/
 
     public function getCreatedAtAttribute($value)
-    {
-        $carbon = Carbon::parse($value)->timezone(config('app.timezone'));
-        return $carbon->format('d/m/Y h:i:s A');
-    }
-
-    public function setCreatedAtAttribute($value)
     {
         $carbon = Carbon::parse($value)->timezone(config('app.timezone'));
         return $carbon->format('d/m/Y h:i:s A');

@@ -25,11 +25,11 @@ class TechnologyController extends Controller
     {
         $request['slug'] = Str::slug($request->name);
         $data = $request->validate([
-            'name'  => "required|max:255|string|unique:technologies",
-            'slug'  => "required|unique:technologies",
-            'icon'  => 'required|string',
-            'main'  => "boolean",
-            'color' => "required|max:255|string",
+            'name'     => "required|max:255|string|unique:technologies",
+            'slug'     => "required|unique:technologies",
+            'icon'     => 'required|string',
+            'is_main'  => "boolean",
+            'color'    => "required|max:255|string",
         ]);
 
         Technology::create($data);
@@ -47,11 +47,11 @@ class TechnologyController extends Controller
     {
         $request['slug'] = Str::slug($request->name);
         $data = $request->validate([
-            'slug'  => "required|unique:technologies,slug,$technology->id",
-            'name'  => "required|max:255|string|unique:technologies,name,$technology->id",
-            'icon'  => 'required|string',
-            'main'  => "boolean",
-            'color' => "required|max:255|string",
+            'slug'     => "required|unique:technologies,slug,$technology->id",
+            'name'     => "required|max:255|string|unique:technologies,name,$technology->id",
+            'icon'     => 'required|string',
+            'is_main'  => "boolean",
+            'color'    => "required|max:255|string",
         ]);
 
         $technology->update($data);

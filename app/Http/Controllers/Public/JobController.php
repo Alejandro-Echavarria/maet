@@ -18,7 +18,7 @@ class JobController extends Controller
         $filter = $request?->category;
         $filterTechnology = $request?->technology;
 
-        $jobs = Job::select('id', 'category_id', 'title', 'slug', 'project_name', 'alt_banner_image', 'link', 'status', 'created_at', 'updated_at')->with(
+        $jobs = Job::select('id', 'category_id', 'title', 'slug', 'preview', 'project_name', 'alt_banner_image', 'link', 'is_published', 'created_at', 'updated_at')->with(
             [
                 'category:id,name',
                 'technologies:id,name,icon',
@@ -31,20 +31,20 @@ class JobController extends Controller
         )
             ->filter($filter, $model = 'category')
             ->filter($filterTechnology, $model = 'technology')
-            ->where('jobs.status', '=', '1')
+            ->where('jobs.is_published', '=', '1')
             ->orderBy('created_at', 'desc')
             ->paginate(4);
 
         $categories = Category::select('categories.name', 'categories.slug')
             ->join('jobs', 'jobs.category_id', '=', 'categories.id')
-            ->where('jobs.status', '=', '1')
+            ->where('jobs.is_published', '=', '1')
             ->groupBy('categories.id')
             ->get();
 
-        $technologies = Technology::select('technologies.name', 'technologies.slug')
+        $technologies = Technology::select('technologies.name', 'technologies.slug', 'technologies.icon')
             ->join('job_technology', 'job_technology.technology_id', '=', 'technologies.id')
             ->join('jobs', 'jobs.id', '=', 'job_technology.job_id')
-            ->where('jobs.status', '=', '1')
+            ->where('jobs.is_published', '=', '1')
             ->groupBy('technologies.id')
             ->get();
 
@@ -55,7 +55,7 @@ class JobController extends Controller
     {
         $this->authorize('published', $job);
 
-        $job = $job->select('id', 'category_id', 'title', 'slug', 'color', 'project_name', 'alt_banner_image', 'preview', 'body', 'link', 'status', 'created_at', 'updated_at')->with(
+        $job = $job->select('id', 'category_id', 'title', 'slug', 'color', 'project_name', 'alt_banner_image', 'preview', 'body', 'link', 'is_published', 'created_at', 'updated_at')->with(
             [
                 'category:id,name,slug',
                 'technologies:id,name,slug,icon',
@@ -68,7 +68,7 @@ class JobController extends Controller
             ]
         )
             ->where('id', $job->id)
-            ->where('status', '=', '1')
+            ->where('is_published', '=', '1')
             ->first();
 
         return Inertia::render('Public/Jobs/Show', compact('job'));

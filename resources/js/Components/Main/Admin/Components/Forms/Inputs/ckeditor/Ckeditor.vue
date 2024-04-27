@@ -11,7 +11,7 @@ const props = defineProps({
         default: '',
     },
     idData: {
-        type: Number,
+        type: [Number, String],
     },
     additionalPath: {
         type: String,

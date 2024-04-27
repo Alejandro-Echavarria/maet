@@ -29,6 +29,7 @@ const openModal = (op, id, name, icon, description, color) => {
 </script>
 
 <template>
+
     <Head title="Services" />
 
     <div>
@@ -54,22 +55,22 @@ const openModal = (op, id, name, icon, description, color) => {
             </template>
 
             <template #tbody>
-                    <tr v-for="tb in services.data"
-                        class="dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition ease-linear duration-300 animate-fade-in-down"
-                        :key="tb.id + 'tb'" :style="{ animationDelay: `${index * 0.05}s` }">
-                        <td class="px-4 py-3">{{ tb.name }}</td>
-                        <td class="px-4 py-3">{{ tb.icon }}</td>
-                        <td class="px-4 py-3">{{ tb.color }}</td>
-                        <td class="px-4 py-3">{{ tb.created_at }}</td>
-                        <td class="px-4 py-3">{{ tb.updated_at }}</td>
-                        <td class="px-4 py-3 flex items-center justify-end">
-                            <TableButton>
-                                <font-awesome-icon @click="openModal(2, tb.id, tb.name, tb.icon, tb.description, tb.color)"
-                                    class="w-4 h-4 text-indigo-500" :icon="['far', 'pen-to-square']" />
-                            </TableButton>
-                            <DeleteService :id="tb.id" :filter="filter" :page="page" :key="tb.id + 'deleteBtn'"/>
-                        </td>
-                    </tr>
+                <tr v-for="(tb, index) in services.data"
+                    class="dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition ease-linear duration-300 animate-fade-in-down"
+                    :key="tb.id + 'tb'" :style="{ animationDelay: `${index * 0.05}s` }">
+                    <td class="px-4 py-3">{{ tb.name }}</td>
+                    <td class="px-4 py-3">{{ tb.icon }}</td>
+                    <td class="px-4 py-3">{{ tb.color }}</td>
+                    <td class="px-4 py-3">{{ tb.created_at }}</td>
+                    <td class="px-4 py-3">{{ tb.updated_at }}</td>
+                    <td class="px-4 py-3 flex items-center justify-end">
+                        <TableButton>
+                            <font-awesome-icon @click="openModal(2, tb.id, tb.name, tb.icon, tb.description, tb.color)"
+                                class="w-4 h-4 text-indigo-500" :icon="['far', 'pen-to-square']" />
+                        </TableButton>
+                        <DeleteService :id="tb.id" :filter="filter" :page="page" :key="tb.id + 'deleteBtn'" />
+                    </td>
+                </tr>
             </template>
         </MainTable>
     </div>

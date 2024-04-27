@@ -16,14 +16,17 @@ class Technology extends Model
         'slug',
         'name',
         'icon',
-        'main',
+        'is_main',
         'color'
+    ];
+
+    protected $casts = [
+        'is_main' => 'boolean'
     ];
 
     // Relacion muchos a muchos inversa
     public function jobs()
     {
-
         return $this->belongsToMany(Job::class);
     }
 
@@ -50,9 +53,20 @@ class Technology extends Model
             $query->whereAny([
                 'slug',
                 'name',
-                'main',
                 'created_at'
-            ], 'LIKE', "%$search%");
+            ], 'LIKE', "%$search%")
+                ->orWhereRaw("
+                    is_main =
+                    (
+                        CASE WHEN LOWER('$search') = 'true' THEN
+                            1
+                        ELSE
+                            CASE WHEN LOWER('$search') = 'false' THEN
+                                0
+                            END
+                        END
+                    )
+                ");
         });
     }
 }

@@ -206,8 +206,8 @@ const ok = (msj, type, timer) => {
 
                             <div class="grid-cols-1 sm:col-span-3">
                                 <!-- <InputLabel for="description" value="Description" class="mb-3" /> -->
-                                <Ckeditor id="body" idname="body" key="body" v-model="form.description" :value="form.description"
-                                    ref="descriptionInput">
+                                <Ckeditor id="body" idname="body" key="body" v-model="form.description"
+                                    :value="form.description" ref="descriptionInput">
                                     <div id="ckeditorbody"></div>
                                 </Ckeditor>
 
@@ -229,4 +229,5 @@ const ok = (msj, type, timer) => {
                 </PrimaryButton>
             </template>
         </DialogModal>
-</div></template>
+    </div>
+</template>
