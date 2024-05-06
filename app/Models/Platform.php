@@ -6,21 +6,20 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserSocialMedia extends Model
+class Platform extends Model
 {
     use HasFactory;
 
-    protected $table = 'social_media_user';
-
     protected $fillable = [
-        'user_id',
-        'social_media_id',
+        'platform_type_id',
         'url',
+        'platformable_id',
+        'platformable_type',
     ];
 
-    public function socialMedia()
+    public function platformType()
     {
-        return $this->belongsTo(SocialMedia::class);
+        return $this->belongsTo(PlatformType::class);
     }
 
     public function user()

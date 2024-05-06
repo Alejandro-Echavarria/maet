@@ -4,8 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\TechnologyController;
 use App\Http\Controllers\Admin\JobController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\SocialMediaController;
-use App\Http\Controllers\Admin\UserSocialMediaController;
 use App\Http\Controllers\Admin\AboutMeController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ClientController;
@@ -14,6 +12,8 @@ use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\EducationController;
 use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\KnowleedgeController;
+use App\Http\Controllers\Admin\PlatformController;
+use App\Http\Controllers\Admin\PlatformTypeController;
 
 Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
@@ -21,8 +21,8 @@ Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dash
 Route::resource('jobs', JobController::class)->only(['index', 'store', 'update', 'destroy'])->names('admin.jobs');
 Route::post('ckeditor/images/job/store', [JobController::class, 'ckeditorMoveToStorage'])->name('admin.ckeditor.images.job.movetostorage');
 
-// Social medias for user
-Route::resource('user-social-medias', UserSocialMediaController::class)->only(['index', 'store', 'update', 'destroy'])->names('admin.usersocialmedias');
+// Platforms
+Route::resource('platforms', PlatformController::class)->only(['index', 'store', 'update', 'destroy'])->names('admin.platforms');
 
 // Services
 Route::resource('services', ServiceController::class)->only(['index', 'store', 'update', 'destroy'])->names('admin.services');
@@ -36,8 +36,8 @@ Route::get('about-me', [AboutMeController::class, 'index'])->name('admin.aboutme
 Route::put('about-me/{user}', [AboutMeController::class, 'update'])->name('admin.aboutme.update');
 Route::post('ckeditor/images/about-me/store', [AboutMeController::class, 'ckeditorMoveToStorage'])->name('admin.ckeditor.images.aboutme.movetostorage');
 
-// Social medias
-Route::resource('social-medias', SocialMediaController::class)->only(['index', 'store', 'update', 'destroy'])->names('admin.socialmedias');
+// Platform types
+Route::resource('platform-types', PlatformTypeController::class)->only(['index', 'store', 'update', 'destroy'])->names('admin.platformtypes');
 
 // Categories
 Route::resource('categories', CategoryController::class)->only(['index', 'store', 'update', 'destroy'])->names('admin.categories');

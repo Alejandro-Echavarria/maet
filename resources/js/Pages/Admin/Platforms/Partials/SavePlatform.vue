@@ -25,7 +25,7 @@ const opration = ref(1);
 const options = ref(props.socialMedias);
 
 const form = useForm({
-    social_media_id: '',
+    platform_type_id: '',
     url: '',
 });
 
@@ -35,7 +35,7 @@ const save = () => {
             ...data,
             search: props.filter,
             page: props.page
-        })).post(route('admin.usersocialmedias.store'), {
+        })).post(route('admin.platforms.store'), {
             preserveScroll: true,
             onSuccess: () => {
                 ok('User social media created successfully');
@@ -51,7 +51,7 @@ const save = () => {
             ...data,
             search: props.filter,
             page: props.page
-        })).put(route('admin.usersocialmedias.update', userSocialMedia.value), {
+        })).put(route('admin.platforms.update', userSocialMedia.value), {
             preserveScroll: true,
             onSuccess: () => {
                 ok('User social media updated successfully');
@@ -65,7 +65,7 @@ const save = () => {
     }
 };
 
-const openModal = (op, id, social_media_id, url) => {
+const openModal = (op, id, platform_type_id, url) => {
     modal.value = true;
     opration.value = op;
 
@@ -74,7 +74,7 @@ const openModal = (op, id, social_media_id, url) => {
     } else {
         title.value = 'Edit social media';
         userSocialMedia.value = id;
-        form.social_media_id = social_media_id;
+        form.platform_type_id = platform_type_id;
         form.url = url;
     }
 };
@@ -111,7 +111,7 @@ defineExpose({ openModal });
                         <div class="grid grid-cols-1 gap-6">
                             <div>
                                 <InputLabel for="social-media" value="Social media" />
-                                <VueSelect id="social_media_id" label="name" v-model="form.social_media_id" :append="true"
+                                <VueSelect id="social_media_id" label="name" v-model="form.platform_type_id" :append="true"
                                     :options="options" :reduce="options => options.id" :select-on-tab="true" />
                                 <InputError :message="form.errors.social_media_id" class="mt-2" />
                             </div>
