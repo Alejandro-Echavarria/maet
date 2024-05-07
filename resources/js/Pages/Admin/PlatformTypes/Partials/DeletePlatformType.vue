@@ -25,10 +25,10 @@ const destroy = (id) => {
                 ...data,
                 search: props.filter,
                 page: props.page
-            })).delete(route('admin.socialmedias.destroy', id), {
+            })).delete(route('admin.platformtypes.destroy', id), {
                 preserveScroll: true,
                 onSuccess: () => {
-                    ok('Social media deleted successfully');
+                    ok('Platform type deleted');
                 },
                 onError: () => {
                     console.log('error');

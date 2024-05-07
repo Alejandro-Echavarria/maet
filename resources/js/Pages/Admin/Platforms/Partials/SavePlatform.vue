@@ -70,7 +70,7 @@ const openModal = (op, id, platform_type_id, url) => {
     opration.value = op;
 
     if (op === 1) {
-        title.value = 'Create a new platform';
+        title.value = 'Create new platform';
     } else {
         title.value = 'Edit platform';
         platform.value = id;
@@ -97,7 +97,7 @@ defineExpose({ openModal });
     <div>
         <PrimaryButton class="w-full" @click="openModal(1)">
             <font-awesome-icon class="mr-2" :icon="['fas', 'plus']" />
-            Add a platform
+            Add platform
         </PrimaryButton>
 
         <DialogModal :show="modal" :maxWidth="'2xl'" @close="closeModal">

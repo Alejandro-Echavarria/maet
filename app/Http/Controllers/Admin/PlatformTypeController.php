@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\SocialMedia;
+use App\Models\PlatformType;
 use Inertia\Inertia;
 
 class PlatformTypeController extends Controller
@@ -14,59 +14,59 @@ class PlatformTypeController extends Controller
         $page = $request?->page;
         $filter = $request?->search;
 
-        // $socialMedias = SocialMedia::orderBy('created_at', 'desc')
-        //     ->filter($filter)
-        //     ->paginate(10);
+        $platformTypes = PlatformType::orderBy('created_at', 'desc')
+            ->filter($filter)
+            ->paginate(10);
 
-        return Inertia::render('Admin/SocialMedias/Index', compact('socialMedias', 'filter', 'page'));
+        return Inertia::render('Admin/PlatformTypes/Index', compact('platformTypes', 'filter', 'page'));
     }
 
-    // public function store(Request $request)
-    // {
-    //     SocialMedia::create(
-    //         $request->validate([
-    //             'name' => "required|max:255|string|unique:social_medias,name,$request->id",
-    //             'icon'  => 'required|string',
-    //         ])
-    //     );
+    public function store(Request $request)
+    {
+        PlatformType::create(
+            $request->validate([
+                'name' => "required|max:255|string|unique:platform_types,name,$request->id",
+                'icon' => 'required|string',
+            ])
+        );
 
-    //     $page = $request?->page;
-    //     $search = $request?->search;
+        $page = $request?->page;
+        $search = $request?->search;
 
-    //     return to_route('admin.socialmedias.index', [
-    //         'search' => $search,
-    //         'page' => $page
-    //     ]);
-    // }
+        return to_route('admin.platformtypes.index', [
+            'search' => $search,
+            'page' => $page
+        ])->with('flash', 'Platform type created');
+    }
 
-    // public function update(Request $request, SocialMedia $socialMedia)
-    // {
-    //     $socialMedia->update(
-    //         $request->validate([
-    //             'name' => "required|max:255|string|unique:social_medias,name,$socialMedia->id",
-    //             'icon'  => 'required|string',
-    //         ])
-    //     );
+    public function update(Request $request, PlatformType $platformType)
+    {
+        $platformType->update(
+            $request->validate([
+                'name' => "required|max:255|string|unique:platform_types,name,$platformType->id",
+                'icon' => 'required|string',
+            ])
+        );
 
-    //     $page = $request?->page;
-    //     $search = $request?->search;
+        $page = $request?->page;
+        $search = $request?->search;
 
-    //     return to_route('admin.socialmedias.index', [
-    //         'search' => $search,
-    //         'page' => $page
-    //     ])->with('flash', 'Social Media Updated');
-    // }
+        return to_route('admin.platformtypes.index', [
+            'search' => $search,
+            'page' => $page
+        ])->with('flash', 'Platform type updated');
+    }
 
-    // public function destroy(Request $request, SocialMedia $socialMedia)
-    // {
-    //     $socialMedia->delete();
+    public function destroy(Request $request, PlatformType $platformType)
+    {
+        $platformType->delete();
 
-    //     $page = $request?->page;
-    //     $search = $request?->search;
+        $page = $request?->page;
+        $search = $request?->search;
 
-    //     return to_route('admin.socialmedias.index', [
-    //         'search' => $search,
-    //         'page' => $page
-    //     ]);
-    // }
+        return to_route('admin.platformtypes.index', [
+            'search' => $search,
+            'page' => $page
+        ]);
+    }
 }
