@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AboutMeController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ClientController;
+use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\Admin\ExperienceController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\EducationController;
@@ -56,3 +57,6 @@ Route::resource('resume/knowledge', KnowleedgeController::class)->only(['index',
 
 // Show private images for clients
 Route::get('images/clients/{image}', [ImageController::class, 'show'])->name('admin.clients.showImage');
+
+// Company settings
+Route::resource('companies', CompanyController::class)->only(['index', 'store', 'update', 'destroy'])->names('admin.companies');

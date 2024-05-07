@@ -29,6 +29,7 @@ const navItems = [
             { href: 'admin.categories.index', active: route().current('admin.categories.index'), activeClass: '/admin/categories', label: 'Categories', children: [], icon: null },
             { href: 'admin.technologies.index', active: route().current('admin.technologies.index'), activeClass: '/admin/technologies', label: 'Technologies for jobs', children: [], icon: null },
             { href: 'admin.platformtypes.index', active: route().current('admin.platformtypes.index'), activeClass: '/admin/platform-types', label: 'Platform types', children: [], icon: null },
+            { href: 'admin.companies.index', active: route().current('admin.companies.index'), activeClass: '/admin/companies', label: 'Companies', children: [], icon: null }
         ], icon: ['fas', 'gear']
     },
 ];
