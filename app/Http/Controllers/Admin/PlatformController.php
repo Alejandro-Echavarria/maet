@@ -29,10 +29,11 @@ class PlatformController extends Controller
     public function store(Request $request)
     {
         $model = User::select('id')->first();
+        $model->platformable_type = User::class;
 
         $data = $request->validate(
             [
-                'platform_type_id' => "required|exists:platform_types,id|unique:platforms|unique:platforms,platformable_id,$model->id|unique:platforms,platformable_type,".Platform::class,
+                'platform_type_id' => "required|exists:platform_types,id|unique:platforms|unique:platforms,platformable_id,$model->id|unique:platforms,platformable_type," . $model->platformable_type,
                 'url'              => 'required|max:255|string|url:https',
             ],
             [
@@ -57,12 +58,21 @@ class PlatformController extends Controller
     public function update(Request $request, Platform $platform)
     {
         $model = User::select('id')->first();
+        $platform->platformable_type = User::class;
 
         $platform->update(
-            $request->validate([
-                'platform_type_id' => "required|exists:platform_types,id|unique:platforms,platform_type_id,$platform->id|unique:platforms,platformable_id,$model->id|unique:platforms,platformable_type,".Platform::class,
-                'url'              => 'required|max:255|string|url:https',
-            ])
+            $request->validate(
+                [
+                    'platform_type_id' => "required|exists:platform_types,id|unique:platforms,platform_type_id,$platform->id|unique:platforms,platformable_id,$model->id|unique:platforms,platformable_type,".$platform->platformable_type,
+                    'url'              => 'required|max:255|string|url:https',
+                ],
+                [
+                    '',
+                ],
+                [
+                    'platform_type_id' => 'platform',
+                ]
+            )
         );
 
         $page = $request?->page;

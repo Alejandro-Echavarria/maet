@@ -21,11 +21,10 @@ class AboutMeController extends Controller
                     'knowledge' => function ($query) {
                         $query->select('user_id', 'name', 'icon');
                     },
-                    'userSocialMedia' => function ($query) {
-                        $query->select('user_id', 'social_media_id', 'url')
-                            ->with('socialMedia:id,name,icon');
+                    'platforms' => function ($query) {
+                        $query->select('platforms.platform_type_id', 'platforms.url', 'platforms.platformable_id')
+                            ->with('platformType:id,name,icon');
                     },
-
                 ]
             )
             ->first();

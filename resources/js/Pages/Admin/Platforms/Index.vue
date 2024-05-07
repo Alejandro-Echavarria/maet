@@ -20,7 +20,7 @@ const props = defineProps({
     page: String
 });
 
-const thead = ['platform', 'url', 'created', 'updated'];
+const thead = ['platform', 'url', 'For', 'created', 'updated'];
 const url = 'admin.platforms.index';
 
 const callOpenModal = ref(null);
@@ -59,6 +59,7 @@ const openModal = (op, id, socialMediaId, url) => {
                     :key="tb.id + 'tb'">
                     <td id="tech-container" class="px-4 py-3 flex"><span v-html="tb.platform_type.icon"></span>&nbsp-&nbsp{{ tb.platform_type.name }}</td>
                     <td class="px-4 py-3">{{ tb.url }}</td>
+                    <td class="px-4 py-3">{{ tb.platformable_type }}</td>
                     <td class="px-4 py-3">{{ tb.created_at }}</td>
                     <td class="px-4 py-3">{{ tb.updated_at }}</td>
                     <td class="px-4 py-3 flex items-center justify-end">
