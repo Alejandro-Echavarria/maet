@@ -12,7 +12,7 @@ import SaveAlert from '@/Helpers/Alerts/SaveAlert';
 import SimpleForm from '@/Components/Main/Admin/Components/Forms/SimpleForm.vue';
 
 const props = defineProps({
-    socialMedias: Object,
+    platformTypes: Object,
     filter: String,
     page: String
 });
@@ -20,9 +20,9 @@ const props = defineProps({
 const urlInput = ref(null);
 const title = ref('');
 const modal = ref(false);
-const userSocialMedia = ref(null);
+const platform = ref(null);
 const opration = ref(1);
-const options = ref(props.socialMedias);
+const options = ref(props.platformTypes);
 
 const form = useForm({
     platform_type_id: '',
@@ -38,7 +38,7 @@ const save = () => {
         })).post(route('admin.platforms.store'), {
             preserveScroll: true,
             onSuccess: () => {
-                ok('User social media created successfully');
+                ok('Platform created');
             },
             onError: () => {
                 if (form.errors.url) {
@@ -51,10 +51,10 @@ const save = () => {
             ...data,
             search: props.filter,
             page: props.page
-        })).put(route('admin.platforms.update', userSocialMedia.value), {
+        })).put(route('admin.platforms.update', platform.value), {
             preserveScroll: true,
             onSuccess: () => {
-                ok('User social media updated successfully');
+                ok('Platform updated');
             },
             onError: () => {
                 if (form.errors.url) {
@@ -70,10 +70,10 @@ const openModal = (op, id, platform_type_id, url) => {
     opration.value = op;
 
     if (op === 1) {
-        title.value = 'Create a new social media';
+        title.value = 'Create a new platform';
     } else {
-        title.value = 'Edit social media';
-        userSocialMedia.value = id;
+        title.value = 'Edit platform';
+        platform.value = id;
         form.platform_type_id = platform_type_id;
         form.url = url;
     }
@@ -97,7 +97,7 @@ defineExpose({ openModal });
     <div>
         <PrimaryButton class="w-full" @click="openModal(1)">
             <font-awesome-icon class="mr-2" :icon="['fas', 'plus']" />
-            Add social media
+            Add a platform
         </PrimaryButton>
 
         <DialogModal :show="modal" :maxWidth="'2xl'" @close="closeModal">
@@ -110,10 +110,10 @@ defineExpose({ openModal });
                     <template #form>
                         <div class="grid grid-cols-1 gap-6">
                             <div>
-                                <InputLabel for="social-media" value="Social media" />
-                                <VueSelect id="social_media_id" label="name" v-model="form.platform_type_id" :append="true"
+                                <InputLabel for="platform" value="Platform" />
+                                <VueSelect id="platform_type_id" label="name" v-model="form.platform_type_id" :append="true"
                                     :options="options" :reduce="options => options.id" :select-on-tab="true" />
-                                <InputError :message="form.errors.social_media_id" class="mt-2" />
+                                <InputError :message="form.errors.platform_type_id" class="mt-2" />
                             </div>
             
                             <div>

@@ -31,11 +31,11 @@ const openModal = (op, id, socialMediaId, url) => {
 </script>
 
 <template>
-    <Head title="User social medias" />
+    <Head title="Platforms" />
 
     <div>
         <MainTitle>
-            User social medias
+            Platforms
         </MainTitle>
 
         <MainTable :pagination="platforms">
@@ -44,7 +44,7 @@ const openModal = (op, id, socialMediaId, url) => {
             </template>
 
             <template #createButton>
-                <SavePlatform ref="callOpenModal" :socialMedias="platformTypes" :filter="filter" :page="page" />
+                <SavePlatform ref="callOpenModal" :platformTypes="platformTypes" :filter="filter" :page="page" />
             </template>
 
             <template #thead>

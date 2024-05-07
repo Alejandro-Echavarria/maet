@@ -6,8 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Platform;
 use App\Models\PlatformType;
-use App\Models\SocialMedia;
-use App\Models\UserSocialMedia;
+use App\Models\User;
 use Inertia\Inertia;
 
 class PlatformController extends Controller
@@ -29,22 +28,22 @@ class PlatformController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'platform_type_id' => "required|exists:platform_types,id|unique:platforms,id,$request->id",
-            'url'              => 'required|max:255|string|url:https',
-        ]);
+        $model = User::select('id')->first();
 
-        // $data['user_id'] = auth()->user()->id;
-        $model = auth()->user();
-
-        // return response($model);
-        // $data['']
+        $data = $request->validate(
+            [
+                'platform_type_id' => "required|exists:platform_types,id|unique:platforms|unique:platforms,platformable_id,$model->id|unique:platforms,platformable_type,".Platform::class,
+                'url'              => 'required|max:255|string|url:https',
+            ],
+            [
+                '',
+            ],
+            [
+                'platform_type_id' => 'platform',
+            ]
+        );
 
         $model->platforms()->create($data);
-
-        // return response()->json($data);
-
-        // Platform::create($data);
 
         $page = $request?->page;
         $search = $request?->search;
@@ -55,34 +54,36 @@ class PlatformController extends Controller
         ])->with('flash', 'Platform created');
     }
 
-    // public function update(Request $request, UserSocialMedia $userSocialMedia)
-    // {
-    //     $userSocialMedia->update(
-    //         $request->validate([
-    //             'social_media_id' => "required|exists:social_medias,id|unique:social_media_user,social_media_id,$userSocialMedia->id",
-    //             'url' => 'required|max:255|string|url:https',
-    //         ])
-    //     );
+    public function update(Request $request, Platform $platform)
+    {
+        $model = User::select('id')->first();
 
-    //     $page = $request?->page;
-    //     $search = $request?->search;
+        $platform->update(
+            $request->validate([
+                'platform_type_id' => "required|exists:platform_types,id|unique:platforms,platform_type_id,$platform->id|unique:platforms,platformable_id,$model->id|unique:platforms,platformable_type,".Platform::class,
+                'url'              => 'required|max:255|string|url:https',
+            ])
+        );
 
-    //     return to_route('admin.usersocialmedias.index', [
-    //         'search' => $search,
-    //         'page' => $page
-    //     ])->with('flash', 'User social Media Updated');
-    // }
+        $page = $request?->page;
+        $search = $request?->search;
 
-    // public function destroy(Request $request, UserSocialMedia $userSocialMedia)
-    // {
-    //     $userSocialMedia->delete();
+        return to_route('admin.platforms.index', [
+            'search' => $search,
+            'page' => $page
+        ])->with('flash', 'Platform updated');
+    }
 
-    //     $page = $request?->page;
-    //     $search = $request?->search;
+    public function destroy(Request $request, Platform $platform)
+    {
+        $platform->delete();
 
-    //     return to_route('admin.usersocialmedias.index', [
-    //         'search' => $search,
-    //         'page' => $page
-    //     ]);
-    // }
+        $page = $request?->page;
+        $search = $request?->search;
+
+        return to_route('admin.platforms.index', [
+            'search' => $search,
+            'page' => $page
+        ]);
+    }
 }
