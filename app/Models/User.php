@@ -100,9 +100,9 @@ class User extends Authenticatable
         return $this->hasMany(Knowledge::class);
     }
 
-    public function userSocialMedia()
+    public function platforms()
     {
-        return $this->hasMany(UserSocialMedia::class);
+        return $this->morphMany(Platform::class, 'platformable');
     }
 
     public function images()

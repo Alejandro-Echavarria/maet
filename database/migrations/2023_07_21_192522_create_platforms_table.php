@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('services', function (Blueprint $table) {
+        Schema::create('platforms', function (Blueprint $table) {
 
             $table->id();
-            $table->string('name', 55);
-            $table->text('icon')->nullable();
-            $table->text('description');
-            $table->string('color');
+            $table->foreignId('platform_type_id')->constrained();
+            $table->string('url');
+            $table->unsignedBigInteger('platformable_id');
+            $table->string('platformable_type');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('services');
+        Schema::dropIfExists('platforms');
     }
 };

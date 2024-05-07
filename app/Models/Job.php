@@ -58,7 +58,7 @@ class Job extends Model
     // Relación muchos a muchos
     public function technologies()
     {
-        return $this->belongsToMany(Technology::class);
+        return $this->belongsToMany(Technology::class)->withTimestamps();
     }
 
     public function images()

@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('social_medias', function (Blueprint $table) {
-
-            $table->id();
-            $table->string('name');
-            $table->text('icon')->nullable();
-            $table->timestamps();
+        Schema::table('services', function (Blueprint $table) {
+            $table->after('description', function (Blueprint $table) {
+                $table->integer('price')->unsigned()->default(0);
+            });
         });
     }
 
@@ -25,6 +23,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('social_medias');
+        Schema::table('services', function (Blueprint $table) {
+            $table->dropColumn('price');
+        });
     }
 };
