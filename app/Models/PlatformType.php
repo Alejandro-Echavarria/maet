@@ -6,20 +6,18 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SocialMedia extends Model
+class PlatformType extends Model
 {
     use HasFactory;
-
-    protected $table = 'social_medias';
 
     protected $fillable = [
         'name',
         'icon'
     ];
 
-    public function socialMediaUsers()
+    public function platforms()
     {
-        return $this->hasMany(UserSocialMedia::class);
+        return $this->hasMany(Platform::class);
     }
 
     public function getCreatedAtAttribute($value)

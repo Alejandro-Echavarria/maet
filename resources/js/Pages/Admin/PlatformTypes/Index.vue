@@ -6,43 +6,43 @@ import MainTitle from '@/Components/Main/Admin/Components/Titles/MainTitle.vue';
 import MainTable from '@/Components/Main/Admin/Components/Tables/MainTable.vue';
 import TableButton from '@/Components/Main/Admin/Components/Buttons/TableButton.vue';
 import Search from '@/Components/Main/Admin/Components/Searchs/Search.vue';
-import SaveSocialMedia from '@/Pages/Admin/SocialMedias/Partials/SaveSocialMedia.vue';
-import DeleteSocialMedia from '@/Pages/Admin/SocialMedias/Partials/DeleteSocialMedia.vue';
+import SavePlatformTypes from '@/Pages/Admin/PlatformTypes/Partials/SavePlatformType.vue';
+import DeletePlatformTypes from '@/Pages/Admin/PlatformTypes/Partials/DeletePlatformType.vue';
 
 defineOptions({
     layout: MainLayout
 });
 
 const props = defineProps({
-    socialMedias: Object,
+    platformTypes: Object,
     filter: String,
     page: String
 });
 
 const thead = ['icon', 'name', 'created', 'updated'];
-const url = 'admin.socialmedias.index';
+const url = 'admin.platformtypes.index';
 
 const callOpenModal = ref(null);
 
-const openModal = (op, id, socialMediaId, url) => {
-    callOpenModal.value.openModal(op, id, socialMediaId, url);
+const openModal = (op, id, icon, name) => {
+    callOpenModal.value.openModal(op, id, icon, name);
 };
 </script>
 
 <template>
-    <Head title="Social medias" />
+    <Head title="Platform types" />
 
     <div>
         <MainTitle>
-            Social medias
+            Platform types
         </MainTitle>
 
-        <MainTable :pagination="socialMedias">
+        <MainTable :pagination="platformTypes">
             <template #search>
                 <Search :filter="filter" :url="url" />
             </template>
             <template #createButton>
-                <SaveSocialMedia ref="callOpenModal" :filter="filter" :page="page" />
+                <SavePlatformTypes ref="callOpenModal" :filter="filter" :page="page" />
             </template>
 
             <template #thead>
@@ -52,7 +52,7 @@ const openModal = (op, id, socialMediaId, url) => {
             </template>
 
             <template #tbody>
-                <tr v-for="tb in socialMedias.data"
+                <tr v-for="tb in platformTypes.data"
                     class="dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition ease-linear duration-300"
                     :key="tb.id + 'tb'">
                     <td id="tech-container" class="px-4 py-3"><span v-html="tb.icon"></span></td>
@@ -64,7 +64,7 @@ const openModal = (op, id, socialMediaId, url) => {
                             <font-awesome-icon @click="openModal(2, tb.id, tb.icon, tb.name)"
                                 class="w-4 h-4 text-indigo-500" :icon="['far', 'pen-to-square']" />
                         </TableButton>
-                        <DeleteSocialMedia :id="tb.id" :filter="filter" :page="page" :key="tb.id + 'deleteBtn'" />
+                        <DeletePlatformTypes :id="tb.id" :filter="filter" :page="page" :key="tb.id + 'deleteBtn'" />
                     </td>
                 </tr>
             </template>
