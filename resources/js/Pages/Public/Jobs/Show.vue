@@ -75,7 +75,7 @@ onMounted(() => {
                 </div>
             </div>
 
-            <div class="text-center content-ckeditor mb-4 animate-fade-in-up" style="animation-delay: 1.1s;">
+            <div class="content-ckeditor mb-4 animate-fade-in-up" style="animation-delay: 1.1s;">
                 <p v-html="job.preview" />
             </div>
 
