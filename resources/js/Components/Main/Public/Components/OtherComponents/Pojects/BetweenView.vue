@@ -22,12 +22,12 @@ const changeOrder = () => {
         <div :class="['w-full order-1', changeOrder() ? 'order-1' : 'md:order-2', 'space-y-4']">
             <div>
                 <Link :href="route('jobs.index', { 'category': project.category.slug })">
-                <span class="py-1 px-2 text-sm text-indigo-700 font-semibold bg-indigo-700/10 rounded-full">
+                <span class="text-sm py-1 px-2 text-indigo-700 border-2 border-indigo-700 font-medium rounded-full hover:bg-indigo-700/5 transition ease-in-out duration-300">
                     {{ project.category.name }}
                 </span>
                 </Link>
                 <Link :href="route('jobs.show', project.slug)" target="_blank" rel="noreferrer noopener nofollow">
-                <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-200 hover:text-indigo-700 mt-4">
+                <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-200 hover:text-indigo-700 transition ease-in-out duration-300 mt-4">
                     {{ project.title }}
                 </h2>
                 </Link>
