@@ -3,6 +3,7 @@ import { Link } from '@inertiajs/vue3';
 import WebMockup from '@/Components/Main/Public/Components/Mockups/Webs/WebMockup.vue';
 import Stacks from '@/Components/Main/Public/Containers/Stacks/Stacks.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
+import cleanString from "@/Helpers/HelperFunctions";
 
 const props = defineProps({
     projects: Object,
@@ -33,7 +34,9 @@ const changeOrder = () => {
                 </Link>
             </div>
 
-            <p class="text-gray-500 dark:text-gray-300 line-clamp-3" v-html="project.preview" />
+            <p class="text-gray-500 dark:text-gray-300 line-clamp-3">
+                {{ cleanString(project.preview) }}
+            </p>
 
             <div class="hidden md:block">
                 <Link :href="route('jobs.show', project.slug)" target="_blank" rel="noreferrer noopener nofollow"
