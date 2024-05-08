@@ -69,7 +69,7 @@ const handleResize = () => {
                         <ApplicationLogo />
                         <span
                             class="self-center text-xl font-bold sm:text-2xl whitespace-nowrap dark:text-gray-200 text-gray-800">
-                            MAET
+                            {{ $page.props.entity.name }}
                         </span>
                         </Link>
                     </div>

@@ -8,4 +8,24 @@ use Illuminate\Database\Eloquent\Model;
 class Company extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'company_type_id',
+        'slug',
+        'name',
+        'bio',
+        'tax_id_number',
+        'country',
+        'city',
+        'state',
+        'street',
+        'zip_code',
+        'email',
+        'phone',
+    ];
+
+    public function companyType()
+    {
+        return $this->belongsTo(CompanyType::class);
+    }
 }

@@ -87,7 +87,7 @@ const openModal = () => {
             </div>
             <div class="max-w-5xl mx-auto">
                 <div class="space-y-10 sm:space-y-20">
-                    <section id="about-me-brief" class="text-center">
+                    <section v-if="user.bio" id="about-me-brief" class="text-center">
                         <SectionTitle>
                             <h2 class="py-4 text-5xl lg:text-7xl font-bold text-gray-800 dark:text-gray-200">
                                 About me
