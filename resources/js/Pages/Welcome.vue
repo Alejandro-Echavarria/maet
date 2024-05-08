@@ -105,7 +105,7 @@ const openModal = () => {
                                 </div> -->
                                 <div>
                                     <Link :href="route('aboutme.index')">
-                                    <SecondaryButton>
+                                    <SecondaryButton :hidden="false">
                                         See more about me
                                     </SecondaryButton>
                                     </Link>
