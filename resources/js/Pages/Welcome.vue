@@ -106,7 +106,7 @@ const openModal = () => {
                                 <div>
                                     <Link :href="route('aboutme.index')">
                                     <SecondaryButton :hidden="false">
-                                        See more about me
+                                        See more
                                     </SecondaryButton>
                                     </Link>
                                 </div>
@@ -128,7 +128,7 @@ const openModal = () => {
                         <div class="flex justify-center">
                             <Link :href="route('jobs.index')">
                             <PrimaryButton>
-                                See all projects
+                                View all
                             </PrimaryButton>
                             </Link>
                         </div>

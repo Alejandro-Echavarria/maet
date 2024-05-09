@@ -13,7 +13,8 @@ defineOptions({
 });
 
 const props = defineProps({
-    companies: Object
+    companies: Object,
+    companyTypes: Object,
 });
 
 const thead = ['company type', 'name', 'tax id', 'email', 'phone'];
@@ -41,7 +42,7 @@ const openModal = (op, data) => {
             </template>
 
             <template #createButton>
-                <SaveCompany ref="callOpenModal" :filter="filter" :page="page" />
+                <SaveCompany ref="callOpenModal" :data="{ companyTypes }" :filter="filter" :page="page" />
             </template>
 
             <template #thead>
