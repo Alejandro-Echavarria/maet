@@ -28,19 +28,19 @@ class CompanyController extends Controller
                 'slug'            => 'required|unique:companies',
                 'name'            => 'required|max:255|string',
                 'bio'             => 'required|string',
-                'taxt_id_number'  => 'required|max:255|string',
-                'country'         => 'required|max:255|string',
-                'city'            => 'required|max:255|string',
-                'state'           => 'required|max:255|string',
-                'street'          => 'required|max:255|string',
-                'zip_code'        => 'required|max:50|string',
+                'taxt_id_number'  => 'nullable|max:255|string',
+                'country'         => 'nullable|max:255|string',
+                'city'            => 'nullable|max:255|string',
+                'state'           => 'nullable|max:255|string',
+                'street'          => 'nullable|max:255|string',
+                'zip_code'        => 'nullable|max:50|string',
                 'email'           => 'required|email|max:255',
-                'phone'           => 'required|max:15',
+                'phone'           => 'nullable|max:15',
             ],
             [],
             [
                 'company_type_id' => 'company type',
-                'taxt_id_number'   => 'tax id number',
+                'taxt_id_number'  => 'tax id number',
                 'zip_code'        => 'zip code',
             ]
         );
@@ -53,6 +53,60 @@ class CompanyController extends Controller
         return to_route('admin.companies.index', [
             'search' => $search,
             'page' => $page
-        ])->with('flash', 'Company Created');
+        ])->with('flash', 'Company created');
+    }
+
+    public function update(Company $company, Request $request)
+    {
+        $request['slug'] = Str::slug($request->name);
+        $data = $request->validate(
+            [
+                'company_type_id' => 'required|exists:company_types,id',
+                'slug'            => "required|unique:companies,slug,$company->id",
+                'name'            => "required|max:255|unique:companies,name,$company->id",
+                'bio'             => 'required|string',
+                'taxt_id_number'  => 'nullable|max:255|string',
+                'country'         => 'nullable|max:255|string',
+                'city'            => 'nullable|max:255|string',
+                'state'           => 'nullable|max:255|string',
+                'street'          => 'nullable|max:255|string',
+                'zip_code'        => 'nullable|max:50|string',
+                'email'           => 'required|email|max:255',
+                'phone'           => 'nullable|max:15',
+            ],
+            [],
+            [
+                'company_type_id' => 'company type',
+                'taxt_id_number'  => 'tax id number',
+                'zip_code'        => 'zip code',
+            ]
+        );
+
+        $company->update($data);
+
+        $page = $request?->page;
+        $search = $request?->search;
+
+        return to_route('admin.companies.index', [
+            'search' => $search,
+            'page' => $page
+        ])->with('flash', 'Company updated');
+    }
+
+    public function destroy(Request $request, Company $company)
+    {
+        if ($company->id === 1) {
+            return to_route('admin.companies.index')->withErrors(['delete' => 'The default company cannot be deleted.']);
+        }
+
+        $company->delete();
+
+        $page = $request?->page;
+        $search = $request?->search;
+
+        return to_route('admin.jobs.index', [
+            'search' => $search,
+            'page' => $page
+        ])->with('flash', 'Job Deleted');
     }
 }

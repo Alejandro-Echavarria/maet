@@ -24,6 +24,15 @@ class Company extends Model
         'phone',
     ];
 
+    /*----------------------------------------------------------------------------*/
+    // Relations
+    /*----------------------------------------------------------------------------*/
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     public function companyType()
     {
         return $this->belongsTo(CompanyType::class);
