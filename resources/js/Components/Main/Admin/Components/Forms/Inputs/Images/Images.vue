@@ -37,14 +37,14 @@ const cambiarImagen = (event) => {
 const typeImageClass = computed(() => {
     return {
         'banners': 'h-96 rounded-lg w-full',
-        'clients': 'h-full w-full rounded-full',
+        'clients': 'h-16 w-16 rounded-full',
     }[props.typeImage];
 });
 </script>
 
 <template>
-    <div>
-        <div class="flex items-center justify-center w-full">
+    <div class="h-full">
+        <div class="h-full flex items-center justify-center w-full">
             <label for="file"
                 :class="[typeImageClass]"
                 class="overflow-hidden flex items-center justify-center border-2 border-gray-300 border-dashed cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">

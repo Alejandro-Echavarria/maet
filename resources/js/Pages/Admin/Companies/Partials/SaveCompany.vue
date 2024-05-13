@@ -5,6 +5,7 @@ import DialogModal from '@/Components/DialogModal.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
+import Images from "@/Components/Main/Admin/Components/Forms/Inputs/Images/Images.vue";
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import SaveAlert from '@/Helpers/Alerts/SaveAlert';
@@ -135,7 +136,19 @@ defineExpose({ openModal });
                 <SimpleForm :actions="true" @submitted="save">
                     <template #form>
                         <div class="grid grid-cols-1 md:grid-cols-9 gap-6">
+                            <div class="md:col-span-9">
+                                <Images v-model="form.file" :file="form.file" />
+
+                                <InputError :message="form.errors.file" class="mt-2" />
+                            </div>
+
                             <div class="md:col-span-3">
+                                <Images v-model="form.file" :file="form.file" typeImage="clients" />
+
+                                <InputError :message="form.errors.file" class="mt-2" />
+                            </div>
+
+                            <div class="md:col-span-6">
                                 <InputLabel for="name" value="Name" />
                                 <TextInput v-model="form.name" id="name" ref="nameInput" type="text" />
 
@@ -164,7 +177,7 @@ defineExpose({ openModal });
                                 <InputError :message="form.errors.taxt_id_number" class="mt-2" />
                             </div>
 
-                            <div class="sm:col-span-3">
+                            <div class="md:col-span-3">
                                 <InputLabel for="company_type_id" value="Company type" />
                                 <VueSelect id="company_type_id" label="name" v-model="form.company_type_id" :append="true"
                                     :options="companyTypesOptions" :reduce="companyTypesOptions => companyTypesOptions.id"
@@ -181,21 +194,21 @@ defineExpose({ openModal });
                                 <InputError :message="form.errors.zip_code" class="mt-2" />
                             </div>
 
-                            <div class="md:col-span-2">
+                            <div class="md:col-span-3">
                                 <InputLabel for="country" value="Country" />
                                 <TextInput v-model="form.country" id="country" ref="countryInput" type="text" />
 
                                 <InputError :message="form.errors.country" class="mt-2" />
                             </div>
 
-                            <div class="md:col-span-2">
+                            <div class="md:col-span-3">
                                 <InputLabel for="city" value="City" />
                                 <TextInput v-model="form.city" id="city" ref="cityInput" type="text" />
 
                                 <InputError :message="form.errors.city" class="mt-2" />
                             </div>
 
-                            <div class="md:col-span-2">
+                            <div class="md:col-span-3">
                                 <InputLabel for="state" value="State" />
                                 <TextInput v-model="form.state" id="state" ref="stateInput" type="text" />
 
@@ -209,7 +222,7 @@ defineExpose({ openModal });
                                 <InputError :message="form.errors.street" class="mt-2" />
                             </div>
 
-                            <div class="sm:col-span-9">
+                            <div class="md:col-span-9">
                                 <InputLabel for="body" value="Body" class="mb-2" />
                                 <Ckeditor id="body" idname="body" v-model="form.bio" :idData="company"
                                     :additionalPath="'/company'" :urlName="urlCkeditorStoreImage" :value="form.bio"
