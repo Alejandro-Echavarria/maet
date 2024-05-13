@@ -7,14 +7,17 @@ import Search from '@/Components/Main/Admin/Components/Searchs/Search.vue';
 import MainTable from '@/Components/Main/Admin/Components/Tables/MainTable.vue';
 import TableButton from '@/Components/Main/Admin/Components/Buttons/TableButton.vue';
 import SaveCompany from '@/Pages/Admin/Companies/Partials/SaveCompany.vue';
+import DeleteCompany from '@/Pages/Admin/Companies/Partials/DeleteCompany.vue';
 
 defineOptions({
-    layout: MainLayout
+    layout: MainLayout,
 });
 
 const props = defineProps({
     companies: Object,
     companyTypes: Object,
+    filter: String,
+    page: String,
 });
 
 const thead = ['company type', 'name', 'tax id', 'email', 'phone'];
@@ -65,7 +68,7 @@ const openModal = (op, data) => {
                             <font-awesome-icon @click="openModal(2, tb)" class="w-4 h-4 text-indigo-500"
                                 :icon="['far', 'pen-to-square']" />
                         </TableButton>
-                        <!-- <DeleteCategory :id="tb.slug" :filter="filter" :page="page" :key="tb.id + 'deleteBtn'" /> -->
+                        <DeleteCompany :id="tb.slug" :filter="filter" :page="page" :key="tb.id + 'deleteBtn'" />
                     </td>
                 </tr>
             </template>

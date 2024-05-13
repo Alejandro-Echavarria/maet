@@ -95,7 +95,7 @@ class CompanyController extends Controller
 
     public function destroy(Request $request, Company $company)
     {
-        if ($company->id === 1) {
+        if (Company::select('id')->where('id', $company->id)->first()->id === 1) {
             return to_route('admin.companies.index')->withErrors(['delete' => 'The default company cannot be deleted.']);
         }
 
@@ -104,7 +104,7 @@ class CompanyController extends Controller
         $page = $request?->page;
         $search = $request?->search;
 
-        return to_route('admin.jobs.index', [
+        return to_route('admin.companies.index', [
             'search' => $search,
             'page' => $page
         ])->with('flash', 'Job Deleted');
