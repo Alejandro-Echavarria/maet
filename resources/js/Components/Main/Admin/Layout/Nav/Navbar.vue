@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onBeforeUnmount, onMounted } from 'vue';
+import { ref, watch, computed, onBeforeUnmount, onMounted } from 'vue';
 import { router, Link, usePage } from "@inertiajs/vue3";
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import NavItem from '@/Components/Main/Admin/Layout/Nav/NavItem.vue';
@@ -8,14 +8,19 @@ import DropdownLink from '@/Components/DropdownLink.vue';
 
 const isSidebarVisible = ref(true);
 const isBackDropVisible = ref(false);
-const entity = ref(usePage().props.entity);
+const { props } = usePage();
+const entity = ref(props.entity);
 
-const navItems = [
+watch(() => usePage().props.entity, (newEntity) => {
+    entity.value = newEntity;
+})
+
+const navItems = computed(() => [
     { href: 'admin.dashboard', active: route().current('admin.dashboard'), activeClass: '/admin/dashboard', label: 'Dashboard', children: [], icon: ['fas', 'chart-line'], visible: true },
     { href: 'admin.jobs.index', active: route().current('admin.jobs.index'), activeClass: '/admin/jobs', label: 'Jobs (projects)', children: [], icon: ['fas', 'file-arrow-down'], visible: true },
     { href: 'admin.services.index', active: route().current('admin.services.index'), activeClass: '/admin/services', label: 'Services', children: [], icon: ['fas', 'store'], visible: true },
     { href: 'admin.clients.index', active: route().current('admin.clients.index'), activeClass: '/admin/clients', label: 'Clients', children: [], icon: ['fas', 'users'], visible: true },
-    { href: 'admin.platforms.index', active: route().current('admin.platforms.index'), activeClass: '/admin/platforms', label: 'Platforms', children: [], icon: ['fas', 'share-nodes'], visible: entity.value.company_type_id == 2 && true },
+    { href: 'admin.platforms.index', active: route().current('admin.platforms.index'), activeClass: '/admin/platforms', label: 'Platforms', children: [], icon: ['fas', 'share-nodes'], visible: entity.value.company_type_id === 2 && true },
     {
         href: '#', label: 'Personal info',
         active: route().current('admin.resume.*'),
@@ -23,7 +28,7 @@ const navItems = [
             { href: 'admin.aboutme.index', active: route().current('admin.aboutme.index'), activeClass: '/admin/about-me', label: 'About me', children: [], icon: null, visible: true },
             { href: 'admin.platforms.index', active: route().current('admin.platforms.index'), activeClass: '/admin/platforms', label: 'Platforms', children: [], icon: null, visible: true },
             { href: 'admin.resume.educations.index', active: route().current('admin.resume.*'), activeClass: '/admin/resume', label: 'Personal info', children: [], icon: null, visible: true },
-        ], icon: ['far', 'file'], visible: entity.value.company_type_id == 1 && true
+        ], icon: ['far', 'file'], visible: entity.value.company_type_id === 1 && true
     },
     {
         href: '#', label: 'Configuration', active: route().current('admin.platformtypes.*'),
@@ -34,7 +39,7 @@ const navItems = [
             { href: 'admin.companies.index', active: route().current('admin.companies.index'), activeClass: '/admin/companies', label: 'Companies', children: [], icon: null, visible: true }
         ], icon: ['fas', 'gear'], visible: true
     },
-];
+]);
 
 onMounted(() => {
     window.addEventListener('resize', handleResize);

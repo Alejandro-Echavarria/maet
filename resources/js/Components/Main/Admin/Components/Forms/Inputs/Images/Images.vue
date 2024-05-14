@@ -3,6 +3,7 @@ import { ref, computed } from 'vue';
 
 const props = defineProps({
     modelValue: String,
+    id: String,
     file: String,
     typeImage: {
         type: String,
@@ -15,15 +16,13 @@ const props = defineProps({
 });
 
 const emit = defineEmits('update:modelValue');
-const fileName = ref('');
 
 const cambiarImagen = (event) => {
     const file = event.target.files[0];
     const reader = new FileReader();
 
     reader.onload = (event) => {
-        document.getElementById('img-post').setAttribute('src', event.target.result);
-        fileName.value = file.name;
+        document.getElementById(`img-post-${ props.id }`).setAttribute('src', event.target.result);
     };
 
     reader.onerror = (error) => {
@@ -45,7 +44,7 @@ const typeImageClass = computed(() => {
 <template>
     <div class="h-full">
         <div class="h-full flex items-center justify-center w-full">
-            <label for="file"
+            <label
                 :class="[typeImageClass]"
                 class="overflow-hidden flex items-center justify-center border-2 border-gray-300 border-dashed cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                 <template v-if="file === null || !file">
@@ -63,9 +62,9 @@ const typeImageClass = computed(() => {
                 <template v-else>
                     <img
                         :class="[typeImageClass]"
-                        class="overflow-auto object-cover" id="img-post" :src="`/${access}/${file}`" alt="">
+                        class="overflow-auto object-cover" :id="`img-post-${id}`" :src="`/${access}/${file}`">
                 </template>
-                <input id="file" type="file" @change="cambiarImagen" accept="image/*" class="hidden" />
+                <input type="file" @change="cambiarImagen" accept="image/*" class="hidden" />
             </label>
         </div>
     </div>

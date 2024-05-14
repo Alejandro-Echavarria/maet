@@ -44,6 +44,8 @@ const form = useForm({
     zip_code: '',
     email: '',
     phone: '',
+    banner_file: null,
+    logo_file: null,
 });
 
 const save = () => {
@@ -137,23 +139,27 @@ defineExpose({ openModal });
                     <template #form>
                         <div class="grid grid-cols-1 md:grid-cols-9 gap-6">
                             <div class="md:col-span-9">
-                                <Images v-model="form.file" :file="form.file" />
+                                <InputLabel for="banner_file" value="Banner" />
+                                <Images id="banner_file" v-model="form.banner_file" :file="form.banner_file" />
 
-                                <InputError :message="form.errors.file" class="mt-2" />
+                                <InputError :message="form.errors.banner_file" class="mt-2" />
                             </div>
 
-                            <div class="md:col-span-3">
-                                <Images v-model="form.file" :file="form.file" typeImage="clients" />
+                            <div class="flex flex-col md:flex-row items-center md:col-span-6 gap-6">
+                                <div class="flex flex-col md:flex-row items-center gap-2">
+                                    <InputLabel for="logo_file" value="Logo" />
 
-                                <InputError :message="form.errors.file" class="mt-2" />
-                            </div>
+                                    <Images id="logo_file" v-model="form.logo_file" :file="form.logo_file" typeImage="clients" />
+                                    <InputError :message="form.errors.logo_file" class="mt-2" />
+                                </div>
 
-                            <div class="md:col-span-6">
-                                <InputLabel for="name" value="Name" />
-                                <TextInput v-model="form.name" id="name" ref="nameInput" type="text" />
-
-                                <InputError :message="form.errors.name" class="mt-2" />
-                                <InputError :message="form.errors.slug" class="mt-2" />
+                                <div class="grow w-full">
+                                    <InputLabel for="name" value="Name" />
+                                    <TextInput v-model="form.name" id="name" ref="nameInput" type="text" />
+    
+                                    <InputError :message="form.errors.name" class="mt-2" />
+                                    <InputError :message="form.errors.slug" class="mt-2" />
+                                </div>
                             </div>
 
                             <div class="md:col-span-3">
@@ -215,7 +221,7 @@ defineExpose({ openModal });
                                 <InputError :message="form.errors.state" class="mt-2" />
                             </div>
 
-                            <div class="md:col-span-3">
+                            <div class="md:col-span-6">
                                 <InputLabel for="street" value="Street" />
                                 <TextInput v-model="form.street" id="street" ref="streetInput" type="text" />
 

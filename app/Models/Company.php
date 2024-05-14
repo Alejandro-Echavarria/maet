@@ -37,4 +37,9 @@ class Company extends Model
     {
         return $this->belongsTo(CompanyType::class);
     }
+
+    public function platforms()
+    {
+        return $this->morphMany(Platform::class, 'platformable');
+    }
 }
