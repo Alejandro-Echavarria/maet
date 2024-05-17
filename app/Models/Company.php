@@ -42,4 +42,9 @@ class Company extends Model
     {
         return $this->morphMany(Platform::class, 'platformable');
     }
+
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'imageable');
+    }
 }

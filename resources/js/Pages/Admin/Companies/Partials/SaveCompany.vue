@@ -27,6 +27,7 @@ onMounted(() => {
 const nameInput = ref(null);
 const title = ref('');
 const modal = ref(false);
+const closeOpenModal = ref(true);
 const opration = ref(1);
 const company = ref(null);
 const companyTypesOptions = ref(props.data.companyTypes);
@@ -60,23 +61,30 @@ const save = () => {
             onSuccess: () => {
                 ok("Company created");
             },
-            onError: () => {
-                console.log("error");
+            onError: (errors) => {
+                if (errors.create) {
+                    closeOpenModal.value = false;
+                    ok(errors.create, 'error', null, false, 'Error');
+                }
             }
         });
     } else {
         form.transform((data) => ({
             ...data,
+            method: 'put',
             search: props.filter,
             page: props.page,
-        })).put(route("admin.companies.update", company.value), {
+        })).post(route("admin.companies.update", company.value), {
             preserveScroll: true,
             preserveState: true,
             onSuccess: () => {
                 ok("Company updated");
             },
-            onError: () => {
-                console.log("error");
+            onError: (errors) => {
+                if (errors.update) {
+                    closeOpenModal.value = false;
+                    ok(errors.update, 'error', null, false, 'Error');
+                }
             }
         });
     }
@@ -114,9 +122,9 @@ const closeModal = () => {
     form.reset();
 };
 
-const ok = (msj, type, timer) => {
-    closeModal();
-    SaveAlert(msj, type, timer);
+const ok = (msj, type, timer, toast, title) => {
+    closeOpenModal.value && closeModal();
+    SaveAlert(msj, type, timer, toast, title);
 };
 
 defineExpose({ openModal });
@@ -149,14 +157,15 @@ defineExpose({ openModal });
                                 <div class="flex flex-col md:flex-row items-center gap-2">
                                     <InputLabel for="logo_file" value="Logo" />
 
-                                    <Images id="logo_file" v-model="form.logo_file" :file="form.logo_file" typeImage="clients" />
+                                    <Images id="logo_file" v-model="form.logo_file" :file="form.logo_file"
+                                        typeImage="clients" />
                                     <InputError :message="form.errors.logo_file" class="mt-2" />
                                 </div>
 
                                 <div class="grow w-full">
                                     <InputLabel for="name" value="Name" />
                                     <TextInput v-model="form.name" id="name" ref="nameInput" type="text" />
-    
+
                                     <InputError :message="form.errors.name" class="mt-2" />
                                     <InputError :message="form.errors.slug" class="mt-2" />
                                 </div>
@@ -178,17 +187,17 @@ defineExpose({ openModal });
 
                             <div class="md:col-span-3">
                                 <InputLabel for="taxt_id_number" value="Taxt id number" />
-                                <TextInput v-model="form.taxt_id_number" id="taxt_id_number" ref="taxtIdNumberInput" type="text" />
+                                <TextInput v-model="form.taxt_id_number" id="taxt_id_number" ref="taxtIdNumberInput"
+                                    type="text" />
 
                                 <InputError :message="form.errors.taxt_id_number" class="mt-2" />
                             </div>
 
                             <div class="md:col-span-3">
                                 <InputLabel for="company_type_id" value="Company type" />
-                                <VueSelect id="company_type_id" label="name" v-model="form.company_type_id" :append="true"
-                                    :options="companyTypesOptions" :reduce="companyTypesOptions => companyTypesOptions.id"
-                                
-                                    :select-on-tab="true" />
+                                <VueSelect id="company_type_id" label="name" v-model="form.company_type_id"
+                                    :append="true" :options="companyTypesOptions"
+                                    :reduce="companyTypesOptions => companyTypesOptions.id" :select-on-tab="true" />
 
                                 <InputError :message="form.errors.company_type_id" class="mt-2" />
                             </div>

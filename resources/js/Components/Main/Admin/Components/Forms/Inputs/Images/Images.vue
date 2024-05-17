@@ -35,7 +35,7 @@ const cambiarImagen = (event) => {
 
 const typeImageClass = computed(() => {
     return {
-        'banners': 'h-96 rounded-lg w-full',
+        'banners': 'h-96 rounded-lg w-full mb-2',
         'clients': 'h-16 w-16 rounded-full',
     }[props.typeImage];
 });

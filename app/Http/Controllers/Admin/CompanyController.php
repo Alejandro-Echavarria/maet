@@ -6,11 +6,19 @@ use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Models\CompanyType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 
 class CompanyController extends Controller
 {
+    protected $directory;
+
+    public function __construct()
+    {
+        $this->directory = 'images/companies';
+    }
+
     public function index()
     {
         $companies = Company::with('companyType:id,name')->paginate(10);
@@ -45,7 +53,23 @@ class CompanyController extends Controller
             ]
         );
 
-        Company::create($data);
+        DB::beginTransaction();
+        try {
+            $company = Company::create($data);
+
+            if ($request->file('banner_file')) {
+                ImageController::store($request->file('banner_file'), $company, $this->directory . '/banners');
+            }
+
+            if ($request->file('logo_file')) {
+                ImageController::store($request->file('logo_file'), $company, $this->directory . '/logos');
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            return to_route('admin.companies.index')->withErrors(['create' => $e->getMessage()]);
+        }
+        DB::commit();
 
         $page = $request?->page;
         $search = $request?->search;
