@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Company;
 use App\Models\Platform;
 use App\Models\PlatformType;
 use App\Models\User;
@@ -29,9 +30,11 @@ class PlatformController extends Controller
 
     public function store(Request $request)
     {
-        $model = User::select('id')->where('id', auth()->user()->id)->first();
+        $entity = Company::select('id', 'company_type_id')->orderBy('id')->first();
+
+        $model = $entity->id === 1 ? User::select('id')->where('id', auth()->user()->id)->first() : $entity;
         $model->platformable_id = $model->id;
-        $model->platformable_type = User::class;
+        $model->platformable_type = $entity->company_type_id === 1 ? User::class : Company::class;
 
         $data = $request->validate(
             [
@@ -63,9 +66,11 @@ class PlatformController extends Controller
 
     public function update(Request $request, Platform $platform)
     {
-        $model = User::select('id')->where('id', auth()->user()->id)->first();
+        $entity = Company::select('id', 'company_type_id')->orderBy('id')->first();
+
+        $model = $entity->id === 1 ? User::select('id')->where('id', auth()->user()->id)->first() : $entity;
         $platform->platformable_id = $model->id;
-        $platform->platformable_type = User::class;
+        $platform->platformable_type = $entity->company_type_id === 1 ? User::class : Company::class;
 
         $platform->update(
             $request->validate(

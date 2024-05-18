@@ -74,13 +74,13 @@ const openModal = (op, id, client_type_id, first_name, last_name, email, phone, 
                     </td>
                     <td class="px-4 py-3">{{ tb.last_name }}</td>
                     <td class="px-4 py-3 text-xs">
-                        <span class="px-2 py-1 font-semibold rounded-full" :class="`bg-${tb.client_type.color}/20 text-${tb.client_type.color}`">
+                        <span class="px-2 py-1 font-semibold rounded-full text-nowrap" :class="`border-2 border-${tb.client_type.color} text-${tb.client_type.color}`">
                             {{ tb.client_type.name }}
                         </span>
                     </td>
                     <td class="px-4 py-3">{{ tb.phone }}</td>
                     <td class="px-4 py-3 text-xs">
-                        <span class="px-2 py-1 font-semibold rounded-full text-nowrap" :class="tb.status ? 'bg-green-500/20 text-green-500' : 'bg-red-500/20 text-red-500'">
+                        <span class="px-2 py-1 font-semibold rounded-full text-nowrap" :class="tb.status ? 'border-2 border-green-700 text-green-700' : 'border-2 border-gray-400 text-gray-400'">
                             <template v-if="tb.status">
                                 Activo
                             </template>

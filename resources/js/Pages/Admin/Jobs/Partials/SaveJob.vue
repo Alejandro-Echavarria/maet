@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted, onBeforeMount, onBeforeUnmount } from "vue";
-import { useForm, usePage } from "@inertiajs/vue3";
+import { useForm } from "@inertiajs/vue3";
 import DialogModal from "@/Components/DialogModal.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";

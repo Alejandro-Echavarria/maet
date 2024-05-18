@@ -24,8 +24,27 @@ class Company extends Model
         'phone',
     ];
 
+    /*----------------------------------------------------------------------------*/
+    // Relations
+    /*----------------------------------------------------------------------------*/
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     public function companyType()
     {
         return $this->belongsTo(CompanyType::class);
+    }
+
+    public function platforms()
+    {
+        return $this->morphMany(Platform::class, 'platformable');
+    }
+
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'imageable');
     }
 }

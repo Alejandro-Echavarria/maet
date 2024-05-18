@@ -27,6 +27,11 @@ class Platform extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
+
     public function getCreatedAtAttribute($value)
     {
         $carbon = Carbon::parse($value)->timezone(config('app.timezone'));
