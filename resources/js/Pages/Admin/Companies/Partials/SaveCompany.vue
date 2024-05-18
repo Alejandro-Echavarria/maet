@@ -71,7 +71,7 @@ const save = () => {
     } else {
         form.transform((data) => ({
             ...data,
-            method: 'put',
+            _method: 'put',
             search: props.filter,
             page: props.page,
         })).post(route("admin.companies.update", company.value), {
