@@ -44,6 +44,11 @@ class ImageController extends Controller
         }
     }
 
+    public static function arrStore(String $model, Object $modelImages, String $directory, String $additionalPath = '', String $access = 'public')
+    {
+        
+    }
+
     public static function ckeditorStore($model, $modelImages, $directory, $additionalPath = '')
     {
         $reExtractImages = '/src=["\']([^ ^"^\']*)["\']/ims';
