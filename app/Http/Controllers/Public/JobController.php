@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Job;
 use App\Models\Technology;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
