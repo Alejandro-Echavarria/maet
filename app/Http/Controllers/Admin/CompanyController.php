@@ -21,7 +21,15 @@ class CompanyController extends Controller
 
     public function index()
     {
-        $companies = Company::with('companyType:id,name')->paginate(10);
+        $companies = Company::with(
+            [
+                'companyType:id,name',
+                'images' => function ($query) {
+                    $query->select( 'url', 'imageable_id')->orderBy('imageable_id');
+                }
+            ]
+        )->paginate(10);
+
         $companyTypes = CompanyType::all();
 
         return Inertia::render('Admin/Companies/Index', compact('companies', 'companyTypes'));
@@ -29,6 +37,7 @@ class CompanyController extends Controller
 
     public function store(Request $request)
     {
+        return response()->json($request->file());
         $request['slug'] = Str::slug($request->name);
         $data = $request->validate(
             [
