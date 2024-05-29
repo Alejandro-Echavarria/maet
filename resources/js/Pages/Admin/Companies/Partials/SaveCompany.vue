@@ -150,7 +150,7 @@ defineExpose({ openModal });
                         <div class="grid grid-cols-1 md:grid-cols-9 gap-6">
                             <div class="md:col-span-9">
                                 <InputLabel for="banner_file" value="Banner" />
-                                <Images id="banner_file" v-model="form.banner_file" :file="form.banner_file" />
+                                <Images id="banner_file" v-model="form.banner_file" :file="form.banner_file" :access="'admin'" />
 
                                 <InputError :message="form.errors.banner_file" class="mt-2" />
                             </div>
@@ -160,7 +160,7 @@ defineExpose({ openModal });
                                     <InputLabel for="logo_file" value="Logo" />
 
                                     <Images id="logo_file" v-model="form.logo_file" :file="form.logo_file"
-                                        typeImage="clients" />
+                                        typeImage="clients" :access="'admin'"/>
                                     <InputError :message="form.errors.logo_file" class="mt-2" />
                                 </div>
 
