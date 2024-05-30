@@ -44,9 +44,31 @@ class ImageController extends Controller
         }
     }
 
-    public static function arrStore(String $model, Object $modelImages, String $directory, String $additionalPath = '', String $access = 'public')
+    public static function multipleStore(object $model, array $modelImages, string $directory, string $additionalPath = '', string $access = 'public')
     {
-        
+        foreach ($modelImages as $key => $image) {
+            $name = Str::random(10) . str_replace(" ", "", $image->getClientOriginalName());
+            $name = pathinfo($name, PATHINFO_FILENAME) . '.webp';
+
+            $directory = $directory . $additionalPath;
+
+            Storage::disk('local')->makeDirectory("$access/$directory/$key");
+
+            $path = storage_path("app/$access/$directory/$key/$name");
+            $pathRelative = "$directory/$key/$name";
+
+            $manager = new ImageManager(new Driver());
+
+            $manager->read($image)
+                ->scaleDown(1280, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                })
+            ->toWebp(100)->save($path);
+
+            $model->images()->create([
+                'url' => $pathRelative,
+            ]);
+        }
     }
 
     public static function ckeditorStore($model, $modelImages, $directory, $additionalPath = '')
@@ -128,7 +150,7 @@ class ImageController extends Controller
 
     public function show($image)
     {
-        $path = storage_path("app/admin/images/clients/{$image}");
+        $path = storage_path("app/admin/images/{$image}");
 
         return response()->file($path);
     }

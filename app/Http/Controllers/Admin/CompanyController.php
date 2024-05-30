@@ -37,7 +37,6 @@ class CompanyController extends Controller
 
     public function store(Request $request)
     {
-        return response()->json($request->file());
         $request['slug'] = Str::slug($request->name);
         $data = $request->validate(
             [
@@ -66,12 +65,8 @@ class CompanyController extends Controller
         try {
             $company = Company::create($data);
 
-            if ($request->file('banner_file')) {
-                ImageController::store($request->file('banner_file'), $company, $this->directory . '/banners');
-            }
-
-            if ($request->file('logo_file')) {
-                ImageController::store($request->file('logo_file'), $company, $this->directory . '/logos');
+            if ($request->file()) {
+                response()->json(ImageController::multipleStore($company, $request->file(), $this->directory, '', 'admin'));
             }
         } catch (\Exception $e) {
             DB::rollback();
