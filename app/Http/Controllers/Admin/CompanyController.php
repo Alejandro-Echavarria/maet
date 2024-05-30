@@ -110,7 +110,19 @@ class CompanyController extends Controller
             ]
         );
 
-        $company->update($data);
+        DB::beginTransaction();
+        try {
+            $company->update($data);
+
+            if ($request->file()) {
+                response()->json(ImageController::multipleUpdate($company, $request->file(), $this->directory, '', 'admin'));
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            return to_route('admin.companies.index')->withErrors(['update' => $e->getMessage()]);
+        }
+        DB::commit();
 
         $page = $request?->page;
         $search = $request?->search;
