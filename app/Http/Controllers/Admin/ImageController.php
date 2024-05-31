@@ -65,38 +65,17 @@ class ImageController extends Controller
                 })
             ->toWebp(100)->save($path);
 
-            $model->images()->create([
-                'url' => $pathRelative,
-            ]);
-        }
-    }
+            if ($model->images()->select()->where('url', 'like', "%$key%")->first()?->count() == 0) {
+                $model->images()->create([
+                    'url' => $pathRelative,
+                ]);
+            } else {
+                Storage::disk('local')->delete("$access/" . $model->images()->select()->where('url', 'like', "%$key%")->first()->url);
 
-    public static function multipleUpdate(object $model, array $modelImages, string $directory, string $additionalPath = '', string $access = 'public')
-    {
-        foreach ($modelImages as $key => $image) {
-            $name = Str::random(10) . str_replace(" ", "", $image->getClientOriginalName());
-            $name = pathinfo($name, PATHINFO_FILENAME) . '.webp';
-
-            $directory = $directory . $additionalPath;
-
-            Storage::disk('local')->makeDirectory("$access/$directory/$key");
-
-            $path = storage_path("app/$access/$directory/$key/$name");
-            $pathRelative = "$directory/$key/$name";
-
-            $manager = new ImageManager(new Driver());
-
-            $manager->read($image)
-                ->scaleDown(1280, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                })
-            ->toWebp(100)->save($path);
-
-            Storage::disk('local')->delete("$access/" . $model->images()->select('url')->first()->url);
-
-            $model->images()->update([
-                'url' => $pathRelative,
-            ])->where('url', );
+                $model->images()->select()->where('url', 'like', "%$key%")->first()->update([
+                    'url' => $pathRelative,
+                ]);
+            }
         }
     }
 

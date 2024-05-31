@@ -25,7 +25,26 @@ class CompanyController extends Controller
             [
                 'companyType:id,name',
                 'images' => function ($query) {
-                    $query->select( 'url', 'imageable_id')->orderBy('imageable_id');
+                    $query->selectRaw("
+                        url,
+                        CASE
+                            WHEN (url LIKE '%banner_file%') THEN
+                                'banner_file'
+                            WHEN (url LIKE '%logo_file%') THEN
+                                'logo_file'
+                            ELSE
+                                'other'
+                        END AS 'file_type',
+                        imageable_id
+                    ")
+                        ->orderByRaw("
+                            CASE
+                                WHEN url LIKE '%banner_file%' THEN
+                                    1
+                                ELSE
+                                    2
+                            END
+                        ");
                 }
             ]
         )->paginate(10);
@@ -66,7 +85,7 @@ class CompanyController extends Controller
             $company = Company::create($data);
 
             if ($request->file()) {
-                response()->json(ImageController::multipleStore($company, $request->file(), $this->directory, '', 'admin'));
+                ImageController::multipleStore($company, $request->file(), $this->directory, '', 'admin');
             }
         } catch (\Exception $e) {
             DB::rollback();
@@ -115,7 +134,7 @@ class CompanyController extends Controller
             $company->update($data);
 
             if ($request->file()) {
-                response()->json(ImageController::multipleUpdate($company, $request->file(), $this->directory, '', 'admin'));
+                ImageController::multipleStore($company, $request->file(), $this->directory, '', 'admin');
             }
         } catch (\Exception $e) {
             DB::rollback();
@@ -140,6 +159,7 @@ class CompanyController extends Controller
         }
 
         $company->delete();
+        ImageController::destroy($company, 'admin');
 
         $page = $request?->page;
         $search = $request?->search;
