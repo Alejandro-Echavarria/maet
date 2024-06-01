@@ -77,11 +77,11 @@ class JobController extends Controller
                 'color'            => "required|max:255|string",
                 'file'             => "required|image",
                 'project_name'     => "required|max:140|string",
-                'link'             => "string|max:255|url:https",
+                'link'             => "nullable|max:255|string|url",
                 'preview'          => "required|string",
                 'body'             => "required|string",
                 'alt_banner_image' => "string|max:255|nullable",
-                'is_published'           => "required|boolean",
+                'is_published'     => "required|boolean",
             ],
             [
                 // Custom error messages
@@ -165,7 +165,7 @@ class JobController extends Controller
                 'color'            => "required|max:255|string",
                 'file'             => $request->file('file') ? "required|image" : "required|string",
                 'project_name'     => "required|max:140|string",
-                'link'             => "string|max:255|url:https",
+                'link'             => "nullable|max:255|string|url",
                 'preview'          => "required|string",
                 'body'             => "required|string",
                 'price'            => "required|numeric|min:0",

@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Company;
 use App\Models\Platform;
 use App\Models\PlatformType;
 use App\Models\User;
+use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 
 class PlatformController extends Controller
@@ -28,13 +30,20 @@ class PlatformController extends Controller
 
     public function store(Request $request)
     {
-        $model = User::select('id')->first();
-        $model->platformable_type = User::class;
+        $entity = Company::select('id', 'company_type_id')->orderBy('id')->first();
+
+        $model = $entity->id === 1 ? User::select('id')->where('id', auth()->user()->id)->first() : $entity;
+        $model->platformable_id = $model->id;
+        $model->platformable_type = $entity->company_type_id === 1 ? User::class : Company::class;
 
         $data = $request->validate(
             [
-                'platform_type_id' => "required|exists:platform_types,id|unique:platforms|unique:platforms,platformable_id,$model->id|unique:platforms,platformable_type," . $model->platformable_type,
-                'url'              => 'required|max:255|string|url:https',
+                'platform_type_id' => [
+                    'required',
+                    'exists:platform_types,id',
+                    Rule::unique('platforms', 'platform_type_id')->where('platformable_type', $model->platformable_type)->where('platformable_id', $model->id),
+                ],
+                'url' => 'required|max:255|string|url:https',
             ],
             [
                 '',
@@ -57,14 +66,21 @@ class PlatformController extends Controller
 
     public function update(Request $request, Platform $platform)
     {
-        $model = User::select('id')->first();
-        $platform->platformable_type = User::class;
+        $entity = Company::select('id', 'company_type_id')->orderBy('id')->first();
+
+        $model = $entity->id === 1 ? User::select('id')->where('id', auth()->user()->id)->first() : $entity;
+        $platform->platformable_id = $model->id;
+        $platform->platformable_type = $entity->company_type_id === 1 ? User::class : Company::class;
 
         $platform->update(
             $request->validate(
                 [
-                    'platform_type_id' => "required|exists:platform_types,id|unique:platforms,platform_type_id,$platform->id|unique:platforms,platformable_id,$model->id|unique:platforms,platformable_type,".$platform->platformable_type,
-                    'url'              => 'required|max:255|string|url:https',
+                    'platform_type_id' => [
+                        'required',
+                        'exists:platform_types,id',
+                        Rule::unique('platforms', 'platform_type_id')->ignore($platform->id)->where('platformable_type', $platform->platformable_type)->where('platformable_id', $model->id),
+                    ],
+                    'url' => 'required|max:255|string|url:https',
                 ],
                 [
                     '',
