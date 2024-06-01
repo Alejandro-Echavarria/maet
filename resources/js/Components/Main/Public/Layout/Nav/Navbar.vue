@@ -9,6 +9,9 @@ const props = defineProps({
     animation: {
         type: Boolean,
         default: false
+    },
+    entity: {
+        type: Object
     }
 });
 
@@ -27,7 +30,7 @@ const navLinks = ref([
         active: '/jobs'
     },
     {
-        name: 'About me',
+        name: props.entity.company_type_id === 1 ? 'About me' : 'About us',
         routeName: 'aboutme.index',
         active: '/about-me'
     },
