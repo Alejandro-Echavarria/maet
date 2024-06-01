@@ -66,7 +66,7 @@ const handleResize = () => {
                 <div :class="['w-full h-full flex items-center justify-between']">
                     <div class="flex items-center justify-start h-full">
                         <Link href="/" @click="isVisible && toggleVisibility()" class="flex md:mr-24 gap-2">
-                        <ApplicationLogo />
+                        <ApplicationLogo :entity-name="$page.props.entity?.name" :url="$page.props.entity?.url" />
                         <span
                             class="self-center text-xl font-bold sm:text-2xl whitespace-nowrap dark:text-gray-200 text-gray-800">
                             {{ $page.props.entity?.name }}
