@@ -33,27 +33,27 @@ class PlatformController extends Controller
         $entity = Company::select('id', 'company_type_id')->orderBy('id')->first();
 
         $model = $entity->id === 1 ? User::select('id')->where('id', auth()->user()->id)->first() : $entity;
-        $model->platformable_id = $model->id;
-        $model->platformable_type = $entity->company_type_id === 1 ? User::class : Company::class;
+        $model->platformableType = $entity->company_type_id === 1 ? User::class : Company::class;
 
         $data = $request->validate(
             [
                 'platform_type_id' => [
                     'required',
                     'exists:platform_types,id',
-                    Rule::unique('platforms', 'platform_type_id')->where('platformable_type', $model->platformable_type)->where('platformable_id', $model->id),
+                    Rule::unique('platforms', 'platform_type_id')->where('platformable_type', $model->platformableType)->where('platformable_id', $model->id),
                 ],
                 'url' => 'required|max:255|string|url:https',
             ],
-            [
-                '',
-            ],
+            [],
             [
                 'platform_type_id' => 'platform',
             ]
         );
 
-        $model->platforms()->create($data);
+        $data['platformable_id'] = $model->id;
+        $data['platformable_type'] = $model->platformableType;
+
+        Platform::create($data);
 
         $page = $request?->page;
         $search = $request?->search;
@@ -69,7 +69,6 @@ class PlatformController extends Controller
         $entity = Company::select('id', 'company_type_id')->orderBy('id')->first();
 
         $model = $entity->id === 1 ? User::select('id')->where('id', auth()->user()->id)->first() : $entity;
-        $platform->platformable_id = $model->id;
         $platform->platformable_type = $entity->company_type_id === 1 ? User::class : Company::class;
 
         $platform->update(
@@ -82,9 +81,7 @@ class PlatformController extends Controller
                     ],
                     'url' => 'required|max:255|string|url:https',
                 ],
-                [
-                    '',
-                ],
+                [],
                 [
                     'platform_type_id' => 'platform',
                 ]

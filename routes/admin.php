@@ -56,7 +56,7 @@ Route::resource('resume/experiences', ExperienceController::class)->only(['index
 Route::resource('resume/knowledge', KnowleedgeController::class)->only(['index', 'store', 'update', 'destroy'])->names('admin.resume.knowledge');
 
 // Show private images for clients
-Route::get('images/clients/{image}', [ImageController::class, 'show'])->name('admin.clients.showImage');
+Route::get('images/{image}', [ImageController::class, 'show'])->where('image', '.*')->name('admin.clients.showImage');
 
 // Company settings
 Route::resource('companies', CompanyController::class)->only(['index', 'store', 'update', 'destroy'])->names('admin.companies');
