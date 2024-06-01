@@ -114,6 +114,7 @@ class Job extends Model
             $query
                 ->select('jobs.*')
                 ->join('categories', 'categories.id', '=', 'jobs.category_id')
+                ->where('jobs.is_published', '=', 1)
                 ->orWhere('categories.slug', 'like', '%' . "$search" . '%')
                 ->groupBy('jobs.id');
         });
@@ -126,6 +127,7 @@ class Job extends Model
                 ->select('jobs.*')
                 ->join('job_technology', 'job_technology.job_id', '=', 'jobs.id')
                 ->join('technologies', 'technologies.id', '=', 'job_technology.technology_id')
+                ->where('jobs.is_published', '=', 1)
                 ->orWhere('technologies.slug', 'like', '%' . "$search" . '%')
                 ->groupBy('jobs.id');
         });

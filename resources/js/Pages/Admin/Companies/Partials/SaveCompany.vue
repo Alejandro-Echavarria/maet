@@ -71,7 +71,7 @@ const save = () => {
     } else {
         form.transform((data) => ({
             ...data,
-            method: 'put',
+            _method: 'put',
             search: props.filter,
             page: props.page,
         })).post(route("admin.companies.update", company.value), {
@@ -111,6 +111,8 @@ const openModal = (op, data) => {
         form.zip_code = data.zip_code;
         form.email = data.email;
         form.phone = data.phone;
+        form.banner_file = data.images[0]?.url;
+        form.logo_file = data.images[1]?.url;
     }
 
     setTimeout(() => nameInput.value.focus(), 250);
@@ -148,7 +150,7 @@ defineExpose({ openModal });
                         <div class="grid grid-cols-1 md:grid-cols-9 gap-6">
                             <div class="md:col-span-9">
                                 <InputLabel for="banner_file" value="Banner" />
-                                <Images id="banner_file" v-model="form.banner_file" :file="form.banner_file" />
+                                <Images id="banner_file" v-model="form.banner_file" :file="form.banner_file" :access="'admin'" />
 
                                 <InputError :message="form.errors.banner_file" class="mt-2" />
                             </div>
@@ -158,7 +160,7 @@ defineExpose({ openModal });
                                     <InputLabel for="logo_file" value="Logo" />
 
                                     <Images id="logo_file" v-model="form.logo_file" :file="form.logo_file"
-                                        typeImage="clients" />
+                                        typeImage="clients" :access="'admin'"/>
                                     <InputError :message="form.errors.logo_file" class="mt-2" />
                                 </div>
 

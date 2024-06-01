@@ -21,7 +21,34 @@ class CompanyController extends Controller
 
     public function index()
     {
-        $companies = Company::with('companyType:id,name')->paginate(10);
+        $companies = Company::with(
+            [
+                'companyType:id,name',
+                'images' => function ($query) {
+                    $query->selectRaw("
+                        url,
+                        CASE
+                            WHEN (url LIKE '%banner_file%') THEN
+                                'banner_file'
+                            WHEN (url LIKE '%logo_file%') THEN
+                                'logo_file'
+                            ELSE
+                                'other'
+                        END AS 'file_type',
+                        imageable_id
+                    ")
+                        ->orderByRaw("
+                            CASE
+                                WHEN url LIKE '%banner_file%' THEN
+                                    1
+                                ELSE
+                                    2
+                            END
+                        ");
+                }
+            ]
+        )->paginate(10);
+
         $companyTypes = CompanyType::all();
 
         return Inertia::render('Admin/Companies/Index', compact('companies', 'companyTypes'));
@@ -57,12 +84,8 @@ class CompanyController extends Controller
         try {
             $company = Company::create($data);
 
-            if ($request->file('banner_file')) {
-                ImageController::store($request->file('banner_file'), $company, $this->directory . '/banners');
-            }
-
-            if ($request->file('logo_file')) {
-                ImageController::store($request->file('logo_file'), $company, $this->directory . '/logos');
+            if ($request->file()) {
+                ImageController::multipleStore($company, $request->file(), $this->directory, '', 'admin');
             }
         } catch (\Exception $e) {
             DB::rollback();
@@ -106,7 +129,19 @@ class CompanyController extends Controller
             ]
         );
 
-        $company->update($data);
+        DB::beginTransaction();
+        try {
+            $company->update($data);
+
+            if ($request->file()) {
+                ImageController::multipleStore($company, $request->file(), $this->directory, '', 'admin');
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            return to_route('admin.companies.index')->withErrors(['update' => $e->getMessage()]);
+        }
+        DB::commit();
 
         $page = $request?->page;
         $search = $request?->search;
@@ -124,6 +159,7 @@ class CompanyController extends Controller
         }
 
         $company->delete();
+        ImageController::destroy($company, 'admin');
 
         $page = $request?->page;
         $search = $request?->search;
