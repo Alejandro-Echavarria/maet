@@ -79,7 +79,7 @@ const handleResize = () => {
 
                     <div class="hidden md:flex items-center space-x-3 divide-x divide-[#000000]/[0.16]">
                         <ul class="flex items-center space-x-6">
-                            <li v-for="(navLink, index) in navLinks">
+                            <li v-for="(navLink, index) in navLinks" :key="'nav-link-' + index">
                                 <NavLink :href="route(navLink.routeName)"
                                     :active="route().current(navLink.active) || $page.url.startsWith(navLink.active)"
                                     :key="'nav-link-' + index">

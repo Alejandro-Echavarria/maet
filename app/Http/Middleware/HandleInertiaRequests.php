@@ -41,6 +41,7 @@ class HandleInertiaRequests extends Middleware
         $company = Company::select(
             'companies.company_type_id',
             'companies.name',
+            'companies.email',
             'images.url'
         )
             ->leftJoin('images', function (JoinClause $join) {
