@@ -111,23 +111,23 @@ const props = defineProps({
 
                     <div class="grid grid-cols-1 gap-4 justify-self-center sm:justify-self-end h-10">
                         <div class="flex justify-center sm:justify-end gap-4 divide-x divide-[#000000]/[0.16]">
-                            <template v-if="user.user_social_media.length > 0">
+                            <template v-if="user.platforms.length > 0">
                                 <div class="flex gap-4">
-                                    <div v-for="( social_media, index ) in user.user_social_media"
+                                    <div v-for="( platform_type, index ) in user.platforms"
                                         :key="'social-media-' + index" class="py-2 animate-fade-in-left"
                                         :style="{ animationDelay: `${index * 0.11}s` }">
                                         <div id="tech-container">
-                                            <a :href="social_media.url" target="_blank"
-                                                :title="social_media.social_media.name"
-                                                :aria-label="social_media.social_media.name">
-                                                <span v-html="social_media.social_media.icon"></span>
+                                            <a :href="platform_type.url" target="_blank"
+                                                :title="platform_type.platform_type.name"
+                                                :aria-label="platform_type.platform_type.name">
+                                                <span v-html="platform_type.platform_type.icon"></span>
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                             </template>
 
-                            <div :class="[user.user_social_media.length > 0 && 'pl-4']" class="animate-fade-in-left"
+                            <div :class="[user.platforms.length > 0 && 'pl-4']" class="animate-fade-in-left"
                                 style="animation-delay: 0.50s;">
                                 <a :href="`mailto:${user.email}`">
                                     <SecondaryButton :hidden="false" title="Send me an email"

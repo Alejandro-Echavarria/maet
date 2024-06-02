@@ -85,9 +85,9 @@ defineExpose({ toggleSidebarVisibility });
                         :style="{ animationDelay: `${index * 0.05}s` }">
 
                         <span class="flex gap-2 items-center max-[1490px]:justify-center">
-                            <span id="tech-container" v-if="data?.icon" class="justify-self-center">
+                            <!-- <span id="tech-container" v-if="data?.icon" class="justify-self-center">
                                 <i v-html="data.icon" :title="data.name" />
-                            </span>
+                            </span> -->
                             {{ data.name }}
                         </span>
                     </li>

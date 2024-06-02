@@ -11,7 +11,6 @@ import InputLabel from '@/Components/InputLabel.vue';
 import SaveAlert from '@/Helpers/Alerts/SaveAlert';
 
 const props = defineProps({
-    socialMedias: Object,
     filter: String,
     page: String
 });
@@ -20,7 +19,7 @@ const iconInput = ref(null);
 const nameInput = ref(null);
 const title = ref('');
 const modal = ref(false);
-const socialMedia = ref(null);
+const platformType = ref(null);
 const opration = ref(1);
 
 const form = useForm({
@@ -34,7 +33,7 @@ const save = () => {
             ...data,
             search: props.filter,
             page: props.page
-        })).post(route('admin.socialmedias.store'), {
+        })).post(route('admin.platformtypes.store'), {
             preserveScroll: true,
             onSuccess: () => {
                 ok('Social media created successfully');
@@ -54,7 +53,7 @@ const save = () => {
             ...data,
             search: props.filter,
             page: props.page
-        })).put(route('admin.socialmedias.update', socialMedia.value), {
+        })).put(route('admin.platformtypes.update', platformType.value), {
             preserveScroll: true,
             onSuccess: () => {
                 ok('Social media updated successfull');
@@ -77,15 +76,15 @@ const openModal = (op, id, icon, name) => {
     opration.value = op;
 
     if (op == 1) {
-        title.value = 'Create a new social media';
+        title.value = 'Create platform type';
     } else {
-        title.value = 'Edit social media';
-        socialMedia.value = id;
+        title.value = 'Edit platform type';
+        platformType.value = id;
         form.icon = icon;
         form.name = name;
     }
 
-    setTimeout(() => iconInput.value.focus(), 250);
+    setTimeout(() => nameInput.value.focus(), 250);
 };
 
 const closeModal = () => {
@@ -106,7 +105,7 @@ defineExpose({ openModal });
     <div>
         <PrimaryButton class="w-full" @click="openModal(1)">
             <font-awesome-icon class="mr-2" :icon="['fas', 'plus']" />
-            Add social media
+            Add platform type
         </PrimaryButton>
         <DialogModal :show="modal" :maxWidth="'2xl'" @close="closeModal">
             <template #title>
@@ -115,17 +114,17 @@ defineExpose({ openModal });
 
             <template #content>
                 <div>
-                    <InputLabel for="icon" value="Icon" />
-                    <IconTextInput id="icon" ref="iconInput" v-model="form.icon" />
-
-                    <InputError :message="form.errors.icon" class="mt-2" />
-                </div>
-
-                <div class="mt-4">
                     <InputLabel for="name" value="Name" />
                     <TextInput v-model="form.name" id="name" ref="nameInput" type="text" />
 
                     <InputError :message="form.errors.name" class="mt-2" />
+                </div>
+
+                <div class="mt-4">
+                    <InputLabel for="icon" value="Icon" />
+                    <IconTextInput id="icon" ref="iconInput" v-model="form.icon" />
+
+                    <InputError :message="form.errors.icon" class="mt-2" />
                 </div>
             </template>
 

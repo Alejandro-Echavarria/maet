@@ -6,26 +6,30 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserSocialMedia extends Model
+class Platform extends Model
 {
     use HasFactory;
 
-    protected $table = 'social_media_user';
-
     protected $fillable = [
-        'user_id',
-        'social_media_id',
+        'platform_type_id',
         'url',
+        'platformable_id',
+        'platformable_type',
     ];
 
-    public function socialMedia()
+    public function platformType()
     {
-        return $this->belongsTo(SocialMedia::class);
+        return $this->belongsTo(PlatformType::class);
     }
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
     }
 
     public function getCreatedAtAttribute($value)
@@ -43,12 +47,12 @@ class UserSocialMedia extends Model
     public function scopeFilter($query, $filter)
     {
         $query->when($filter ?? null, function ($query, $search) {
-            $query->select('social_media_user.*', 'social_medias.name as social_media_name')
-                ->join('social_medias', 'social_medias.id', '=', 'social_media_user.social_media_id')
+            $query->select('platforms.*', 'platform_types.name as platform_name')
+                ->join('platform_types', 'platform_types.id', '=', 'platforms.platform_type_id')
                 ->whereAny([
-                    'social_medias.name',
-                    'social_media_user.url',
-                    'social_media_user.created_at'
+                    'platform_types.name',
+                    'platforms.url',
+                    'platforms.created_at'
                 ], 'LIKE', "%$search%");
         });
     }

@@ -6,6 +6,7 @@ import SectionBorder from '@/Components/SectionBorder.vue';
 import TwoFactorAuthenticationForm from '@/Pages/Profile/Partials/TwoFactorAuthenticationForm.vue';
 import UpdatePasswordForm from '@/Pages/Profile/Partials/UpdatePasswordForm.vue';
 import UpdateProfileInformationForm from '@/Pages/Profile/Partials/UpdateProfileInformationForm.vue';
+import UpdatePersonalInformation from '@/Pages/Profile/Partials/UpdatePersonalInformation.vue';
 import MainTitle from '@/Components/Main/Admin/Components/Titles/MainTitle.vue';
 import MainLayout from '@/Components/Main/Admin/Layout/MainLayout.vue';
 
@@ -29,6 +30,12 @@ defineOptions({
 
         <div v-if="$page.props.jetstream.canUpdateProfileInformation">
             <UpdateProfileInformationForm :user="$page.props.auth.user" />
+
+            <SectionBorder />
+        </div>
+
+        <div v-if="$page.props.jetstream.canUpdateProfileInformation">
+            <UpdatePersonalInformation :user="$page.props.auth.user" />
 
             <SectionBorder />
         </div>

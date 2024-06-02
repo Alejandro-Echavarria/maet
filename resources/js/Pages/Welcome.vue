@@ -1,20 +1,21 @@
 <script setup>
 import { ref, defineAsyncComponent } from 'vue';
-import { Head, Link } from '@inertiajs/vue3';
+import { Head, Link, usePage } from '@inertiajs/vue3';
 import MainBanner from '@/Components/Main/Banners/MainBanner.vue';
 import Navbar from '@/Components/Main/Public/Layout/Nav/Navbar.vue';
 import MainFooter from "@/Components/Main/Public/Footers/MainFooter.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import SecondaryButton from "@/Components/SecondaryButton.vue";
 import ContactButton from "@/Components/Main/Public/Components/Buttons/ContactButton.vue";
 import SectionTitle from '@/Components/Main/Public/Components/Titles/SectionTitle.vue';
 import BetweenView from "@/Components/Main/Public/Components/OtherComponents/Pojects/BetweenView.vue";
-
 
 const props = defineProps({
     user: Object,
     jobs: Object
 });
 
+const entity = ref(usePage().props.entity);
 const callOpenModal = ref(null);
 
 const ContactModal = defineAsyncComponent(() => import('@/Components/Main/Public/Components/Contacts/ContactModal.vue'));
@@ -33,7 +34,7 @@ const openModal = () => {
     </Head>
 
     <div>
-        <Navbar :animation="true">
+        <Navbar :entity="entity" :animation="true">
             <template #button>
                 <ContactButton @click="openModal()" class="rounded-2xl relative shadow-md shadow-gray-500/20">
                     Contact
@@ -86,7 +87,7 @@ const openModal = () => {
             </div>
             <div class="max-w-5xl mx-auto">
                 <div class="space-y-10 sm:space-y-20">
-                    <section id="about-me-brief">
+                    <section v-if="user.bio" id="about-me-brief" class="text-center">
                         <SectionTitle>
                             <h2 class="py-4 text-5xl lg:text-7xl font-bold text-gray-800 dark:text-gray-200">
                                 About me
@@ -94,65 +95,20 @@ const openModal = () => {
                         </SectionTitle>
 
                         <div class="relative grid grid-cols-1 lg:grid-cols-1 gap-8">
-                            <div>
-                                <div class="space-y-8 order-3">
-                                    <div>
-                                        <p v-html="user.bio" />
-                                    </div>
-
-                                    <div class="space-y-8">
-                                        <template v-if="user.experiences.length > 0">
-                                            <div>
-                                                <h3 class="p-0">Experiences</h3>
-                                            </div>
-
-                                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
-                                                <div v-for="( experience ) in user.experiences"
-                                                    :key="'experience-' + experience.id"
-                                                    class="p-4 space-y-2 border rounded-xl border-[#000000]/[0.16]">
-                                                    <time class="text-sm font-medium text-gray-600">
-                                                        <span>{{ experience.start_date }} -
-                                                            {{ experience.end_date }}</span>
-                                                    </time>
-                                                    <h3 class="text-lg font-semibold text-gray-700 dark:text-white p-0">
-                                                        {{ experience.title }}
-                                                    </h3>
-
-                                                    <p class="dark:text-gray-400 line-clamp-6"
-                                                        v-html="experience.description">
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </template>
-
-                                        <template v-if="user.knowledge.length > 0">
-                                            <div>
-                                                <h3 class="p-0">Knowledge</h3>
-                                            </div>
-                                            <div class="space-y-4 p-4 border rounded-xl border-[#000000]/[0.16]">
-                                                <div v-for="( knowledge ) in user.knowledge"
-                                                    :key="'knowledge-about-me-' + knowledge.id" class="flex">
-                                                    <div id="tech-container" class="flex gap-2 items-center">
-                                                        <p class="dark:text-gray-400" v-html="knowledge.name"></p>
-                                                        <div class="overflow-hidden">
-                                                            <i v-html="knowledge.icon" :title="knowledge.name" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </template>
-                                    </div>
+                            <div class="space-y-8">
+                                <div>
+                                    <p v-html="user.bio" />
                                 </div>
 
-                                <div
+                                <!-- <div
                                     class="bg-gradient-to-b from-white/0 via-white/50 to-white/100 h-1/4 absolute bottom-0 w-full grid place-content-center content-end">
-                                    <div class="py-4">
-                                        <Link :href="route('aboutme.index')">
-                                        <PrimaryButton>
-                                            See more about me
-                                        </PrimaryButton>
-                                        </Link>
-                                    </div>
+                                </div> -->
+                                <div>
+                                    <Link :href="route('aboutme.index')">
+                                    <SecondaryButton :hidden="false">
+                                        See more
+                                    </SecondaryButton>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
@@ -169,15 +125,12 @@ const openModal = () => {
                             <BetweenView :projects="jobs" />
                         </section>
 
-                        <div
-                            class="bg-gradient-to-b from-white/0 via-white/70 to-white/100 h-1/4 absolute bottom-0 w-full grid place-content-center content-end">
-                            <div class="py-4">
-                                <Link :href="route('jobs.index')">
-                                <PrimaryButton>
-                                    See all projects
-                                </PrimaryButton>
-                                </Link>
-                            </div>
+                        <div class="flex justify-center">
+                            <Link :href="route('jobs.index')">
+                            <PrimaryButton>
+                                View all
+                            </PrimaryButton>
+                            </Link>
                         </div>
                     </div>
                 </div>
