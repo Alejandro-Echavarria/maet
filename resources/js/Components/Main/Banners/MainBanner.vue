@@ -27,7 +27,7 @@ const openModal = () => {
 </script>
 
 <template>
-    <div class="w-full h-[80vh] relative overflow-hidden">
+    <div class="w-full h-[80vh] relative">
         <div class="backdrop-blur-2xl bg-gradient-to-b from-white/80 to-blue-50/10 h-full">
             <Container class="h-full flex items-center mt-12">
                 <div class="grid grid-cols-1 sm:grid-cols-2 content-center gap-8">
@@ -37,7 +37,7 @@ const openModal = () => {
                                 <div>
                                     <span
                                         class="text-3xl lg:text-5xl font-semibold bg-gradient-to-r from-gray-800 via-indigo-700 to-blue-700 bg-clip-text text-transparent">
-                                        Hey there,
+                                        Hey,
                                     </span>
                                 </div>
                                 <h1 class="text-3xl lg:text-5xl font-semibold bg-gradient-to-r from-gray-800 via-indigo-700 to-blue-700 bg-clip-text text-transparent animate-fade-in-left"
@@ -47,11 +47,12 @@ const openModal = () => {
                             </div>
 
                             <h2 class="text-lg lg:text-xl font-medium dark:text-white animate-fade-in-up"
-                                style="animation-delay: 0.66s;">
-                                {{ user.position }}
+                                style="animation-delay: 0.50s;">
+                                    {{ user.position }}
                             </h2>
 
-                            <h2 class="text-lg lg:text-xl font-semibold dark:text-white">
+                            <h2 class="text-lg lg:text-xl font-semibold dark:text-white animate-fade-in-up"
+                                style="animation-delay: 0.50s;">
                                 Passionate About Helping Others Succeed With Web Apps & Data
                             </h2>
                         </div>
@@ -59,7 +60,8 @@ const openModal = () => {
                         <div class="space-y-4">
                             <div class="flex self-end gap-4">
                                 <ContactButton @click="openModal()"
-                                    class="rounded-lg relative shadow-md shadow-gray-500/20">
+                                    class="rounded-lg relative shadow-md shadow-gray-500/20 animate-fade-in-up"
+                                    style="animation-delay: 1.1s;">
                                     <span class="relative flex h-2 w-2 mr-2">
                                         <span
                                             class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-200 opacity-75"></span>
@@ -72,7 +74,7 @@ const openModal = () => {
                                 </ContactButton>
 
                                 <Link :href="route('jobs.index')" title="All My Projects">
-                                <SecondaryButton :hidden="false">
+                                <SecondaryButton :hidden="false" class="animate-fade-in-up" style="animation-delay: 1.1s;">
                                     Projects
                                 </SecondaryButton>
                                 </Link>
@@ -80,8 +82,8 @@ const openModal = () => {
                         </div>
                     </div>
 
-                    <div>
-                        <CircleStack />
+                    <div class="animate-fade-in sm:mt-0 mt-10" style="animation-delay: 0.66s;">
+                        <CircleStack :stacks="knowledge" />
                     </div>
                 </div>
 

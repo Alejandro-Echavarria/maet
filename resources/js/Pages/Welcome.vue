@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, defineAsyncComponent } from 'vue';
 import { Head, Link, usePage } from '@inertiajs/vue3';
 import MainBanner from '@/Components/Main/Banners/MainBanner.vue';
 import Navbar from '@/Components/Main/Public/Layout/Nav/Navbar.vue';
@@ -16,10 +16,19 @@ const props = defineProps({
 });
 
 const entity = ref(usePage().props.entity);
+
+const callOpenModal = ref(null);
+
+const ContactModal = defineAsyncComponent(() =>
+    import("@/Components/Main/Public/Components/Contacts/ContactModal.vue")
+);
+
+const openModal = () => {
+    callOpenModal.value.openModal();
+};
 </script>
 
 <template>
-
     <Head>
         <title>Manuel Echavarria ~ Portfolio</title>
         <meta type="description" name="description" head-key="description"
@@ -103,5 +112,6 @@ const entity = ref(usePage().props.entity);
         </main>
 
         <MainFooter />
+        <ContactModal ref="callOpenModal" />
     </div>
 </template>
