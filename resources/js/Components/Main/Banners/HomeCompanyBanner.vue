@@ -1,7 +1,6 @@
 <script setup>
 import { ref, defineAsyncComponent } from "vue";
 import Container from "@/Components/Main/Containers/Container.vue";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
 import ContactButton from "@/Components/Main/Public/Components/Buttons/ContactButton.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 
