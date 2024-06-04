@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\Company;
+use Illuminate\Database\Query\JoinClause;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -37,9 +38,21 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+        $company = Company::select(
+            'companies.company_type_id',
+            'companies.name',
+            'companies.email',
+            'images.url'
+        )
+            ->leftJoin('images', function (JoinClause $join) {
+                $join->on('images.imageable_id', '=', 'companies.id')
+                    ->where('images.url', 'like', '%logo_file%');
+            })
+            ->first();
+
         return array_merge(parent::share($request), [
             'csrf_token' => csrf_token(),
-            'entity'     => Company::select('company_type_id', 'name')->first(),
+            'entity'     => $company,
         ]);
     }
 }

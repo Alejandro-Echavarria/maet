@@ -42,7 +42,7 @@ const toggleSidebarVisibility = () => {
 
         <div>
             <div class="max-w-5xl mx-auto flex items-center justify-between">
-                <h1 :class="`text-5xl lg:text-7xl md:text-6xl font-bold text-gray-800`">
+                <h1 :class="`text-3xl lg:text-5xl font-semibold text-gray-800`">
                     Projects
                 </h1>
                 
