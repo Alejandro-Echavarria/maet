@@ -25,8 +25,9 @@ class JobController extends Controller
                 'images' => function ($query) {
                     $query->select('id', 'url', 'default', 'imageable_id')
                         ->where('default', '=', '1')
-                        ->orderBy('id', 'desc');
-                },
+                        ->orderBy('id', 'desc')
+                        ->limit(1);
+                }
             ]
         )
             ->filter($filter, $model = 'category')
@@ -41,7 +42,7 @@ class JobController extends Controller
             ->groupBy('categories.id')
             ->get();
 
-        $technologies = Technology::select('technologies.name', 'technologies.slug', 'technologies.icon')
+        $technologies = Technology::select('technologies.name', 'technologies.slug')
             ->join('job_technology', 'job_technology.technology_id', '=', 'technologies.id')
             ->join('jobs', 'jobs.id', '=', 'job_technology.job_id')
             ->where('jobs.is_published', '=', '1')
@@ -62,7 +63,8 @@ class JobController extends Controller
                 'images' => function ($query) {
                     $query->select('id', 'url', 'default', 'imageable_id')
                         ->where('default', '=', '1')
-                        ->orderBy('id', 'desc');
+                        ->orderBy('id', 'desc')
+                        ->limit(1);
                 },
 
             ]

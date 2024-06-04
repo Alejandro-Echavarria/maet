@@ -45,7 +45,8 @@ class JobController extends Controller
                 'images' => function ($query) {
                     $query->select('id', 'url', 'default', 'imageable_id')
                         ->where('default', '=', '1')
-                        ->orderBy('id', 'desc');
+                        ->orderBy('id', 'desc')
+                        ->limit(1);
                 }
             ]
         )
