@@ -36,7 +36,7 @@ onMounted(() => {
             </span>
             </Link>
 
-            <h1 :class="`text-center text-3xl lg:text-5xl font-semibold py-1.5 bg-gradient-to-r from-${job.color} via-gray-800/90 to-gray-800 bg-clip-text text-transparent animate-fade-in-up`"
+            <h1 :class="`text-center text-4xl lg:text-5xl font-semibold py-1.5 bg-gradient-to-r from-${job.color} via-gray-800/90 to-gray-800 bg-clip-text text-transparent animate-fade-in-up`"
                 style="animation-delay: 0.36s;">
                 {{ job.title }}
             </h1>

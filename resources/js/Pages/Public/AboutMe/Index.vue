@@ -62,7 +62,7 @@ const props = defineProps({
                     </div>
 
                     <div class="p-4 text-left">
-                        <code class="flex text-gray-200 text-3xl lg:text-5xl font-semibold animate-fade-in-left">
+                        <code class="flex text-gray-200 text-4xl lg:text-5xl font-semibold animate-fade-in-left">
                             <span class="text-gray-300">$&nbsp;</span>
                             <h1
                             style="animation-delay: 0.33s; animation-duration: 0.4s;">
@@ -167,7 +167,7 @@ const props = defineProps({
 
                 <template v-if="user.knowledge.length > 0">
                     <div class="space-y-10 sm:space-y-20">
-                        <h2 class="text-3xl lg:text-5xl font-semibold text-gray-800 dark:text-gray-200 animate-fade-in-up"
+                        <h2 class="text-4xl lg:text-5xl font-semibold text-gray-800 dark:text-gray-200 animate-fade-in-up"
                             style="animation-delay: 1.1s;">
                             Knowledge
                         </h2>
@@ -196,7 +196,7 @@ const props = defineProps({
 
                 <template v-if="user.experiences.length > 0">
                     <div class="space-y-10 sm:space-y-20">
-                        <h2 class="text-3xl lg:text-5xl font-semibold text-gray-800 dark:text-gray-200">
+                        <h2 class="text-4xl lg:text-5xl font-semibold text-gray-800 dark:text-gray-200">
                             Experiences
                         </h2>
 
@@ -206,7 +206,7 @@ const props = defineProps({
 
                 <template v-if="user.education.length > 0">
                     <div class="space-y-10 sm:space-y-20">
-                        <h2 class="text-3xl lg:text-5xl font-semibold text-gray-800 dark:text-gray-200">
+                        <h2 class="text-4xl lg:text-5xl font-semibold text-gray-800 dark:text-gray-200">
                             Education
                         </h2>
 

@@ -36,11 +36,11 @@ const openModal = () => {
                             <div>
                                 <div>
                                     <span
-                                        class="text-3xl lg:text-5xl font-semibold bg-gradient-to-r from-gray-800 via-indigo-700 to-blue-700 bg-clip-text text-transparent">
+                                        class="text-4xl lg:text-5xl font-semibold bg-gradient-to-r from-gray-800 via-indigo-700 to-blue-700 bg-clip-text text-transparent">
                                         Hey,
                                     </span>
                                 </div>
-                                <h1 class="text-3xl lg:text-5xl font-semibold bg-gradient-to-r from-gray-800 via-indigo-700 to-blue-700 bg-clip-text text-transparent animate-fade-in-left"
+                                <h1 class="text-4xl lg:text-5xl font-semibold bg-gradient-to-r from-gray-800 via-indigo-700 to-blue-700 bg-clip-text text-transparent animate-fade-in-left"
                                     style="animation-delay: 0.1s; animation-duration: 0.4s;">
                                     <span>I'm</span> {{ user.name }}
                                 </h1>
