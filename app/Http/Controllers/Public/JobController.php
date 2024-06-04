@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Job;
 use App\Models\Technology;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class JobController extends Controller
@@ -18,6 +19,7 @@ class JobController extends Controller
         $filter = $request?->category;
         $filterTechnology = $request?->technology;
 
+        DB::enableQueryLog();
         $jobs = Job::select('id', 'category_id', 'title', 'slug', 'preview', 'project_name', 'alt_banner_image', 'link', 'is_published', 'created_at', 'updated_at')->with(
             [
                 'category:id,name',
@@ -35,6 +37,7 @@ class JobController extends Controller
             ->where('jobs.is_published', '=', '1')
             ->orderBy('created_at', 'desc')
             ->paginate(4);
+        // dd(DB::getQueryLog());
 
         $categories = Category::select('categories.name', 'categories.slug')
             ->join('jobs', 'jobs.category_id', '=', 'categories.id')
