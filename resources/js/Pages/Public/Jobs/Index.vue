@@ -42,11 +42,11 @@ const toggleSidebarVisibility = () => {
 
         <div>
             <div class="max-w-5xl mx-auto flex items-center justify-between">
-                <h1 :class="`text-3xl lg:text-5xl font-semibold text-gray-800`">
+                <h1 :class="`text-4xl lg:text-5xl font-semibold text-gray-800`">
                     Projects
                 </h1>
                 
-                <div class="bg-gray-100  rounded-full w-auto h-auto text-gray-800 min-[1490px]:hidden">
+                <div class="bg-gray-100 rounded-full w-auto h-auto text-gray-800 min-[1490px]:hidden">
                     <button @click="toggleSidebarVisibility" class="h-8 w-8 flex justify-center items-center" title="Filter" label="Filter">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
