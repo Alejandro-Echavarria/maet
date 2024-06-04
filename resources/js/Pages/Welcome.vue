@@ -66,7 +66,7 @@ const openModal = () => {
                 <div class="space-y-10 sm:space-y-20">
                     <section v-if="user.bio" id="about-me-brief" class="text-center">
                         <SectionTitle>
-                            <h2 class="py-4 text-3xl lg:text-5xl font-semibold text-gray-800 dark:text-gray-200">
+                            <h2 class="py-4 text-4xl lg:text-5xl font-semibold text-gray-800 dark:text-gray-200">
                                 About me
                             </h2>
                         </SectionTitle>
@@ -91,7 +91,7 @@ const openModal = () => {
                     <div class="relative pb-1" v-if="jobs.length > 0">
                         <section id="projects">
                             <SectionTitle>
-                                <h2 class="py-4 text-3xl lg:text-5xl font-semibold text-gray-800 dark:text-gray-200">
+                                <h2 class="py-4 text-4xl lg:text-5xl font-semibold text-gray-800 dark:text-gray-200">
                                     Projects
                                 </h2>
                             </SectionTitle>
