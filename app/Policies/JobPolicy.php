@@ -9,7 +9,7 @@ class JobPolicy
 {
     public function published(?User $user, Job $job)
     {
-        if ($job->is_published == true) {
+        if ($job->is_published == true || auth()->user()) {
             return true;
         } else {
             return false;
