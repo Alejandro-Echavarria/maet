@@ -46,13 +46,13 @@ const openModal = () => {
                                 </h1>
                             </div>
 
-                            <h2 class="text-lg lg:text-xl font-medium dark:text-white animate-fade-in-up"
-                                style="animation-delay: 0.50s;">
-                                    {{ user.position }}
+                            <h2 class="text-lg lg:text-xl font-medium dark:text-white animate-fade-in"
+                                style="animation-delay: 0.60s;">
+                                {{ user.position }}
                             </h2>
 
-                            <h2 class="text-lg lg:text-xl font-semibold dark:text-white animate-fade-in-up"
-                                style="animation-delay: 0.50s;">
+                            <h2 class="text-lg lg:text-xl font-semibold dark:text-white animate-fade-in"
+                                style="animation-delay: 0.60s;">
                                 Passionate About Helping Others Succeed With Web Apps & Data
                             </h2>
                         </div>
@@ -74,7 +74,8 @@ const openModal = () => {
                                 </ContactButton>
 
                                 <Link :href="route('jobs.index')" title="All My Projects">
-                                <SecondaryButton :hidden="false" class="animate-fade-in-up" style="animation-delay: 1.1s;">
+                                <SecondaryButton :hidden="false" class="animate-fade-in-up"
+                                    style="animation-delay: 1.1s;">
                                     Projects
                                 </SecondaryButton>
                                 </Link>
@@ -82,15 +83,17 @@ const openModal = () => {
                         </div>
                     </div>
 
-                    <div class="animate-fade-in sm:mt-0 mt-10" style="animation-delay: 0.66s;">
+                    <div class="animate-fade-in sm:mt-0 mt-10" style="animation-delay: 1.1s;">
                         <CircleStack :stacks="knowledge" />
                     </div>
                 </div>
 
                 <div
                     class="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]">
-                    <div
-                        class="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-indigo-700 opacity-20 blur-[100px]">
+                    <div class="relative h-full w-full bg-white">
+                        <div
+                            class="absolute h-full w-full bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]">
+                        </div>
                     </div>
                 </div>
             </Container>

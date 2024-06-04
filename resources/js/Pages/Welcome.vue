@@ -53,7 +53,7 @@ const openModal = () => {
             <div class="grid justify-center h-[10vh] mt-2 gap-4 sm:gap-4m animate-fade-in-up"
                 style="animation-delay: 1.1s;">
                 <div class="flex justify-center">
-                    <svg class="animate-bounce" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
                         viewBox="0 0 24 24" fill="none">
                         <path d="M12 20L12 4" class="stroke-indigo-700" stroke-width="1.5" stroke-linecap="round"
                             stroke-linejoin="round" />

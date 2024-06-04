@@ -1,38 +1,6 @@
-<template>
-    <!--
-        Inspirado por Darley
-        https://uiverse.io/Darlley/unlucky-mouse-37
-    -->
-    <div class="relative h-full w-full flex items-center justify-center">
-        <div class="border-[#000000]/[0.16] bg-white/40 backdrop-blur-sm border  w-auto rounded-full flex items-center justify-center py-1 px-4">
-            <p class="text-sm  font-semibold text-gray-500">
-                Main tech
-            </p>
-        </div>
-
-        <div v-for="(tech, index) in techStack" :key="'tech-' + index" class="animate-fade-in"
-            :style="{ animationDelay: `${index * 0.30}s` }"
-            @mouseover="pauseAnimation(index)"
-            @mouseleave="resumeAnimation(index)" @click="toggleAnimation(index)" @touchstart="toggleAnimation(index)">
-            <div :id="'tech-' + index"
-                class="stack-container shadow-gray-500/10 shadow-md absolute rounded-full bg-cover cursor-pointer border border-[#000000]/[0.16] bg-white backdrop-blur-sm transition-all duration-500"
-                :style="calculatePosition(index, techStack.length)">
-                <HoverTooltip :content="tech.name">
-                    <span
-                        class="block w-[30px] h-[30px] sm:w-[40px] sm:h-[40px] transition-all duration-500 rounded-full z-[2] overflow-hidden">
-                        <div class="overflow-hidden flex items-center justify-center h-full">
-                            <i v-html="tech.icon" :title="tech.name" />
-                        </div>
-                    </span>
-                </HoverTooltip>
-            </div>
-        </div>
-    </div>
-</template>
-
 <script setup>
 import { ref, onMounted, computed } from 'vue';
-import HoverTooltip from '@/Components/Main/Public/Components/Tooltips/HoverTooltip.vue';
+import HoverTooltip from '@/Components/Main/Public/Components/ToolTips/HoverTooltip.vue';
 
 const props = defineProps({
     stacks: Object
@@ -50,7 +18,8 @@ const calculatePosition = (index, total) => {
     const angle = (index / total) * 2 * Math.PI;
     const x = Math.cos(angle) * radius.value;
     const y = Math.sin(angle) * radius.value;
-    const animationDuration = (index + 3) * 1;
+    const animationDuration = (index === 0 ? 5 : index + 3) * 1;
+
     return {
         left: `calc(50% + ${x}px)`,
         top: `calc(50% + ${y}px)`,
@@ -85,6 +54,38 @@ onMounted(() => {
     });
 });
 </script>
+
+<template>
+    <!--
+        Inspirado por Darley
+        https://uiverse.io/Darlley/unlucky-mouse-37
+    -->
+    <div class="relative h-full w-full flex items-center justify-center">
+        <div
+            class="border-[#000000]/[0.16] bg-white/40 backdrop-blur-sm border  w-auto rounded-full flex items-center justify-center py-1 px-4">
+            <p class="text-sm  font-semibold text-gray-500">
+                Main tech
+            </p>
+        </div>
+
+        <div v-for="(tech, index) in techStack" :key="'tech-' + index" class="animate-fade-in"
+            :style="{ animationDelay: `${index * 0.30}s` }" @mouseover="pauseAnimation(index)"
+            @mouseleave="resumeAnimation(index)" @click="toggleAnimation(index)" @touchstart="toggleAnimation(index)">
+            <div :id="'tech-' + index"
+                class="stack-container shadow-gray-500/10 shadow-md absolute rounded-full bg-cover cursor-pointer border border-[#000000]/[0.16] bg-white backdrop-blur-sm transition-all duration-500"
+                :style="calculatePosition(index, techStack.length)">
+                <HoverTooltip :content="tech.name">
+                    <span
+                        class="block w-[30px] h-[30px] sm:w-[40px] sm:h-[40px] transition-all duration-500 rounded-full z-[2] overflow-hidden">
+                        <div class="overflow-hidden flex items-center justify-center h-full">
+                            <i v-html="tech.icon" :title="tech.name" />
+                        </div>
+                    </span>
+                </HoverTooltip>
+            </div>
+        </div>
+    </div>
+</template>
 
 <style>
 div.stack-container svg {
