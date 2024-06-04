@@ -85,7 +85,7 @@ class CompanyController extends Controller
             $company = Company::create($data);
 
             if ($request->file()) {
-                ImageController::multipleStore($company, $request->file(), $this->directory, '', 'admin');
+                ImageController::multipleStore($company, $request->file(), $this->directory);
             }
         } catch (\Exception $e) {
             DB::rollback();
@@ -134,7 +134,7 @@ class CompanyController extends Controller
             $company->update($data);
 
             if ($request->file()) {
-                ImageController::multipleStore($company, $request->file(), $this->directory, '', 'admin');
+                ImageController::multipleStore($company, $request->file(), $this->directory);
             }
         } catch (\Exception $e) {
             DB::rollback();

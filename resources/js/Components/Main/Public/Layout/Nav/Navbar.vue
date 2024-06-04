@@ -9,6 +9,9 @@ const props = defineProps({
     animation: {
         type: Boolean,
         default: false
+    },
+    entity: {
+        type: Object
     }
 });
 
@@ -27,7 +30,7 @@ const navLinks = ref([
         active: '/jobs'
     },
     {
-        name: 'About me',
+        name: props.entity.company_type_id === 1 ? 'About me' : 'About us',
         routeName: 'aboutme.index',
         active: '/about-me'
     },
@@ -66,7 +69,7 @@ const handleResize = () => {
                 <div :class="['w-full h-full flex items-center justify-between']">
                     <div class="flex items-center justify-start h-full">
                         <Link href="/" @click="isVisible && toggleVisibility()" class="flex md:mr-24 gap-2">
-                        <ApplicationLogo />
+                        <ApplicationLogo :entity-name="$page.props.entity?.name" :url="$page.props.entity?.url" />
                         <span
                             class="self-center text-xl font-bold sm:text-2xl whitespace-nowrap dark:text-gray-200 text-gray-800">
                             {{ $page.props.entity?.name }}
@@ -76,7 +79,7 @@ const handleResize = () => {
 
                     <div class="hidden md:flex items-center space-x-3 divide-x divide-[#000000]/[0.16]">
                         <ul class="flex items-center space-x-6">
-                            <li v-for="(navLink, index) in navLinks">
+                            <li v-for="(navLink, index) in navLinks" :key="'nav-link-' + index">
                                 <NavLink :href="route(navLink.routeName)"
                                     :active="route().current(navLink.active) || $page.url.startsWith(navLink.active)"
                                     :key="'nav-link-' + index">

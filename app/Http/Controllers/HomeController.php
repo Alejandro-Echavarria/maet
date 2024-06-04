@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
 use App\Models\Job;
 use App\Models\User;
 use Inertia\Inertia;
@@ -10,6 +11,8 @@ class HomeController extends Controller
 {
     public function index()
     {
+        $companyType = Company::select('company_type_id')->orderBy('id', 'asc')->first()->company_type_id;
+
         $user = User::select(['id', 'name', 'email', 'position', 'bio'])
             ->with(
                 [
@@ -40,6 +43,8 @@ class HomeController extends Controller
             ->limit(4)
             ->get();
 
-        return Inertia::render('Welcome', compact('user', 'jobs'));
+        $view = $companyType === 1 ? 'Welcome' : 'Public/Home/HomeCompany';
+
+        return Inertia::render($view, compact('user', 'jobs'));
     }
 }

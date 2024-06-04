@@ -1,10 +1,11 @@
 <script setup>
 import { ref, defineAsyncComponent } from 'vue';
-import { Head } from '@inertiajs/vue3';
+import { Head, usePage } from '@inertiajs/vue3';
 import Navbar from "@/Components/Main/Public/Layout/Nav/Navbar.vue";
 import ContactButton from "@/Components/Main/Public/Components/Buttons/ContactButton.vue";
 import MainFooter from "@/Components/Main/Public/Footers/MainFooter.vue";
 
+const entity = ref(usePage().props.entity);
 const callOpenModal = ref(null);
 
 const ContactModal = defineAsyncComponent(() => import('@/Components/Main/Public/Components/Contacts/ContactModal.vue'));
@@ -21,7 +22,7 @@ const openModal = () => {
                 content="Transforming ideas into stunning and functional webapps. Boosting online presence with modern, responsive designs optimized for SEO! Discover high-quality web development and Software Engineering">
         </Head>
 
-        <Navbar>
+        <Navbar :entity="entity">
             <template #button>
                 <ContactButton @click="openModal()" class="rounded-2xl relative shadow-md shadow-gray-500/20">
                     Contact

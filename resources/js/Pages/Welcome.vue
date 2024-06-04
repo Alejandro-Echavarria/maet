@@ -1,6 +1,6 @@
 <script setup>
 import { ref, defineAsyncComponent } from 'vue';
-import { Head, Link } from '@inertiajs/vue3';
+import { Head, Link, usePage } from '@inertiajs/vue3';
 import MainBanner from '@/Components/Main/Banners/MainBanner.vue';
 import Navbar from '@/Components/Main/Public/Layout/Nav/Navbar.vue';
 import MainFooter from "@/Components/Main/Public/Footers/MainFooter.vue";
@@ -10,12 +10,12 @@ import ContactButton from "@/Components/Main/Public/Components/Buttons/ContactBu
 import SectionTitle from '@/Components/Main/Public/Components/Titles/SectionTitle.vue';
 import BetweenView from "@/Components/Main/Public/Components/OtherComponents/Pojects/BetweenView.vue";
 
-
 const props = defineProps({
     user: Object,
     jobs: Object
 });
 
+const entity = ref(usePage().props.entity);
 const callOpenModal = ref(null);
 
 const ContactModal = defineAsyncComponent(() => import('@/Components/Main/Public/Components/Contacts/ContactModal.vue'));
@@ -34,7 +34,7 @@ const openModal = () => {
     </Head>
 
     <div>
-        <Navbar :animation="true">
+        <Navbar :entity="entity" :animation="true">
             <template #button>
                 <ContactButton @click="openModal()" class="rounded-2xl relative shadow-md shadow-gray-500/20">
                     Contact

@@ -33,10 +33,10 @@ const navItems = computed(() => [
     {
         href: '#', label: 'Configuration', active: route().current('admin.platformtypes.*'),
         children: [
+            { href: 'admin.companies.index', active: route().current('admin.companies.index'), activeClass: '/admin/companies', label: 'Companies', children: [], icon: null, visible: true },
             { href: 'admin.categories.index', active: route().current('admin.categories.index'), activeClass: '/admin/categories', label: 'Categories', children: [], icon: null, visible: true },
             { href: 'admin.technologies.index', active: route().current('admin.technologies.index'), activeClass: '/admin/technologies', label: 'Technologies for jobs', children: [], icon: null, visible: true },
             { href: 'admin.platformtypes.index', active: route().current('admin.platformtypes.index'), activeClass: '/admin/platform-types', label: 'Platform types', children: [], icon: null, visible: true },
-            { href: 'admin.companies.index', active: route().current('admin.companies.index'), activeClass: '/admin/companies', label: 'Companies', children: [], icon: null, visible: true }
         ], icon: ['fas', 'gear'], visible: true
     },
 ]);
@@ -89,7 +89,7 @@ defineExpose({ toggleSidebarVisibility });
                         </div>
                     </button>
                     <Link href="/" class="flex md:mr-24 gap-2">
-                    <ApplicationLogo />
+                    <ApplicationLogo :entity-name="$page.props.entity?.name" :url="$page.props.entity?.url" />
                     <span
                         class="self-center text-xl font-bold sm:text-2xl whitespace-nowrap dark:text-gray-200 text-gray-800">
                         {{ $page.props.entity?.name }}
