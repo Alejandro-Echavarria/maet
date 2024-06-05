@@ -75,9 +75,11 @@ onUnmounted(() => {
     <div class="relative h-full w-full flex items-center justify-center">
         <div
             class="border-[#000000]/[0.16] bg-white/40 backdrop-blur-sm border w-auto rounded-full flex items-center justify-center py-1 px-4">
-            <p class="text-sm font-semibold text-gray-500">
-                Main tech
-            </p>
+            <ButtonTooltip :content="'Hey!'">
+                <p class="text-sm font-semibold text-gray-500">
+                    Main tech
+                </p>
+            </ButtonTooltip>
         </div>
 
         <div v-for="(tech, index) in techStack" :key="'tech-' + index" class="animate-fade-in"
