@@ -1,6 +1,7 @@
 <script setup>
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted, onUnmounted, computed, watch } from 'vue';
 import HoverTooltip from '@/Components/Main/Public/Components/ToolTips/HoverTooltip.vue';
+import ButtonTooltip from '@/Components/Main/Public/Components/ToolTips/ButtonTooltip.vue';
 
 const props = defineProps({
     stacks: Object
@@ -29,14 +30,14 @@ const calculatePosition = (index, total) => {
 
 const pauseAnimation = (index) => {
     const element = document.querySelector(`#tech-${index}`);
-    if (element) {
+    if (element && window.innerWidth >= 640) {
         element.style.animationPlayState = 'paused';
     }
 };
 
 const resumeAnimation = (index) => {
     const element = document.querySelector(`#tech-${index}`);
-    if (element) {
+    if (element && window.innerWidth >= 640) {
         element.style.animationPlayState = 'running';
     }
 };
@@ -48,40 +49,51 @@ const toggleAnimation = (index) => {
     }
 };
 
+// Estado reactivo para el componente de tooltip
+const tooltipComponent = ref(window.innerWidth <= 640 ? ButtonTooltip : HoverTooltip);
+
+// Función para actualizar el componente de tooltip según el tamaño de la pantalla
+const updateTooltipComponent = () => {
+    tooltipComponent.value = window.innerWidth <= 640 ? ButtonTooltip : HoverTooltip;
+};
+
+// Observa los cambios en el tamaño de la ventana y actualiza el componente de tooltip
+watch(() => window.innerWidth, updateTooltipComponent);
+
+// Agrega un event listener para el cambio de tamaño de la ventana
 onMounted(() => {
-    window.addEventListener('resize', () => {
-        calculatePosition();
-    });
+    window.addEventListener('resize', updateTooltipComponent);
+});
+
+// Limpia el event listener cuando el componente se desmonta
+onUnmounted(() => {
+    window.removeEventListener('resize', updateTooltipComponent);
 });
 </script>
 
 <template>
-    <!--
-        Inspirado por Darley
-        https://uiverse.io/Darlley/unlucky-mouse-37
-    -->
     <div class="relative h-full w-full flex items-center justify-center">
         <div
-            class="border-[#000000]/[0.16] bg-white/40 backdrop-blur-sm border  w-auto rounded-full flex items-center justify-center py-1 px-4">
-            <p class="text-sm  font-semibold text-gray-500">
+            class="border-[#000000]/[0.16] bg-white/40 backdrop-blur-sm border w-auto rounded-full flex items-center justify-center py-1 px-4">
+            <p class="text-sm font-semibold text-gray-500">
                 Main tech
             </p>
         </div>
 
         <div v-for="(tech, index) in techStack" :key="'tech-' + index" class="animate-fade-in"
             :style="{ animationDelay: `${index * 0.30}s` }" @mouseover="pauseAnimation(index)"
-            @mouseleave="resumeAnimation(index)" @click="toggleAnimation(index)" @touchstart="toggleAnimation(index)">
+            @mouseleave="resumeAnimation(index)" @click="toggleAnimation(index)">
             <div :id="'tech-' + index"
                 class="stack-container shadow-gray-500/10 shadow-md absolute rounded-full bg-cover cursor-pointer border border-[#000000]/[0.16] bg-white backdrop-blur-sm transition-all duration-500"
                 :style="calculatePosition(index, techStack.length)">
-                <HoverTooltip :content="tech.name">
+                <component :is="tooltipComponent" :content="tech.name">
                     <span
                         class="block w-[30px] h-[30px] sm:w-[40px] sm:h-[40px] transition-all duration-500 rounded-full z-[2] overflow-hidden">
                         <div class="overflow-hidden flex items-center justify-center h-full">
                             <i v-html="tech.icon" :title="tech.name" />
                         </div>
                     </span>
-                </HoverTooltip>
+                </component>
             </div>
         </div>
     </div>
@@ -107,3 +119,4 @@ div.stack-container svg {
     transition: animation-play-state 0.3s;
 }
 </style>
+  
