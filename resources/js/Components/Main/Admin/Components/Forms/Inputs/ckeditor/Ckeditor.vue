@@ -54,6 +54,19 @@ onMounted(() => {
                         { model: 'heading5', view: 'h5', title: 'Heading 5', class: 'ck-heading_heading5' }
                     ]
                 },
+                codeBlock: {
+                    languages: [
+                        { language: 'html', label: 'HTML' },
+                        { language: 'css', label: 'CSS' },
+                        { language: 'javascript', label: 'JavaScript' },
+                        { language: 'php', label: 'PHP' },
+                        { language: 'sql', label: 'SQL' },
+                        { language: 'python', label: 'Python' },
+                        { language: 'plaintext', label: 'Plain text' },
+                        { language: 'xml', label: 'XML' },
+                        { language: 'diff', label: 'Diff' },
+                    ]
+                },
                 simpleUpload: {
                     uploadUrl: props.urlName !== null ? route(props.urlName, {
                         id: props.idData ? props.idData : null,
