@@ -110,7 +110,7 @@ const splitColor = (color) => {
         <transition name="fade">
             <div v-show="open"
                 class="z-50 absolute origin-top-right right-0 mt-2 rounded-xl shadow-lg max-w-xs sm:max-w-md">
-                <div class="rounded-xl bg-white shadow-xs p-2 z-10 border overflow-auto w-[17rem] sm:w-full h-32">
+                <div class="rounded-xl bg-white shadow-xs p-2 z-10 border overflow-auto overscroll-contain w-[17rem] sm:w-full h-32">
                     <div class="flex">
                         <template v-for="color in colors">
                             <div>
