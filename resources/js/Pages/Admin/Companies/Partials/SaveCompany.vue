@@ -111,8 +111,12 @@ const openModal = (op, data) => {
         form.zip_code = data.zip_code;
         form.email = data.email;
         form.phone = data.phone;
-        form.banner_file = data.images[0]?.url;
-        form.logo_file = data.images[1]?.url;
+
+        const bannerImage = data.images.find(image => image.file_type === 'banner_file');
+        const logoImage = data.images.find(image => image.file_type === 'logo_file');
+
+        form.banner_file = bannerImage ? bannerImage.url : null;
+        form.logo_file = logoImage ? logoImage.url : null;
     }
 
     setTimeout(() => nameInput.value.focus(), 250);
