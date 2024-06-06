@@ -1,4 +1,6 @@
 <script setup>
+import { ref } from 'vue';
+
 const props = defineProps({
     content: {
         type: String,
@@ -6,6 +8,16 @@ const props = defineProps({
         default: null
     }
 });
+
+const tooltipVisible = ref(false);
+
+const showTooltip = () => {
+    tooltipVisible.value = true;
+};
+
+const hideTooltip = () => {
+    tooltipVisible.value = false;
+};
 </script>
 
 <template>
@@ -14,8 +26,40 @@ const props = defineProps({
         https://uiverse.io/eduardojsc18/serious-seahorse-3
     -->
     <button
-        class="block font-medium text-neutral-600 relative z-[40] data-[tooltip]:after:content-[attr(data-tooltip)] data-[tooltip]:after:invisible data-[tooltip]:after:scale-50 data-[tooltip]:after:origin-bottom data-[tooltip]:after:opacity-0 focus-within:data-[tooltip]:after:visible focus-within:data-[tooltip]:after:opacity-100 focus-within:data-[tooltip]:after:scale-100 data-[tooltip]:after:transition-all data-[tooltip]:after:absolute data-[tooltip]:after:bg-black data-[tooltip]:after:bottom-[calc(100%+4px)] data-[tooltip]:after:left-1/2 data-[tooltip]:after:-translate-x-1/2 data-[tooltip]:after:-z-[1] data-[tooltip]:after:px-1.5 data-[tooltip]:after:py-1 data-[tooltip]:after:min-h-fit data-[tooltip]:after:min-w-fit data-[tooltip]:after:rounded-md data-[tooltip]:after:drop-shadow data-[tooltip]:before:drop-shadow data-[tooltip]:after:text-center data-[tooltip]:after:text-white data-[tooltip]:after:whitespace-nowrap data-[tooltip]:after:text-[12px] data-[tooltip]:before:invisible data-[tooltip]:before:opacity-0 focus-within:data-[tooltip]:before:visible focus-within:data-[tooltip]:before:opacity-100 data-[tooltip]:before:transition-all data-[tooltip]:before:bg-black data-[tooltip]:before:[clip-path:polygon(100%_0,0_0,50%_100%)] data-[tooltip]:before:absolute data-[tooltip]:before:bottom-full data-[tooltip]:before:left-1/2 data-[tooltip]:before:-translate-x-1/2 data-[tooltip]:before:z-0 data-[tooltip]:before:w-3 data-[tooltip]:before:h-[4px]"
-        :data-tooltip="content">
+        class="block font-medium text-neutral-600 relative z-[40] focus:outline-none"
+        @mouseover="showTooltip" @mouseleave="hideTooltip" @focus="showTooltip" @blur="hideTooltip" @touchstart="showTooltip" @touchend="hideTooltip">
         <slot />
+        <span :class="['tooltip', { 'tooltip-visible': tooltipVisible }]"
+            class="bg-gray-800 absolute bottom-[calc(100%+8px)] left-1/2 transform -translate-x-1/2 px-1.5 py-1 min-w-fit rounded-md drop-shadow text-center text-white whitespace-nowrap text-[12px] transition-all duration-300 origin-bottom">
+            {{ content }}
+            <span :class="['triangle', { 'triangle-visible': tooltipVisible }]"
+                class="absolute bg-gray-800 top-full left-1/2 transform -translate-x-1/2 w-3 h-[4px] clip-path-polygon transition-all duration-300"></span>
+        </span>
     </button>
 </template>
+
+<style>
+.clip-path-polygon {
+    clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
+}
+
+.tooltip {
+    opacity: 0;
+    transform: scale(0.95) translateX(-50%);
+}
+
+.tooltip-visible {
+    opacity: 1;
+    transform: scale(1) translateX(-50%);
+}
+
+.triangle {
+    opacity: 0;
+    transform: scale(0.95) translateX(-50%);
+}
+
+.triangle-visible {
+    opacity: 1;
+    transform: scale(1) translateX(-50%);
+}
+</style>
