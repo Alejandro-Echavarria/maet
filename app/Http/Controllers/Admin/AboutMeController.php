@@ -3,38 +3,37 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Admin\ImageController;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\User;
 use Carbon\Carbon;
+use Inertia\Response;
 
 class AboutMeController extends Controller
 {
-    protected $directoryCkeditor;
+    protected string $directoryCkeditor;
 
     public function __construct()
     {
         $this->directoryCkeditor = 'images/ckeditor/aboutme';
     }
 
-    public function index()
+    public function index(): Response
     {
         return Inertia::render('Admin/AboutMe/Index');
     }
 
-    public function ckeditorMoveToStorage(Request $request)
+    public function ckeditorMoveToStorage(Request $request): array
     {
         $request->validate([
             'upload' => "required|image"
         ]);
 
-        $url = ImageController::ckeditorMoveToStorage($request->file('upload'), $this->directoryCkeditor);
-
-        return $url;
+        return ImageController::ckeditorMoveToStorage($request->file('upload'), $this->directoryCkeditor);
     }
 
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $user): RedirectResponse
     {
         $data = $request->validate([
             'position' => "required|max:45|string",

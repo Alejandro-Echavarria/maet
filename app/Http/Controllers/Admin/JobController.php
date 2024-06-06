@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Admin\ImageController;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Category;
@@ -13,11 +13,12 @@ use App\Models\Technology;
 use Illuminate\Database\Query\JoinClause;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Inertia\Response;
 
 class JobController extends Controller
 {
-    protected $directory;
-    protected $directoryCkeditor;
+    protected string $directory;
+    protected string $directoryCkeditor;
 
     public function __construct()
     {
@@ -25,7 +26,7 @@ class JobController extends Controller
         $this->directoryCkeditor = 'images/ckeditor/jobs';
     }
 
-    public function index(Request $request)
+    public function index(Request $request): Response
     {
         $page = $request?->page;
         $filter = $request?->search;
@@ -66,7 +67,7 @@ class JobController extends Controller
         return Inertia::render('Admin/Jobs/Index', compact('page', 'filter', 'jobs', 'clients', 'categories', 'technologies'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $request['slug'] = Str::slug($request->title);
         $data = $request->validate(
@@ -129,7 +130,7 @@ class JobController extends Controller
         ])->with('flash', 'Job Created');
     }
 
-    public function ckeditorMoveToStorage(Request $request)
+    public function ckeditorMoveToStorage(Request $request): array
     {
         $request->validate([
             'upload' => "required|image"
@@ -140,7 +141,7 @@ class JobController extends Controller
         return $url;
     }
 
-    public function update(Request $request, Job $job)
+    public function update(Request $request, Job $job): RedirectResponse
     {
         $validClientStatus = Job::selectRaw(
             "
@@ -218,7 +219,7 @@ class JobController extends Controller
         ])->with('flash', 'Job Updated');
     }
 
-    public function destroy(Request $request, Job $job)
+    public function destroy(Request $request, Job $job): RedirectResponse
     {
         $job->delete();
         ImageController::destroy($job);

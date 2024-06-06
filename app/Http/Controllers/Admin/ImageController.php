@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 
 class ImageController extends Controller
 {
-    public static function store($request, $data, $directory, $access = 'public')
+    public static function store($request, $data, $directory, $access = 'public'): void
     {
         Storage::disk('local')->makeDirectory("$access/$directory");
 
@@ -44,7 +44,7 @@ class ImageController extends Controller
         }
     }
 
-    public static function multipleStore(object $model, array $modelImages, string $directory, string $additionalPath = '', string $access = 'public')
+    public static function multipleStore(object $model, array $modelImages, string $directory, string $additionalPath = '', string $access = 'public'): void
     {
         foreach ($modelImages as $key => $image) {
             $name = Str::random(10) . str_replace(" ", "", $image->getClientOriginalName());
@@ -79,7 +79,7 @@ class ImageController extends Controller
         }
     }
 
-    public static function ckeditorStore($model, $modelImages, $directory, $additionalPath = '')
+    public static function ckeditorStore($model, $modelImages, $directory, $additionalPath = ''): void
     {
         $reExtractImages = '/src=["\']([^ ^"^\']*)["\']/ims';
         preg_match_all($reExtractImages, $modelImages, $matches);
@@ -96,7 +96,7 @@ class ImageController extends Controller
         }
     }
 
-    public static function ckeditorUpdate($model, $modelImages, $directory, $additionalPath = '', $access = 'public')
+    public static function ckeditorUpdate($model, $modelImages, $directory, $additionalPath = '', $access = 'public'): void
     {
         $reExtractImages = '/src=["\']([^ ^"^\']*)["\']/ims';
         preg_match_all($reExtractImages, $modelImages, $matches);
@@ -130,7 +130,7 @@ class ImageController extends Controller
         }
     }
 
-    public static function ckeditorMoveToStorage($request, $directory, $access = 'public')
+    public static function ckeditorMoveToStorage($request, $directory, $access = 'public'): array
     {
         Storage::disk('local')->makeDirectory("$access/$directory");
 
@@ -163,7 +163,7 @@ class ImageController extends Controller
         return response()->file($path);
     }
 
-    public static function destroy($data, $access = 'public')
+    public static function destroy($data, $access = 'public'): void
     {
         $images = $data->images()->select('id', 'url')->get();
 
